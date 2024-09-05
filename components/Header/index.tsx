@@ -6,15 +6,23 @@ import { IoMail } from 'react-icons/io5';
 
 export default function Header() {
   return (
-    <Box as="header" pt={16} px={24} pb={8} h={70} display={{ base: 'none', md: 'block' }}>
+    <Box
+      as="header"
+      py={16}
+      px={24}
+      h={76}
+      position={'fixed'}
+      top={0}
+      w={'100%'}
+      bg={'white'}
+      display={{ base: 'none', md: 'block' }}
+    >
       <Box display={'flex'}>
         <Link href="/">
           <Image
             src="/common/rectangle_logo.svg"
-            width={'11vw'}
+            width={{ md: 150, lg: 190 }}
             height={'auto'}
-            minW={150}
-            maxW={200}
             alt="ピーチウェブ"
           />
         </Link>

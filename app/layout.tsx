@@ -1,5 +1,6 @@
-import { getTagList } from '@/libs/microcms';
-import { LIMIT } from '@/constants';
+// import { getTagList } from '@/libs/microcms';
+// import { LIMIT } from '@/constants';
+import { Box } from '@chakra-ui/react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 // import Nav from '@/components/Nav';
@@ -26,16 +27,18 @@ type Props = {
 };
 
 export default async function RootLayout({ children }: Props) {
-  const tags = await getTagList({
-    limit: LIMIT,
-  });
+  // const tags = await getTagList({
+  //   limit: LIMIT,
+  // });
   return (
     <html lang="ja">
       <body>
         <Provider>
           <Header />
           {/* <Nav tags={tags.contents} /> */}
-          <main className={styles.main}>{children}</main>
+          <Box as="main" className={styles.main} mt={76}>
+            {children}
+          </Box>
           <Footer />
         </Provider>
       </body>
