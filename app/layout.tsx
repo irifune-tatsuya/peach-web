@@ -2,9 +2,10 @@ import { getTagList } from '@/libs/microcms';
 import { LIMIT } from '@/constants';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Nav from '@/components/Nav';
+// import Nav from '@/components/Nav';
 import './globals.css';
 import styles from './layout.module.css';
+import { Provider } from './providers/chakra-ui/Provider';
 
 export const metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),
@@ -31,10 +32,12 @@ export default async function RootLayout({ children }: Props) {
   return (
     <html lang="ja">
       <body>
-        <Header />
-        <Nav tags={tags.contents} />
-        <main className={styles.main}>{children}</main>
-        <Footer />
+        <Provider>
+          <Header />
+          {/* <Nav tags={tags.contents} /> */}
+          <main className={styles.main}>{children}</main>
+          <Footer />
+        </Provider>
       </body>
     </html>
   );
