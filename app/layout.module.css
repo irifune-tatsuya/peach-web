@@ -1,11 +1,23 @@
 .main {
-  width: 720px;
   margin: 0 auto;
 }
 
 @media (max-width: 640px) {
   .main {
-    width: auto;
-    padding: 24px;
+    margin: 0 auto;
+  }
+}
+
+.message {
+  animation: message 2s linear;
+  transform-origin: 50% 50%;
+}
+
+@keyframes message {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
   }
 }

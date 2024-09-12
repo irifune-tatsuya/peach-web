@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_レイヤー_1" data-name="レイヤー_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 838.56 431.64">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ff7bac;
+      }
+
+      .cls-2 {
+        fill: #ff7bac;
+        font-size: 150px;
+      }
+
+      .cls-2, .cls-3, .cls-4 {
+        font-family: Buildingsandundertherailwaytracks-Regular-83pv-RKSJ-H, 'Buildings and under the railway tracks';
+      }
+
+      .cls-3 {
+        font-size: 134px;
+      }
+
+      .cls-3, .cls-4 {
+        fill: #fff;
+      }
+
+      .cls-4 {
+        font-size: 148px;
+      }
+    </style>
+  </defs>
+  <text class="cls-3" transform="translate(27.53 117.92)"><tspan x="0" y="0">あなたの仕事が</tspan></text>
+  <text class="cls-2" transform="translate(36.85 266.09)"><tspan x="0" y="0" xml:space="preserve">永       く</tspan></text>
+  <text class="cls-4" transform="translate(0 412.25)"><tspan x="0" y="0">愛されますよう。</tspan></text>
+  <path class="cls-1" d="M175,230.19h445.5c20.5,0,41.18.82,61.67,0,.28-.01.56,0,.84,0,6.43,0,6.45-10,0-10H237.5c-20.5,0-41.18-.82-61.67,0-.28.01-.56,0-.84,0-6.43,0-6.45,10,0,10h0Z"/>
+</svg>

@@ -13,6 +13,7 @@ export default function Header() {
       h={76}
       position={'fixed'}
       top={0}
+      zIndex={100}
       w={'100%'}
       bg={'white'}
       display={{ base: 'none', md: 'block' }}
