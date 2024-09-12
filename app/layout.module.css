@@ -9,15 +9,14 @@
 }
 
 .message {
-  animation: message 2s linear;
-  transform-origin: 50% 50%;
+  animation: message 7s;
 }
 
 @keyframes message {
   from {
-    transform: scale(0);
+    opacity: 0;
   }
   to {
-    transform: scale(1);
+    opacity: 1;
   }
 }
