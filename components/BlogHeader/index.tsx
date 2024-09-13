@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './index.module.css';
 
-export default function Header() {
+export default function BlogHeader() {
   return (
     <header className={styles.header}>
       <Link href="/">

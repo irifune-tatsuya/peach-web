@@ -3,10 +3,10 @@ import './globals.css';
 import styles from './layout.module.css';
 import { Metadata, NextPage } from 'next';
 import { NavBar } from '@/components/NavBar';
-import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer';
 import { ScrollToTopButton } from '@/components/ScrollToTopButton';
 import { Provider } from './providers/chakra-ui/Provider';
+import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
 
 const siteName = 'ピーチウェブ -岡山のWEBブランディングサービス-';
 const description =
