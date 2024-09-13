@@ -1,24 +1,30 @@
-import styles from './index.module.css';
-import { MENU } from '@/constants';
-import { Box, Image, Link, UnorderedList, ListItem, Text } from '@chakra-ui/react';
-import { IoMail } from 'react-icons/io5';
-// import { FaGripLines } from 'react-icons/fa';
+'use client';
+import { CONTACT } from '@/constants';
+import { Box, Image, Link, useDisclosure } from '@chakra-ui/react';
+import { NextPage } from 'next';
+import { FaInstagram } from 'react-icons/fa';
+import { FaFacebookSquare } from 'react-icons/fa';
+import { FaLine } from 'react-icons/fa';
+import { MenuButton } from '../MenuButton';
+import { NavDrawer } from '../NavDrawer';
+import { ContactButton } from '../ContactButton';
 
-export default function Header() {
+export const Header: NextPage = () => {
+  const { isOpen, onToggle, onClose } = useDisclosure();
   return (
     <Box
       as="header"
-      py={16}
-      px={24}
+      py={3}
+      px={6}
       h={76}
       position={'fixed'}
       top={0}
-      zIndex={100}
+      zIndex={10}
       w={'100%'}
       bg={'white'}
       display={{ base: 'none', md: 'block' }}
     >
-      <Box display={'flex'}>
+      <Box display={'flex'} justifyContent={'space-between'}>
         <Link href="/">
           <Image
             src="/common/rectangle_logo.svg"
@@ -27,56 +33,23 @@ export default function Header() {
             alt="ピーチウェブ"
           />
         </Link>
-        <Box as="nav" ml={'auto'} display={'flex'} alignItems={'center'} height={'100%'}>
-          <UnorderedList
-            display={'flex'}
-            alignItems={'center'}
-            height={'100%'}
-            listStyleType={'none'}
-            gap={32}
-            mr={32}
-            fontWeight={'bold'}
-          >
-            {MENU.map((item, i) => (
-              <ListItem key={i}>
-                <Link
-                  fontSize={{ base: 'small', lg: 'medium' }}
-                  display={'block'}
-                  py={10}
-                  href={item.href}
-                  _hover={{
-                    color: 'momo.100',
-                  }}
-                >
-                  {item.title}
-                </Link>
-              </ListItem>
-            ))}
-          </UnorderedList>
-          <Link display={'block'} href="/contact" textAlign={'center'}>
-            <Box
-              py={'0.5em'}
-              px={'1.5em'}
-              display={'flex'}
-              justifyContent={'center'}
-              alignItems={'center'}
-              height={'100%'}
-              className={'slide-btn'}
-              borderRadius={30}
-              fontSize={{ base: 'small', lg: 'medium' }}
-            >
-              <IoMail size={'1.5em'} />
-              <Text ml={4}>お問い合わせ</Text>
-            </Box>
+        <Box display={'flex'} alignItems={'center'} gap={5}>
+          <Link href={CONTACT.instagram} target="_blank">
+            <FaInstagram size={'2em'} />
           </Link>
-          {/* <Button>
-            <Box display={'flex'} flexFlow={'column'} alignItems={'center'}>
-              <FaGripLines size={'2rem'} />
-              <span className={styles.menu}>Menu</span>
-            </Box>
-          </Button> */}
+          <Link href={CONTACT.facebook} target="_blank">
+            <FaFacebookSquare size={'2em'} />
+          </Link>
+          <Link href={CONTACT.line} target="_blank">
+            <FaLine size={'2em'} />
+          </Link>
+          <Box as="nav" ml={'auto'} display={'flex'} alignItems={'center'} height={'100%'}>
+            <ContactButton />
+          </Box>
+          <MenuButton onToggle={onToggle} />
         </Box>
+        <NavDrawer onClose={onClose} isOpen={isOpen} />
       </Box>
     </Box>
   );
-}
+};

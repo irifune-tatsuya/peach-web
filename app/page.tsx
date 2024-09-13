@@ -23,7 +23,7 @@ const Home: NextPage = () => {
           top={{ base: '50%', sm: '60%', lg: '50%' }}
           left={'50%'}
           transform={'translate(-50%, -50%)'}
-          zIndex={3}
+          zIndex={2}
           w={'95%'}
           maxW={'500px'}
         >
@@ -34,7 +34,7 @@ const Home: NextPage = () => {
               fontSize={{ base: 'small', sm: 'medium', md: 'large', lg: 'x-large' }}
               fontWeight={'bold'}
               textAlign={'center'}
-              mt={32}
+              mt={8}
             >
               I hope you and your business <Box as="br" />
               will be loved for many years to come.
@@ -43,6 +43,7 @@ const Home: NextPage = () => {
         </Box>
         <TopSwiper images={swiperImages} />
       </Box>
+      <Box w={'100vw'} h={2000}></Box>
     </>
   );
 };

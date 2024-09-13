@@ -1,10 +1,12 @@
 import { Box } from '@chakra-ui/react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import './globals.css';
 import styles from './layout.module.css';
-import { Provider } from './providers/chakra-ui/Provider';
 import { Metadata, NextPage } from 'next';
+import { NavBar } from '@/components/NavBar';
+import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
+import { ScrollToTopButton } from '@/components/ScrollToTopButton';
+import { Provider } from './providers/chakra-ui/Provider';
 
 const siteName = 'ピーチウェブ -岡山のWEBブランディングサービス-';
 const description =
@@ -14,7 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),
   title: {
     template: `%s | ${siteName}`,
-    default: `TOP | ${siteName}`,
+    default: `HOME | ${siteName}`,
   },
   description: description,
   openGraph: {
@@ -70,16 +72,17 @@ type Props = {
   children: React.ReactNode;
 };
 
-const RootLayout: NextPage<Props> = (props) => {
-  const { children } = props;
+const RootLayout: NextPage<Props> = ({ children }) => {
   return (
-    <html lang="ja">
-      <body>
+    <html lang="ja" suppressHydrationWarning={true}>
+      <body suppressHydrationWarning={true}>
         <Provider>
           <Header />
           <Box as="main" className={styles.main} mt={{ base: 0, lg: 76 }}>
             {children}
           </Box>
+          <ScrollToTopButton />
+          <NavBar />
           <Footer />
         </Provider>
       </body>

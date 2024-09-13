@@ -4,6 +4,10 @@ export const LIMIT = 10;
 // ヘッダーやフッターに表示するメニュー
 export const MENU = [
   {
+    title: 'ホーム',
+    href: '/',
+  },
+  {
     title: 'ピーチな想い',
     href: '/thought',
   },
@@ -17,7 +21,15 @@ export const MENU = [
   },
   {
     title: 'ブログ',
-    href: '/slug',
+    href: '/blog',
+  },
+  {
+    title: 'プライバシーポリシー',
+    href: '/privacy',
+  },
+  {
+    title: '利用規約',
+    href: '/terms',
   },
 ];
 

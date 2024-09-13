@@ -1,14 +1,14 @@
 import { Box, UnorderedList, ListItem, Link, Image, Text, textDecoration } from '@chakra-ui/react';
-import styles from './index.module.css';
 import { MENU, CONTACT } from '@/constants';
 import { FaInstagram } from 'react-icons/fa';
 import { FaFacebookSquare } from 'react-icons/fa';
 import { FaLine } from 'react-icons/fa';
-import { IoMail } from 'react-icons/io5';
+import { NextPage } from 'next';
+import { ContactButton } from '../ContactButton';
 
-export default function Footer() {
+export const Footer: NextPage = () => {
   return (
-    <Box as="footer" pt={46} px={16} pb={86} display={{ base: 'none', md: 'block' }}>
+    <Box as="footer" pt={12} px={4} pb={20} display={{ base: 'none', md: 'block' }}>
       <Box w={'100%'} display={'flex'} justifyContent={'center'}>
         <Link href="/">
           <Image
@@ -21,14 +21,14 @@ export default function Footer() {
           />
         </Link>
       </Box>
-      <Box display={'flex'} justifyContent={'center'} gap={40} mt={32}>
+      <Box display={'flex'} justifyContent={'center'} gap={10} mt={8}>
         <Box as="nav">
           <UnorderedList
             listStyleType={'none'}
             fontWeight={'bold'}
             display={'flex'}
             flexFlow={'column'}
-            gap={16}
+            gap={4}
             fontSize={'small'}
           >
             {MENU.map((item, i) => (
@@ -43,26 +43,6 @@ export default function Footer() {
                 </Link>
               </ListItem>
             ))}
-            <ListItem>
-              <Link
-                href="privacy"
-                _hover={{
-                  color: 'momo.100',
-                }}
-              >
-                プライバシーポリシー
-              </Link>
-            </ListItem>
-            <ListItem>
-              <Link
-                href="terms"
-                _hover={{
-                  color: 'momo.100',
-                }}
-              >
-                利用規約
-              </Link>
-            </ListItem>
           </UnorderedList>
         </Box>
         <Box>
@@ -73,7 +53,7 @@ export default function Footer() {
             <br />
             ヴィンテージ・プレイス201
           </Box>
-          <Box display={'flex'} gap={20} mt={20}>
+          <Box display={'flex'} gap={5} my={5}>
             <Link href={CONTACT.instagram} target="_blank">
               <FaInstagram size={'3em'} />
             </Link>
@@ -84,29 +64,7 @@ export default function Footer() {
               <FaLine size={'3em'} />
             </Link>
           </Box>
-          <Link
-            display={'block'}
-            href="/contact"
-            mt={20}
-            textAlign={'center'}
-            borderRadius={40}
-            className={'slide-btn'}
-          >
-            <Box
-              py={'0.5em'}
-              px={'1.5em'}
-              display={'flex'}
-              justifyContent={'center'}
-              alignItems={'center'}
-              height={'100%'}
-              className={styles.contact}
-            >
-              <IoMail size={'1.5em'} />
-              <Text ml={4} _hover={{ textDecorationLine: 'none' }}>
-                お問い合わせ
-              </Text>
-            </Box>
-          </Link>
+          <ContactButton />
         </Box>
         <Box>
           <Box
@@ -117,9 +75,9 @@ export default function Footer() {
           ></Box>
         </Box>
       </Box>
-      <Box w={'100%'} textAlign={'center'} mt={40}>
+      <Box w={'100%'} textAlign={'center'} mt={10}>
         <Text fontSize={'small'}>© 2024 PEACH WEB LLC</Text>
       </Box>
     </Box>
   );
-}
+};

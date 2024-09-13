@@ -1,22 +1,17 @@
-import { ChakraProvider } from '@chakra-ui/react';
+'use client';
 
-const theme = {
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+
+const theme = extendTheme({
   colors: {
     momo: {
       100: '#ff7bac',
       200: '#febdd6',
       300: '#eeeeee',
+      400: '#e0e0e0',
     },
   },
-  breakpoints: {
-    base: '0em',
-    sm: '30em',
-    md: '48em',
-    lg: '62em',
-    xl: '80em',
-    '2xl': '96em',
-  },
-};
+});
 
 export function Provider({ children }: { children: React.ReactNode }) {
   return <ChakraProvider theme={theme}>{children}</ChakraProvider>;
