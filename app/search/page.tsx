@@ -1,6 +1,6 @@
 import { getList } from '@/libs/microcms';
-import ArticleList from '@/components/ArticleList';
-import Pagination from '@/components/Pagination';
+// import ArticleList from '@/components/ArticleList';
+// import Pagination from '@/components/Pagination';
 
 type Props = {
   searchParams: {
@@ -17,8 +17,8 @@ export default async function Page({ searchParams }: Props) {
 
   return (
     <>
-      <ArticleList articles={data.contents} />
-      <Pagination totalCount={data.totalCount} basePath="/search" q={searchParams.q} />
+      {/* <ArticleList articles={data.contents} /> */}
+      {/* <Pagination totalCount={data.totalCount} basePath="/search" q={searchParams.q} /> */}
     </>
   );
 }
