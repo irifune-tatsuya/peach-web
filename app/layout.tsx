@@ -15,7 +15,7 @@ const description =
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),
   title: {
-    template: `%s | ${siteName}`,
+    template: `%s | ${siteName} `,
     default: `HOME | ${siteName}`,
   },
   description: description,
@@ -64,6 +64,9 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
+  },
+  alternates: {
+    canonical: '/',
   },
   manifest: '/manifest.json',
 };
