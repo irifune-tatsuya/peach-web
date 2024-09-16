@@ -26,12 +26,12 @@ body {
   overflow-x: hidden;
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', YuGothic, 'ヒラギノ角ゴ ProN W3',
+/* body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', YuGothic, 'ヒラギノ角ゴ ProN W5',
     Hiragino Kaku Gothic ProN, Arial, 'メイリオ', Meiryo, sans-serif;
   color: var(--color-text-main);
   line-height: 1.8;
-}
+} */
 
 code {
   font-family: menlo, inconsolata, monospace;
