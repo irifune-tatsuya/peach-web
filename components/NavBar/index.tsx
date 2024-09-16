@@ -24,25 +24,53 @@ export const NavBar: NextPage = () => {
         justifyContent={'space-between'}
         alignItems={'flex-end'}
       >
-        <Link href="/blog" display={'flex'} flexFlow={'column'} alignItems={'center'} w={10}>
+        <Link
+          href="/articles"
+          display={'flex'}
+          flexFlow={'column'}
+          alignItems={'center'}
+          w={10}
+          _hover={{ textDecoration: 'none' }}
+        >
           <IoBookOutline size={'1.5rem'} color={'ff7bac'} />
           <Text fontSize={'xx-small'} fontWeight={'bold'} mt={'0.1em'}>
-            ブログ
+            新着記事
           </Text>
         </Link>
-        <Link href="/service" display={'flex'} flexFlow={'column'} alignItems={'center'} w={10}>
+        <Link
+          href="/service"
+          display={'flex'}
+          flexFlow={'column'}
+          alignItems={'center'}
+          w={10}
+          _hover={{ textDecoration: 'none' }}
+        >
           <ImDisplay size={'1.5rem'} color={'ff7bac'} />
           <Text fontSize={'xx-small'} fontWeight={'bold'} mt={'0.1em'}>
             サービス
           </Text>
         </Link>
-        <Link href="/" display={'flex'} flexFlow={'column'} alignItems={'center'} w={10}>
-          <Image src="/common/nav-momo.png" alt="HOMEに戻る" w={'1.5rem'} h={'auto'} />
+        <Link
+          href="/"
+          display={'flex'}
+          flexFlow={'column'}
+          alignItems={'center'}
+          w={10}
+          _hover={{ textDecoration: 'none' }}
+        >
+          <Image src="/common/nav-momo.png" alt="ホームに戻る" w={'1.5rem'} h={'auto'} />
           <Text fontSize={'xx-small'} fontWeight={'bold'} mt={'0.1em'}>
             ホーム
           </Text>
         </Link>
-        <Link href="/contact" display={'flex'} flexFlow={'column'} alignItems={'center'} w={10}>
+        <Link
+          href="/contact"
+          display={'flex'}
+          flexFlow={'column'}
+          alignItems={'center'}
+          w={10}
+          _hover={{ textDecoration: 'none' }}
+        >
           <GoMail size={'1.5rem'} color={'ff7bac'} />
           <Text fontSize={'xx-small'} fontWeight={'bold'} mt={'0.1em'}>
             お問合せ

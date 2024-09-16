@@ -1,7 +1,7 @@
 // 1ページの表示件数
-export const LIMIT04 = 4;
-export const LIMIT10 = 10;
-export const BLOGFILTER = 'category[equals]blog';
+export const LIMIT05 = 5;
+export const LIMIT12 = 12;
+export const ARTICLEFILTER = 'category[equals]article';
 export const INFORMATIONFILTER = 'category[equals]information';
 
 // ヘッダーやフッターに表示するメニュー
@@ -31,8 +31,8 @@ export const MENU = [
     href: '/peach-fight',
   },
   {
-    title: 'ブログ',
-    href: '/blog',
+    title: '新着記事',
+    href: '/articles',
   },
   {
     title: 'よくあるご質問',

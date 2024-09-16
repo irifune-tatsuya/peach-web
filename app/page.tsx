@@ -11,14 +11,14 @@ import {
 } from '@chakra-ui/react';
 import styles from './layout.module.css';
 import { TopSwiper } from '@/components/TopSwiper';
-import { LIMIT04, LIMIT10, BLOGFILTER, INFORMATIONFILTER, CONTACT } from '@/constants';
+import { LIMIT05, ARTICLEFILTER, INFORMATIONFILTER, CONTACT } from '@/constants';
 import { FaInstagram } from 'react-icons/fa';
 import { FaFacebookSquare } from 'react-icons/fa';
 import { FaLine } from 'react-icons/fa';
 import { ContactButton } from '@/components/ContactButton';
 import { getList } from '@/libs/microcms';
 import React from 'react';
-import ArticleList from '@/components/ArticleList';
+import SideScrollArticleList from '@/components/SideScrollArticleList';
 import { ViewMoreButton } from '@/components/ViewMoreButton';
 import ContentTitle from '@/components/ContentTitle';
 import PublishedDate from '@/components/PublishedDate';
@@ -43,12 +43,12 @@ const bottomLinks = [
 ];
 
 export default async function Home() {
-  const blogData = await getList({
-    limit: LIMIT10,
-    filters: BLOGFILTER,
+  const articleData = await getList({
+    limit: LIMIT05,
+    filters: ARTICLEFILTER,
   });
   const informationData = await getList({
-    limit: LIMIT04,
+    limit: LIMIT05,
     filters: INFORMATIONFILTER,
   });
   return (
@@ -169,10 +169,12 @@ export default async function Home() {
       </Box>
       <Box as="section" pb={{ base: 100, md: 200 }}>
         <Box w={'100%'} maxW={1080} mx={'auto'}>
-          <Link href={'peach-fight'} w={'100%'}>
+          <Link href={'peach-fight'} w={'100%'} overflow={'hidden'}>
             <Image
               src={'/top/peach_fight_banner.jpg'}
               alt={'岡山のチャレンジ応援マガジンピーチファイ'}
+              transition={'transform 0.3s ease'}
+              _hover={{ transform: 'scale(1.1)' }}
             />
           </Link>
         </Box>
@@ -185,10 +187,10 @@ export default async function Home() {
             alignItems={'center'}
             mb={{ base: 8, md: 12 }}
           >
-            <ContentTitle TitleEn="Blog" TitleJp="新着記事" mb={0} />
-            <ViewMoreButton href={'/blog'} size={'small'} />
+            <ContentTitle TitleEn="Article" TitleJp="新着記事" mb={0} />
+            <ViewMoreButton href={'/article'} size={'small'} />
           </Box>
-          <ArticleList articles={blogData.contents} category={'blog'} />
+          <SideScrollArticleList articles={articleData.contents} category={'article'} />
         </Box>
       </Box>
       <Box as="section" pb={{ base: 100, md: 20 }} maxW={1152} px={4} mx={'auto'}>

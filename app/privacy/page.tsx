@@ -5,7 +5,7 @@ import { Box, Heading, ListItem, OrderedList, Text } from '@chakra-ui/react';
 
 const breadcrumbs = [
   {
-    title: 'Home',
+    title: 'ホーム',
     href: '/',
     isCurrentPage: false,
   },

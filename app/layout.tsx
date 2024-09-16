@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),
   title: {
     template: `%s | ${siteName} `,
-    default: `HOME | ${siteName}`,
+    default: `ホーム | ${siteName}`,
   },
   description: description,
   openGraph: {
