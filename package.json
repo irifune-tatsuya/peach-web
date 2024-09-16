@@ -21,6 +21,9 @@
     "node": ">=18.x"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
     "@types/cheerio": "^0.22.31",
     "@types/node": "18.15.3",
     "@types/react": "18.0.28",
@@ -32,12 +35,16 @@
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
     "eslint-config-prettier": "^8.7.0",
+    "framer-motion": "^11.5.2",
     "highlight.js": "^11.7.0",
     "microcms-js-sdk": "^2.3.2",
     "next": "^13.4.4",
+    "next-pwa": "^5.6.0",
     "prettier": "^2.8.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.3.0",
+    "swiper": "^11.1.12",
     "typescript": "4.9.5"
   }
 }

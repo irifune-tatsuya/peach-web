@@ -1,4 +1,4 @@
-.main {
+/* .main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -42,7 +42,7 @@
 
 .writerName {
   margin-left: 16px;
-}
+} */
 
 .thumbnail {
   width: 960px;

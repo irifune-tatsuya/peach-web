@@ -1,0 +1,35 @@
+{
+  "name": "ピーチウェブ -岡山のWEBブランディングサービス-",
+  "short_name": "ピーチウェブ",
+  "description": "あなたの仕事が永く愛されますように。お客様の事業の魅力を最大限発信するWEBブランディングをご提案する岡山の会社ピーチウェブの公式サイトです。ホームページの制作・運用、事業計画の見直しなど多岐にわたってサポートいたします。",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "scope": "/",
+  "lang": "ja",
+  "dir": "auto",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

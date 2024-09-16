@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { getDetail } from '@/libs/microcms';
-import Article from '@/components/Article';
+// import Article from '@/components/Article';
 
 type Props = {
   params: {
@@ -34,5 +34,5 @@ export default async function Page({ params, searchParams }: Props) {
     draftKey: searchParams.dk,
   });
 
-  return <Article data={data} />;
+  // return <Article data={data} />;
 }
