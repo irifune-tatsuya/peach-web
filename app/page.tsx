@@ -191,8 +191,8 @@ export default async function Home() {
           <ArticleList articles={blogData.contents} category={'blog'} />
         </Box>
       </Box>
-      <Box as="section" pb={{ base: 100, md: 20 }}>
-        <Box mx={'auto'} maxW={1152} px={4}>
+      <Box as="section" pb={{ base: 100, md: 20 }} maxW={1152} px={4} mx={'auto'}>
+        <Box>
           <Box
             display={'flex'}
             justifyContent={'space-between'}
