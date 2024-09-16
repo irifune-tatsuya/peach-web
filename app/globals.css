@@ -50,6 +50,7 @@ ol,
 ul {
   list-style: none;
 }
+
 .contactButton {
   overflow: hidden;
   position: relative;
@@ -74,4 +75,12 @@ ul {
 }
 .contactButton:hover::after {
   transform: scale(1, 1);
+}
+
+.articleTitle {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

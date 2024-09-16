@@ -1,6 +1,6 @@
 import { formatRichText } from '@/libs/utils';
 import { type Article } from '@/libs/microcms';
-import PublishedDate from '../Date';
+import PublishedDate from '../PublishedDate';
 import styles from './index.module.css';
 import TagList from '../TagList';
 import Profile from '../Profile';

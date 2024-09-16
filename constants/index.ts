@@ -1,5 +1,8 @@
 // 1ページの表示件数
-export const LIMIT = 10;
+export const LIMIT04 = 4;
+export const LIMIT10 = 10;
+export const BLOGFILTER = 'category[equals]blog';
+export const INFORMATIONFILTER = 'category[equals]information';
 
 // ヘッダーやフッターに表示するメニュー
 export const MENU = [
@@ -12,16 +15,28 @@ export const MENU = [
     href: '/thought',
   },
   {
+    title: '選ばれる理由',
+    href: '/reason',
+  },
+  {
     title: 'サービス',
     href: '/service',
   },
   {
-    title: 'よくあるご質問',
-    href: '/faq',
+    title: '料金体系',
+    href: '/pricing',
+  },
+  {
+    title: 'ピーチファイ',
+    href: '/peach-fight',
   },
   {
     title: 'ブログ',
     href: '/blog',
+  },
+  {
+    title: 'よくあるご質問',
+    href: '/faq',
   },
   {
     title: 'プライバシーポリシー',

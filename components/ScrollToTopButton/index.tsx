@@ -2,7 +2,7 @@
 
 import { Icon } from '@chakra-ui/react';
 import { NextPage } from 'next';
-import { IoIosArrowUp } from 'react-icons/io';
+import { MdKeyboardArrowUp } from 'react-icons/md';
 import styles from './index.module.css';
 
 export const ScrollToTopButton: NextPage = () => {
@@ -13,10 +13,11 @@ export const ScrollToTopButton: NextPage = () => {
       position="fixed"
       right={3}
       bottom={20}
-      as={IoIosArrowUp}
+      as={MdKeyboardArrowUp}
       color={'momo.100'}
-      w={10}
-      h={10}
+      size={'small'}
+      w={50}
+      h={50}
       borderRadius={'50%'}
       p={2}
       bg={'white'}
