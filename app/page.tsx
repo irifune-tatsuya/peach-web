@@ -169,7 +169,7 @@ export default async function Home() {
       </Box>
       <Box as="section" pb={{ base: 100, md: 200 }}>
         <Box w={'100%'} maxW={1080} mx={'auto'}>
-          <Link href={'peach-fight'} w={'100%'} overflow={'hidden'}>
+          <Link href={'/peach-fight'} w={'100%'} overflow={'hidden'}>
             <Image
               src={'/top/peach_fight_banner.jpg'}
               alt={'岡山のチャレンジ応援マガジンピーチファイ'}

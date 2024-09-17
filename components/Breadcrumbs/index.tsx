@@ -15,14 +15,7 @@ type Props = {
 
 export const Breadcrumbs: NextPage<Props> = ({ breadcrumbs }) => {
   return (
-    <Box
-      bg={'momo.300'}
-      fontSize={'small'}
-      py={10}
-      px={4}
-      mt={{ base: 15, md: 156 }}
-      mb={{ base: 16, md: 0 }}
-    >
+    <Box bg={'momo.300'} fontSize={'small'} py={10} px={4} mb={{ base: 16, md: 0 }}>
       <Breadcrumb
         spacing="8px"
         separator={<MdOutlineKeyboardArrowRight color={'momo.400'} />}

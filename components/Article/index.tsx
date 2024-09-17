@@ -14,7 +14,7 @@ type Props = {
 export default function Article({ data }: Props) {
   const toc = renderToc(data.content);
   return (
-    <Box as={'article'} maxW={{ base: 'auto', md: 620 }} mx={'auto'}>
+    <Box as={'article'} maxW={{ base: 'auto', md: 620 }} mx={'auto'} pb={{ base: 15, md: 156 }}>
       <Image src={data.thumbnail?.url} className={styles.thumbnail} w={'100%'} h={'auto'} />
       <Heading
         as={'h1'}

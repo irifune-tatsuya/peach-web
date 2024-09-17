@@ -20,7 +20,7 @@ export default async function Privacy() {
   return (
     <>
       <Title titleEn={'Privacy Policy'} titleJp={'プライバシーポリシー'} />
-      <Box maxW={1152} mx={'auto'} p={4} fontSize={'small'}>
+      <Box maxW={1152} mx={'auto'} p={4} fontSize={'small'} pb={{ base: 15, md: 156 }}>
         <Text mb={12} fontSize={'small'}>
           合同会社ピーチウェブ（以下、「弊社」といいます。）は、本ウェブサイト上で提供するサービス（以下、「本サービス」といいます。）におけるユーザーの個人情報の取扱いについて以下のとおりプライバシーポリシー（以下、「本ポリシー」といいます。）を定めます。
         </Text>

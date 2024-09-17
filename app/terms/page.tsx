@@ -20,7 +20,7 @@ export default async function Terms() {
   return (
     <>
       <Title titleEn={'Terms'} titleJp={'利用規約'} />
-      <Box maxW={1152} mx={'auto'} p={4} fontSize={'small'}>
+      <Box maxW={1152} mx={'auto'} p={4} fontSize={'small'} pb={{ base: 15, md: 156 }}>
         <Text mb={12} fontSize={'small'}>
           この利用規約（以下，「本規約」といいます。）は、合同会社ピーチウェブ（以下，「弊社」といいます。）がこのウェブサイト上で提供するサービス（以下，「本サービス」といいます。）の利用条件を定めるものです。登録ユーザーの皆さま（以下，「ユーザー」といいます。）には，本規約に従って，本サービスをご利用いただきます。
         </Text>

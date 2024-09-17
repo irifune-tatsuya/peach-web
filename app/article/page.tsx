@@ -30,9 +30,9 @@ export default async function Article() {
   return (
     <>
       <Title titleEn={'Articles'} titleJp={'新着記事一覧'} />
-      <Box maxW={1152} mx={'auto'} p={4} mb={{ base: 16, md: 0 }}>
+      <Box maxW={1152} mx={'auto'} p={4} pb={{ base: 15, md: 156 }}>
         <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }}>
-          <SearchField />
+          <SearchField category={'article'} />
         </Box>
         <Pagination totalCount={data.totalCount} />
         <GridArticleList articles={data.contents} category={'article'} />

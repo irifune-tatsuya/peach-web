@@ -4,14 +4,16 @@ import { useCallback, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Input } from '@chakra-ui/react';
 
-export default function SearchField() {
+type Props = { category: string };
+
+export default function SearchField({ category }: Props) {
   const [composing, setComposition] = useState(false);
   const startComposition = () => setComposition(true);
   const endComposition = () => setComposition(false);
   const _onEnter: React.KeyboardEventHandler<HTMLInputElement> = useCallback(
     (e) => {
       if (e.code === 'Enter' && !composing) {
-        location.href = `/article/search?q=${inputRef.current?.value}`;
+        location.href = `/${category}/search?q=${inputRef.current?.value}`;
       }
     },
     [composing],

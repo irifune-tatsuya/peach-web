@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { getDetail } from '@/libs/microcms';
-// import Article from '@/components/Article';
+import Article from '@/components/Article';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 type Props = {
   params: {
@@ -24,7 +25,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     openGraph: {
       title: data.title,
       description: data.description,
-      images: [data?.thumbnail?.url || ''],
+      images: [data?.thumbnail?.url || '/ogp.jpg'],
     },
   };
 }
@@ -34,5 +35,28 @@ export default async function Page({ params, searchParams }: Props) {
     draftKey: searchParams.dk,
   });
 
-  // return <Article data={data} />;
+  const breadcrumbs = [
+    {
+      title: 'ホーム',
+      href: '/',
+      isCurrentPage: false,
+    },
+    {
+      title: '岡山のチャレンジ応援マガジン「ピーチファイ」',
+      href: '/peach-fight',
+      isCurrentPage: false,
+    },
+    {
+      title: data.title,
+      href: `/peach-fight/${data.id}`,
+      isCurrentPage: true,
+    },
+  ];
+
+  return (
+    <>
+      <Article data={data} />
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
+    </>
+  );
 }

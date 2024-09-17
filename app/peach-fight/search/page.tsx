@@ -5,7 +5,7 @@ import { Box } from '@chakra-ui/react';
 import Title from '@/components/Title';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import SearchField from '@/components/SearchField';
-import { ARTICLEFILTER } from '@/constants';
+import { PEACHFILTER } from '@/constants';
 
 const breadcrumbs = [
   {
@@ -14,13 +14,13 @@ const breadcrumbs = [
     isCurrentPage: false,
   },
   {
-    title: '新着記事',
-    href: '/article',
+    title: '岡山のチャレンジ応援マガジン「ピーチファイ」',
+    href: '/peach-fight',
     isCurrentPage: false,
   },
   {
     title: '記事の検索結果',
-    href: '/article/search',
+    href: '/peach-fight/search',
     isCurrentPage: true,
   },
 ];
@@ -35,20 +35,28 @@ export const revalidate = 60;
 
 export default async function Page({ searchParams }: Props) {
   const data = await getList({
-    filters: ARTICLEFILTER,
+    filters: PEACHFILTER,
     q: searchParams.q,
   });
 
   return (
     <>
-      <Title titleEn={'Search Results'} titleJp={'記事検索の結果'} />
-      <Box maxW={1152} mx={'auto'} p={4} pb={{ base: 15, md: 156 }}>
+      <Title titleEn={'Search Results'} titleJp={'ピーチファイの検索の結果'} />
+      <Box maxW={1152} mx={'auto'} p={4} mb={{ base: 16, md: 0 }}>
         <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }}>
-          <SearchField category={'article'} />
+          <SearchField category={'peach-fight'} />
         </Box>
-        <Pagination totalCount={data.totalCount} basePath="/article/search" q={searchParams.q} />
-        <GridArticleList articles={data.contents} category={'article'} />
-        <Pagination totalCount={data.totalCount} basePath="/article/search" q={searchParams.q} />
+        <Pagination
+          totalCount={data.totalCount}
+          basePath="/peach-fight/search"
+          q={searchParams.q}
+        />
+        <GridArticleList articles={data.contents} category={'peach-fight'} />
+        <Pagination
+          totalCount={data.totalCount}
+          basePath="/peach-fight/search"
+          q={searchParams.q}
+        />
       </Box>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
