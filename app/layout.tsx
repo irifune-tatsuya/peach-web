@@ -81,7 +81,7 @@ const RootLayout: NextPage<Props> = ({ children }) => {
       <body suppressHydrationWarning={true}>
         <Provider>
           <Header />
-          <Box as="main" className={styles.main} mt={{ base: 0, lg: 76 }}>
+          <Box as="main" className={styles.main} mt={{ base: 0, md: 76 }}>
             {children}
           </Box>
           <ScrollToTopButton />

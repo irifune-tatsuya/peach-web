@@ -25,7 +25,7 @@ export const NavBar: NextPage = () => {
         alignItems={'flex-end'}
       >
         <Link
-          href="/articles"
+          href="/article"
           display={'flex'}
           flexFlow={'column'}
           alignItems={'center'}

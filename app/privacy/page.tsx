@@ -186,16 +186,7 @@ export default async function Privacy() {
         <br />
         <Text textAlign="end">以上</Text>
       </Box>
-      <Box
-        bg={'momo.300'}
-        fontSize={'small'}
-        py={10}
-        px={4}
-        mt={{ base: 15, md: 156 }}
-        mb={{ base: 16, md: 0 }}
-      >
-        <Breadcrumbs breadcrumbs={breadcrumbs} />
-      </Box>
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
 }

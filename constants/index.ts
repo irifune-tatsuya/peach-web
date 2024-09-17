@@ -32,7 +32,7 @@ export const MENU = [
   },
   {
     title: '新着記事',
-    href: '/articles',
+    href: '/article',
   },
   {
     title: 'よくあるご質問',

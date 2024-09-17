@@ -1,7 +1,7 @@
 :root {
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono',
+  /* --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono',
     'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono', 'Droid Sans Mono',
-    'Courier New', monospace;
+    'Courier New', monospace; */
   --color-text-main: #333;
   --color-text-sub: #999;
   --color-bg-main: #fff;
@@ -26,12 +26,9 @@ body {
   overflow-x: hidden;
 }
 
-/* body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', YuGothic, 'ヒラギノ角ゴ ProN W5',
-    Hiragino Kaku Gothic ProN, Arial, 'メイリオ', Meiryo, sans-serif;
-  color: var(--color-text-main);
-  line-height: 1.8;
-} */
+body {
+  font-family: Noto Sans JP, sans-serif !important;
+}
 
 code {
   font-family: menlo, inconsolata, monospace;
@@ -83,4 +80,13 @@ ul {
   -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.toc-h3 {
+  margin-left: 16px;
+}
+
+.marker {
+  font-weight: bold;
+  background: linear-gradient(transparent 50%, #febdd6 60% 90%, transparent 90%);
 }
