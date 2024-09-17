@@ -13,8 +13,13 @@ const breadcrumbs = [
     isCurrentPage: false,
   },
   {
+    title: '新着記事',
+    href: '/article',
+    isCurrentPage: false,
+  },
+  {
     title: '記事の検索結果',
-    href: '/search',
+    href: '/article/search',
     isCurrentPage: true,
   },
 ];
@@ -39,9 +44,9 @@ export default async function Page({ searchParams }: Props) {
         <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }}>
           <SearchField />
         </Box>
-        <Pagination totalCount={data.totalCount} basePath="/search" q={searchParams.q} />
+        <Pagination totalCount={data.totalCount} basePath="/article/search" q={searchParams.q} />
         <GridArticleList articles={data.contents} category={'article'} />
-        <Pagination totalCount={data.totalCount} basePath="/search" q={searchParams.q} />
+        <Pagination totalCount={data.totalCount} basePath="/article/search" q={searchParams.q} />
       </Box>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>

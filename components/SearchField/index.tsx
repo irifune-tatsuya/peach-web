@@ -2,8 +2,7 @@
 
 import { useCallback, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import styles from './index.module.css';
-import { Input, InputGroup, InputLeftAddon, Stack } from '@chakra-ui/react';
+import { Input } from '@chakra-ui/react';
 
 export default function SearchField() {
   const [composing, setComposition] = useState(false);
@@ -23,11 +22,13 @@ export default function SearchField() {
   return (
     <Input
       variant="flushed"
-      maxW={250}
+      maxW={300}
+      pl={9}
+      pr={3}
+      bg={`url('/search.svg') no-repeat 10px center`}
       type="search"
       name="q"
       ref={inputRef}
-      className={styles.search}
       placeholder="こちらから記事を検索できます"
       onKeyDown={_onEnter}
       onCompositionStart={startComposition}

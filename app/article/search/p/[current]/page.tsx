@@ -14,8 +14,13 @@ const breadcrumbs = [
     isCurrentPage: false,
   },
   {
+    title: '新着記事',
+    href: '/article',
+    isCurrentPage: false,
+  },
+  {
     title: '記事の検索結果',
-    href: '/search',
+    href: '/article/search',
     isCurrentPage: true,
   },
 ];
@@ -48,14 +53,14 @@ export default async function Page({ params, searchParams }: Props) {
         </Box>
         <Pagination
           totalCount={data.totalCount}
-          basePath="/search"
+          basePath="/article/search"
           current={current}
           q={searchParams.q}
         />
         <GridArticleList articles={data.contents} category={'article'} />
         <Pagination
           totalCount={data.totalCount}
-          basePath="/search"
+          basePath="/article/search"
           current={current}
           q={searchParams.q}
         />
