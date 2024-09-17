@@ -5,6 +5,7 @@ import GridArticleList from '@/components/GridArticleList';
 import { Box } from '@chakra-ui/react';
 import Title from '@/components/Title';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import SearchField from '@/components/SearchField';
 
 export const revalidate = 60;
 
@@ -30,6 +31,9 @@ export default async function Article() {
     <>
       <Title titleEn={'Articles'} titleJp={'新着記事一覧'} />
       <Box maxW={1152} mx={'auto'} p={4} mb={{ base: 16, md: 0 }}>
+        <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }}>
+          <SearchField />
+        </Box>
         <Pagination totalCount={data.totalCount} />
         <GridArticleList articles={data.contents} category={'article'} />
         <Pagination totalCount={data.totalCount} />
