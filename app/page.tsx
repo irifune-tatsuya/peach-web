@@ -1,27 +1,17 @@
-import {
-  Box,
-  Heading,
-  Image,
-  Link,
-  ListItem,
-  OrderedList,
-  Tag,
-  Text,
-  UnorderedList,
-} from '@chakra-ui/react';
+import { Box, Heading, Image, Link, ListItem, OrderedList, Text } from '@chakra-ui/react';
 import styles from './layout.module.css';
 import { TopSwiper } from '@/components/TopSwiper';
-import { LIMIT04, LIMIT10, BLOGFILTER, INFORMATIONFILTER, CONTACT } from '@/constants';
+import { LIMIT05, ARTICLEFILTER, CONTACT, NEWSFILTER } from '@/constants';
 import { FaInstagram } from 'react-icons/fa';
 import { FaFacebookSquare } from 'react-icons/fa';
 import { FaLine } from 'react-icons/fa';
 import { ContactButton } from '@/components/ContactButton';
 import { getList } from '@/libs/microcms';
 import React from 'react';
-import ArticleList from '@/components/ArticleList';
+import SideScrollArticleList from '@/components/SideScrollArticleList';
 import { ViewMoreButton } from '@/components/ViewMoreButton';
 import ContentTitle from '@/components/ContentTitle';
-import PublishedDate from '@/components/PublishedDate';
+import ArticleList from '@/components/ArticleList';
 
 export const revalidate = 60;
 
@@ -43,13 +33,13 @@ const bottomLinks = [
 ];
 
 export default async function Home() {
-  const blogData = await getList({
-    limit: LIMIT10,
-    filters: BLOGFILTER,
+  const articleData = await getList({
+    limit: LIMIT05,
+    filters: ARTICLEFILTER,
   });
-  const informationData = await getList({
-    limit: LIMIT04,
-    filters: INFORMATIONFILTER,
+  const newsData = await getList({
+    limit: LIMIT05,
+    filters: NEWSFILTER,
   });
   return (
     <>
@@ -169,10 +159,12 @@ export default async function Home() {
       </Box>
       <Box as="section" pb={{ base: 100, md: 200 }}>
         <Box w={'100%'} maxW={1080} mx={'auto'}>
-          <Link href={'peach-fight'} w={'100%'}>
+          <Link href={'/peach-fight'} w={'100%'} overflow={'hidden'}>
             <Image
               src={'/top/peach_fight_banner.jpg'}
               alt={'岡山のチャレンジ応援マガジンピーチファイ'}
+              transition={'transform 0.3s ease'}
+              _hover={{ transform: 'scale(1.1)' }}
             />
           </Link>
         </Box>
@@ -185,10 +177,10 @@ export default async function Home() {
             alignItems={'center'}
             mb={{ base: 8, md: 12 }}
           >
-            <ContentTitle TitleEn="Blog" TitleJp="新着記事" mb={0} />
-            <ViewMoreButton href={'/blog'} size={'small'} />
+            <ContentTitle TitleEn="Article" TitleJp="新着記事" mb={0} />
+            <ViewMoreButton href={'/article'} size={'small'} />
           </Box>
-          <ArticleList articles={blogData.contents} category={'blog'} />
+          <SideScrollArticleList articles={articleData.contents} category={'article'} />
         </Box>
       </Box>
       <Box as="section" pb={{ base: 100, md: 20 }} maxW={1152} px={4} mx={'auto'}>
@@ -203,45 +195,7 @@ export default async function Home() {
             <ViewMoreButton href={'/news'} size={'small'} />
           </Box>
         </Box>
-        <UnorderedList
-          borderTop={1}
-          borderStyle={'solid'}
-          borderColor={'momo.400'}
-          listStyleType={'none'}
-          m={0}
-        >
-          {informationData.contents.map((item, i) => (
-            <ListItem key={i} borderBottom={1} borderStyle={'solid'} borderColor={'momo.400'} p={0}>
-              <Link
-                href={`/information/${item.id}`}
-                display={{ base: 'block', md: 'flex' }}
-                py={6}
-                px={5}
-                alignItems={`center`}
-                _hover={{ textDecoration: 'none' }}
-              >
-                <Box display={'flex'}>
-                  <PublishedDate date={'2024.09.16'} simple={true} />
-                  <Tag
-                    size={'sm'}
-                    ml={6}
-                    whiteSpace={'nowrap'}
-                    justifyContent={'center'}
-                    py={2}
-                    px={3}
-                    fontSize={'xx-small'}
-                    fontWeight={'bold'}
-                  >
-                    お知らせ
-                  </Tag>
-                </Box>
-                <Box ml={{ base: 0, md: 8 }} mt={{ base: 3, md: 0 }} lineHeight={1.5}>
-                  <Text className={'articleTitle'}>{item.title}</Text>
-                </Box>
-              </Link>
-            </ListItem>
-          ))}
-        </UnorderedList>
+        <ArticleList articles={newsData.contents} category={'news'} />
       </Box>
       <Box
         as="section"
@@ -259,7 +213,13 @@ export default async function Home() {
             justifyContent={'center'}
           >
             {bottomLinks.map((item, i) => (
-              <Link key={i} href={item.src} display={'inline-block'} maxW={767} overflow={'hidden'}>
+              <Link
+                key={i}
+                href={item.href}
+                display={'inline-block'}
+                maxW={767}
+                overflow={'hidden'}
+              >
                 <Image
                   src={item.src}
                   alt={item.src}

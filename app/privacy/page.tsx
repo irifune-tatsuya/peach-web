@@ -5,7 +5,7 @@ import { Box, Heading, ListItem, OrderedList, Text } from '@chakra-ui/react';
 
 const breadcrumbs = [
   {
-    title: 'Home',
+    title: 'ホーム',
     href: '/',
     isCurrentPage: false,
   },
@@ -20,7 +20,7 @@ export default async function Privacy() {
   return (
     <>
       <Title titleEn={'Privacy Policy'} titleJp={'プライバシーポリシー'} />
-      <Box maxW={1152} mx={'auto'} p={4} fontSize={'small'}>
+      <Box maxW={1152} mx={'auto'} p={4} fontSize={'small'} pb={{ base: 15, md: 156 }}>
         <Text mb={12} fontSize={'small'}>
           合同会社ピーチウェブ（以下、「弊社」といいます。）は、本ウェブサイト上で提供するサービス（以下、「本サービス」といいます。）におけるユーザーの個人情報の取扱いについて以下のとおりプライバシーポリシー（以下、「本ポリシー」といいます。）を定めます。
         </Text>
@@ -186,16 +186,7 @@ export default async function Privacy() {
         <br />
         <Text textAlign="end">以上</Text>
       </Box>
-      <Box
-        bg={'momo.300'}
-        fontSize={'small'}
-        py={10}
-        px={4}
-        mt={{ base: 15, md: 156 }}
-        mb={{ base: 16, md: 0 }}
-      >
-        <Breadcrumbs breadcrumbs={breadcrumbs} />
-      </Box>
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
 }

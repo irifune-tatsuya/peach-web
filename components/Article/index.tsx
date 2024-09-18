@@ -1,66 +1,148 @@
-// import { formatRichText } from '@/libs/utils';
+'use client';
+
+import { formatRichText } from '@/libs/utils';
+import { renderToc } from '@/libs/render-toc';
 import { type Article } from '@/libs/microcms';
-// import PublishedDate from '../PublishedDate';
-// import styles from './index.module.css';
-// import TagList from '../TagList';
-// import Profile from '../Profile';
+import PublishedDate from '../PublishedDate';
+import styles from './index.module.css';
+import { Box, Heading, Image, Link } from '@chakra-ui/react';
+import TableOfContents from '../TableOfContents';
+import { FaInstagram, FaFacebookF } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
+import { usePathname } from 'next/navigation';
 
 type Props = {
   data: Article;
+  instagramId?: string;
+  isShowToc?: boolean;
+  isFaqLayout?: boolean;
 };
 
-export default function Article({ data }: Props) {
-  //   return (
-  //     <main className={styles.main}>
-  //       <h1 className={styles.title}>{data.title}</h1>
-  //       <TagList tags={data.tags} />
-  //       <p className={styles.description}>{data.description}</p>
-  //       <div className={styles.meta}>
-  //         {data.writer && (
-  //           <div className={styles.writer}>
-  //             <picture>
-  //               <source
-  //                 type="image/webp"
-  //                 srcSet={`${data.writer?.image?.url}?fm=webp&fit=crop&w=48&h=48 1x, ${data.writer?.image?.url}?fm=webp&fit=crop&w=48&h=48&dpr=2 2x`}
-  //               />
-  //               <img
-  //                 src={data.writer?.image?.url}
-  //                 alt=""
-  //                 className={styles.writerIcon}
-  //                 width={data.writer?.image?.width}
-  //                 height={data.writer?.image?.height}
-  //               />
-  //             </picture>
-  //             <span className={styles.writerName}>{data.writer?.name}</span>
-  //           </div>
-  //         )}
-  //         <PublishedDate date={data.publishedAt || data.createdAt} />
-  //       </div>
-  //       <picture>
-  //         <source
-  //           type="image/webp"
-  //           media="(max-width: 640px)"
-  //           srcSet={`${data.thumbnail?.url}?fm=webp&w=414 1x, ${data.thumbnail?.url}?fm=webp&w=414&dpr=2 2x`}
-  //         />
-  //         <source
-  //           type="image/webp"
-  //           srcSet={`${data.thumbnail?.url}?fm=webp&fit=crop&w=960&h=504 1x, ${data.thumbnail?.url}?fm=webp&fit=crop&w=960&h=504&dpr=2 2x`}
-  //         />
-  //         <img
-  //           src={data.thumbnail?.url}
-  //           alt=""
-  //           className={styles.thumbnail}
-  //           width={data.thumbnail?.width}
-  //           height={data.thumbnail?.height}
-  //         />
-  //       </picture>
-  //       <div
-  //         className={styles.content}
-  //         dangerouslySetInnerHTML={{
-  //           __html: `${formatRichText(data.content)}`,
-  //         }}
-  //       />
-  //       <Profile writer={data.writer} />
-  //     </main>
-  //   );
+export default function Article({
+  data,
+  instagramId = 'irifune3333',
+  isShowToc = true,
+  isFaqLayout = false,
+}: Props) {
+  const toc = renderToc(data.content);
+  const pathName = usePathname();
+  const fullPath = `${new URL(process.env.BASE_URL || 'http://localhost:3000')}${pathName.slice(
+    1,
+  )}`;
+  return (
+    <Box
+      as={'article'}
+      maxW={{ base: 'auto', md: 620 }}
+      mx={'auto'}
+      pb={{ base: 15, md: 156 }}
+      minH={'calc(100vh - 200px)'}
+    >
+      {isFaqLayout ? (
+        ''
+      ) : (
+        <>
+          {data.thumbnail ? (
+            <Image src={data.thumbnail?.url} alt={data.title} w={'100%'} maxW={620} h={'auto'} />
+          ) : (
+            <Image src="/no-image.png" alt="No Image" w={'100%'} maxW={620} h={'auto'} />
+          )}{' '}
+        </>
+      )}
+      <Heading
+        as={'h1'}
+        mt={{ base: '30px', md: '72px' }}
+        mb={5}
+        fontSize={'x-large'}
+        textAlign={'left'}
+        className={styles.title}
+        px={4}
+        lineHeight={1.5}
+      >
+        {data.title}
+      </Heading>
+      {isFaqLayout ? (
+        ''
+      ) : (
+        <>
+          {' '}
+          <Box
+            px={4}
+            h={'37px'}
+            mb={9}
+            display={'flex'}
+            alignItems={'center'}
+            justifyContent={'space-between'}
+          >
+            <Box display={'flex'} alignItems={'center'}>
+              <Image
+                src={'/article/momo-icon.png'}
+                alt={'ピーチウェブアイコン'}
+                w={'37px'}
+                h={'37px'}
+                borderRadius="full"
+              />
+              <Box display={'flex'} flexFlow={'column'} fontSize={'small'} ml={2}>
+                <Box as={'span'}>合同会社ピーチウェブ</Box>
+                <PublishedDate date={data.publishedAt || data.createdAt} simple={true} />
+              </Box>
+            </Box>
+            <Box display={'flex'} gap={2}>
+              <Link
+                href={`https://www.instagram.com/${instagramId}?ref=badge`}
+                isExternal
+                className={styles.instagramButton}
+                display={'flex'}
+                alignItems={'center'}
+                justifyContent={'center'}
+                borderRadius={7}
+                w={{ base: 37 }}
+                h={{ base: 37 }}
+                _hover={{ textDecoration: 'none', opacity: 0.7 }}
+              >
+                <FaInstagram className={styles.instagramIcon} size={30} color="white" />
+              </Link>
+              <Link
+                href={`http://www.facebook.com/share.php?u=${fullPath}`}
+                isExternal
+                rel={'nofollow noopener'}
+                display={'flex'}
+                alignItems={'end'}
+                justifyContent={'center'}
+                bg={'#1877f2'}
+                borderRadius={7}
+                w={{ base: 37 }}
+                h={{ base: 37 }}
+                _hover={{ textDecoration: 'none', opacity: 0.7 }}
+              >
+                <FaFacebookF size={30} color="white" />
+              </Link>
+              <Link
+                href={`https://x.com/share?url=${fullPath}&text=${data.title}&via=irifune333&related=irifune333&hashtags=ピーチウェブ`}
+                isExternal
+                rel={'nofollow noopener'}
+                display={'flex'}
+                alignItems={'center'}
+                justifyContent={'center'}
+                bg={'#000'}
+                borderRadius={7}
+                w={{ base: 37 }}
+                h={{ base: 37 }}
+                _hover={{ textDecoration: 'none', opacity: 0.7 }}
+              >
+                <FaXTwitter size={24} color="white" />
+              </Link>
+            </Box>
+          </Box>
+          {isShowToc ? <TableOfContents toc={toc} /> : ''}
+        </>
+      )}
+      <Box
+        px={4}
+        className={styles.content}
+        dangerouslySetInnerHTML={{
+          __html: `${formatRichText(data.content)}`,
+        }}
+      />
+    </Box>
+  );
 }

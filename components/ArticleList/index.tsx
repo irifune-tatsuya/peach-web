@@ -1,19 +1,10 @@
 import { Article } from '@/libs/microcms';
-import {
-  Card,
-  CardBody,
-  Heading,
-  Image,
-  Link,
-  ListItem,
-  Stack,
-  UnorderedList,
-} from '@chakra-ui/react';
+import { Box, Link, ListItem, OrderedList, Tag, Text } from '@chakra-ui/react';
+import React from 'react';
 import PublishedDate from '../PublishedDate';
-import styles from './index.module.css';
 
 type Props = {
-  articles?: Article[];
+  articles: Article[];
   category: string;
 };
 
@@ -25,53 +16,67 @@ export default function ArticleList({ articles, category }: Props) {
     return <p>記事がありません。</p>;
   }
   return (
-    <UnorderedList
-      m={{ base: 1, md: 0 }}
+    <OrderedList
+      borderTop={1}
+      borderStyle={'solid'}
+      borderColor={'momo.400'}
       listStyleType={'none'}
-      fontSize={'large'}
-      fontWeight={'normal'}
-      display={'flex'}
-      gap={4}
-      overflow={'scroll'}
-      overflowY={'hidden'}
-      sx={{
-        scrollSnapType: 'x mandatory',
-      }}
-      alignItems="start"
+      m={0}
     >
-      {articles.map((article, i) => (
-        <ListItem key={i} w={['65vw', '65vw', '300px', '350px']} maxW={350}>
-          <Card size="sm">
-            <Link href={`/${category}/${article.id}`} _hover={{ textDecoration: 'none' }}>
-              <CardBody p={0}>
-                {article.thumbnail ? (
-                  <Image
-                    src={article.thumbnail?.url}
-                    alt={article.title}
-                    w={['65vw', '65vw', '300px', '350px']}
-                    maxW={350}
-                    h={'auto'}
-                  />
-                ) : (
-                  <Image
-                    src="/no-image.png"
-                    alt="No Image"
-                    w={['65vw', '65vw', '300px', '350px']}
-                    maxW={350}
-                    h={'auto'}
-                  />
-                )}
-                <Stack p={2}>
-                  <Heading size={'sm'} my={2} className={styles.articleTitle}>
-                    {article.title}
-                  </Heading>
-                  <PublishedDate date={article.publishedAt || article.createdAt} />
-                </Stack>
-              </CardBody>
-            </Link>
-          </Card>
+      {articles.map((item, i) => (
+        <ListItem key={i} borderBottom={1} borderStyle={'solid'} borderColor={'momo.400'} p={0}>
+          <Link
+            href={`/${category}/${item.id}`}
+            display={{ base: 'block', md: 'flex' }}
+            py={6}
+            px={5}
+            alignItems={`center`}
+            _hover={{ textDecoration: 'none' }}
+          >
+            <Box display={'flex'}>
+              {category === 'faq' ? (
+                ''
+              ) : (
+                <PublishedDate date={item.publishedAt || item.createdAt} simple={true} />
+              )}
+              {category === 'faq' ? (
+                item.tags?.map((tag, i) => (
+                  <Tag
+                    size={'sm'}
+                    ml={6}
+                    whiteSpace={'nowrap'}
+                    justifyContent={'center'}
+                    py={2}
+                    px={3}
+                    fontSize={'xx-small'}
+                    fontWeight={'bold'}
+                    key={i}
+                  >
+                    {`#${tag.name}`}
+                  </Tag>
+                ))
+              ) : (
+                <Tag
+                  size={'sm'}
+                  ml={6}
+                  whiteSpace={'nowrap'}
+                  justifyContent={'center'}
+                  py={2}
+                  px={3}
+                  fontSize={'xx-small'}
+                  fontWeight={'bold'}
+                  key={i}
+                >
+                  お知らせ
+                </Tag>
+              )}
+            </Box>
+            <Box ml={{ base: 0, md: 8 }} mt={{ base: 3, md: 0 }} lineHeight={1.5}>
+              <Text className={'articleTitle'}>{item.title}</Text>
+            </Box>
+          </Link>
         </ListItem>
       ))}
-    </UnorderedList>
+    </OrderedList>
   );
 }

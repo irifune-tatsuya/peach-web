@@ -1,0 +1,32 @@
+.message {
+  animation: message 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes message {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.momotaro {
+  animation: slideIn 1s;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(180px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+  }
+  40%,
+  100% {
+    opacity: 1;
+  }
+}

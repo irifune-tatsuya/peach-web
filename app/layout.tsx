@@ -1,6 +1,5 @@
 import { Box } from '@chakra-ui/react';
 import './globals.css';
-import styles from './layout.module.css';
 import { Metadata, NextPage } from 'next';
 import { NavBar } from '@/components/NavBar';
 import { ScrollToTopButton } from '@/components/ScrollToTopButton';
@@ -16,7 +15,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),
   title: {
     template: `%s | ${siteName} `,
-    default: `HOME | ${siteName}`,
+    default: `ホーム | ${siteName}`,
   },
   description: description,
   openGraph: {
@@ -81,7 +80,7 @@ const RootLayout: NextPage<Props> = ({ children }) => {
       <body suppressHydrationWarning={true}>
         <Provider>
           <Header />
-          <Box as="main" className={styles.main} mt={{ base: 0, lg: 76 }}>
+          <Box as="main" mt={{ base: 0, md: 76 }} mx={'auto'}>
             {children}
           </Box>
           <ScrollToTopButton />
