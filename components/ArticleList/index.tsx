@@ -34,19 +34,42 @@ export default function ArticleList({ articles, category }: Props) {
             _hover={{ textDecoration: 'none' }}
           >
             <Box display={'flex'}>
-              <PublishedDate date={item.publishedAt || item.createdAt} simple={true} />
-              <Tag
-                size={'sm'}
-                ml={6}
-                whiteSpace={'nowrap'}
-                justifyContent={'center'}
-                py={2}
-                px={3}
-                fontSize={'xx-small'}
-                fontWeight={'bold'}
-              >
-                {category === 'news' ? 'お知らせ' : 'よくあるご質問'}
-              </Tag>
+              {category === 'faq' ? (
+                ''
+              ) : (
+                <PublishedDate date={item.publishedAt || item.createdAt} simple={true} />
+              )}
+              {category === 'faq' ? (
+                item.tags?.map((tag, i) => (
+                  <Tag
+                    size={'sm'}
+                    ml={6}
+                    whiteSpace={'nowrap'}
+                    justifyContent={'center'}
+                    py={2}
+                    px={3}
+                    fontSize={'xx-small'}
+                    fontWeight={'bold'}
+                    key={i}
+                  >
+                    {`#${tag.name}`}
+                  </Tag>
+                ))
+              ) : (
+                <Tag
+                  size={'sm'}
+                  ml={6}
+                  whiteSpace={'nowrap'}
+                  justifyContent={'center'}
+                  py={2}
+                  px={3}
+                  fontSize={'xx-small'}
+                  fontWeight={'bold'}
+                  key={i}
+                >
+                  お知らせ
+                </Tag>
+              )}
             </Box>
             <Box ml={{ base: 0, md: 8 }} mt={{ base: 3, md: 0 }} lineHeight={1.5}>
               <Text className={'articleTitle'}>{item.title}</Text>

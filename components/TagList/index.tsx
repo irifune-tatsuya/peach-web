@@ -5,9 +5,10 @@ import styles from './index.module.css';
 type Props = {
   tags?: Tag[];
   hasLink?: boolean;
+  category: string;
 };
 
-export default function TagList({ tags, hasLink = true }: Props) {
+export default function TagList({ tags, hasLink = true, category }: Props) {
   if (!tags) {
     return null;
   }
@@ -15,7 +16,7 @@ export default function TagList({ tags, hasLink = true }: Props) {
     <ul className={styles.tags}>
       {tags.map((tag) => (
         <li key={tag.id}>
-          <TagListItem tag={tag} hasLink={hasLink} />
+          <TagListItem tag={tag} hasLink={hasLink} category={category} />
         </li>
       ))}
     </ul>

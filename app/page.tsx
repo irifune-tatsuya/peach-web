@@ -213,7 +213,13 @@ export default async function Home() {
             justifyContent={'center'}
           >
             {bottomLinks.map((item, i) => (
-              <Link key={i} href={item.src} display={'inline-block'} maxW={767} overflow={'hidden'}>
+              <Link
+                key={i}
+                href={item.href}
+                display={'inline-block'}
+                maxW={767}
+                overflow={'hidden'}
+              >
                 <Image
                   src={item.src}
                   alt={item.src}

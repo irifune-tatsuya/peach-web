@@ -23,6 +23,7 @@ const breadcrumbs = [
 ];
 
 export default async function Article() {
+  const category = 'article';
   const data = await getList({
     limit: LIMIT12,
     filters: ARTICLEFILTER,
@@ -31,10 +32,10 @@ export default async function Article() {
     <>
       <Title titleEn={'Articles'} titleJp={'新着記事一覧'} />
       <Box maxW={1152} mx={'auto'} p={4} pb={{ base: 15, md: 156 }}>
-        <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }}>
-          <SearchField category={'article'} />
+        <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }} mb={20}>
+          <SearchField category={category} />
         </Box>
-        <GridArticleList articles={data.contents} category={'article'} />
+        <GridArticleList articles={data.contents} category={category} />
         <Pagination totalCount={data.totalCount} />
       </Box>
       <Breadcrumbs breadcrumbs={breadcrumbs} />

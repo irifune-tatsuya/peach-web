@@ -5,7 +5,7 @@ import { Box } from '@chakra-ui/react';
 import Title from '@/components/Title';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import SearchField from '@/components/SearchField';
-import { PEACHFILTER } from '@/constants';
+import { FAQFILTER } from '@/constants';
 
 const breadcrumbs = [
   {
@@ -14,13 +14,13 @@ const breadcrumbs = [
     isCurrentPage: false,
   },
   {
-    title: '岡山のチャレンジ応援マガジン「ピーチファイ」',
-    href: '/peach-fight',
+    title: 'よくあるご質問',
+    href: '/faq',
     isCurrentPage: false,
   },
   {
-    title: 'ピーチファイの検索結果',
-    href: '/peach-fight/search',
+    title: 'よくあるご質問の検索結果',
+    href: '/faq/search',
     isCurrentPage: true,
   },
 ];
@@ -34,17 +34,17 @@ type Props = {
 export const revalidate = 60;
 
 export default async function Page({ searchParams }: Props) {
-  const category = 'peach-fight';
+  const category = 'faq';
   const data = await getList({
-    filters: PEACHFILTER,
+    filters: FAQFILTER,
     q: searchParams.q,
   });
 
   return (
     <>
-      <Title titleEn={'Search Results'} titleJp={'ピーチファイの検索結果'} />
-      <Box maxW={1152} mx={'auto'} p={4} mb={{ base: 16, md: 0 }}>
-        <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }} mb={20}>
+      <Title titleEn={'Search Results'} titleJp={'よくあるご質問の検索結果'} />
+      <Box maxW={1152} mx={'auto'} p={4} pb={{ base: 15, md: 156 }}>
+        <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }}>
           <SearchField category={category} />
         </Box>
         <GridArticleList articles={data.contents} category={category} />

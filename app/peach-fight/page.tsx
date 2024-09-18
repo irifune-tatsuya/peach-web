@@ -27,6 +27,7 @@ const breadcrumbs = [
 const swiperImages = [{ src: '/peach-fight/peach-fight-banner.jpg', alt: 'ピーチファイ' }];
 
 export default async function Article() {
+  const category = 'peach-fight';
   const data = await getList({
     limit: LIMIT12,
     filters: PEACHFILTER,
@@ -85,10 +86,10 @@ export default async function Article() {
         <TopSwiper images={swiperImages} />
       </Box>
       <Box maxW={1152} mx={'auto'} p={4} pb={{ base: 15, md: 156 }}>
-        <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }}>
-          <SearchField category={'peach-fight'} />
+        <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }} mb={20}>
+          <SearchField category={category} />
         </Box>
-        <GridArticleList articles={data.contents} category={'peach-fight'} />
+        <GridArticleList articles={data.contents} category={category} />
         <Pagination totalCount={data.totalCount} />
       </Box>
       <Breadcrumbs breadcrumbs={breadcrumbs} />

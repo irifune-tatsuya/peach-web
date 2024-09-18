@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
-const pageTitle = '記事の検索結果';
+const pageTitle = 'よくあるご質問';
 const description =
-  'ホームページの制作・運用、事業計画の見直しなどを通じてWEBブランディングを行う岡山の会社ピーチウェブの公式サイトです。こちらは記事の検索結果ページです。';
+  'ホームページの制作・運用、事業計画の見直しなどを通じてWEBブランディングを行う岡山の会社ピーチウェブの公式サイトです。こちらはよくあるご質問のページです。';
 
 export const metadata: Metadata = {
   title: pageTitle,
