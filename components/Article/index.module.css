@@ -47,6 +47,7 @@
 .content > p {
   line-height: 2.5;
   margin-top: 60px;
+  font-size: 1.1rem;
 }
 
 .content > pre {
@@ -154,7 +155,6 @@
 }
 
 .instagramButton {
-  border-radius: 7px;
   position: relative;
   background: -webkit-linear-gradient(135deg, #427eff 0%, #f13f79 70%) no-repeat;
   background: linear-gradient(135deg, #427eff 0%, #f13f79 70%) no-repeat;

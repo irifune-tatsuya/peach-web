@@ -37,7 +37,6 @@ type Props = {
 export const revalidate = 60;
 
 export default async function Page({ params, searchParams }: Props) {
-  console.log(searchParams);
   const current = parseInt(params.current as string, 10);
   const data = await getList({
     filters: ARTICLEFILTER,

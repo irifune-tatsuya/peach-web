@@ -8,6 +8,5 @@ export const renderToc = (body) => {
     id: data.attribs.id,
     name: data.name,
   }));
-
   return toc;
 };

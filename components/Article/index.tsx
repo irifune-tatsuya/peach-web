@@ -1,3 +1,5 @@
+'use client';
+
 import { formatRichText } from '@/libs/utils';
 import { renderToc } from '@/libs/render-toc';
 import { type Article } from '@/libs/microcms';
@@ -5,14 +7,22 @@ import PublishedDate from '../PublishedDate';
 import styles from './index.module.css';
 import { Box, Heading, Image, Link } from '@chakra-ui/react';
 import TableOfContents from '../TableOfContents';
-import { FaInstagram } from 'react-icons/fa';
+import { FaInstagram, FaFacebookF } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
+import { usePathname } from 'next/navigation';
 
 type Props = {
   data: Article;
+  instagramId?: string;
+  isShowToc?: boolean;
 };
 
-export default function Article({ data }: Props) {
+export default function Article({ data, instagramId = 'irifune3333', isShowToc = true }: Props) {
   const toc = renderToc(data.content);
+  const pathName = usePathname();
+  const fullPath = `${new URL(process.env.BASE_URL || 'http://localhost:3000')}${pathName.slice(
+    1,
+  )}`;
   return (
     <Box as={'article'} maxW={{ base: 'auto', md: 620 }} mx={'auto'} pb={{ base: 15, md: 156 }}>
       {data.thumbnail ? (
@@ -24,7 +34,7 @@ export default function Article({ data }: Props) {
         as={'h1'}
         mt={{ base: '30px', md: '72px' }}
         mb={5}
-        fontSize={'xx-large'}
+        fontSize={'x-large'}
         textAlign={'left'}
         className={styles.title}
         px={4}
@@ -35,7 +45,7 @@ export default function Article({ data }: Props) {
       <Box
         px={4}
         h={'37px'}
-        mb={5}
+        mb={9}
         display={'flex'}
         alignItems={'center'}
         justifyContent={'space-between'}
@@ -53,34 +63,54 @@ export default function Article({ data }: Props) {
             <PublishedDate date={data.publishedAt || data.createdAt} simple={true} />
           </Box>
         </Box>
-        <Box display={'flex'}>
+        <Box display={'flex'} gap={2}>
           <Link
-            href={'https://www.instagram.com/irifune3333?ref=badge'}
+            href={`https://www.instagram.com/${instagramId}?ref=badge`}
             isExternal
             className={styles.instagramButton}
             display={'flex'}
             alignItems={'center'}
             justifyContent={'center'}
-            h={37}
-            w={120}
+            borderRadius={7}
+            w={{ base: 37 }}
+            h={{ base: 37 }}
             _hover={{ textDecoration: 'none', opacity: 0.7 }}
           >
-            <FaInstagram className={styles.instagramIcon} size={20} color="white" />
-            <Box
-              as={'span'}
-              fontSize={'small'}
-              fontWeight={'bold'}
-              color="white"
-              lineHeight={'20px'}
-              ml={1}
-              position={'relative'}
-            >
-              Follow Me
-            </Box>
+            <FaInstagram className={styles.instagramIcon} size={30} color="white" />
+          </Link>
+          <Link
+            href={`http://www.facebook.com/share.php?u=${fullPath}`}
+            isExternal
+            rel={'nofollow noopener'}
+            display={'flex'}
+            alignItems={'end'}
+            justifyContent={'center'}
+            bg={'#1877f2'}
+            borderRadius={7}
+            w={{ base: 37 }}
+            h={{ base: 37 }}
+            _hover={{ textDecoration: 'none', opacity: 0.7 }}
+          >
+            <FaFacebookF size={30} color="white" />
+          </Link>
+          <Link
+            href={`https://x.com/share?url=${fullPath}&text=${data.title}&via=irifune333&related=irifune333&hashtags=ピーチウェブ`}
+            isExternal
+            rel={'nofollow noopener'}
+            display={'flex'}
+            alignItems={'center'}
+            justifyContent={'center'}
+            bg={'#000'}
+            borderRadius={7}
+            w={{ base: 37 }}
+            h={{ base: 37 }}
+            _hover={{ textDecoration: 'none', opacity: 0.7 }}
+          >
+            <FaXTwitter size={24} color="white" />
           </Link>
         </Box>
       </Box>
-      <TableOfContents toc={toc} />
+      {isShowToc ? <TableOfContents toc={toc} /> : ''}
       <Box
         px={4}
         className={styles.content}
