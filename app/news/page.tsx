@@ -1,11 +1,10 @@
 import { getList } from '@/libs/microcms';
-import { ARTICLEFILTER, LIMIT12 } from '@/constants';
+import { LIMIT12, NEWSFILTER } from '@/constants';
 import Pagination from '@/components/Pagination';
-import GridArticleList from '@/components/GridArticleList';
 import { Box } from '@chakra-ui/react';
 import Title from '@/components/Title';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
-import SearchField from '@/components/SearchField';
+import ArticleList from '@/components/ArticleList';
 
 export const revalidate = 60;
 
@@ -16,8 +15,8 @@ const breadcrumbs = [
     isCurrentPage: false,
   },
   {
-    title: '新着記事一覧',
-    href: '/article',
+    title: 'ニュース',
+    href: '/news',
     isCurrentPage: true,
   },
 ];
@@ -25,16 +24,13 @@ const breadcrumbs = [
 export default async function Article() {
   const data = await getList({
     limit: LIMIT12,
-    filters: ARTICLEFILTER,
+    filters: NEWSFILTER,
   });
   return (
     <>
-      <Title titleEn={'Articles'} titleJp={'新着記事一覧'} />
+      <Title titleEn={'News'} titleJp={'ニュース'} />
       <Box maxW={1152} mx={'auto'} p={4} pb={{ base: 15, md: 156 }}>
-        <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }}>
-          <SearchField category={'article'} />
-        </Box>
-        <GridArticleList articles={data.contents} category={'article'} />
+        <ArticleList articles={data.contents} category={'news'} />
         <Pagination totalCount={data.totalCount} />
       </Box>
       <Breadcrumbs breadcrumbs={breadcrumbs} />

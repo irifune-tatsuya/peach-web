@@ -15,7 +15,11 @@ export default function Article({ data }: Props) {
   const toc = renderToc(data.content);
   return (
     <Box as={'article'} maxW={{ base: 'auto', md: 620 }} mx={'auto'} pb={{ base: 15, md: 156 }}>
-      <Image src={data.thumbnail?.url} className={styles.thumbnail} w={'100%'} h={'auto'} />
+      {data.thumbnail ? (
+        <Image src={data.thumbnail?.url} alt={data.title} w={'100%'} maxW={620} h={'auto'} />
+      ) : (
+        <Image src="/no-image.png" alt="No Image" w={'100%'} maxW={620} h={'auto'} />
+      )}
       <Heading
         as={'h1'}
         mt={{ base: '30px', md: '72px' }}

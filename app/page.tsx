@@ -1,17 +1,7 @@
-import {
-  Box,
-  Heading,
-  Image,
-  Link,
-  ListItem,
-  OrderedList,
-  Tag,
-  Text,
-  UnorderedList,
-} from '@chakra-ui/react';
+import { Box, Heading, Image, Link, ListItem, OrderedList, Text } from '@chakra-ui/react';
 import styles from './layout.module.css';
 import { TopSwiper } from '@/components/TopSwiper';
-import { LIMIT05, ARTICLEFILTER, INFORMATIONFILTER, CONTACT } from '@/constants';
+import { LIMIT05, ARTICLEFILTER, CONTACT, NEWSFILTER } from '@/constants';
 import { FaInstagram } from 'react-icons/fa';
 import { FaFacebookSquare } from 'react-icons/fa';
 import { FaLine } from 'react-icons/fa';
@@ -21,7 +11,7 @@ import React from 'react';
 import SideScrollArticleList from '@/components/SideScrollArticleList';
 import { ViewMoreButton } from '@/components/ViewMoreButton';
 import ContentTitle from '@/components/ContentTitle';
-import PublishedDate from '@/components/PublishedDate';
+import ArticleList from '@/components/ArticleList';
 
 export const revalidate = 60;
 
@@ -47,9 +37,9 @@ export default async function Home() {
     limit: LIMIT05,
     filters: ARTICLEFILTER,
   });
-  const informationData = await getList({
+  const newsData = await getList({
     limit: LIMIT05,
-    filters: INFORMATIONFILTER,
+    filters: NEWSFILTER,
   });
   return (
     <>
@@ -205,45 +195,7 @@ export default async function Home() {
             <ViewMoreButton href={'/news'} size={'small'} />
           </Box>
         </Box>
-        <UnorderedList
-          borderTop={1}
-          borderStyle={'solid'}
-          borderColor={'momo.400'}
-          listStyleType={'none'}
-          m={0}
-        >
-          {informationData.contents.map((item, i) => (
-            <ListItem key={i} borderBottom={1} borderStyle={'solid'} borderColor={'momo.400'} p={0}>
-              <Link
-                href={`/information/${item.id}`}
-                display={{ base: 'block', md: 'flex' }}
-                py={6}
-                px={5}
-                alignItems={`center`}
-                _hover={{ textDecoration: 'none' }}
-              >
-                <Box display={'flex'}>
-                  <PublishedDate date={'2024.09.16'} simple={true} />
-                  <Tag
-                    size={'sm'}
-                    ml={6}
-                    whiteSpace={'nowrap'}
-                    justifyContent={'center'}
-                    py={2}
-                    px={3}
-                    fontSize={'xx-small'}
-                    fontWeight={'bold'}
-                  >
-                    お知らせ
-                  </Tag>
-                </Box>
-                <Box ml={{ base: 0, md: 8 }} mt={{ base: 3, md: 0 }} lineHeight={1.5}>
-                  <Text className={'articleTitle'}>{item.title}</Text>
-                </Box>
-              </Link>
-            </ListItem>
-          ))}
-        </UnorderedList>
+        <ArticleList articles={newsData.contents} category={'news'} />
       </Box>
       <Box
         as="section"

@@ -88,9 +88,8 @@ export default async function Article() {
         <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }}>
           <SearchField category={'peach-fight'} />
         </Box>
-        <Pagination totalCount={data.totalCount} basePath="/peach-fight/search" />
         <GridArticleList articles={data.contents} category={'peach-fight'} />
-        <Pagination totalCount={data.totalCount} basePath="/peach-fight/search" />
+        <Pagination totalCount={data.totalCount} />
       </Box>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>

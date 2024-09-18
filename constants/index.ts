@@ -3,7 +3,8 @@ export const LIMIT05 = 5;
 export const LIMIT12 = 12;
 export const ARTICLEFILTER = 'category[equals]article';
 export const PEACHFILTER = 'category[equals]peach-fight';
-export const INFORMATIONFILTER = 'category[equals]information';
+export const NEWSFILTER = 'category[equals]news';
+export const FAQFILTER = 'category[equals]faq';
 
 // ヘッダーやフッターに表示するメニュー
 export const MENU = [

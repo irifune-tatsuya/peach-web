@@ -1,6 +1,5 @@
 import { Box } from '@chakra-ui/react';
 import './globals.css';
-import styles from './layout.module.css';
 import { Metadata, NextPage } from 'next';
 import { NavBar } from '@/components/NavBar';
 import { ScrollToTopButton } from '@/components/ScrollToTopButton';

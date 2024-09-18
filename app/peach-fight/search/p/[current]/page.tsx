@@ -52,12 +52,6 @@ export default async function Page({ params, searchParams }: Props) {
         <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }}>
           <SearchField category={'peach-fight'} />
         </Box>
-        <Pagination
-          totalCount={data.totalCount}
-          basePath="/article/search"
-          current={current}
-          q={searchParams.q}
-        />
         <GridArticleList articles={data.contents} category={'peach-fight'} />
         <Pagination
           totalCount={data.totalCount}

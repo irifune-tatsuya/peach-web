@@ -45,7 +45,8 @@
 }
 
 .content > p {
-  line-height: 2;
+  line-height: 2.5;
+  margin-top: 60px;
 }
 
 .content > pre {
@@ -182,9 +183,3 @@
 .instagramIcon {
   position: relative;
 }
-
-/* .instagramButton span {
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-} */
