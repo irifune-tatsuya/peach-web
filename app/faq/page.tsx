@@ -8,7 +8,7 @@ import SearchField from '@/components/SearchField';
 import ArticleList from '@/components/ArticleList';
 import TagList from '@/components/TagList';
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 const breadcrumbs = [
   {

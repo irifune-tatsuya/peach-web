@@ -34,7 +34,7 @@ type Props = {
   };
 };
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 export default async function Page({ params, searchParams }: Props) {
   const category = 'article';

@@ -1,11 +1,13 @@
 import { getList } from '@/libs/microcms';
+import { ARTICLEFILTER, LIMIT12 } from '@/constants';
 import Pagination from '@/components/Pagination';
 import GridArticleList from '@/components/GridArticleList';
 import { Box } from '@chakra-ui/react';
 import Title from '@/components/Title';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import SearchField from '@/components/SearchField';
-import { PEACHFILTER } from '@/constants';
+
+export const revalidate = 0;
 
 const breadcrumbs = [
   {
@@ -14,41 +16,27 @@ const breadcrumbs = [
     isCurrentPage: false,
   },
   {
-    title: '岡山のチャレンジ応援マガジン「ピーチファイ」',
-    href: '/peach-fight',
-    isCurrentPage: false,
-  },
-  {
-    title: 'ピーチファイの検索結果',
-    href: '/peach-fight/search',
+    title: 'お問い合わせ',
+    href: '/contact',
     isCurrentPage: true,
   },
 ];
 
-type Props = {
-  searchParams: {
-    q?: string;
-  };
-};
-
-export const revalidate = 0;
-
-export default async function Page({ searchParams }: Props) {
-  const category = 'peach-fight';
+export default async function Article() {
+  const category = 'article';
   const data = await getList({
-    filters: PEACHFILTER,
-    q: searchParams.q,
+    limit: LIMIT12,
+    filters: ARTICLEFILTER,
   });
-
   return (
     <>
-      <Title titleEn={'Search Results'} titleJp={'ピーチファイの検索結果'} />
-      <Box maxW={1152} mx={'auto'} p={4} mb={{ base: 16, md: 0 }}>
+      <Title titleEn={'Contact'} titleJp={'お問い合わせ'} />
+      <Box maxW={1152} mx={'auto'} p={4} pb={{ base: 15, md: 156 }}>
         <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }} mb={20}>
           <SearchField category={category} />
         </Box>
         <GridArticleList articles={data.contents} category={category} />
-        <Pagination totalCount={data.totalCount} q={searchParams.q} />
+        <Pagination totalCount={data.totalCount} />
       </Box>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>

@@ -6,7 +6,7 @@ import Title from '@/components/Title';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import ArticleList from '@/components/ArticleList';
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 const breadcrumbs = [
   {
