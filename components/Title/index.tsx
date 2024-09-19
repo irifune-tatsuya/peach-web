@@ -7,7 +7,7 @@ type Props = {
 
 export default function Title({ titleEn, titleJp }: Props) {
   return (
-    <Box pt={{ base: 9, md: 118 }} pb={18} color={'momo.100'}>
+    <Box pt={{ base: 9, md: 118 }} pb={{ base: 10, md: '72px' }} color={'momo.100'}>
       <Box maxW={1152} mx={'auto'} p={4}>
         <Box display={'inline-block'} pr={1}>
           <Box fontSize={'medium'} fontWeight={'bold'}>

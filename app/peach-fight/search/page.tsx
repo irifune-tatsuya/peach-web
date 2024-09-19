@@ -33,7 +33,7 @@ type Props = {
 
 export const revalidate = 0;
 
-export default async function Page({ searchParams }: Props) {
+export default async function Search({ searchParams }: Props) {
   const category = 'peach-fight';
   const data = await getList({
     filters: PEACHFILTER,

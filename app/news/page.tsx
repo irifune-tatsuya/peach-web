@@ -21,7 +21,7 @@ const breadcrumbs = [
   },
 ];
 
-export default async function Article() {
+export default async function News() {
   const category = 'news';
   const data = await getList({
     limit: LIMIT12,

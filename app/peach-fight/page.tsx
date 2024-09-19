@@ -26,7 +26,7 @@ const breadcrumbs = [
 
 const swiperImages = [{ src: '/peach-fight/peach-fight-banner.jpg', alt: 'ピーチファイ' }];
 
-export default async function Article() {
+export default async function PeachFight() {
   const category = 'peach-fight';
   const data = await getList({
     limit: LIMIT12,
