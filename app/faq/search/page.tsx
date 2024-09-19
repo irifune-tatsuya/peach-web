@@ -31,9 +31,9 @@ type Props = {
   };
 };
 
-export const revalidate = 60;
+export const revalidate = 0;
 
-export default async function Page({ searchParams }: Props) {
+export default async function Search({ searchParams }: Props) {
   const category = 'faq';
   const data = await getList({
     filters: FAQFILTER,

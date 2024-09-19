@@ -6,7 +6,7 @@ import Title from '@/components/Title';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import ArticleList from '@/components/ArticleList';
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 const breadcrumbs = [
   {
@@ -21,7 +21,7 @@ const breadcrumbs = [
   },
 ];
 
-export default async function Article() {
+export default async function News() {
   const category = 'news';
   const data = await getList({
     limit: LIMIT12,
