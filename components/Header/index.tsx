@@ -30,7 +30,7 @@ export const Header: NextPage = () => {
             src="/common/rectangle_logo.svg"
             width={{ md: 150, lg: 190 }}
             height={'auto'}
-            alt="ピーチウェブ"
+            alt={'ピーチウェブ'}
           />
         </Link>
         <Box display={'flex'} alignItems={'center'} gap={5}>

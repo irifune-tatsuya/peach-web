@@ -7,15 +7,17 @@ import {
   FormControl,
   FormErrorMessage,
   Icon,
+  Image,
   Input,
   Link,
+  Text,
   Textarea,
 } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 import { ChangeEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { createContactData } from '@/app/_actions/contact';
+import { createContactData } from '@/app/_action/contact';
 
 type formInputs = {
   lastname: string;
@@ -28,6 +30,8 @@ type formInputs = {
 
 export const ContactForm: NextPage = () => {
   const [isChecked, setIsChecked] = useState(false);
+  const [status, setStatus] = useState<string | null>(null);
+
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     setIsChecked(event.target.checked);
   };
@@ -37,11 +41,101 @@ export const ContactForm: NextPage = () => {
     formState: { errors, isSubmitting },
   } = useForm<formInputs>();
 
-  const onSubmit = handleSubmit((data) => {
-    createContactData(data);
-  });
+  const onSubmit = async (data: formInputs) => {
+    const result = await createContactData(data);
+    setStatus(result);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  if (status === 'succcess') {
+    return (
+      <>
+        <Box
+          maxW={960}
+          mx={'auto'}
+          bg={'momo.300'}
+          fontSize={'large'}
+          fontWeight={500}
+          lineHeight={2}
+          py={20}
+        >
+          <Box
+            display={{ base: 'flex', md: 'flex' }}
+            flexFlow={{ base: 'column', md: 'row' }}
+            alignItems={'center'}
+            justifyContent={'center'}
+          >
+            <Image
+              src={'common/square_logo.svg'}
+              width={'200px'}
+              height={'auto'}
+              maxW={300}
+              alt={'ピーチウェブロゴ'}
+            />
+            <Text textAlign={'center'} mt={{ base: 10, md: 0 }}>
+              お問い合わせいただき、
+              <Box as={'br'} display={{ base: 'block', md: 'none' }} />
+              ありがとうございます。
+              <Box as={'br'} display={{ base: 'block', md: 'none' }} />
+              <Box as={'br'} />
+              お返事まで今しばらくお待ち下さい。
+              <Box as={'br'} />
+              <Box as={'br'} />
+              合同会社ピーチウェブ
+            </Text>
+          </Box>
+        </Box>
+      </>
+    );
+  }
+
+  if (status === 'error') {
+    return (
+      <Box
+        maxW={960}
+        mx={'auto'}
+        bg={'momo.300'}
+        fontSize={'large'}
+        fontWeight={500}
+        lineHeight={2}
+        py={20}
+        px={4}
+      >
+        <Box
+          display={{ base: 'flex', md: 'flex' }}
+          flexFlow={{ base: 'column', md: 'row' }}
+          alignItems={'center'}
+          justifyContent={'center'}
+        >
+          <Image
+            src={'common/square_logo.svg'}
+            width={'200px'}
+            height={'auto'}
+            maxW={300}
+            alt={'ピーチウェブロゴ'}
+          />
+          <Text textAlign={'center'} mt={{ base: 10, md: 0 }}>
+            申し訳ございません。
+            <Box as={'br'} />
+            お問い合わせの送信に失敗しました。
+            <Box as={'br'} display={{ base: 'block', md: 'none' }} />
+            <Box as={'br'} />
+            再度お問い合わせをいただくか
+            <Box as={'br'} display={{ base: 'none', md: 'block' }} />
+            以下までご連絡をお願いいたします。
+            <Box as={'br'} />
+            <Box as={'br'} />
+            合同会社ピーチウェブ
+            <Box as={'br'} />
+            irifune@peach-web.co.jp
+          </Text>
+        </Box>
+      </Box>
+    );
+  }
+
   return (
-    <Box as={'form'} maxW={960} mx={'auto'} onSubmit={onSubmit}>
+    <Box as={'form'} maxW={960} mx={'auto'} onSubmit={handleSubmit(onSubmit)}>
       <Box as={'dl'} display={{ base: 'block', lg: 'flex' }}>
         <Box as={'dt'} mt={8} fontSize={'large'} fontWeight={'bold'} h={'44px'} w={315}>
           ご氏名
