@@ -3,7 +3,7 @@ import Title from '@/components/Title';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { ContactForm } from '@/components/ContactForm';
 
-export const revalidate = 0;
+export const revalidate = 60;
 
 const breadcrumbs = [
   {
