@@ -9,7 +9,7 @@ import SearchField from '@/components/SearchField';
 import { TopSwiper } from '@/components/TopSwiper';
 import styles from './layout.module.css';
 
-export const revalidate = 0;
+export const revalidate = 60;
 
 const breadcrumbs = [
   {

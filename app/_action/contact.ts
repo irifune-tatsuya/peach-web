@@ -11,7 +11,7 @@ type formInputs = {
 
 export async function createContactData(data: formInputs) {
   const portalId = process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID;
-  const formGuid = process.env.NEXT_PUBLIC_HUBSPOT_FROM_ID;
+  const formGuid = process.env.NEXT_PUBLIC_HUBSPOT_FORM_ID;
   const config = {
     headers: {
       'Content-Type': 'application/json',

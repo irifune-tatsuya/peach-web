@@ -7,7 +7,7 @@ import Title from '@/components/Title';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import SearchField from '@/components/SearchField';
 
-export const revalidate = 0;
+export const revalidate = 60;
 
 const breadcrumbs = [
   {

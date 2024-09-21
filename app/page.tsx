@@ -13,7 +13,7 @@ import { ViewMoreButton } from '@/components/ViewMoreButton';
 import ContentTitle from '@/components/ContentTitle';
 import ArticleList from '@/components/ArticleList';
 
-export const revalidate = 0;
+export const revalidate = 60;
 
 const swiperImages = [
   { src: '/top/top-slider1.jpg', alt: 'キービジュアル1' },
