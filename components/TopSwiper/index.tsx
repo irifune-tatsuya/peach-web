@@ -35,13 +35,7 @@ export const TopSwiper: NextPage<Props> = (props) => {
     >
       {images.map((image, i) => (
         <SwiperSlide key={i}>
-          <Image
-            src={image.src}
-            w={'100%'}
-            h={{ base: 'calc(100% - 55px)', md: 'calc(100% - 76px)' }}
-            objectFit={'cover'}
-            alt={image.alt}
-          />
+          <Image src={image.src} w={'100%'} h={'100%'} objectFit={'cover'} alt={image.alt} />
         </SwiperSlide>
       ))}
     </Swiper>

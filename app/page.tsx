@@ -22,7 +22,7 @@ const swiperImages = [
 ];
 
 const businessLinks = [
-  { href: '/reasons', title: '選ばれる理由', titleEn: 'Reasons' },
+  { href: '/reason', title: '選ばれる理由', titleEn: 'Reason' },
   { href: '/service', title: 'サービス内容', titleEn: 'Service' },
   { href: '/pricing', title: '料金体系', titleEn: 'Pricing' },
 ];
@@ -43,7 +43,13 @@ export default async function Home() {
   });
   return (
     <>
-      <Box id={'key-visual'} h={'100vh'} position={'relative'} overflow={'hidden'}>
+      <Box
+        id={'key-visual'}
+        w={'100%'}
+        h={{ base: 'calc(100vh - 55px)', md: 'calc(100vh - 76px)' }}
+        position={'relative'}
+        overflow={'hidden'}
+      >
         <Heading as={'h1'} display={'none'}>
           合同会社ピーチウェブ公式サイト
         </Heading>

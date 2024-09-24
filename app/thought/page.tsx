@@ -157,81 +157,6 @@ export default async function Thought() {
                 </Text>
               </Box>
             ))}
-            {/* <Box as={'section'} _first={{ mt: 0 }} mt={{ base: '60px', md: 0 }}>
-              <Heading
-                as={'h3'}
-                fontSize={{ base: 'x-large', lg: 'xx-large' }}
-                letterSpacing={'0.04em'}
-                mb={'44px'}
-                pb={33}
-                position={'relative'}
-                _after={{
-                  content: '""',
-                  display: 'block',
-                  w: '56px',
-                  h: '1px',
-                  bg: 'white',
-                  position: 'absolute',
-                  bottom: 0,
-                  left: 0,
-                }}
-              >
-                深い理解
-              </Heading>
-              <Text fontWeight={'bold'} letterSpacing={'0.02em'} lineHeight={2}>
-                経営コンサルタントに匹敵するビジネスプラン構築能力と、お客様のペースに合わせて共感しながらお話を伺うことができる傾聴能力が弊社の事業の出発点です。単におしゃれなデザインをご提案するのではなく、あなたの仕事を深く理解して共に良いホームページをお作りします。
-              </Text>
-            </Box> */}
-            {/* <Box as={'section'} mt={{ base: '60px', md: 0 }}>
-              <Heading
-                as={'h3'}
-                fontSize={{ base: 'x-large', lg: 'xx-large' }}
-                letterSpacing={'0.04em'}
-                mb={'44px'}
-                pb={33}
-                position={'relative'}
-                _after={{
-                  content: '""',
-                  display: 'block',
-                  w: '56px',
-                  h: '1px',
-                  bg: 'white',
-                  position: 'absolute',
-                  bottom: 0,
-                  left: 0,
-                }}
-              >
-                想いを形に
-              </Heading>
-              <Text fontWeight={'bold'} letterSpacing={'0.02em'} lineHeight={2}>
-                ビジネスプランを理解し戦略を立てただけでは良いホームページにはなりません。ブランドには統一されたトーンやマナーが設定されており、それに基づいた洗練されたクリエイティブが欠かせません。お客様に喜んでいただけるフルカスタマイズデザインをご提案します。
-              </Text>
-            </Box> */}
-            {/* <Box as={'section'} mt={{ base: '60px', md: 0 }}>
-              <Heading
-                as={'h3'}
-                fontSize={{ base: 'x-large', lg: 'xx-large' }}
-                letterSpacing={'0.04em'}
-                mb={'44px'}
-                pb={33}
-                position={'relative'}
-                _after={{
-                  content: '""',
-                  display: 'block',
-                  w: '56px',
-                  h: '1px',
-                  bg: 'white',
-                  position: 'absolute',
-                  bottom: 0,
-                  left: 0,
-                }}
-              >
-                温もりを大切に
-              </Heading>
-              <Text fontWeight={'bold'} letterSpacing={'0.02em'} lineHeight={2}>
-                直接顔を合わせるからそこ、お話できることも多いかと思います。弊社は直接訪問でのお打ち合わせを大切にしております。お客様の大切な世界観を形にするブランディングにおいてお客様の放つ雰囲気やお言葉が何よりも頼りになります。
-              </Text>
-            </Box> */}
           </Box>
         </Box>
       </Box>
@@ -290,7 +215,7 @@ export default async function Thought() {
               お打ち合わせできればと思っております。
               <Box as={'br'} />
               <Box as={'br'} />
-              合同会社youth
+              合同会社ピーチウェブ
               <Box as={'br'} />
               代表社員 入船達也
             </Text>
