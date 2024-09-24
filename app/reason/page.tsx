@@ -73,7 +73,7 @@ const designData = [
   },
 ];
 
-export default async function Thought() {
+export default async function Reason() {
   return (
     <>
       <Title titleEn={'Reasons'} titleJp={'選ばれる理由'} />
@@ -317,7 +317,7 @@ export default async function Thought() {
               </Table>
             </Box>
             <Box mt={10}>
-              <ViewMoreButton href={'/price'} size={'large'} />
+              <ViewMoreButton href={'/pricing'} size={'large'} />
             </Box>
           </Box>
         </Box>
