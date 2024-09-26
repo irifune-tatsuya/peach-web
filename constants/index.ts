@@ -21,7 +21,7 @@ export const MENU = [
     href: '/reason',
   },
   {
-    title: 'サービス',
+    title: 'サービス内容',
     href: '/service',
   },
   {

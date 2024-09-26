@@ -6,6 +6,7 @@ import {
   CardBody,
   Heading,
   Image,
+  Link,
   Stack,
   Table,
   Tbody,
@@ -17,6 +18,8 @@ import {
 } from '@chakra-ui/react';
 import { FaCheckCircle } from 'react-icons/fa';
 import SideScrollIcon from '@/components/SideScrollIcon';
+import styles from './layout.module.css';
+import { ImDisplay } from 'react-icons/im';
 
 const breadcrumbs = [
   {
@@ -34,9 +37,9 @@ const breadcrumbs = [
 const basicPriceData = [
   {
     title: 'Starter',
-    price: '55,000円/月',
-    homepage: ['ブログ機能付きホームページ', '初回制作費無料', 'TOP + 4ページ作成'],
-    contents: ['SEO対策あり', '記事更新2回/月', 'ページ追加1枚/月', '毎月運用レポート発行'],
+    price: '50,000円/月',
+    homepage: ['ブログ機能付きホームページ', '初回制作費無料', 'TOP + 3ページ作成'],
+    contents: ['基本的なSEO対策', '記事更新2回/月', '毎月運用レポート発行'],
   },
   {
     title: 'Basic',
@@ -44,9 +47,8 @@ const basicPriceData = [
     price: '60,000円/月',
     homepage: ['ブログ機能付きホームページ', '初回制作費無料', 'TOP + 6ページ作成'],
     contents: [
-      'SEO対策あり',
+      '専用ツールによるSEO対策',
       '記事更新4回/月',
-      'ページ追加1枚/月',
       'デザイン制作1点/月',
       '毎月運用レポート発行',
     ],
@@ -56,7 +58,7 @@ const basicPriceData = [
     price: '120,000円/月',
     homepage: ['ブログ機能付きホームページ', '初回制作費無料', 'TOP + 10ページ作成'],
     contents: [
-      'SEO対策あり',
+      '専用ツールによるSEO対策',
       '記事更新4回/月',
       'ページ追加1枚/月',
       'デザイン制作2点/月',
@@ -102,6 +104,10 @@ const singleOptionData = {
     {
       title: 'パワーポイント資料作成',
       price: '10,000円/件〜',
+    },
+    {
+      title: '追加ページの制作',
+      price: '10,000円/枚〜',
     },
     {
       title: 'ランディングページ作成',
@@ -163,7 +169,7 @@ export default async function Pricing() {
               alignItems="start"
             >
               {basicPriceData.map((item, i) => (
-                <Card minW={280} w={'auto'} key={i}>
+                <Card minW={280} w={'auto'} bg={'white'} key={i}>
                   <CardBody>
                     <Stack mt="6" spacing="5">
                       <Heading as={'h3'} size={'lg'}>
@@ -205,6 +211,33 @@ export default async function Pricing() {
                   </CardBody>
                 </Card>
               ))}
+              <Box py={10}>
+                <Link
+                  display={'block'}
+                  w={250}
+                  mx={'auto'}
+                  href="/service"
+                  textAlign={'center'}
+                  _hover={{ textDecoration: 'none' }}
+                  className={styles.contactButton}
+                >
+                  <Box
+                    py={'1em'}
+                    px={'2em'}
+                    display={'flex'}
+                    justifyContent={'center'}
+                    alignItems={'center'}
+                    height={'100%'}
+                    borderRadius={40}
+                    bg={'momo.100'}
+                    color={'white'}
+                    fontWeight={'bold'}
+                  >
+                    <ImDisplay size={'1.5em'} />
+                    <Text ml={2}>サービス内容を見る</Text>
+                  </Box>
+                </Link>
+              </Box>
             </Box>
             <Text fontSize={'small'}>※ 料金は税別です。</Text>
           </Box>
