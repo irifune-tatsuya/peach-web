@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
-const pageTitle = '選ばれる理由';
+const pageTitle = 'サービス内容';
 const description =
-  '弊社の強み、他社と比較して選ばれる理由についてお話します。ホームページ制作は高い！どんなページが良いか一緒に考えてほしいという方は弊社の強みに共感していただけると思います！';
+  'ピーチウェブのWEBブランディングのサービスについてご紹介します。ホームページを作るだけでなく記事を更新してお客様との信頼関係を醸成できるサービスを目指しております。';
 
 export const metadata: Metadata = {
   title: pageTitle,

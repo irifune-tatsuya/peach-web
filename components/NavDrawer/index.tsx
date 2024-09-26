@@ -58,6 +58,7 @@ export const NavDrawer: NextPage<Props> = ({ isOpen, onClose }) => {
                     fontWeight={'bold'}
                     py={4}
                     px={2}
+                    _hover={{ textDecoration: 'none', color: 'momo.100' }}
                   >
                     {item.title}
                     <Icon as={FaArrowRight} color={'momo.100'} />

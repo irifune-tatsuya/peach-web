@@ -7,6 +7,7 @@ import {
   Center,
   Heading,
   Image,
+  Link,
   ListItem,
   Stack,
   Table,
@@ -23,6 +24,8 @@ import { FaRegCircle } from 'react-icons/fa';
 import styles from './layout.module.css';
 import SideScrollIcon from '@/components/SideScrollIcon';
 import { ViewMoreButton } from '@/components/ViewMoreButton';
+import { ImDisplay } from 'react-icons/im';
+import { ImCoinYen } from 'react-icons/im';
 
 const breadcrumbs = [
   {
@@ -110,7 +113,7 @@ export default async function Reason() {
               <Box as={'span'} color={'momo.100'} fontWeight={'bold'}>
                 「一緒に作り上げる」
               </Box>
-              ことができるお客様と当社の距離感にあります。このちょうどいい距離感を守るために以下のような配慮を行っております。
+              ことができるお客様と弊社の距離感にあります。このちょうどいい距離感を守るために以下のような配慮を行っております。
             </Text>
           </Box>
           <Box w={'100%'}>
@@ -143,7 +146,33 @@ export default async function Reason() {
             </Box>
           </Box>
           <Box mt={10}>
-            <ViewMoreButton href={'/service'} size={'large'} />
+            <Box py={10}>
+              <Link
+                display={'block'}
+                w={250}
+                mx={'auto'}
+                href="/service"
+                textAlign={'center'}
+                _hover={{ textDecoration: 'none' }}
+                className={styles.contactButton}
+              >
+                <Box
+                  py={'1em'}
+                  px={'2em'}
+                  display={'flex'}
+                  justifyContent={'center'}
+                  alignItems={'center'}
+                  height={'100%'}
+                  borderRadius={40}
+                  bg={'momo.100'}
+                  color={'white'}
+                  fontWeight={'bold'}
+                >
+                  <ImDisplay size={'1.5em'} />
+                  <Text ml={2}>サービス内容を見る</Text>
+                </Box>
+              </Link>
+            </Box>
           </Box>
         </Box>
       </Box>
@@ -317,7 +346,33 @@ export default async function Reason() {
               </Table>
             </Box>
             <Box mt={10}>
-              <ViewMoreButton href={'/pricing'} size={'large'} />
+              <Box py={10}>
+                <Link
+                  display={'block'}
+                  w={250}
+                  mx={'auto'}
+                  href="/pricing"
+                  textAlign={'center'}
+                  _hover={{ textDecoration: 'none' }}
+                  className={styles.contactButton}
+                >
+                  <Box
+                    py={'1em'}
+                    px={'2em'}
+                    display={'flex'}
+                    justifyContent={'center'}
+                    alignItems={'center'}
+                    height={'100%'}
+                    borderRadius={40}
+                    bg={'momo.100'}
+                    color={'white'}
+                    fontWeight={'bold'}
+                  >
+                    <ImCoinYen size={'1.5em'} />
+                    <Text ml={2}>価格とプランを見る</Text>
+                  </Box>
+                </Link>
+              </Box>
             </Box>
           </Box>
         </Box>
@@ -534,7 +589,33 @@ export default async function Reason() {
               </Table>
             </Box>
             <Box mt={10}>
-              <ViewMoreButton href={'/service'} size={'large'} />
+              <Box py={10}>
+                <Link
+                  display={'block'}
+                  w={250}
+                  mx={'auto'}
+                  href="/service"
+                  textAlign={'center'}
+                  _hover={{ textDecoration: 'none' }}
+                  className={styles.contactButton}
+                >
+                  <Box
+                    py={'1em'}
+                    px={'2em'}
+                    display={'flex'}
+                    justifyContent={'center'}
+                    alignItems={'center'}
+                    height={'100%'}
+                    borderRadius={40}
+                    bg={'momo.100'}
+                    color={'white'}
+                    fontWeight={'bold'}
+                  >
+                    <ImDisplay size={'1.5em'} />
+                    <Text ml={2}>サービス内容を見る</Text>
+                  </Box>
+                </Link>
+              </Box>
             </Box>
           </Box>
         </Box>
