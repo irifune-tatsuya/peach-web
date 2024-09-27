@@ -6,6 +6,7 @@ import { ScrollToTopButton } from '@/components/ScrollToTopButton';
 import { Provider } from './providers/chakra-ui/Provider';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import GoogleAnalytics from '@/components/GoogleAnalytics/';
 
 const siteName = 'ピーチウェブ -岡山のWEBブランディングサービス-';
 const description =
@@ -77,6 +78,9 @@ type Props = {
 const RootLayout: NextPage<Props> = ({ children }) => {
   return (
     <html lang="ja" suppressHydrationWarning={true}>
+      <head>
+        <GoogleAnalytics />
+      </head>
       <body suppressHydrationWarning={true}>
         <Provider>
           <Header />
