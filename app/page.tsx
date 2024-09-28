@@ -12,6 +12,7 @@ import SideScrollArticleList from '@/components/SideScrollArticleList';
 import { ViewMoreButton } from '@/components/ViewMoreButton';
 import ContentTitle from '@/components/ContentTitle';
 import ArticleList from '@/components/ArticleList';
+import SideScrollIcon from '@/components/SideScrollIcon';
 
 export const revalidate = 60;
 
@@ -190,6 +191,7 @@ export default async function Home() {
             <ContentTitle TitleEn="Article" TitleJp="新着記事" mb={0} />
             <ViewMoreButton href={'/article'} size={'small'} />
           </Box>
+          <SideScrollIcon display={['block']} />
           <SideScrollArticleList articles={articleData.contents} category={'article'} />
         </Box>
       </Box>
