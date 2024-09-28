@@ -6,6 +6,8 @@ import { ScrollToTopButton } from '@/components/ScrollToTopButton';
 import { Provider } from './providers/chakra-ui/Provider';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import GoogleAnalytics from '@/components/GoogleAnalytics/';
+import { IMAGEBASEURL } from '@/constants';
 
 const siteName = 'ピーチウェブ -岡山のWEBブランディングサービス-';
 const description =
@@ -25,23 +27,23 @@ export const metadata: Metadata = {
     siteName: siteName,
     images: [
       {
-        url: `/ogp.jpg`,
+        url: `${IMAGEBASEURL}/ogp.jpg`,
         width: 800,
         height: 600,
       },
       {
-        url: `ogp-alt.jpg`,
+        url: `${IMAGEBASEURL}/ogp-alt.jpg`,
         width: 1800,
         height: 1600,
         alt: siteName,
       },
     ],
     locale: 'ja_JP',
-    type: 'article',
+    type: 'website',
   },
   icons: {
-    icon: `/favicon.ico`,
-    apple: `/apple-touch-icon.png`,
+    icon: `${IMAGEBASEURL}/favicon.ico`,
+    apple: `${IMAGEBASEURL}/apple-touch-icon.png`,
   },
   twitter: {
     card: 'summary_large_image',
@@ -49,7 +51,7 @@ export const metadata: Metadata = {
     description: description,
     creator: '@irifune333',
     images: {
-      url: `og.jpg`,
+      url: `${IMAGEBASEURL}/ogp.jpg`,
       alt: siteName,
     },
   },
@@ -77,6 +79,9 @@ type Props = {
 const RootLayout: NextPage<Props> = ({ children }) => {
   return (
     <html lang="ja" suppressHydrationWarning={true}>
+      <head>
+        <GoogleAnalytics />
+      </head>
       <body suppressHydrationWarning={true}>
         <Provider>
           <Header />

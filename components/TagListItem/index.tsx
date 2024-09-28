@@ -1,7 +1,6 @@
-import Link from 'next/link';
 import { Tag } from '@/libs/microcms';
 import styles from './index.module.css';
-import { Box } from '@chakra-ui/react';
+import { Box, Link } from '@chakra-ui/react';
 
 type Props = {
   tag: Tag;

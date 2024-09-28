@@ -1,5 +1,5 @@
 import { Article } from '@/libs/microcms';
-import { Box, Grid, GridItem, ListItem, SimpleGrid, UnorderedList } from '@chakra-ui/react';
+import { Box, SimpleGrid } from '@chakra-ui/react';
 import React from 'react';
 import ArticleCard from '../ArticleCard';
 

@@ -6,6 +6,7 @@ import { IoBookOutline } from 'react-icons/io5';
 import { GoMail } from 'react-icons/go';
 import { MenuButton } from '../MenuButton';
 import { NavDrawer } from '../NavDrawer';
+import { IMAGEBASEURL } from '@/constants';
 
 export const NavBar: NextPage = () => {
   const { isOpen, onToggle, onClose } = useDisclosure();
@@ -58,7 +59,12 @@ export const NavBar: NextPage = () => {
           w={10}
           _hover={{ textDecoration: 'none' }}
         >
-          <Image src="/common/nav-momo.png" alt="ホームに戻る" w={'1.5rem'} h={'auto'} />
+          <Image
+            src={`${IMAGEBASEURL}/common/nav-momo.webp`}
+            alt={'ホームに戻る'}
+            w={'1.5rem'}
+            h={'auto'}
+          />
           <Text fontSize={'xx-small'} fontWeight={'bold'} mt={'0.1em'}>
             ホーム
           </Text>

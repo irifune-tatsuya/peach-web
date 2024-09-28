@@ -1,5 +1,5 @@
 import { getList } from '@/libs/microcms';
-import { LIMIT12, PEACHFILTER } from '@/constants';
+import { LIMIT12, PEACHFILTER, IMAGEBASEURL } from '@/constants';
 import Pagination from '@/components/Pagination';
 import GridArticleList from '@/components/GridArticleList';
 import { Box, Image, Text } from '@chakra-ui/react';
@@ -24,7 +24,9 @@ const breadcrumbs = [
   },
 ];
 
-const swiperImages = [{ src: '/peach-fight/peach-fight-banner.jpg', alt: 'ピーチファイ' }];
+const swiperImages = [
+  { src: `${IMAGEBASEURL}/peach-fight/peach-fight-banner.webp`, alt: 'ピーチファイ' },
+];
 
 export default async function PeachFight() {
   const category = 'peach-fight';
@@ -48,7 +50,10 @@ export default async function PeachFight() {
           maxW={'600px'}
         >
           <Box w={'100%'} className={styles.message}>
-            <Image src={'/peach-fight/peach-fight-logo.png'} />
+            <Image
+              src={`${IMAGEBASEURL}/peach-fight/peach-fight-logo.webp`}
+              alt={'岡山のチャレンジ応援マガジン「ピーチファイ」'}
+            />
             <Text
               color={'white'}
               fontSize={{ base: '1em', sm: 'large', md: 'larger', lg: 'x-large' }}
@@ -73,8 +78,8 @@ export default async function PeachFight() {
           </Box>
         </Box>
         <Image
-          src={'/peach-fight/momotaro.png'}
-          alt={'インタビューに応じてくれる方を募集'}
+          src={`${IMAGEBASEURL}/peach-fight/momotaro.webp`}
+          alt={'桃太郎とピーチな人たち！'}
           w={'100%'}
           maxW={600}
           position={'absolute'}

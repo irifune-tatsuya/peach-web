@@ -10,6 +10,7 @@ import TableOfContents from '../TableOfContents';
 import { FaInstagram, FaFacebookF } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { usePathname } from 'next/navigation';
+import { IMAGEBASEURL } from '@/constants';
 
 type Props = {
   data: Article;
@@ -44,7 +45,13 @@ export default function Article({
           {data.thumbnail ? (
             <Image src={data.thumbnail?.url} alt={data.title} w={'100%'} maxW={620} h={'auto'} />
           ) : (
-            <Image src="/no-image.png" alt="No Image" w={'100%'} maxW={620} h={'auto'} />
+            <Image
+              src={`${IMAGEBASEURL}/no-image.webp`}
+              alt={'No Image'}
+              w={'100%'}
+              maxW={620}
+              h={'auto'}
+            />
           )}{' '}
         </>
       )}
@@ -75,7 +82,7 @@ export default function Article({
           >
             <Box display={'flex'} alignItems={'center'}>
               <Image
-                src={'/article/momo-icon.png'}
+                src={`${IMAGEBASEURL}/article/momo-icon.webp`}
                 alt={'ピーチウェブアイコン'}
                 w={'37px'}
                 h={'37px'}

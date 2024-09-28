@@ -1,5 +1,5 @@
-import { Box, UnorderedList, ListItem, Link, Image, Text, textDecoration } from '@chakra-ui/react';
-import { MENU, CONTACT } from '@/constants';
+import { Box, UnorderedList, ListItem, Link, Image, Text } from '@chakra-ui/react';
+import { MENU, CONTACT, IMAGEBASEURL } from '@/constants';
 import { FaInstagram } from 'react-icons/fa';
 import { FaFacebookSquare } from 'react-icons/fa';
 import { FaLine } from 'react-icons/fa';
@@ -12,7 +12,7 @@ export const Footer: NextPage = () => {
       <Box w={'100%'} display={'flex'} justifyContent={'center'}>
         <Link href="/">
           <Image
-            src="/common/square_logo.svg"
+            src={`${IMAGEBASEURL}/common/square_logo.svg`}
             width={'3vw'}
             height={'auto'}
             minW={100}

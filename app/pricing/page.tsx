@@ -20,6 +20,7 @@ import { FaCheckCircle } from 'react-icons/fa';
 import SideScrollIcon from '@/components/SideScrollIcon';
 import styles from './layout.module.css';
 import { ImDisplay } from 'react-icons/im';
+import { IMAGEBASEURL } from '@/constants';
 
 const breadcrumbs = [
   {
@@ -175,7 +176,7 @@ export default async function Pricing() {
                       <Heading as={'h3'} size={'lg'}>
                         <Box display={'flex'} alignItems={'center'}>
                           <Image
-                            src={`/pricing/plan-icon${i + 1}.png`}
+                            src={`${IMAGEBASEURL}/pricing/plan-icon${i + 1}.webp`}
                             alt={item.title}
                             w={7}
                             h={7}
@@ -211,35 +212,37 @@ export default async function Pricing() {
                   </CardBody>
                 </Card>
               ))}
-              <Box py={10}>
-                <Link
-                  display={'block'}
-                  w={250}
-                  mx={'auto'}
-                  href="/service"
-                  textAlign={'center'}
-                  _hover={{ textDecoration: 'none' }}
-                  className={styles.contactButton}
-                >
-                  <Box
-                    py={'1em'}
-                    px={'2em'}
-                    display={'flex'}
-                    justifyContent={'center'}
-                    alignItems={'center'}
-                    height={'100%'}
-                    borderRadius={40}
-                    bg={'momo.100'}
-                    color={'white'}
-                    fontWeight={'bold'}
-                  >
-                    <ImDisplay size={'1.5em'} />
-                    <Text ml={2}>サービス内容を見る</Text>
-                  </Box>
-                </Link>
-              </Box>
             </Box>
-            <Text fontSize={'small'}>※ 料金は税別です。</Text>
+            <Text fontSize={'small'} textAlign={'center'}>
+              ※ 料金は全て税別です。
+            </Text>
+            <Box py={10}>
+              <Link
+                display={'block'}
+                w={250}
+                mx={'auto'}
+                href="/service"
+                textAlign={'center'}
+                _hover={{ textDecoration: 'none' }}
+                className={styles.contactButton}
+              >
+                <Box
+                  py={'1em'}
+                  px={'2em'}
+                  display={'flex'}
+                  justifyContent={'center'}
+                  alignItems={'center'}
+                  height={'100%'}
+                  borderRadius={40}
+                  bg={'momo.100'}
+                  color={'white'}
+                  fontWeight={'bold'}
+                >
+                  <ImDisplay size={'1.5em'} />
+                  <Text ml={2}>サービス内容を見る</Text>
+                </Box>
+              </Link>
+            </Box>
           </Box>
         </Box>
       </Box>
@@ -313,7 +316,9 @@ export default async function Pricing() {
                 </Tbody>
               </Table>
             </Box>
-            <Text fontSize={'small'}>※ 料金は税別です。</Text>
+            <Text fontSize={'small'} textAlign={'center'}>
+              ※ 料金は全て税別です。
+            </Text>
           </Box>
         </Box>
       </Box>

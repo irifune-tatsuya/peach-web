@@ -1,5 +1,5 @@
 'use client';
-import { CONTACT } from '@/constants';
+import { CONTACT, IMAGEBASEURL } from '@/constants';
 import { Box, Image, Link, useDisclosure } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import { FaInstagram } from 'react-icons/fa';
@@ -27,10 +27,10 @@ export const Header: NextPage = () => {
       <Box display={'flex'} justifyContent={'space-between'}>
         <Link href="/">
           <Image
-            src="/common/rectangle_logo.svg"
+            src={`${IMAGEBASEURL}/common/rectangle_logo.svg`}
             width={{ md: 150, lg: 190 }}
             height={'auto'}
-            alt={'ピーチウェブ'}
+            alt={'ピーチウェブヘッダーロゴ'}
           />
         </Link>
         <Box display={'flex'} alignItems={'center'} gap={5}>

@@ -2,6 +2,7 @@ import { Article } from '@/libs/microcms';
 import styles from './index.module.css';
 import PublishedDate from '../PublishedDate';
 import { Card, CardBody, Heading, Image, Link, Stack } from '@chakra-ui/react';
+import { IMAGEBASEURL } from '@/constants';
 
 type Props = {
   article: Article;
@@ -17,7 +18,13 @@ export default function ArticleCard({ article, category, maxW }: Props) {
           {article.thumbnail ? (
             <Image src={article.thumbnail?.url} alt={article.title} w={'100%'} h={'auto'} />
           ) : (
-            <Image src="/no-image.png" alt="No Image" w={'100%'} maxW={450} h={'auto'} />
+            <Image
+              src={`${IMAGEBASEURL}/no-image.webp`}
+              alt={'No Image'}
+              w={'100%'}
+              maxW={450}
+              h={'auto'}
+            />
           )}
           <Stack p={2}>
             <Heading size={'sm'} my={1} className={styles.articleTitle} h={10}>

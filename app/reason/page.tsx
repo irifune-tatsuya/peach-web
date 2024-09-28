@@ -23,9 +23,9 @@ import { FaCheckCircle } from 'react-icons/fa';
 import { FaRegCircle } from 'react-icons/fa';
 import styles from './layout.module.css';
 import SideScrollIcon from '@/components/SideScrollIcon';
-import { ViewMoreButton } from '@/components/ViewMoreButton';
 import { ImDisplay } from 'react-icons/im';
 import { ImCoinYen } from 'react-icons/im';
+import { IMAGEBASEURL } from '@/constants';
 
 const breadcrumbs = [
   {
@@ -133,7 +133,7 @@ export default async function Reason() {
               {togetherData.map((item, i) => (
                 <Card minW={280} w={'auto'} maxW={350} key={i}>
                   <CardBody>
-                    <Image src={`/reason/together${i + 1}.png `} alt={item.title} />
+                    <Image src={`${IMAGEBASEURL}/reason/together${i + 1}.webp`} alt={item.title} />
                     <Stack mt="6" spacing="5">
                       <Heading as={'h3'} size={{ base: 'sm', md: 'md' }}>
                         {item.title}
@@ -234,7 +234,12 @@ export default async function Reason() {
                     </Th>
                     <Th minW={160}>
                       <Center>
-                        <Image src={'/common/rectangle_logo.svg'} alt={''} w={'100px'} h={'auto'} />
+                        <Image
+                          src={`${IMAGEBASEURL}/common/rectangle_logo.svg`}
+                          alt={'ピーチウェブ'}
+                          w={'100px'}
+                          h={'auto'}
+                        />
                       </Center>
                     </Th>
                     <Th minW={170} textAlign={'center'} fontWeight={'bold'}>
@@ -427,7 +432,7 @@ export default async function Reason() {
                 {designData.map((item, i) => (
                   <Card minW={280} w={'auto'} maxW={350} key={i}>
                     <CardBody>
-                      <Image src={`/reason/design${i + 1}.png `} alt={item.title} />
+                      <Image src={`${IMAGEBASEURL}/reason/design${i + 1}.webp`} alt={item.title} />
                       <Stack mt="6" spacing="5">
                         <Heading as={'h3'} size={{ base: 'sm', md: 'md' }}>
                           {item.title}

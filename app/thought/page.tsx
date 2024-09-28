@@ -1,5 +1,6 @@
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import Title from '@/components/Title';
+import { IMAGEBASEURL } from '@/constants';
 import { Box, Heading, Image, Text } from '@chakra-ui/react';
 
 const breadcrumbs = [
@@ -70,7 +71,7 @@ export default async function Thought() {
           height: '1116px',
           left: { base: '0x', md: '-200px' },
           top: { base: '0px', md: '-100px' },
-          backgroundImage: 'url(/thought/mission-bg.svg)',
+          backgroundImage: `url(${IMAGEBASEURL}/thought/mission-bg.svg)`,
           zIndex: 1,
         }}
       >
@@ -90,7 +91,7 @@ export default async function Thought() {
             zIndex={2}
           >
             <Image
-              src={'/thought/mission-text.png'}
+              src={`${IMAGEBASEURL}/thought/mission-text.webp`}
               alt={'あなたのビジネスが永く愛されますよう。'}
               maxW={{ base: 330, md: 450, lg: 500 }}
               h={'auto'}
@@ -177,10 +178,20 @@ export default async function Thought() {
           </Box>
           <Box mt={{ base: 0, md: 90 }} display={{ base: 'block', md: 'flex' }} gap={12}>
             <Box display={{ base: 'none', md: 'block' }} w={'45vw'}>
-              <Image src={'/thought/ceo-pc.jpg'} alt={'入船達也'} w={'100%'} h={'auto'} />
+              <Image
+                src={`${IMAGEBASEURL}/thought/ceo-pc.webp`}
+                alt={'合同会社ピーチウェブ 代表社員 入船 達也'}
+                w={'100%'}
+                h={'auto'}
+              />
             </Box>
             <Box display={{ base: 'block', md: 'none' }}>
-              <Image src={'/thought/ceo-sp.jpg'} alt={'入船達也'} w={'100%'} h={'auto'} />
+              <Image
+                src={`${IMAGEBASEURL}/thought/ceo-sp.webp`}
+                alt={'合同会社ピーチウェブ 代表社員 入船 達也'}
+                w={'100%'}
+                h={'auto'}
+              />
             </Box>
             <Text
               fontSize={{ base: 'medium', md: 'large' }}
