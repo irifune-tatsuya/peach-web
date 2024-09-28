@@ -18,6 +18,7 @@ import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 import { ChangeEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { createContactData } from '@/app/_action/contact';
+import { IMAGEBASEURL } from '@/constants';
 
 type formInputs = {
   lastname: string;
@@ -66,7 +67,7 @@ export const ContactForm: NextPage = () => {
             justifyContent={'center'}
           >
             <Image
-              src={'common/square_logo.svg'}
+              src={`${IMAGEBASEURL}/common/square_logo.svg`}
               width={'200px'}
               height={'auto'}
               maxW={300}
@@ -108,7 +109,7 @@ export const ContactForm: NextPage = () => {
           justifyContent={'center'}
         >
           <Image
-            src={'common/square_logo.svg'}
+            src={`${IMAGEBASEURL}/common/square_logo.svg`}
             width={'200px'}
             height={'auto'}
             maxW={300}

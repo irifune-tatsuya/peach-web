@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { getDetail } from '@/libs/microcms';
 import Article from '@/components/Article';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { IMAGEBASEURL } from '@/constants';
 
 type Props = {
   params: {
@@ -25,7 +26,8 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     openGraph: {
       title: data.title,
       description: data.description,
-      images: [data?.thumbnail?.url || '/ogp.jpg'],
+      images: [data?.thumbnail?.url || `${IMAGEBASEURL}/ogp.jpg`],
+      type: 'article',
     },
   };
 }

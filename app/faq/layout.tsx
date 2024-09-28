@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: pageTitle,
     description: description,
+    type: 'article',
   },
 };
 

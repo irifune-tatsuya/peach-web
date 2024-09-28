@@ -1,5 +1,4 @@
-import styles from './index.module.css';
-import { Button, Box } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import { MdMenu } from 'react-icons/md';
 

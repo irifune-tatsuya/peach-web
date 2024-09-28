@@ -1,7 +1,7 @@
 import { Box, Heading, Image, Link, ListItem, OrderedList, Text } from '@chakra-ui/react';
 import styles from './layout.module.css';
 import { TopSwiper } from '@/components/TopSwiper';
-import { LIMIT05, ARTICLEFILTER, CONTACT, NEWSFILTER } from '@/constants';
+import { LIMIT05, ARTICLEFILTER, CONTACT, NEWSFILTER, IMAGEBASEURL } from '@/constants';
 import { FaInstagram } from 'react-icons/fa';
 import { FaFacebookSquare } from 'react-icons/fa';
 import { FaLine } from 'react-icons/fa';
@@ -16,9 +16,9 @@ import ArticleList from '@/components/ArticleList';
 export const revalidate = 60;
 
 const swiperImages = [
-  { src: '/top/top-slider1.jpg', alt: 'キービジュアル1' },
-  { src: '/top/top-slider2.jpg', alt: 'キービジュアル2' },
-  { src: '/top/top-slider3.jpg', alt: 'キービジュアル3' },
+  { src: `${IMAGEBASEURL}/top/top-slider1.webp`, alt: 'キービジュアル1' },
+  { src: `${IMAGEBASEURL}/top/top-slider2.webp`, alt: 'キービジュアル2' },
+  { src: `${IMAGEBASEURL}/top/top-slider3.webp`, alt: 'キービジュアル3' },
 ];
 
 const businessLinks = [
@@ -28,8 +28,8 @@ const businessLinks = [
 ];
 
 const bottomLinks = [
-  { href: '/contact', src: '/top/contact.jpg', alt: 'お問い合わせ' },
-  { href: '/faq', src: '/top/faq.jpg', alt: 'よくあるご質問' },
+  { href: '/contact', src: `${IMAGEBASEURL}/top/contact.webp`, alt: 'お問い合わせ' },
+  { href: '/faq', src: `${IMAGEBASEURL}/top/faq.webp`, alt: 'よくあるご質問' },
 ];
 
 export default async function Home() {
@@ -63,7 +63,11 @@ export default async function Home() {
           maxW={'500px'}
         >
           <Box w={'100%'}>
-            <Image src={'/top/message.svg'} className={styles.message} />
+            <Image
+              src={`${IMAGEBASEURL}/top/message.svg`}
+              alt={'あなたの仕事が永く愛されますように'}
+              className={styles.message}
+            />
             <Text
               color={'white'}
               fontSize={{ base: 'small', sm: 'medium', md: 'large', lg: 'x-large' }}
@@ -167,7 +171,7 @@ export default async function Home() {
         <Box w={'100%'} maxW={1080} mx={'auto'}>
           <Link href={'/peach-fight'} w={'100%'} overflow={'hidden'}>
             <Image
-              src={'/top/peach_fight_banner.jpg'}
+              src={`${IMAGEBASEURL}/top/peach_fight_banner.webp`}
               alt={'岡山のチャレンジ応援マガジンピーチファイ'}
               transition={'transform 0.3s ease'}
               _hover={{ transform: 'scale(1.1)' }}

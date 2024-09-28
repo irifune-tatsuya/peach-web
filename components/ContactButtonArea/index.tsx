@@ -1,7 +1,7 @@
 import { Box, Link, Text } from '@chakra-ui/react';
 import { IoMail } from 'react-icons/io5';
 import { NextPage } from 'next';
-import styles from './layout.module.css';
+import styles from './index.module.css';
 import { CONTACT } from '@/constants';
 import { FaLine } from 'react-icons/fa';
 

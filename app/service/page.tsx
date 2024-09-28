@@ -23,6 +23,7 @@ import styles from './layout.module.css';
 import SideScrollIcon from '@/components/SideScrollIcon';
 import { ContactButtonArea } from '@/components/ContactButtonArea';
 import { ImCoinYen } from 'react-icons/im';
+import { IMAGEBASEURL } from '@/constants';
 
 const breadcrumbs = [
   {
@@ -206,7 +207,7 @@ export default async function Service() {
     <>
       <Box w={'100%'} h={{ base: 300, md: 600 }} position={'relative'}>
         <Image
-          src={'/service/title.jpg'}
+          src={`${IMAGEBASEURL}/service/title.webp`}
           alt={'サービス内容トップ画像'}
           objectFit={'cover'}
           w={'100%'}
@@ -264,7 +265,7 @@ export default async function Service() {
           >
             <Box mx={{ base: 'auto', md: 0 }} w={250} h={250}>
               <Image
-                src={'/service/issue.png'}
+                src={`${IMAGEBASEURL}/service/issue.webp`}
                 alt={'こんなお悩みはございませんか？'}
                 w={250}
                 h={250}
@@ -309,7 +310,7 @@ export default async function Service() {
           alignItems={'center'}
         >
           <Box w={300} h={300} mx={{ base: 'auto', md: 0 }}>
-            <Image src={'/service/solution.png'} alt={'解決策をご提案'} w={300} h={300} />
+            <Image src={`${IMAGEBASEURL}/service/solution.webp`} alt={'解決策をご提案'} w={300} h={300} />
           </Box>
           <Box fontWeight={'bold'} textAlign={'center'}>
             <Text
@@ -324,7 +325,7 @@ export default async function Service() {
             </Text>
             <Center>
               <Image
-                src={'/service/service-title.png'}
+                src={`${IMAGEBASEURL}/service/service-title.webp`}
                 alt={'ピーチウェブのWEBブランディングサービス'}
               />
             </Center>
@@ -416,7 +417,7 @@ export default async function Service() {
                 mt={{ base: 20, md: 120, lg: 40 }}
                 key={i}
               >
-                <Image src={`/service/service${i + 1}.jpg`} alt={item.title} w={400} h={267} />
+                <Image src={`${IMAGEBASEURL}/service/service${i + 1}.webp`} alt={item.title} w={400} h={267} />
                 <Box mt={{ base: 8, md: 0 }}>
                   <Heading
                     as={'h3'}
@@ -504,7 +505,7 @@ export default async function Service() {
             {brandingScenario.map((step, i) => (
               <Card minW={280} w={'auto'} maxW={350} key={i}>
                 <CardBody>
-                  <Image src={`/service/scenario${i + 1}.png `} alt={step.title} />
+                  <Image src={`${IMAGEBASEURL}/service/scenario${i + 1}.webp`} alt={step.title} />
                   <Stack mt="6" spacing="5">
                     <Heading as={'h3'} size={{ base: 'sm', md: 'md' }}>
                       <Tag size={'sm'} bg={'momo.100'} color={'white'}>{`シナリオ${i + 1}`}</Tag>
@@ -526,7 +527,7 @@ export default async function Service() {
           >
             <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
               <Image
-                src={'/service/ceo-circle.png'}
+                src={`${IMAGEBASEURL}/service/ceo-circle.webp`}
                 alt={'ピーチウェブ代表社員 入船達也'}
                 h={300}
                 w={300}
@@ -551,8 +552,8 @@ export default async function Service() {
               </Text>
               <Box display={'flex'} justifyContent={'center'} alignItems={'end'}>
                 <Image
-                  src={'/service/service-title.png'}
-                  alt={'WEBブランディング'}
+                  src={`${IMAGEBASEURL}/service/service-title.webp`}
+                  alt={'ピーチウェブのWEBブランディングサービス'}
                   w={{ base: 300, lg: 400 }}
                   h={{ base: '48px', lg: '64px' }}
                 />
@@ -594,7 +595,7 @@ export default async function Service() {
             {steps.map((step, i) => (
               <Card minW={280} w={'auto'} maxW={350} key={i}>
                 <CardBody>
-                  <Image src={`/service/step${i + 1}.png `} alt={step.title} />
+                  <Image src={`${IMAGEBASEURL}/service/step${i + 1}.webp`} alt={step.title} />
                   <Stack mt="6" spacing="5">
                     <Heading as={'h3'} size={{ base: 'sm', md: 'md' }}>
                       <Tag size={'sm'} bg={'momo.100'} color={'white'}>{`ステップ${i + 1}`}</Tag>

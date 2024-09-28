@@ -3,6 +3,7 @@
 import { useCallback, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Input } from '@chakra-ui/react';
+import { IMAGEBASEURL } from '@/constants';
 
 type Props = { category: string };
 
@@ -27,7 +28,7 @@ export default function SearchField({ category }: Props) {
       maxW={300}
       pl={9}
       pr={3}
-      bg={`url('/search.svg') no-repeat 10px center`}
+      bg={`url('${IMAGEBASEURL}/search.svg') no-repeat 10px center`}
       type="search"
       name="q"
       ref={inputRef}
