@@ -10,7 +10,7 @@ import { TopSwiper } from '@/components/TopSwiper';
 import styles from './layout.module.css';
 import React from 'react';
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 const breadcrumbs = [
   {
