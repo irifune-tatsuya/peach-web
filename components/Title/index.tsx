@@ -1,5 +1,6 @@
 import { Box, Heading } from '@chakra-ui/react';
 import styles from './index.module.css';
+import React from 'react';
 
 type Props = {
   titleEn: string;

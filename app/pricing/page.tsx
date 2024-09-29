@@ -21,6 +21,7 @@ import SideScrollIcon from '@/components/SideScrollIcon';
 import styles from './layout.module.css';
 import { ImDisplay } from 'react-icons/im';
 import { IMAGEBASEURL } from '@/constants';
+import React from 'react';
 
 const breadcrumbs = [
   {

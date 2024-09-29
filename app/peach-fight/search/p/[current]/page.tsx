@@ -6,6 +6,7 @@ import Title from '@/components/Title';
 import { Box } from '@chakra-ui/react';
 import SearchField from '@/components/SearchField';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import React from 'react';
 
 const breadcrumbs = [
   {
