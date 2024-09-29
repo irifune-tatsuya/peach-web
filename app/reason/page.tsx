@@ -133,7 +133,15 @@ export default async function Reason() {
               {togetherData.map((item, i) => (
                 <Card minW={280} w={'auto'} maxW={350} key={i}>
                   <CardBody>
-                    <Image src={`${IMAGEBASEURL}/reason/together${i + 1}.webp`} alt={item.title} />
+                    <Image
+                      src={`${IMAGEBASEURL}/reason/together${i + 1}.webp`}
+                      alt={item.title}
+                      minW={240}
+                      w={'100%'}
+                      maxW={310}
+                      h={'auto'}
+                      loading={'lazy'}
+                    />
                     <Stack mt="6" spacing="5">
                       <Heading as={'h3'} size={{ base: 'sm', md: 'md' }}>
                         {item.title}
@@ -432,7 +440,15 @@ export default async function Reason() {
                 {designData.map((item, i) => (
                   <Card minW={280} w={'auto'} maxW={350} key={i}>
                     <CardBody>
-                      <Image src={`${IMAGEBASEURL}/reason/design${i + 1}.webp`} alt={item.title} />
+                      <Image
+                        src={`${IMAGEBASEURL}/reason/design${i + 1}.webp`}
+                        alt={item.title}
+                        minW={240}
+                        w={'100%'}
+                        maxW={310}
+                        h={'auto'}
+                        loading={'lazy'}
+                      />
                       <Stack mt="6" spacing="5">
                         <Heading as={'h3'} size={{ base: 'sm', md: 'md' }}>
                           {item.title}

@@ -53,6 +53,9 @@ export default async function PeachFight() {
             <Image
               src={`${IMAGEBASEURL}/peach-fight/peach-fight-logo.webp`}
               alt={'岡山のチャレンジ応援マガジン「ピーチファイ」'}
+              w={'100%'}
+              h={'auto'}
+              maxW={600}
             />
             <Text
               color={'white'}

@@ -72,6 +72,7 @@ export const ContactForm: NextPage = () => {
               height={'auto'}
               maxW={300}
               alt={'ピーチウェブロゴ'}
+              loading={'lazy'}
             />
             <Text textAlign={'center'} mt={{ base: 10, md: 0 }}>
               お問い合わせいただき、
@@ -114,6 +115,7 @@ export const ContactForm: NextPage = () => {
             height={'auto'}
             maxW={300}
             alt={'ピーチウェブロゴ'}
+            loading={'lazy'}
           />
           <Text textAlign={'center'} mt={{ base: 10, md: 0 }}>
             申し訳ございません。

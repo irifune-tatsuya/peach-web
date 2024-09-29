@@ -24,6 +24,7 @@ export default function ArticleCard({ article, category, maxW }: Props) {
               w={'100%'}
               maxW={450}
               h={'auto'}
+              loading={'lazy'}
             />
           )}
           <Stack p={2}>

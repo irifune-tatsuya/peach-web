@@ -24,6 +24,7 @@ export default function SideScrollIcon(props: Props) {
       mb="10px"
       w="60px"
       h="20px"
+      loading={'lazy'}
     />
   );
 }

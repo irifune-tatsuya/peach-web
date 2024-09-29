@@ -29,8 +29,13 @@ const businessLinks = [
 ];
 
 const bottomLinks = [
-  { href: '/contact', src: `${IMAGEBASEURL}/top/contact.webp`, alt: 'お問い合わせ' },
-  { href: '/faq', src: `${IMAGEBASEURL}/top/faq.webp`, alt: 'よくあるご質問' },
+  {
+    href: '/contact',
+    src: `${IMAGEBASEURL}/top/contact.webp`,
+    titleJp: 'お問い合わせ',
+    titleEn: 'contact',
+  },
+  { href: '/faq', src: `${IMAGEBASEURL}/top/faq.webp`, titleJp: 'よくあるご質問', titleEn: 'FAQ' },
 ];
 
 export default async function Home() {
@@ -46,7 +51,7 @@ export default async function Home() {
     <>
       <Box
         id={'key-visual'}
-        w={'100%'}
+        w={'100vw'}
         h={{ base: 'calc(100vh - 55px)', md: 'calc(100vh - 76px)' }}
         position={'relative'}
         overflow={'hidden'}
@@ -67,6 +72,8 @@ export default async function Home() {
             <Image
               src={`${IMAGEBASEURL}/top/message.svg`}
               alt={'あなたの仕事が永く愛されますように'}
+              w={'100%'}
+              h={'auto'}
               className={styles.message}
             />
             <Text
@@ -228,18 +235,37 @@ export default async function Home() {
               <Link
                 key={i}
                 href={item.href}
-                display={'inline-block'}
-                maxW={767}
+                display={'block'}
+                maxW={300}
                 overflow={'hidden'}
+                position={'relative'}
+                zIndex={1}
+                _hover={{ textDecoration: 'none' }}
               >
                 <Image
                   src={item.src}
-                  alt={item.src}
+                  alt={item.titleJp}
                   w={'100%'}
                   h={'auto'}
                   transition={'transform 0.3s ease'}
                   _hover={{ transform: 'scale(1.2)' }}
+                  loading={'lazy'}
                 />
+                <Box
+                  position={'absolute'}
+                  top={'50%'}
+                  left={'50%'}
+                  transform={'translate(-50%, -50%)'}
+                  w={'100%'}
+                  color={'white'}
+                  fontWeight={'bold'}
+                  textAlign={'center'}
+                  zIndex={2}
+                  _hover={{ textDecoration: 'none' }}
+                >
+                  <Text fontSize={'x-large'}>{item.titleJp}</Text>
+                  <Text fontSize={'large'}>{item.titleEn}</Text>
+                </Box>
               </Link>
             ))}
           </Box>

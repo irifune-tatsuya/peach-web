@@ -17,7 +17,8 @@ export const Footer: NextPage = () => {
             height={'auto'}
             minW={100}
             maxW={100}
-            alt="ピーチウェブ"
+            alt={'ピーチウェブ'}
+            loading={'lazy'}
           />
         </Link>
       </Box>
