@@ -1,6 +1,6 @@
 {
-  "name": "nextjs-simple-blog-template",
-  "version": "0.1.0",
+  "name": "peach-web",
+  "version": " 1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
