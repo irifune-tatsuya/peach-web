@@ -6,7 +6,7 @@ export const PEACHFILTER = 'category[equals]peach-fight';
 export const NEWSFILTER = 'category[equals]news';
 export const FAQFILTER = 'category[equals]faq';
 
-export const IMAGEBASEURL = 'http://www.assets.peach-web.co.jp';
+export const IMAGEBASEURL = 'https://www.assets.peach-web.co.jp';
 
 // ヘッダーやフッターに表示するメニュー
 export const MENU = [

@@ -2,6 +2,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import styles from './layout.module.css';
 import Title from '@/components/Title';
 import { Box, Heading, ListItem, OrderedList, Text } from '@chakra-ui/react';
+import React from 'react';
 
 const breadcrumbs = [
   {

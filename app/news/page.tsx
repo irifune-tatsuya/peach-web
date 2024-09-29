@@ -5,6 +5,7 @@ import { Box } from '@chakra-ui/react';
 import Title from '@/components/Title';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import ArticleList from '@/components/ArticleList';
+import React from 'react';
 
 export const revalidate = 60;
 

@@ -6,6 +6,7 @@ import Title from '@/components/Title';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import SearchField from '@/components/SearchField';
 import { PEACHFILTER } from '@/constants';
+import React from 'react';
 
 const breadcrumbs = [
   {

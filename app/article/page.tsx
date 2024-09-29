@@ -1,3 +1,4 @@
+import React from 'react';
 import { getList } from '@/libs/microcms';
 import { ARTICLEFILTER, LIMIT12 } from '@/constants';
 import Pagination from '@/components/Pagination';

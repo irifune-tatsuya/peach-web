@@ -6,6 +6,7 @@ import { Box } from '@chakra-ui/react';
 import SearchField from '@/components/SearchField';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import ArticleList from '@/components/ArticleList';
+import React from 'react';
 
 type Props = {
   params: {

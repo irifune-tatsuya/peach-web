@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { formatRichText } from '@/libs/utils';
 import { renderToc } from '@/libs/render-toc';
 import { type Article } from '@/libs/microcms';
@@ -109,7 +110,7 @@ export default function Article({
                 <FaInstagram className={styles.instagramIcon} size={30} color="white" />
               </Link>
               <Link
-                href={`http://www.facebook.com/share.php?u=${fullPath}`}
+                href={`https://www.facebook.com/share.php?u=${fullPath}`}
                 isExternal
                 rel={'nofollow noopener'}
                 display={'flex'}

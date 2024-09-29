@@ -8,6 +8,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import SearchField from '@/components/SearchField';
 import { TopSwiper } from '@/components/TopSwiper';
 import styles from './layout.module.css';
+import React from 'react';
 
 export const revalidate = 60;
 

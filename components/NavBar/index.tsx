@@ -7,6 +7,7 @@ import { GoMail } from 'react-icons/go';
 import { MenuButton } from '../MenuButton';
 import { NavDrawer } from '../NavDrawer';
 import { IMAGEBASEURL } from '@/constants';
+import React from 'react';
 
 export const NavBar: NextPage = () => {
   const { isOpen, onToggle, onClose } = useDisclosure();

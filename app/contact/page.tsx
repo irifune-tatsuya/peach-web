@@ -2,6 +2,7 @@ import { Box, Text } from '@chakra-ui/react';
 import Title from '@/components/Title';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { ContactForm } from '@/components/ContactForm';
+import React from 'react';
 
 export const revalidate = 60;
 

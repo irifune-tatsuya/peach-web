@@ -4,6 +4,7 @@ import { NextPage } from 'next';
 import styles from './index.module.css';
 import { CONTACT } from '@/constants';
 import { FaLine } from 'react-icons/fa';
+import React from 'react';
 
 export const ContactButtonArea: NextPage = () => {
   return (

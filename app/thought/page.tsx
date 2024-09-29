@@ -2,6 +2,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import Title from '@/components/Title';
 import { IMAGEBASEURL } from '@/constants';
 import { Box, Heading, Image, Text } from '@chakra-ui/react';
+import React from 'react';
 
 const breadcrumbs = [
   {

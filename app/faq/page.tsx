@@ -7,6 +7,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import SearchField from '@/components/SearchField';
 import ArticleList from '@/components/ArticleList';
 import TagList from '@/components/TagList';
+import React from 'react';
 
 export const revalidate = 60;
 
