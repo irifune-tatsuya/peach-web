@@ -42,8 +42,8 @@ export const metadata: Metadata = {
     type: 'website',
   },
   icons: {
-    icon: `${IMAGEBASEURL}/favicon.ico`,
-    apple: `${IMAGEBASEURL}/apple-touch-icon.png`,
+    icon: `/favicon.ico`,
+    apple: `/apple-touch-icon.png`,
   },
   twitter: {
     card: 'summary_large_image',
