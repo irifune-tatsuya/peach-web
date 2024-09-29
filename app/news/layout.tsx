@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 const pageTitle = 'ニュース';
 const description =
-  'ホームページの制作・運用、事業計画の見直しなどを通じてWEBブランディングを行う岡山の会社ピーチウェブの公式サイトです。こちらは会社のニュースページです。';
+  '合同会社ピーチウェブの最新情報をお届けしております。異業種交流会への参加情報やイベント開催情報など気になる情報をいち早くご確認いただくことができます。';
 
 export const metadata: Metadata = {
   title: pageTitle,

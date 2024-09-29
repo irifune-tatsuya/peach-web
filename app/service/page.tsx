@@ -1,3 +1,4 @@
+import React from 'react';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import {
   Accordion,

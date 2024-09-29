@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 const pageTitle = 'お問い合わせ';
 const description =
-  'ホームページの制作・運用、事業計画の見直しなどを通じてWEBブランディングを行う岡山の会社ピーチウェブの公式サイトです。こちらはお問い合わせページです。';
+  'ピーチウェブのサービスに関する業務ご依頼やご質問等、気になることは何でもフォームよりご連絡くださいませ。後日代表よりご返信させていただきます。';
 
 export const metadata: Metadata = {
   title: pageTitle,

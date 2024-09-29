@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 const pageTitle = 'プライバシーポリシー';
 const description =
-  'ホームページの制作・運用、事業計画の見直しなどを通じてWEBブランディングを行う岡山の会社ピーチウェブの公式サイトです。こちらはプライバシポリシーのページです。';
+  'お問い合わせフォーム等で収集したお客様の個人情報の保護規定についてご案内しているプライバシポリシーのページです。';
 
 export const metadata: Metadata = {
   title: pageTitle,
