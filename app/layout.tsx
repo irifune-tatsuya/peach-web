@@ -43,7 +43,6 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: `/favicon.ico`,
-    apple: `/apple-touch-icon.png`,
   },
   twitter: {
     card: 'summary_large_image',
@@ -80,6 +79,12 @@ const RootLayout: NextPage<Props> = ({ children }) => {
   return (
     <html lang="ja" suppressHydrationWarning={true}>
       <head>
+        <link
+          rel={'apple-touch-icon'}
+          href={'/apple-touch-icon.png'}
+          type={'image/png'}
+          sizes={'180x180'}
+        />
         <GoogleAnalytics />
       </head>
       <body suppressHydrationWarning={true}>
