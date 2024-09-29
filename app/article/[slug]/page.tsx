@@ -20,14 +20,25 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     draftKey: searchParams.dk,
   });
 
+  const defaultImageUrl = `${IMAGEBASEURL}/ogp.jpg`;
+  const imageUrl = data?.thumbnail?.url || defaultImageUrl;
+
   return {
     title: data.title,
     description: data.description,
     openGraph: {
       title: data.title,
       description: data.description,
-      images: [data?.thumbnail?.url || `${IMAGEBASEURL}/ogp.jpg`],
+      images: imageUrl,
       type: 'article',
+    },
+    twitter: {
+      title: data.title,
+      description: data.title,
+      images: {
+        url: imageUrl,
+        alt: data.description,
+      },
     },
   };
 }
