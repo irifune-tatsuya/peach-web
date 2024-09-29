@@ -94,6 +94,7 @@ export default async function Thought() {
               src={`${IMAGEBASEURL}/thought/mission-text.webp`}
               alt={'あなたのビジネスが永く愛されますよう。'}
               maxW={{ base: 330, md: 450, lg: 500 }}
+              w={'100%'}
               h={'auto'}
               display={'block'}
             />
@@ -183,6 +184,7 @@ export default async function Thought() {
                 alt={'合同会社ピーチウェブ 代表社員 入船 達也'}
                 w={'100%'}
                 h={'auto'}
+                loading={'lazy'}
               />
             </Box>
             <Box display={{ base: 'block', md: 'none' }}>
@@ -191,6 +193,7 @@ export default async function Thought() {
                 alt={'合同会社ピーチウェブ 代表社員 入船 達也'}
                 w={'100%'}
                 h={'auto'}
+                loading={'lazy'}
               />
             </Box>
             <Text

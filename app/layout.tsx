@@ -11,7 +11,7 @@ import { IMAGEBASEURL } from '@/constants';
 
 const siteName = 'ピーチウェブ -岡山のWEBブランディングサービス-';
 const description =
-  'あなたの仕事が永く愛されますように。お客様の事業の魅力を最大限発信するWEBブランディングをご提案する岡山の会社ピーチウェブの公式サイトです。ホームページの制作・運用、事業計画の見直しなど多岐にわたってサポートいたします。';
+  'あなたのビジネスが永く愛されますようWEBブランディングで岡山の企業をサポートする合同会社ピーチウェブの公式サイトです。';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.BASE_URL || 'http://localhost:3000'),

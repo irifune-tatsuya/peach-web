@@ -1,3 +1,4 @@
+import React from 'react';
 import { Metadata } from 'next';
 import { getDetail } from '@/libs/microcms';
 import Article from '@/components/Article';
@@ -29,16 +30,23 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     openGraph: {
       title: data.title,
       description: data.description,
-      images: imageUrl,
+      images: [
+        {
+          url: imageUrl,
+          alt: data.title,
+        },
+      ],
       type: 'article',
     },
     twitter: {
       title: data.title,
       description: data.title,
-      images: {
-        url: imageUrl,
-        alt: data.description,
-      },
+      images: [
+        {
+          url: imageUrl,
+          alt: data.title,
+        },
+      ],
     },
   };
 }

@@ -18,7 +18,9 @@ export default function PublishedDate({ date, simple = false }: Props) {
       lineHeight={4}
       fontSize={'small'}
     >
-      {!simple ? <Image src={`${IMAGEBASEURL}/clock.svg`} alt={'時計'} w={3} h={3} /> : null}
+      {!simple ? (
+        <Image src={`${IMAGEBASEURL}/clock.svg`} alt={'時計'} w={3} h={3} loading={'lazy'} />
+      ) : null}
       {!simple ? formatDate(date) + ' 公開' : formatDate(date)}
     </Box>
   );
