@@ -9,7 +9,7 @@ import ArticleList from '@/components/ArticleList';
 import TagList from '@/components/TagList';
 import React from 'react';
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 const breadcrumbs = [
   {

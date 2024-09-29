@@ -32,7 +32,7 @@ type Props = {
   };
 };
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 export default async function Search({ searchParams }: Props) {
   const category = 'peach-fight';

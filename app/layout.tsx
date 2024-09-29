@@ -30,6 +30,7 @@ export const metadata: Metadata = {
         url: `${IMAGEBASEURL}/ogp.jpg`,
         width: 800,
         height: 600,
+        alt: siteName,
       },
       {
         url: `${IMAGEBASEURL}/ogp-alt.jpg`,
