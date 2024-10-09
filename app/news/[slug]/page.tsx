@@ -14,7 +14,7 @@ type Props = {
   };
 };
 
-export const revalidate = 0;
+export const revalidate = 3600;
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const data = await getDetail(params.slug, {

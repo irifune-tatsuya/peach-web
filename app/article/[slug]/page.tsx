@@ -14,7 +14,7 @@ type Props = {
   };
 };
 
-export const revalidate = 0;
+export const revalidate = 3600;
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const data = await getDetail(params.slug, {
@@ -22,14 +22,17 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   });
 
   const defaultImageUrl = `${IMAGEBASEURL}/ogp.jpg`;
+  const defaultDescription =
+    'あなたのビジネスが永く愛されますようWEBブランディングで岡山の企業をサポートする合同会社ピーチウェブの公式サイトです。';
   const imageUrl = data?.thumbnail?.url || defaultImageUrl;
+  const description = data?.description || defaultDescription;
 
   return {
     title: data.title,
-    description: data.description,
+    description: description,
     openGraph: {
       title: data.title,
-      description: data.description,
+      description: description,
       images: [
         {
           url: imageUrl,
@@ -40,7 +43,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     },
     twitter: {
       title: data.title,
-      description: data.title,
+      description: description,
       images: [
         {
           url: imageUrl,

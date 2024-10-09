@@ -7,7 +7,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import ArticleList from '@/components/ArticleList';
 import React from 'react';
 
-export const revalidate = 0;
+export const revalidate = 3600;
 
 const breadcrumbs = [
   {

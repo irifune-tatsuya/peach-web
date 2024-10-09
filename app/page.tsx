@@ -14,7 +14,7 @@ import ContentTitle from '@/components/ContentTitle';
 import ArticleList from '@/components/ArticleList';
 import SideScrollIcon from '@/components/SideScrollIcon';
 
-export const revalidate = 0;
+export const revalidate = 3600;
 
 const swiperImages = [
   { src: `${IMAGEBASEURL}/top/top-slider1.webp`, alt: 'キービジュアル1' },
