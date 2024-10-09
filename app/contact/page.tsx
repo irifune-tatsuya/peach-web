@@ -4,7 +4,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { ContactForm } from '@/components/ContactForm';
 import React from 'react';
 
-export const revalidate = 0;
+export const revalidate = 3600;
 
 const breadcrumbs = [
   {
