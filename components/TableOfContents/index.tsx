@@ -40,9 +40,14 @@ export default function TableOfContents({ toc }: Props) {
               <AccordionPanel>
                 <UnorderedList listStyleType={'none'} pl={0}>
                   {toc.map((item) => (
-                    <Link to={item.id || ''} smooth={true} duration={200} offset={-76}>
+                    <Link
+                      to={item.id || ''}
+                      smooth={true}
+                      duration={200}
+                      offset={-76}
+                      key={item.id}
+                    >
                       <ListItem
-                        key={item.id}
                         py={2}
                         fontSize={'small'}
                         textDecoration={'underline'}
