@@ -4,6 +4,9 @@ import { getDetail } from '@/libs/microcms';
 import Article from '@/components/Article';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { IMAGEBASEURL } from '@/constants';
+import { IoBookOutline } from 'react-icons/io5';
+import { IoMdHome } from 'react-icons/io';
+import ButtonArea from '@/components/ButtonArea';
 
 type Props = {
   params: {
@@ -54,6 +57,25 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   };
 }
 
+const ContactButtons = [
+  {
+    bg: 'momo.100',
+    color: 'white',
+    href: '/',
+    isExternal: false,
+    title: 'TOPページへ',
+    icon: <IoMdHome />,
+  },
+  {
+    bg: 'momo.300',
+    color: 'black',
+    href: '/article',
+    isExternal: false,
+    title: '新着記事一覧へ',
+    icon: <IoBookOutline />,
+  },
+];
+
 export default async function Page({ params, searchParams }: Props) {
   const data = await getDetail(params.slug, {
     draftKey: searchParams.dk,
@@ -80,6 +102,7 @@ export default async function Page({ params, searchParams }: Props) {
   return (
     <>
       <Article data={data} />
+      <ButtonArea buttons={ContactButtons} bg={'white'} />
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );

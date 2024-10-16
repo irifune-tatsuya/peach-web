@@ -15,17 +15,11 @@ import { IMAGEBASEURL } from '@/constants';
 
 type Props = {
   data: Article;
-  instagramId?: string;
   isShowToc?: boolean;
   isFaqLayout?: boolean;
 };
 
-export default function Article({
-  data,
-  instagramId = 'irifune3333',
-  isShowToc = true,
-  isFaqLayout = false,
-}: Props) {
+export default function Article({ data, isShowToc = true, isFaqLayout = false }: Props) {
   const toc = renderToc(data.content);
   const pathName = usePathname();
   const fullPath = `${new URL(process.env.BASE_URL || 'http://localhost:3000')}${pathName.slice(
@@ -96,7 +90,7 @@ export default function Article({
             </Box>
             <Box display={'flex'} gap={2}>
               <Link
-                href={`https://www.instagram.com/${instagramId}?ref=badge`}
+                href={`https://www.instagram.com/${data.instagramid || 'irifune3333'}?ref=badge`}
                 isExternal
                 className={styles.instagramButton}
                 display={'flex'}
