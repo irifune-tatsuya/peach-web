@@ -11,14 +11,17 @@ import styles from './index.module.css';
 import { NextPage } from 'next';
 
 type Image = {
+  h?: string;
   src: string;
   alt: string;
+  borderRadius?: number;
 };
 
 type Props = { images: Array<Image> };
 
 export const TopSwiper: NextPage<Props> = (props) => {
   const { images } = props;
+  const imageH = { base: 'calc(100vh - 55px)', md: 'calc(100vh - 76px)' };
   return (
     <Swiper
       modules={[Autoplay, EffectFade]}
@@ -36,11 +39,12 @@ export const TopSwiper: NextPage<Props> = (props) => {
       {images.map((image, i) => (
         <SwiperSlide key={i}>
           <Image
+            borderRadius={image.borderRadius ?? 0}
             src={image.src}
             objectFit={'cover'}
             alt={image.alt}
             w={'100vw'}
-            h={{ base: 'calc(100vh - 55px)', md: 'calc(100vh - 76px)' }}
+            h={image.h ?? imageH}
           />
         </SwiperSlide>
       ))}

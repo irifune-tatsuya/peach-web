@@ -22,9 +22,30 @@ import {
 import { FaCheckCircle } from 'react-icons/fa';
 import styles from './layout.module.css';
 import SideScrollIcon from '@/components/SideScrollIcon';
-import { ContactButtonArea } from '@/components/ContactButtonArea';
 import { ImCoinYen } from 'react-icons/im';
-import { IMAGEBASEURL } from '@/constants';
+import { IMAGEBASEURL, CONTACT } from '@/constants';
+import { IoMail } from 'react-icons/io5';
+import { FaLine } from 'react-icons/fa';
+import ButtonArea from '@/components/ButtonArea';
+
+const ContactButtons = [
+  {
+    bg: 'momo.100',
+    color: 'white',
+    href: '/contact',
+    isExternal: false,
+    title: 'フォームからお問い合わせ',
+    icon: <IoMail />,
+  },
+  {
+    bg: '#06c755',
+    color: 'white',
+    href: CONTACT.line,
+    isExternal: true,
+    title: 'LINEからお問い合わせ',
+    icon: <FaLine />,
+  },
+];
 
 const breadcrumbs = [
   {
@@ -389,7 +410,7 @@ export default async function Service() {
             </Box>
           </Box>
         </Box>
-        <ContactButtonArea />
+        <ButtonArea buttons={ContactButtons} />
       </Box>
       <Box bg={'white'} position={'relative'} overflow={'hidden'} pt={{ base: 20, md: 40 }}>
         <Box p={4} maxW={1152} mx={'auto'}>
@@ -643,7 +664,7 @@ export default async function Service() {
             ))}
           </Box>
         </Box>
-        <ContactButtonArea />
+        <ButtonArea buttons={ContactButtons} />
       </Box>
       <Box p={4} maxW={1152} mx={'auto'} pt={{ base: 88, md: 120 }}>
         <Box>

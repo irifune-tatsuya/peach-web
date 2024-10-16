@@ -1,9 +1,14 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { getDetail } from '@/libs/microcms';
-import Article from '@/components/Article';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { IMAGEBASEURL } from '@/constants';
+import InterviewArticle from '@/components/InterviewArticle';
+import { CONTACT } from '@/constants';
+import { IoMail } from 'react-icons/io5';
+import { FaLine } from 'react-icons/fa';
+import { IoMdHome } from 'react-icons/io';
+import ButtonArea from '@/components/ButtonArea';
 
 type Props = {
   params: {
@@ -15,6 +20,33 @@ type Props = {
 };
 
 export const revalidate = 3600;
+
+const ContactButtons = [
+  {
+    bg: 'momo.100',
+    color: 'white',
+    href: '/contact',
+    isExternal: false,
+    title: 'フォームから取材応募',
+    icon: <IoMail />,
+  },
+  {
+    bg: '#06c755',
+    color: 'white',
+    href: CONTACT.line,
+    isExternal: true,
+    title: 'LINEから取材応募',
+    icon: <FaLine />,
+  },
+  {
+    bg: 'momo.300',
+    color: 'black',
+    href: '/peach-fight',
+    isExternal: false,
+    title: 'ピーチファイTOPへ',
+    icon: <IoMdHome />,
+  },
+];
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const data = await getDetail(params.slug, {
@@ -76,7 +108,8 @@ export default async function Page({ params, searchParams }: Props) {
 
   return (
     <>
-      <Article data={data} />
+      <InterviewArticle data={data} />
+      <ButtonArea buttons={ContactButtons} bg={'white'} />
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
