@@ -13,25 +13,30 @@ export type Tag = {
 } & MicroCMSContentId &
   MicroCMSDate;
 
-// ライターの型定義
-export type Writer = {
+// カテゴリーの型定義
+export type Category = {
   name: string;
-  profile: string;
-  image?: MicroCMSImage;
 } & MicroCMSContentId &
   MicroCMSDate;
 
-// ブログの型定義
-export type Blog = {
+// 記事の型定義
+export type Article = {
   title: string;
   description: string;
   content: string;
   thumbnail?: MicroCMSImage;
   tags?: Tag[];
-  writer?: Writer;
-};
-
-export type Article = Blog & MicroCMSContentId & MicroCMSDate;
+  category?: Category[];
+  instagramid?: string;
+  facebookid?: string;
+  xid?: string;
+  url?: string;
+  company?: string;
+  department?: string;
+  position?: string;
+  interviewed?: string;
+} & MicroCMSContentId &
+  MicroCMSDate;
 
 if (!process.env.MICROCMS_SERVICE_DOMAIN) {
   throw new Error('MICROCMS_SERVICE_DOMAIN is required');

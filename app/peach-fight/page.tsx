@@ -1,14 +1,17 @@
 import { getList } from '@/libs/microcms';
-import { LIMIT12, PEACHFILTER, IMAGEBASEURL } from '@/constants';
+import { LIMIT12, PEACHFILTER, IMAGEBASEURL, CONTACT } from '@/constants';
 import Pagination from '@/components/Pagination';
 import GridArticleList from '@/components/GridArticleList';
-import { Box, Image, Text } from '@chakra-ui/react';
+import { Box, Heading, Image, Link, Text } from '@chakra-ui/react';
 import Title from '@/components/Title';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import SearchField from '@/components/SearchField';
 import { TopSwiper } from '@/components/TopSwiper';
 import styles from './layout.module.css';
 import React from 'react';
+import { IoMail } from 'react-icons/io5';
+import { FaLine } from 'react-icons/fa';
+import ButtonArea from '@/components/ButtonArea';
 
 export const revalidate = 3600;
 
@@ -26,7 +29,31 @@ const breadcrumbs = [
 ];
 
 const swiperImages = [
-  { src: `${IMAGEBASEURL}/peach-fight/peach-fight-banner.webp`, alt: 'ピーチファイ' },
+  {
+    src: `${IMAGEBASEURL}/peach-fight/peach-fight-bg.webp`,
+    alt: 'ピーチファイ',
+    borderRadius: 60,
+    h: '80vh',
+  },
+];
+
+const ContactButtons = [
+  {
+    bg: 'momo.100',
+    color: 'white',
+    href: '/contact',
+    isExternal: false,
+    title: 'フォームから取材応募',
+    icon: <IoMail />,
+  },
+  {
+    bg: '#06c755',
+    color: 'white',
+    href: CONTACT.line,
+    isExternal: true,
+    title: 'LINEから取材応募',
+    icon: <FaLine />,
+  },
 ];
 
 export default async function PeachFight() {
@@ -43,12 +70,12 @@ export default async function PeachFight() {
       <Box id={'key-visual'} h={'100vh'} position={'relative'} overflow={'hidden'}>
         <Box
           position={'absolute'}
-          top={{ base: '42%', sm: '40%', md: '40%', lg: '40%' }}
+          top={{ base: '45%', sm: '40%', md: '40%', lg: '40%' }}
           left={'50%'}
           transform={'translate(-50%, -50%)'}
           zIndex={2}
-          w={'95%'}
-          maxW={'600px'}
+          w={'85%'}
+          maxW={'700px'}
         >
           <Box w={'100%'} className={styles.message}>
             <Image
@@ -56,45 +83,102 @@ export default async function PeachFight() {
               alt={'岡山のチャレンジ応援マガジン「ピーチファイ」'}
               w={'100%'}
               h={'auto'}
-              maxW={600}
+              maxW={700}
             />
-            <Text
-              color={'white'}
-              fontSize={{ base: '1em', sm: 'large', md: 'larger', lg: 'x-large' }}
-              fontWeight={'bold'}
-              lineHeight={2}
-              mt={12}
-            >
-              あなたは仕事に全力投球していますか？
-              <Box as={'br'} />
-              <Box as={'br'} />
-              岡山のチャレンジ応援マガジン「ピーチファイ」は
-              <Box as={'br'} />
-              経営者様・起業家様へのインタビューを通じて
-              <Box as={'br'} />
-              仕事のワクワクを共有するWEBメディアです。
-              <Box as={'br'} />
-              <Box as={'br'} />
-              インタビューに応じてくださる経営者様も
-              <Box as={'br'} />
-              大募集しております！
-            </Text>
           </Box>
         </Box>
-        <Image
-          src={`${IMAGEBASEURL}/peach-fight/momotaro.webp`}
-          alt={'桃太郎とピーチな人たち！'}
-          w={'100%'}
-          maxW={600}
+        <Link
+          href={'/contact'}
           position={'absolute'}
-          bottom={{ base: '-1.7%', lg: '-2.4%' }}
+          zIndex={2}
+          bottom={{ base: '-20px', md: '30px' }}
           left={'50%'}
           transform={'translate(-50%, -50%)'}
-          zIndex={2}
-        />
-        <TopSwiper images={swiperImages} />
+          w={145}
+          h={145}
+          borderRadius={'50%'}
+          border={'2px solid #000000'}
+          bg={'white'}
+          cursor={'pointer'}
+          className={styles.entryButton}
+        >
+          <Text
+            position={'absolute'}
+            top={0}
+            bottom={0}
+            left={0}
+            right={0}
+            m={'auto'}
+            display={'block'}
+            w={124}
+            h={124}
+            className={styles.entryCircle}
+          >
+            <Image
+              src={`${IMAGEBASEURL}/peach-fight/entry_circle.webp`}
+              alt={'エントリーサークル'}
+              w={124}
+              h={124}
+            />
+          </Text>
+          <Text
+            position={'absolute'}
+            top={'50%'}
+            left={'50%'}
+            transform={'translate(-50%, -50%)'}
+            w={'50px'}
+            h={'46.4px'}
+          >
+            <Image
+              src={`${IMAGEBASEURL}/peach-fight/entry_momo.webp`}
+              alt={'エントリーボタン'}
+              w={'50px'}
+              h={'46.4px'}
+            />
+          </Text>
+        </Link>
+        <Box mx={{ base: 4, md: 10 }} my={{ base: 8, md: 0 }}>
+          <TopSwiper images={swiperImages} />
+        </Box>
       </Box>
-      <Box maxW={1152} mx={'auto'} p={4} pb={{ base: 15, md: 156 }}>
+      <Box maxW={1152} mx={'auto'} p={4}>
+        <Heading mb={8} color={'momo.100'}>
+          岡山のチャレンジ応援WEBマガジン
+        </Heading>
+        <Box display={{ base: 'block', md: 'flex' }} justifyContent={'space-between'}>
+          <Box w={{ base: '100%', md: 450, lg: 600 }}>
+            <Text fontSize={{ base: 'medium', lg: 'x-large' }} fontWeight={'bold'} mt={4}>
+              「ピーチファイ」は、岡山県内（ときどき県外）の
+              <Box as={'span'} color={'momo.100'}>
+                起業家や新しいビジネスを展開する会社の従業員様の熱い想いを取材するWEBマガジン
+              </Box>
+              です。
+            </Text>
+            <Text fontSize={{ base: 'medium', lg: 'x-large' }} fontWeight={'bold'} mt={4}>
+              異業種交流会では聴くことができない詳しい事業内容や起業家の想い、プライベートな側面など身近な起業家のストーリーを通じて、あなたの心にも火を灯しましょう！取材をされた方と取材を読んだ方がつながり、新しいチャレンジが連鎖することで地元岡山がより盛り上がればと思っております！
+            </Text>
+            <Text fontSize={{ base: 'medium', lg: 'x-large' }} fontWeight={'bold'} mt={4}>
+              また、ピーチファイでは
+              <Box as={'span'} color={'momo.100'}>
+                取材を受けたい起業家、会社の従業員様も大募集
+              </Box>
+              しております。
+            </Text>
+          </Box>
+          <Box mt={{ base: 20, md: 0 }}>
+            <Image
+              src={`${IMAGEBASEURL}/peach-fight/entrepreneurs.webp`}
+              alt={'起業家様や新しいビジネスを展開する会社の従業員様'}
+              w={'100%'}
+              maxW={500}
+              h={'auto'}
+              maxH={500}
+            />
+          </Box>
+        </Box>
+      </Box>
+      <ButtonArea buttons={ContactButtons} />
+      <Box maxW={1152} mx={'auto'} p={4} pb={{ base: 15, md: 156 }} pt={{ base: 15, md: 156 }}>
         <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }} mb={20}>
           <SearchField category={category} />
         </Box>
