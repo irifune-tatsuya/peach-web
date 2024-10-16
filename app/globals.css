@@ -20,6 +20,10 @@
   margin: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   max-width: 100vw;
@@ -88,4 +92,5 @@ ul {
 
 .marker {
   background: linear-gradient(transparent 0%, #febdd6 0%);
+  border-radius: 12px;
 }
