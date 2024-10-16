@@ -87,6 +87,5 @@ ul {
 }
 
 .marker {
-  font-weight: bold;
-  background: linear-gradient(transparent 50%, #febdd6 60% 90%, transparent 90%);
+  background: linear-gradient(transparent 0%, #febdd6 0%);
 }
