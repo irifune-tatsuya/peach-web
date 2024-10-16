@@ -5,6 +5,7 @@ export const ARTICLEFILTER = 'category[equals]article';
 export const PEACHFILTER = 'category[equals]peach-fight';
 export const NEWSFILTER = 'category[equals]news';
 export const FAQFILTER = 'category[equals]faq';
+export const CATEGORYFILTER = 'category[equals]faq';
 
 export const IMAGEBASEURL = 'https://www.assets.peach-web.co.jp';
 
