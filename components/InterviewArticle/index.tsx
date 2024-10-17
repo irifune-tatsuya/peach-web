@@ -241,7 +241,7 @@ export default function InterviewArticle({ data, isShowToc = true }: Props) {
                         </Link>
                       </GridItem>
                     ) : (
-                      <GridItem w={10} mx={'auto'}>
+                      <GridItem w={10} mx={'auto'} key={i}>
                         <Box
                           display={'flex'}
                           alignItems={'center'}
