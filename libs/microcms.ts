@@ -28,8 +28,9 @@ export type Article = {
   tags?: Tag[];
   category?: Category[];
   instagramid?: string;
-  facebookid?: string;
+  facebookurl?: string;
   xid?: string;
+  lineurl?: string;
   url?: string;
   company?: string;
   department?: string;
