@@ -31,7 +31,7 @@ export default function ButtonArea({
       gap={8}
       justifyContent={'center'}
       py={10}
-      px={{ base: 10 }}
+      px={10}
       bg={bg}
     >
       {buttons.map((button, i) => (

@@ -15,6 +15,7 @@ import { IMAGEBASEURL } from '@/constants';
 import { FaLine } from 'react-icons/fa';
 import { FaArrowCircleRight } from 'react-icons/fa';
 import { IoMdHome } from 'react-icons/io';
+import { StartMailMagazineForm } from '../StartMailMagazineForm';
 
 type Props = {
   data: Article;
@@ -265,13 +266,24 @@ export default function InterviewArticle({ data, isShowToc = true }: Props) {
             )}
           </>
         ))}
-        <Box fontSize={'large'} display={'flex'} justifyContent={'end'} px={8}>
+        <Box fontSize={'large'} display={'flex'} justifyContent={'end'} px={8} mb={20}>
           <PublishedDate
             date={data.publishedAt || data.createdAt}
             simple={true}
             fontSize={'large'}
           />
           <Text ml={1}>公開</Text>
+        </Box>
+        <Box px={4}>
+          <Heading className={styles.title}>次の記事更新はいつ？</Heading>
+          <Text className={styles.paragraph} mb={10}>
+            ニュースレターを登録してピーチウェブの最新情報をいち早く手に入れてください！もちろん、
+            <Box as={'span'} color={'momo.100'} fontWeight={'bold'}>
+              登録無料でいつでも解約可能
+            </Box>
+            ですのでご安心ください。
+          </Text>
+          <StartMailMagazineForm />
         </Box>
       </Box>
     </Box>
