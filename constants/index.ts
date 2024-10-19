@@ -40,6 +40,10 @@ export const MENU = [
     href: '/article',
   },
   {
+    title: 'ニュースレターのご案内',
+    href: '/newsletter',
+  },
+  {
     title: 'よくあるご質問',
     href: '/faq',
   },
