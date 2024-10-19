@@ -1,5 +1,5 @@
 import { getList } from '@/libs/microcms';
-import { LIMIT12, NEWSFILTER } from '@/constants';
+import { LIMIT30, NEWSFILTER } from '@/constants';
 import Pagination from '@/components/Pagination';
 import { Box } from '@chakra-ui/react';
 import Title from '@/components/Title';
@@ -25,7 +25,7 @@ const breadcrumbs = [
 export default async function News() {
   const category = 'news';
   const data = await getList({
-    limit: LIMIT12,
+    limit: LIMIT30,
     filters: NEWSFILTER,
   });
   return (

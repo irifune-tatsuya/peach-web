@@ -1,5 +1,5 @@
 import { getList } from '@/libs/microcms';
-import { ARTICLEFILTER, LIMIT12 } from '@/constants';
+import { ARTICLEFILTER, LIMIT30 } from '@/constants';
 import Pagination from '@/components/Pagination';
 import GridArticleList from '@/components/GridArticleList';
 import Title from '@/components/Title';
@@ -42,8 +42,8 @@ export default async function Page({ params, searchParams }: Props) {
   const current = parseInt(params.current as string, 10);
   const data = await getList({
     filters: ARTICLEFILTER,
-    limit: LIMIT12,
-    offset: LIMIT12 * (current - 1),
+    limit: LIMIT30,
+    offset: LIMIT30 * (current - 1),
     q: searchParams.q,
   });
   return (

@@ -1,5 +1,5 @@
 import { getList, getTag } from '@/libs/microcms';
-import { LIMIT12 } from '@/constants';
+import { LIMIT30 } from '@/constants';
 import Pagination from '@/components/Pagination';
 import Title from '@/components/Title';
 import { Box } from '@chakra-ui/react';
@@ -22,8 +22,8 @@ export default async function Page({ params }: Props) {
   const { tagId } = params;
   const current = parseInt(params.current as string, 10);
   const data = await getList({
-    limit: LIMIT12,
-    offset: LIMIT12 * (current - 1),
+    limit: LIMIT30,
+    offset: LIMIT30 * (current - 1),
     filters: `tags[contains]${tagId}`,
   });
   const tag = await getTag(tagId);

@@ -1,7 +1,9 @@
 import { Article } from '@/libs/microcms';
 import { ListItem, UnorderedList } from '@chakra-ui/react';
 import React from 'react';
-import ArticleCard from '../ArticleCard';
+import LandscapeCard from '../LandscapeCard';
+import ArticleCard from '../LandscapeCard';
+import PortraitCard from '../PortraitCard';
 
 type Props = {
   articles: Article[];
@@ -37,7 +39,11 @@ export default function SideScrollArticleList({ articles, category }: Props) {
           maxW={350}
           _hover={{ opacity: 0.6 }}
         >
-          <ArticleCard article={article} category={category} maxW={350} />
+          {category === 'article' ? (
+            <LandscapeCard article={article} category={category} maxW={250} />
+          ) : (
+            <PortraitCard article={article} category={category} maxW={250} />
+          )}
         </ListItem>
       ))}
     </UnorderedList>

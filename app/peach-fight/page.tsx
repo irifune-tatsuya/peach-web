@@ -1,5 +1,5 @@
 import { getList } from '@/libs/microcms';
-import { LIMIT12, PEACHFILTER, IMAGEBASEURL, CONTACT } from '@/constants';
+import { LIMIT30, PEACHFILTER, IMAGEBASEURL, CONTACT } from '@/constants';
 import Pagination from '@/components/Pagination';
 import GridArticleList from '@/components/GridArticleList';
 import { Box, Heading, Image, Link, Text } from '@chakra-ui/react';
@@ -59,7 +59,7 @@ const ContactButtons = [
 export default async function PeachFight() {
   const category = 'peach-fight';
   const data = await getList({
-    limit: LIMIT12,
+    limit: LIMIT30,
     filters: PEACHFILTER,
   });
   return (

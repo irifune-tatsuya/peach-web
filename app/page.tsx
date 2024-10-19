@@ -1,7 +1,14 @@
 import { Box, Heading, Image, Link, ListItem, OrderedList, Text } from '@chakra-ui/react';
 import styles from './layout.module.css';
 import { TopSwiper } from '@/components/TopSwiper';
-import { LIMIT05, ARTICLEFILTER, CONTACT, NEWSFILTER, IMAGEBASEURL } from '@/constants';
+import {
+  LIMIT05,
+  ARTICLEFILTER,
+  CONTACT,
+  NEWSFILTER,
+  IMAGEBASEURL,
+  PEACHFILTER,
+} from '@/constants';
 import { FaInstagram } from 'react-icons/fa';
 import { FaFacebookSquare } from 'react-icons/fa';
 import { FaLine } from 'react-icons/fa';
@@ -48,6 +55,10 @@ export default async function Home() {
   const articleData = await getList({
     limit: LIMIT05,
     filters: ARTICLEFILTER,
+  });
+  const peachFightData = await getList({
+    limit: LIMIT05,
+    filters: PEACHFILTER,
   });
   const newsData = await getList({
     limit: LIMIT05,
@@ -181,16 +192,31 @@ export default async function Home() {
           </Box>
         </Box>
       </Box>
-      <Box as="section" pb={{ base: 100, md: 200 }}>
-        <Box w={'100%'} maxW={1080} mx={'auto'}>
+      <Box as="section" pb={{ base: 30, md: 100 }}>
+        <Box w={'100%'} maxW={1080} mx={'auto'} p={4}>
           <Link href={'/peach-fight'} w={'100%'} overflow={'hidden'}>
             <Image
               src={`${IMAGEBASEURL}/top/peach_fight_banner.webp`}
               alt={'岡山のチャレンジ応援マガジンピーチファイ'}
               transition={'transform 0.3s ease'}
               _hover={{ transform: 'scale(1.1)' }}
+              borderRadius={'32px'}
             />
           </Link>
+        </Box>
+      </Box>
+      <Box as="section" pb={{ base: 100, md: 200 }}>
+        <Box mx={'auto'} maxW={1152} px={4}>
+          <Box
+            display={'flex'}
+            justifyContent={'space-between'}
+            alignItems={'center'}
+            mb={{ base: 8, md: 12 }}
+          >
+            <ContentTitle TitleEn="Peach Fight" TitleJp="ピーチファイ" mb={0} />
+          </Box>
+          <SideScrollIcon display={['block']} />
+          <SideScrollArticleList articles={peachFightData.contents} category={'peach-fight'} />
         </Box>
       </Box>
       <Box as="section" pb={{ base: 100, md: 200 }}>
