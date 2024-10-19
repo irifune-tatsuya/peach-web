@@ -58,6 +58,7 @@ export default async function sitemap() {
     '/faq/search',
     '/faq/search',
     '/news',
+    '/news-letter',
     '/peach-fight',
     '/peach-fight/search',
     '/pricing',

@@ -29,11 +29,11 @@ type startMailMagazineInputs = {
 };
 
 export const StartMailMagazineForm: NextPage = () => {
-  const [isChecked, setIsChecked] = useState(false);
-  const [status, setStatus] = useState<string | null>(null);
+  const [isStartChecked, setIsStartChecked] = useState(false);
+  const [startstatus, setStartStatus] = useState<string | null>(null);
 
   const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setIsChecked(event.target.checked);
+    setIsStartChecked(event.target.checked);
   };
   const {
     handleSubmit,
@@ -41,12 +41,12 @@ export const StartMailMagazineForm: NextPage = () => {
     formState: { errors, isSubmitting },
   } = useForm<startMailMagazineInputs>();
 
-  const onSubmit = async (data: startMailMagazineInputs) => {
+  const onStartSubmit = async (data: startMailMagazineInputs) => {
     const result = await createStartMailMagazineData(data);
-    setStatus(result);
+    setStartStatus(result);
   };
 
-  if (status === 'succcess') {
+  if (startstatus === 'succcess') {
     return (
       <Box mx={'auto'} bg={'momo.300'} p={8}>
         <Heading fontSize={'x-large'} textAlign={'center'}>
@@ -73,7 +73,7 @@ export const StartMailMagazineForm: NextPage = () => {
     );
   }
 
-  if (status === 'error') {
+  if (startstatus === 'error') {
     return (
       <Box mx={'auto'} bg={'momo.300'} p={8}>
         <Heading fontSize={'x-large'} textAlign={'center'}>
@@ -106,7 +106,7 @@ export const StartMailMagazineForm: NextPage = () => {
   }
 
   return (
-    <Box as={'form'} onSubmit={handleSubmit(onSubmit)}>
+    <Box as={'form'} onSubmit={handleSubmit(onStartSubmit)}>
       <Box as={'dl'} display={{ base: 'block', lg: 'flex' }}>
         <Box as={'dt'} mt={5} fontSize={'large'} fontWeight={'bold'} w={220}>
           ご氏名
@@ -215,10 +215,10 @@ export const StartMailMagazineForm: NextPage = () => {
           fontWeight={'bold'}
           letterSpacing={2}
           _hover={{ bg: 'momo.100', color: 'white' }}
-          isDisabled={!isChecked}
+          isDisabled={!isStartChecked}
           isLoading={isSubmitting}
         >
-          送信する
+          登録する
           <Icon as={MdOutlineKeyboardArrowRight} boxSize={'2rem'} />
         </Button>
       </Box>

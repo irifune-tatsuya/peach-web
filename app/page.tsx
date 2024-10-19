@@ -36,6 +36,12 @@ const bottomLinks = [
     titleEn: 'contact',
   },
   { href: '/faq', src: `${IMAGEBASEURL}/top/faq.webp`, titleJp: 'よくあるご質問', titleEn: 'FAQ' },
+  {
+    href: '/newsletter',
+    src: `${IMAGEBASEURL}/top/newsletter.webp`,
+    titleJp: 'ニュースレターのご案内',
+    titleEn: 'Newsletter',
+  },
 ];
 
 export default async function Home() {
@@ -117,7 +123,7 @@ export default async function Home() {
           <Box display={{ base: 'block', md: 'flex' }} justifyContent={'space-between'}>
             <Box w={{ base: '100%', md: '49%' }}>
               <Text
-                fontSize={{ base: 'large', md: 'x-large' }}
+                fontSize={{ base: 'large', lg: 'x-large' }}
                 fontWeight={'bold'}
                 lineHeight={'1.8em'}
                 textAlign={{ base: 'center', md: 'left' }}
