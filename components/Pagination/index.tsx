@@ -1,4 +1,4 @@
-import { LIMIT12 } from '@/constants';
+import { LIMIT30 } from '@/constants';
 import { Box, Link, ListItem, UnorderedList } from '@chakra-ui/react';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default function Pagination({ totalCount, current = 1, basePath = '', q }: Props) {
-  const pages = Array.from({ length: Math.ceil(totalCount / LIMIT12) }).map((_, i) => i + 1);
+  const pages = Array.from({ length: Math.ceil(totalCount / LIMIT30) }).map((_, i) => i + 1);
   return (
     <UnorderedList
       listStyleType={'none'}

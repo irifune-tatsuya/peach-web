@@ -94,3 +94,39 @@ ul {
   background: linear-gradient(transparent 0%, #febdd6 0%);
   border-radius: 12px;
 }
+
+.callout-memo,
+.callout-caution,
+.lead {
+  display: block;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.callout-memo {
+  background-color: #e8f3d6;
+}
+
+.callout-caution::before {
+  display: block;
+  content: url('https://www.assets.peach-web.co.jp/information.svg');
+  width: 30px;
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+.callout-caution {
+  background-color: #f3d6d6;
+}
+
+.callout-caution::before {
+  display: block;
+  content: url('https://www.assets.peach-web.co.jp/caution.svg');
+  width: 30px;
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+.lead {
+  background-color: #f3f2ed;
+}

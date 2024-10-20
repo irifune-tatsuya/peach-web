@@ -1,6 +1,6 @@
 import React from 'react';
 import { getList } from '@/libs/microcms';
-import { ARTICLEFILTER, LIMIT12 } from '@/constants';
+import { ARTICLEFILTER, LIMIT30 } from '@/constants';
 import Pagination from '@/components/Pagination';
 import GridArticleList from '@/components/GridArticleList';
 import { Box } from '@chakra-ui/react';
@@ -26,7 +26,7 @@ const breadcrumbs = [
 export default async function Article() {
   const category = 'article';
   const data = await getList({
-    limit: LIMIT12,
+    limit: LIMIT30,
     filters: ARTICLEFILTER,
   });
   return (

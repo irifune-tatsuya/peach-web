@@ -10,16 +10,16 @@ type Props = {
   maxW: number;
 };
 
-export default function ArticleCard({ article, category, maxW }: Props) {
+export default function PortraitCard({ article, category, maxW }: Props) {
   return (
     <Card minW={250} w={'auto'} maxW={maxW}>
       <Link href={`/${category}/${article.id}`} _hover={{ textDecoration: 'none' }}>
         <CardBody p={0}>
-          {article.thumbnail ? (
+          {article.subthumbnail ? (
             <Image src={article.thumbnail?.url} alt={article.title} w={'100%'} h={'auto'} />
           ) : (
             <Image
-              src={`${IMAGEBASEURL}/no-image.webp`}
+              src={`${IMAGEBASEURL}/portrait-no-image.webp`}
               alt={'No Image'}
               w={'100%'}
               maxW={450}

@@ -1,5 +1,5 @@
 import { getList, getTagList } from '@/libs/microcms';
-import { FAQFILTER, LIMIT12 } from '@/constants';
+import { FAQFILTER, LIMIT30 } from '@/constants';
 import Pagination from '@/components/Pagination';
 import { Box } from '@chakra-ui/react';
 import Title from '@/components/Title';
@@ -30,7 +30,7 @@ export default async function Faq() {
     filters: FAQFILTER,
   });
   const data = await getList({
-    limit: LIMIT12,
+    limit: LIMIT30,
     filters: FAQFILTER,
   });
   return (

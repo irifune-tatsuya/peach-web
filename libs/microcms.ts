@@ -25,6 +25,7 @@ export type Article = {
   description: string;
   content: string;
   thumbnail?: MicroCMSImage;
+  subthumbnail?: MicroCMSImage;
   tags?: Tag[];
   category?: Category[];
   instagramid?: string;

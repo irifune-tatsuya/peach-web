@@ -31,9 +31,14 @@ export default function InterviewArticle({ data, isShowToc = true }: Props) {
   const devidedContents = data.content
     .split(/<h2/g)
     .filter(Boolean)
-    .map((section, i) => {
-      const completedParagraph = `<h2${section}`;
-      return completedParagraph;
+    .map((section) => {
+      if (section.charAt(0) === '<') {
+        const completedParagraph = section;
+        return completedParagraph;
+      } else {
+        const completedParagraph = `<h2${section}`;
+        return completedParagraph;
+      }
     });
 
   const interviewedSNSLinks = [
