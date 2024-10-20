@@ -22,7 +22,7 @@ export default function PortraitCard({ article, category, maxW }: Props) {
               src={`${IMAGEBASEURL}/portrait-no-image.webp`}
               alt={'No Image'}
               w={'100%'}
-              maxW={450}
+              maxW={250}
               h={'auto'}
               loading={'lazy'}
             />
