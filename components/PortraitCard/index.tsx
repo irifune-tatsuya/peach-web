@@ -16,7 +16,7 @@ export default function PortraitCard({ article, category, maxW }: Props) {
       <Link href={`/${category}/${article.id}`} _hover={{ textDecoration: 'none' }}>
         <CardBody p={0}>
           {article.subthumbnail ? (
-            <Image src={article.thumbnail?.url} alt={article.title} w={'100%'} h={'auto'} />
+            <Image src={article.subthumbnail?.url} alt={article.title} w={'100%'} h={'auto'} />
           ) : (
             <Image
               src={`${IMAGEBASEURL}/portrait-no-image.webp`}
