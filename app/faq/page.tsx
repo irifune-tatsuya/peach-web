@@ -42,7 +42,7 @@ export default async function Faq() {
         </Box>
         <TagList tags={tags.contents} category={category} />
         <ArticleList articles={data.contents} category={category} />
-        <Pagination totalCount={data.totalCount} />
+        <Pagination totalCount={data.totalCount} basePath={`/${category}`} />
       </Box>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>

@@ -1,5 +1,5 @@
 import { getList } from '@/libs/microcms';
-import { LIMIT30, PEACHFILTER, IMAGEBASEURL, CONTACT } from '@/constants';
+import { LIMIT12, PEACHFILTER, IMAGEBASEURL, CONTACT } from '@/constants';
 import Pagination from '@/components/Pagination';
 import GridArticleList from '@/components/GridArticleList';
 import { Box, Heading, Image, Link, Text } from '@chakra-ui/react';
@@ -59,7 +59,7 @@ const ContactButtons = [
 export default async function PeachFight() {
   const category = 'peach-fight';
   const data = await getList({
-    limit: LIMIT30,
+    limit: LIMIT12,
     filters: PEACHFILTER,
   });
   return (
@@ -79,7 +79,7 @@ export default async function PeachFight() {
         >
           <Box w={'100%'} className={styles.message}>
             <Image
-              src={`${IMAGEBASEURL}/peach-fight/peach-fight-logo.webp`}
+              src={`${IMAGEBASEURL}/${category}/peach-fight-logo.webp`}
               alt={'岡山のチャレンジ応援マガジン「ピーチファイ」'}
               w={'100%'}
               h={'auto'}
@@ -115,7 +115,7 @@ export default async function PeachFight() {
             className={styles.entryCircle}
           >
             <Image
-              src={`${IMAGEBASEURL}/peach-fight/entry_circle.webp`}
+              src={`${IMAGEBASEURL}/${category}/entry_circle.webp`}
               alt={'エントリーサークル'}
               w={124}
               h={124}
@@ -130,7 +130,7 @@ export default async function PeachFight() {
             h={'46.4px'}
           >
             <Image
-              src={`${IMAGEBASEURL}/peach-fight/entry_momo.webp`}
+              src={`${IMAGEBASEURL}/${category}/entry_momo.webp`}
               alt={'エントリーボタン'}
               w={'50px'}
               h={'46.4px'}
@@ -140,6 +140,13 @@ export default async function PeachFight() {
         <Box mx={{ base: 4, md: 10 }} my={{ base: 8, md: 0 }}>
           <TopSwiper images={swiperImages} />
         </Box>
+      </Box>
+      <Box maxW={1152} mx={'auto'} p={4} pb={{ base: 15, md: 156 }} pt={{ base: 15, md: 0 }}>
+        <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }} mb={20}>
+          <SearchField category={category} />
+        </Box>
+        <GridArticleList articles={data.contents} category={category} />
+        <Pagination totalCount={data.totalCount} basePath={`/${category}`} />
       </Box>
       <Box maxW={1152} mx={'auto'} p={4}>
         <Heading mb={8} color={'momo.100'}>
@@ -167,7 +174,7 @@ export default async function PeachFight() {
           </Box>
           <Box mt={{ base: 20, md: 0 }}>
             <Image
-              src={`${IMAGEBASEURL}/peach-fight/entrepreneurs.webp`}
+              src={`${IMAGEBASEURL}/${category}/entrepreneurs.webp`}
               alt={'起業家様や新しいビジネスを展開する会社の従業員様'}
               w={'100%'}
               maxW={500}
@@ -177,14 +184,7 @@ export default async function PeachFight() {
           </Box>
         </Box>
       </Box>
-      <ButtonArea buttons={ContactButtons} />
-      <Box maxW={1152} mx={'auto'} p={4} pb={{ base: 15, md: 156 }} pt={{ base: 15, md: 156 }}>
-        <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }} mb={20}>
-          <SearchField category={category} />
-        </Box>
-        <GridArticleList articles={data.contents} category={category} />
-        <Pagination totalCount={data.totalCount} />
-      </Box>
+      <ButtonArea buttons={ContactButtons} bg="#ffffff" />
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );

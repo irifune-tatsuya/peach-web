@@ -49,7 +49,11 @@ export default async function Search({ searchParams }: Props) {
           <SearchField category={category} />
         </Box>
         <GridArticleList articles={data.contents} category={category} />
-        <Pagination totalCount={data.totalCount} q={searchParams.q} />
+        <Pagination
+          totalCount={data.totalCount}
+          basePath={`/${category}/search`}
+          q={searchParams.q}
+        />
       </Box>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>

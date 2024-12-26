@@ -214,6 +214,7 @@ export default async function Home() {
             mb={{ base: 8, md: 12 }}
           >
             <ContentTitle TitleEn="Peach Fight" TitleJp="ピーチファイ" mb={0} />
+            <ViewMoreButton href={'/peach-fight'} size={'small'} />
           </Box>
           <SideScrollIcon display={['block']} />
           <SideScrollArticleList articles={peachFightData.contents} category={'peach-fight'} />
