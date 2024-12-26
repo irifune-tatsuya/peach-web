@@ -1,14 +1,12 @@
-import React from 'react';
 import { getList } from '@/libs/microcms';
 import { ARTICLEFILTER, LIMIT12 } from '@/constants';
 import Pagination from '@/components/Pagination';
 import GridArticleList from '@/components/GridArticleList';
-import { Box } from '@chakra-ui/react';
 import Title from '@/components/Title';
-import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { Box } from '@chakra-ui/react';
 import SearchField from '@/components/SearchField';
-
-export const revalidate = 3600;
+import { Breadcrumbs } from '@/components/Breadcrumbs';
+import React from 'react';
 
 const breadcrumbs = [
   {
@@ -17,17 +15,31 @@ const breadcrumbs = [
     isCurrentPage: false,
   },
   {
-    title: '新着記事一覧',
+    title: '新着記事',
     href: '/article',
-    isCurrentPage: true,
+    isCurrentPage: false,
   },
 ];
 
-export default async function Article() {
+type Props = {
+  params: {
+    current: string;
+  };
+  searchParams: {
+    q?: string;
+  };
+};
+
+export const revalidate = 3600;
+
+export default async function Page({ params, searchParams }: Props) {
   const category = 'article';
+  const current = parseInt(params.current as string, 10);
   const data = await getList({
-    limit: LIMIT12,
     filters: ARTICLEFILTER,
+    limit: LIMIT12,
+    offset: LIMIT12 * (current - 1),
+    q: searchParams.q,
   });
   return (
     <>
@@ -37,7 +49,12 @@ export default async function Article() {
           <SearchField category={category} />
         </Box>
         <GridArticleList articles={data.contents} category={category} />
-        <Pagination totalCount={data.totalCount} basePath={`/${category}`} />
+        <Pagination
+          totalCount={data.totalCount}
+          basePath={`/${category}`}
+          current={current}
+          q={searchParams.q}
+        />
       </Box>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>

@@ -13,11 +13,14 @@ type Props = {
     tagId: string;
     current: string;
   };
+  searchParams: {
+    q?: string;
+  };
 };
 
 export const revalidate = 3600;
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params, searchParams }: Props) {
   const category = 'faq';
   const { tagId } = params;
   const current = parseInt(params.current as string, 10);
@@ -61,6 +64,7 @@ export default async function Page({ params }: Props) {
           totalCount={data.totalCount}
           basePath={`/${category}/tags/${tag.name}`}
           current={current}
+          q={searchParams.q}
         />
       </Box>
       <Breadcrumbs breadcrumbs={breadcrumbs} />

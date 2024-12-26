@@ -1,5 +1,5 @@
 import { getList } from '@/libs/microcms';
-import { ARTICLEFILTER, LIMIT12 } from '@/constants';
+import { PEACHFILTER, LIMIT12 } from '@/constants';
 import Pagination from '@/components/Pagination';
 import GridArticleList from '@/components/GridArticleList';
 import Title from '@/components/Title';
@@ -15,14 +15,9 @@ const breadcrumbs = [
     isCurrentPage: false,
   },
   {
-    title: '新着記事',
-    href: '/article',
+    title: '岡山のチャレンジ応援マガジン「ピーチファイ」',
+    href: '/peach-fight',
     isCurrentPage: false,
-  },
-  {
-    title: '記事の検索結果',
-    href: '/article/search',
-    isCurrentPage: true,
   },
 ];
 
@@ -38,17 +33,17 @@ type Props = {
 export const revalidate = 3600;
 
 export default async function Page({ params, searchParams }: Props) {
-  const category = 'article';
+  const category = 'peach-fight';
   const current = parseInt(params.current as string, 10);
   const data = await getList({
-    filters: ARTICLEFILTER,
+    filters: PEACHFILTER,
     limit: LIMIT12,
     offset: LIMIT12 * (current - 1),
     q: searchParams.q,
   });
   return (
     <>
-      <Title titleEn={'Search Results'} titleJp={'記事の検索結果'} />
+      <Title titleEn={'Peach Fight'} titleJp={'新着記事一覧'} />
       <Box maxW={1152} mx={'auto'} p={4} pb={{ base: 15, md: 156 }}>
         <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }} mb={20}>
           <SearchField category={category} />
@@ -56,7 +51,7 @@ export default async function Page({ params, searchParams }: Props) {
         <GridArticleList articles={data.contents} category={category} />
         <Pagination
           totalCount={data.totalCount}
-          basePath={`/${category}/search`}
+          basePath={`/${category}`}
           current={current}
           q={searchParams.q}
         />
