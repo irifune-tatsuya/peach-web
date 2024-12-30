@@ -66,7 +66,7 @@ export default async function Page({ params }: Props) {
       isCurrentPage: false,
     },
     {
-      title: '実績&デザイン提案',
+      title: '実績&デザイン集',
       href: '/achievements',
       isCurrentPage: false,
     },

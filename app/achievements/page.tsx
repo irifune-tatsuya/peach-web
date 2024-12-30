@@ -24,7 +24,7 @@ const breadcrumbs = [
     isCurrentPage: false,
   },
   {
-    title: '実績&デザイン提案',
+    title: '実績&デザイン集',
     href: '/achievements',
     isCurrentPage: true,
   },
@@ -33,7 +33,7 @@ const breadcrumbs = [
 export default async function Pricing() {
   return (
     <>
-      <Title titleEn={'Achievements & Designs'} titleJp={'実績&デザイン提案'} />
+      <Title titleEn={'Achievements & Designs'} titleJp={'実績&デザイン集'} />
       <Box
         bg={'linear-gradient(to bottom, #fcdee9, #ffffff);'}
         position={'relative'}
