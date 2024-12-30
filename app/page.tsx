@@ -33,6 +33,7 @@ const businessLinks = [
   { href: '/reason', title: '選ばれる理由', titleEn: 'Reason' },
   { href: '/service', title: 'サービス内容', titleEn: 'Service' },
   { href: '/pricing', title: '料金体系', titleEn: 'Pricing' },
+  { href: '/achievements', title: '実績&デザイン集', titleEn: 'Achievements' },
 ];
 
 const bottomLinks = [

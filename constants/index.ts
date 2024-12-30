@@ -33,6 +33,10 @@ export const MENU = [
     href: '/pricing',
   },
   {
+    title: '実績&デザイン集',
+    href: '/achievements',
+  },
+  {
     title: 'ピーチファイ',
     href: '/peach-fight',
   },
