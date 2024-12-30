@@ -108,7 +108,7 @@ export default async function Pricing() {
                     </Heading>
                     <Image
                       src={`${IMAGEBASEURL}/achievements/${item.slug}/thumbnail.webp`}
-                      alt={'hoge'}
+                      alt={`${item.name}様の制作実績`}
                     />
                     <Stack py={5}>
                       <Link
