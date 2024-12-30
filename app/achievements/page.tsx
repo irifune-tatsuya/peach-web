@@ -15,6 +15,7 @@ import { FaCheckCircle } from 'react-icons/fa';
 import { IMAGEBASEURL } from '@/constants';
 import React from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
+import { ACHIEVEMENTS } from '@/constants/achievements';
 
 const breadcrumbs = [
   {
@@ -26,29 +27,6 @@ const breadcrumbs = [
     title: '実績&デザイン提案',
     href: '/achievements',
     isCurrentPage: true,
-  },
-];
-
-const achievements = [
-  {
-    name: 'トワイライトグループ',
-    slug: 'twilight',
-    href: '',
-  },
-  {
-    name: 'アオアカ',
-    slug: 'aoaka',
-    href: '',
-  },
-  {
-    name: 'ワタシノデバン',
-    slug: 'watashinodeban',
-    href: '',
-  },
-  {
-    name: '株式会社ななカンパニー',
-    slug: 'nanacompany',
-    href: '',
   },
 ];
 
@@ -90,7 +68,7 @@ export default async function Pricing() {
               spacing={6}
               gap={2}
             >
-              {achievements.map((item, i) => (
+              {ACHIEVEMENTS.map((item, i) => (
                 <Card
                   key={i}
                   rounded={'lg'}
@@ -106,10 +84,12 @@ export default async function Pricing() {
                     >
                       {`${item.name}様`}
                     </Heading>
-                    <Image
-                      src={`${IMAGEBASEURL}/achievements/${item.slug}/thumbnail.webp`}
-                      alt={`${item.name}様の制作実績`}
-                    />
+                    <Link href={`achievements/${item.slug}`}>
+                      <Image
+                        src={`${IMAGEBASEURL}/achievements/${item.slug}/thumbnail.webp`}
+                        alt={`${item.name}様の制作実績`}
+                      />
+                    </Link>
                     <Stack py={5}>
                       <Link
                         bg={'momo.100'}

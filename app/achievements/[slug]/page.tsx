@@ -16,39 +16,70 @@ import {
 import { IMAGEBASEURL } from '@/constants';
 import React from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
+import { ACHIEVEMENTS } from '@/constants/achievements';
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
-const breadcrumbs = [
-  {
-    title: 'ホーム',
-    href: '/',
-    isCurrentPage: false,
-  },
-  {
-    title: '実績&デザイン提案',
-    href: '/achievements',
-    isCurrentPage: true,
-  },
-];
+type Props = {
+  params: {
+    slug: string;
+  };
+};
 
-const achievements = [
-  {
-    name: '株式会社ななカンパニー',
-    slug: 'nanacompany',
-    href: '',
-    typeOfIndustry: '不動産業',
-    typeOfProduction: 'ランディングページ',
-    theme: 'オンライン不動産サービスのPR',
-    target:
-      '大都市圏での引っ越しを検討する20~30代の方、仕事や子育てにお忙しくされていて来店が難しい方',
-    point:
-      'デザインはご依頼主様のテーマカラーに合わせてオレンジを中心としたカラフルな色味にしました。ランディングページで重要なトップ部分は親しみやすいイラスト画像を採用し、ターゲットが「自分ごと」だと思ってもらえるように丸枠にイメージ写真がスライドされるようにしております。ライティングは、仕事に子育てに忙しくされている方に寄り添って、具体的なお悩みの記述、実施手順の明確さ、よくある質問で不安の解消を心がけております。',
-  },
-];
+export const revalidate = 3600;
 
-export default async function Pricing() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const currentSlug = params.slug;
+  const achievement = ACHIEVEMENTS.find((item) => item.slug === currentSlug);
+  const title = achievement ? achievement.name : '制作実績のご紹介';
+  const description = achievement
+    ? achievement.point
+    : 'ピーチウェブが制作したホームページの実績やホームページデザインの提案をするページとなります。制作をご検討中の方や具体的なサイトのイメージを持ちたい方向けに役立てていただけますと幸いです。';
+
+  return {
+    title: `${title}様の制作実績`,
+    description: description,
+    openGraph: {
+      title: `${title}様の制作実績`,
+      description: description,
+      type: 'article',
+    },
+    twitter: {
+      title: `${title}様の制作実績`,
+      description: description,
+    },
+  };
+}
+
+export default async function Page({ params }: Props) {
+  const currentSlug = params.slug;
+  const achievement = ACHIEVEMENTS.find((item) => item.slug === currentSlug);
+
+  if (!achievement) {
+    notFound();
+  }
+
+  const breadcrumbs = [
+    {
+      title: 'ホーム',
+      href: '/',
+      isCurrentPage: false,
+    },
+    {
+      title: '実績&デザイン提案',
+      href: '/achievements',
+      isCurrentPage: false,
+    },
+    {
+      title: `${achievement.name}様の制作実績`,
+      href: `/achievements/${currentSlug}`,
+      isCurrentPage: true,
+    },
+  ];
+
   return (
     <>
-      <Title titleEn={`制作実績のご紹介`} titleJp={`${achievements[0].name}様`} />
+      <Title titleEn={`制作実績のご紹介`} titleJp={`${achievement.name}様`} />
       <Box
         bg={'linear-gradient(to bottom, #fcdee9, #ffffff);'}
         position={'relative'}
@@ -68,7 +99,7 @@ export default async function Pricing() {
               mb={8}
               w={350}
               rounded={'lg'}
-              href={achievements[0].href}
+              href={achievement.href}
               isExternal
               _hover={{ textDecoration: 'none', opacity: 0.8 }}
             >
@@ -94,8 +125,8 @@ export default async function Pricing() {
               <TabPanel px={0}>
                 <Center>
                   <Image
-                    src={`${IMAGEBASEURL}/achievements/${achievements[0].slug}/fullpage_sp.webp`}
-                    alt={`${achievements[0].name}様のスマホサイト`}
+                    src={`${IMAGEBASEURL}/achievements/${achievement.slug}/fullpage_sp.webp`}
+                    alt={`${achievement.name}様のスマホサイト`}
                     w={'100%'}
                     h={'auto'}
                     maxW={'430px'}
@@ -104,8 +135,8 @@ export default async function Pricing() {
               </TabPanel>
               <TabPanel px={0}>
                 <Image
-                  src={`${IMAGEBASEURL}/achievements/${achievements[0].slug}/fullpage_pc.webp`}
-                  alt={`${achievements[0].name}様のパソコンサイト`}
+                  src={`${IMAGEBASEURL}/achievements/${achievement.slug}/fullpage_pc.webp`}
+                  alt={`${achievement.name}様のパソコンサイト`}
                   w={'100%'}
                   h={'auto'}
                 />
@@ -116,7 +147,7 @@ export default async function Pricing() {
                     ご依頼主様
                   </Tag>
                   <Text py={3} px={5}>
-                    {achievements[0].name}
+                    {achievement.name}
                   </Text>
                 </Box>
                 <Box mt={4}>
@@ -124,7 +155,7 @@ export default async function Pricing() {
                     業 種
                   </Tag>
                   <Text py={3} px={5}>
-                    {achievements[0].typeOfIndustry}
+                    {achievement.typeOfIndustry}
                   </Text>
                 </Box>
                 <Box mt={4}>
@@ -140,7 +171,7 @@ export default async function Pricing() {
                     テーマ
                   </Tag>
                   <Text py={3} px={5}>
-                    {achievements[0].theme}
+                    {achievement.theme}
                   </Text>
                 </Box>
                 <Box mt={4}>
@@ -148,7 +179,7 @@ export default async function Pricing() {
                     ターゲット
                   </Tag>
                   <Text py={3} px={5}>
-                    {achievements[0].target}
+                    {achievement.target}
                   </Text>
                 </Box>
                 <Box mt={4}>
@@ -156,7 +187,7 @@ export default async function Pricing() {
                     制作のポイント
                   </Tag>
                   <Text py={3} px={5}>
-                    {achievements[0].point}
+                    {achievement.point}
                   </Text>
                 </Box>
               </TabPanel>
@@ -174,7 +205,7 @@ export default async function Pricing() {
             mt={8}
             w={350}
             rounded={'lg'}
-            href={achievements[0].href}
+            href={achievement.href}
             isExternal
             _hover={{ textDecoration: 'none', opacity: 0.8 }}
           >
