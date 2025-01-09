@@ -30,6 +30,13 @@ const breadcrumbs = [
   },
 ];
 
+const designLinks = [
+  {
+    name: 'ランディングページ01',
+    slug: 'lp01',
+  },
+];
+
 export default async function Pricing() {
   return (
     <>
@@ -125,6 +132,85 @@ export default async function Pricing() {
                         _hover={{ textDecoration: 'none', opacity: 0.8 }}
                       >
                         <Box as={'span'}>詳細を見る</Box>
+                      </Link>
+                    </Stack>
+                  </CardBody>
+                </Card>
+              ))}
+            </SimpleGrid>
+          </Box>
+        </Box>
+      </Box>
+      <Box
+        bg={'linear-gradient(to bottom, #fcdee9, #ffffff);'}
+        position={'relative'}
+        overflow={'hidden'}
+        pt={{ base: 88, md: 120 }}
+        pb={{ base: 90, md: 180 }}
+      >
+        <Box p={4} maxW={1152} mx={'auto'}>
+          <Box>
+            <Heading as={'h2'} mr={4} size={{ base: 'md', md: 'lg' }} display={'flex'}>
+              <FaCheckCircle color={'#ff7bac'} />
+              <Box as={'span'} ml={2}>
+                デザイン提案
+              </Box>
+            </Heading>
+          </Box>
+          <Box
+            maxW={960}
+            mx={'auto'}
+            py={8}
+            fontSize={{ base: 'medium', md: 'large' }}
+            fontWeight={500}
+            lineHeight={2}
+          >
+            <Text>
+              ホームページやランディングページのデザイン提案です。気に入るものはありますでしょうか？
+            </Text>
+          </Box>
+          <Box w={'100%'}>
+            <SimpleGrid
+              fontSize={'large'}
+              fontWeight={'normal'}
+              columns={{ base: 2, md: 3, lg: 4 }}
+              spacing={6}
+              gap={2}
+            >
+              {designLinks.map((item, i) => (
+                <Card
+                  key={i}
+                  rounded={'lg'}
+                  transition={'transform 0.2s ease'}
+                  _hover={{ transform: 'scale(1.02)' }}
+                >
+                  <CardBody p={2}>
+                    <Heading
+                      as={'h3'}
+                      fontSize={{ base: 'x-small', md: 'medium' }}
+                      textAlign={'center'}
+                      py={3}
+                    >
+                      {item.name}
+                    </Heading>
+                    <Link href={`achievements/design/${item.slug}`}>
+                      <Image
+                        src={`${IMAGEBASEURL}/achievements/${item.slug}/thumbnail.webp`}
+                        alt={`${item.name}`}
+                      />
+                    </Link>
+                    <Stack py={5}>
+                      <Link
+                        bg={'momo.200'}
+                        fontWeight={'bold'}
+                        fontSize={'small'}
+                        textAlign={'center'}
+                        p={3}
+                        rounded={'lg'}
+                        href={`/achievements/design/${item.slug}`}
+                        _hover={{ textDecoration: 'none', opacity: 0.8 }}
+                      >
+                        <Box as={'span'}>デザインを見る</Box>
                       </Link>
                     </Stack>
                   </CardBody>

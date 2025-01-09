@@ -45,6 +45,7 @@ export const TopSwiper: NextPage<Props> = (props) => {
             alt={image.alt}
             w={'100vw'}
             h={image.h ?? imageH}
+            loading={'lazy'}
           />
         </SwiperSlide>
       ))}
