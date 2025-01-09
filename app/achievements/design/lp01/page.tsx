@@ -356,6 +356,22 @@ export default async function Lp01() {
           </UnorderedList>
         </Box>
       </Box>
+      <Center my={20}>
+        <Link
+          display={'block'}
+          bg={'momo.200'}
+          fontWeight={'bold'}
+          textAlign={'center'}
+          p={3}
+          mx={2}
+          w={350}
+          rounded={'lg'}
+          href={`/achievements`}
+          _hover={{ textDecoration: 'none', opacity: 0.8 }}
+        >
+          実績一覧に戻る
+        </Link>
+      </Center>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );

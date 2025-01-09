@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 
-const pageTitle = '実績&デザイン集';
-const description = '起業家様向けの小さなランディングページデザインです。';
+const pageTitle = 'ランディングページデザイン提案01';
+const description =
+  '若々しい起業家のためのランディングページデザインで、多くの写真を使用して視覚的に訴求できるように心がけました。こちらは起業家の挨拶セクションとなります。';
 
 export const metadata: Metadata = {
   title: pageTitle,
