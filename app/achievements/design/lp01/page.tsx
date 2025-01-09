@@ -15,6 +15,7 @@ import styles from './layout.module.css';
 import { SlideSwiper } from '@/components/SlideSwiper';
 import { CoverflowSwiper } from '@/components/CoverflowSwiper';
 import { Lp01VoiceCard } from '@/components/Lp01VoiceCard';
+import { IMAGEBASEURL } from '@/constants';
 
 const breadcrumbs = [
   {
@@ -38,40 +39,40 @@ const pageName = 'lp01';
 
 const swiperImages = [
   {
-    pcSrc: `/images/keyvisual1_pc.jpg`,
-    spSrc: `/images/keyvisual1_sp.jpg`,
+    pcSrc: `${IMAGEBASEURL}/achievements/${pageName}/keyvisual1_pc.webp`,
+    spSrc: `${IMAGEBASEURL}/achievements/${pageName}/keyvisual1_sp.webp`,
     alt: 'ランディングデザインのキービジュアル1',
   },
   {
-    pcSrc: `/images/keyvisual2_pc.jpg`,
-    spSrc: `/images/keyvisual2_sp.jpg`,
+    pcSrc: `${IMAGEBASEURL}/achievements/${pageName}/keyvisual2_pc.webp`,
+    spSrc: `${IMAGEBASEURL}/achievements/${pageName}/keyvisual2_sp.webp`,
     alt: 'ランディングデザインのキービジュアル2',
   },
   {
-    pcSrc: `/images/keyvisual3_pc.jpg`,
-    spSrc: `/images/keyvisual3_sp.jpg`,
+    pcSrc: `${IMAGEBASEURL}/achievements/${pageName}/keyvisual3_pc.webp`,
+    spSrc: `${IMAGEBASEURL}/achievements/${pageName}/keyvisual3_sp.webp`,
     alt: 'ランディングデザインのキービジュアル3',
   },
 ];
 
 const voices = [
   {
-    src: '/images/voice1.jpg',
+    src: `${IMAGEBASEURL}/achievements/${pageName}/voice1.webp`,
     name: '株式会社△△商事様',
     text: 'ターゲットを若年層に絞ったことで求人応募者の年代と応募総数が増えました。フォロワーが増えたことで新卒採用以外のタイミングでも求人募集をかけやすくなりました。',
   },
   {
-    src: '/images/voice2.jpg',
+    src: `${IMAGEBASEURL}/achievements/${pageName}/voice2.webp`,
     name: '○○ガーデンショップ様',
     text: '季節に応じたフラワーギフトの提案をSNSから発信するようにご提案いただきました。投稿文章や写真の添削をしていただいてSNSのクオリティがアップしました。',
   },
   {
-    src: '/images/voice3.jpg',
+    src: `${IMAGEBASEURL}/achievements/${pageName}/voice3.webp`,
     name: '□□社会保険労務士事務所様',
     text: '専門知識を活かした発信よりも事務所で働くスタッフにフォーカスした投稿を提案いただき、新しいお客様を開拓できました。今後はリール動画制作でもお力添えいただければと思います。',
   },
   {
-    src: '/images/voice4.jpg',
+    src: `${IMAGEBASEURL}/achievements/${pageName}/voice4.webp`,
     name: '☆☆ベーカリー様',
     text: '最初は具体的にお仕事依頼しなかったのですが、無料相談の段階でSNSのポイントや目標を教えていただき助かりました。その後、仕事を依頼してからも変わらずサポートしてもらってます。',
   },
@@ -100,7 +101,7 @@ const footerLinks = [
   },
 ];
 
-export default async function Pricing() {
+export default async function Lp01() {
   return (
     <>
       <Box id={'lp01-top'}>
@@ -136,7 +137,11 @@ export default async function Pricing() {
           zIndex={1}
         >
           <Heading as={'h1'} position={'relative'} my={15} ml={{ base: 25, md: '50px', xl: 45 }}>
-            <Image src={'/images/logo.png'} alt={'ロゴ'} w={{ base: 50, md: 70, xl: 160 }} />
+            <Image
+              src={`${IMAGEBASEURL}/achievements/${pageName}/logo.webp`}
+              alt={'ロゴ'}
+              w={{ base: 50, md: 70, xl: 160 }}
+            />
           </Heading>
           <Box as={'nav'}></Box>
         </Box>
@@ -169,8 +174,8 @@ export default async function Pricing() {
               >
                 <Center w={{ md: '30%', lg: '40%', xl: '30%' }} h={'auto'}>
                   <Image
-                    src={'/images/ceo-square.jpg'}
-                    alt={''}
+                    src={`${IMAGEBASEURL}/achievements/${pageName}/ceo-square.webp`}
+                    alt={'CEO'}
                     rounded={'full'}
                     w={{ base: '90vw', md: '100%' }}
                     h={'auto'}
@@ -206,8 +211,8 @@ export default async function Pricing() {
           left={0}
           zIndex={-1}
           backgroundImage={{
-            base: 'url("/images/mission_bg_sp.jpg")',
-            md: 'url("/images/mission_bg_pc.jpg")',
+            base: `url("${IMAGEBASEURL}/achievements/${pageName}/mission_bg_sp.webp")`,
+            md: `url("${IMAGEBASEURL}/achievements/${pageName}/mission_bg_pc.webp")`,
           }}
         />
         <Box display={'flex'} justifyContent={'center'} pt={'80px'} pb={{ base: 30 }}>
@@ -232,8 +237,8 @@ export default async function Pricing() {
         </Center>
         <Center pb={20}>
           <Image
-            src={'/images/mission_circle.png'}
-            alt={''}
+            src={`${IMAGEBASEURL}/achievements/${pageName}/mission_circle.webp`}
+            alt={'提供サービス'}
             maxW={'800px'}
             w={{ base: '95vw', md: '60vw' }}
             h={'auto'}
@@ -251,8 +256,8 @@ export default async function Pricing() {
           left={{ base: '40px', md: '100px', lg: '160px', xl: 'calc(100vw - 1300px)' }}
           zIndex={-1}
           backgroundImage={{
-            base: 'url("/images/voice_bg_sp.jpg")',
-            md: 'url("/images/voice_bg_pc.jpg")',
+            base: `url("${IMAGEBASEURL}/achievements/${pageName}/voice_bg_sp.webp")`,
+            md: `url("${IMAGEBASEURL}/achievements/${pageName}/voice_bg_pc.webp")`,
           }}
         />
         <Box display={'flex'} justifyContent={'center'} pt={'80px'} pb={{ base: 30 }}>
@@ -305,7 +310,7 @@ export default async function Pricing() {
           flexBasis={{ md: '50%' }}
         >
           <Image
-            src={'/images/footer.jpg'}
+            src={`${IMAGEBASEURL}/achievements/${pageName}/footer.webp`}
             alt={'デザインページのフッター'}
             w={{ base: '100%', md: 'auto' }}
             minW={{ md: '100%' }}
