@@ -14,6 +14,7 @@ import React from 'react';
 import styles from './layout.module.css';
 import { SlideSwiper } from '@/components/SlideSwiper';
 import { CoverflowSwiper } from '@/components/CoverflowSwiper';
+import { Lp01VoiceCard } from '@/components/Lp01VoiceCard';
 
 const breadcrumbs = [
   {
@@ -33,10 +34,70 @@ const breadcrumbs = [
   },
 ];
 
+const pageName = 'lp01';
+
 const swiperImages = [
-  { src: `/01_sp.jpg`, alt: 'キービジュアル1' },
-  { src: `/02_sp.jpg`, alt: 'キービジュアル2' },
-  { src: `/03_sp.jpg`, alt: 'キービジュアル3' },
+  {
+    pcSrc: `/images/keyvisual1_pc.jpg`,
+    spSrc: `/images/keyvisual1_sp.jpg`,
+    alt: 'ランディングデザインのキービジュアル1',
+  },
+  {
+    pcSrc: `/images/keyvisual2_pc.jpg`,
+    spSrc: `/images/keyvisual2_sp.jpg`,
+    alt: 'ランディングデザインのキービジュアル2',
+  },
+  {
+    pcSrc: `/images/keyvisual3_pc.jpg`,
+    spSrc: `/images/keyvisual3_sp.jpg`,
+    alt: 'ランディングデザインのキービジュアル3',
+  },
+];
+
+const voices = [
+  {
+    src: '/images/voice1.jpg',
+    name: '株式会社△△商事様',
+    text: 'ターゲットを若年層に絞ったことで求人応募者の年代と応募総数が増えました。フォロワーが増えたことで新卒採用以外のタイミングでも求人募集をかけやすくなりました。',
+  },
+  {
+    src: '/images/voice2.jpg',
+    name: '○○ガーデンショップ様',
+    text: '季節に応じたフラワーギフトの提案をSNSから発信するようにご提案いただきました。投稿文章や写真の添削をしていただいてSNSのクオリティがアップしました。',
+  },
+  {
+    src: '/images/voice3.jpg',
+    name: '□□社会保険労務士事務所様',
+    text: '専門知識を活かした発信よりも事務所で働くスタッフにフォーカスした投稿を提案いただき、新しいお客様を開拓できました。今後はリール動画制作でもお力添えいただければと思います。',
+  },
+  {
+    src: '/images/voice4.jpg',
+    name: '☆☆ベーカリー様',
+    text: '最初は具体的にお仕事依頼しなかったのですが、無料相談の段階でSNSのポイントや目標を教えていただき助かりました。その後、仕事を依頼してからも変わらずサポートしてもらってます。',
+  },
+];
+
+const footerLinks = [
+  {
+    enTitle: 'TOP',
+    jpTitle: 'トップ',
+    href: `#${pageName}-top`,
+  },
+  {
+    enTitle: 'Greeting',
+    jpTitle: 'ごあいさつ',
+    href: `#${pageName}-greeting`,
+  },
+  {
+    enTitle: 'Our Mission',
+    jpTitle: 'ミッション',
+    href: `#${pageName}-mission`,
+  },
+  {
+    enTitle: 'Voice',
+    jpTitle: 'お客様の声',
+    href: `#${pageName}-voice`,
+  },
 ];
 
 export default async function Pricing() {
@@ -82,7 +143,7 @@ export default async function Pricing() {
         <Box id={'wrapper'} p={0} position={'relative'} mx={'auto'} minH={{ md: '100vh' }}>
           <Box mb={100}>
             <Box id={'slideSwiper'} mt={{ base: 81, md: 120 }} ml={{ base: 35, md: 180, xl: 300 }}>
-              <SlideSwiper />
+              <SlideSwiper images={swiperImages} />
             </Box>
             <Box id={'lp01-greeting'}>
               <Box
@@ -124,7 +185,7 @@ export default async function Pricing() {
                   lineHeight={2}
                 >
                   こちらページは、
-                  <Box as={'span'} color={'blue.600'} fontWeight={'bold'}>
+                  <Box as={'span'} className={styles.blueMarker}>
                     合同会社ピーチウェブのホームページデザイン見本
                   </Box>
                   となります。若々しい起業家のためのランディングページデザインで、多くの写真を使用して視覚的に訴求できるように心がけました。こちらは起業家の挨拶セクションとなります。
@@ -166,7 +227,7 @@ export default async function Pricing() {
             letterSpacing={4}
             lineHeight={2}
           >
-            私たちのミッションは、SNS発信を通じて企業の魅力とブランドを適切なターゲットに「ワンストップ」でお届けすることです。
+            ミッションを紹介するセクションになります。経営者自身が顔出しで考え方を伝えることで読み手に安心感を持ってもらうことができます。
           </Text>
         </Center>
         <Center pb={20}>
@@ -206,18 +267,21 @@ export default async function Pricing() {
           <Text
             p={4}
             w={{ md: '70%', lg: '60%', xl: '60%' }}
-            textAlign={{ lg: 'center' }}
             fontWeight={'bold'}
             fontSize={{ base: 'medium', md: 'larger' }}
             letterSpacing={4}
             lineHeight={2}
           >
-            お客様からいただいた喜びの声をご紹介します。
+            お客様からいただいた喜びの声をご紹介するセクションになります。目に見えないサービスの場合はお客様の口コミを掲載することで利用イメージを持ってもらうことができます。
           </Text>
         </Center>
         <Center pb={20}>
           <Box w={{ base: '95vw', md: '60vw' }}>
-            <CoverflowSwiper />
+            <CoverflowSwiper
+              childrens={voices.map((item, i) => (
+                <Lp01VoiceCard src={item.src} name={item.name} text={item.text} key={i} />
+              ))}
+            />
           </Box>
         </Center>
       </Box>
@@ -266,46 +330,23 @@ export default async function Pricing() {
         >
           <UnorderedList listStyleType={'none'} textAlign={'center'} w={{ base: 250 }} mx={'auto'}>
             <SimpleGrid columns={2} spacing={10}>
-              <ListItem w={{ base: 108 }} display={'inline-block'} verticalAlign={'middle'}>
-                <Link href={'#lp01-top'} color={'white'}>
-                  <Box as={'span'} display={'block'} fontSize={'large'} fontWeight={'bold'}>
-                    TOP
-                  </Box>
-                  <Box as={'span'} display={'block'} fontSize={'small'}>
-                    トップ
-                  </Box>
-                </Link>
-              </ListItem>
-              <ListItem w={{ base: 108 }} display={'inline-block'} verticalAlign={'middle'}>
-                <Link href={'#lp01-greeting'} color={'white'}>
-                  <Box as={'span'} display={'block'} fontSize={'large'} fontWeight={'bold'}>
-                    Greeting
-                  </Box>
-                  <Box as={'span'} display={'block'} fontSize={'small'}>
-                    ごあいさつ
-                  </Box>
-                </Link>
-              </ListItem>
-              <ListItem w={{ base: 108 }} display={'inline-block'} verticalAlign={'middle'}>
-                <Link href={'#lp01-mission'} color={'white'}>
-                  <Box as={'span'} display={'block'} fontSize={'large'} fontWeight={'bold'}>
-                    Our Mission
-                  </Box>
-                  <Box as={'span'} display={'block'} fontSize={'small'}>
-                    ミッション
-                  </Box>
-                </Link>
-              </ListItem>
-              <ListItem w={{ base: 108 }} display={'inline-block'} verticalAlign={'middle'}>
-                <Link href={'#lp01-voice'} color={'white'}>
-                  <Box as={'span'} display={'block'} fontSize={'large'} fontWeight={'bold'}>
-                    Voice
-                  </Box>
-                  <Box as={'span'} display={'block'} fontSize={'small'}>
-                    お客様の声
-                  </Box>
-                </Link>
-              </ListItem>
+              {footerLinks.map((item, i) => (
+                <ListItem
+                  w={{ base: 108 }}
+                  display={'inline-block'}
+                  verticalAlign={'middle'}
+                  key={i}
+                >
+                  <Link href={item.href} color={'white'}>
+                    <Box as={'span'} display={'block'} fontSize={'large'} fontWeight={'bold'}>
+                      {item.enTitle}
+                    </Box>
+                    <Box as={'span'} display={'block'} fontSize={'small'}>
+                      {item.jpTitle}
+                    </Box>
+                  </Link>
+                </ListItem>
+              ))}
             </SimpleGrid>
           </UnorderedList>
         </Box>

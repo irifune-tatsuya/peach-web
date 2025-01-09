@@ -31,3 +31,7 @@
   border-bottom: solid 1px Black;
   right: 0;
 }
+
+.blueMarker {
+  background: linear-gradient(transparent 50%, #99cef7 50%);
+}

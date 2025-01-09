@@ -7,7 +7,17 @@ import 'swiper/css';
 import 'swiper/css/effect-creative';
 import { NextPage } from 'next';
 
-export const SlideSwiper: NextPage = () => {
+type Img = {
+  pcSrc: string;
+  spSrc: string;
+  alt: string;
+};
+
+type Props = {
+  images: Img[];
+};
+
+export const SlideSwiper: NextPage<Props> = ({ images }) => {
   return (
     <Swiper
       effect={'creative'}
@@ -29,23 +39,25 @@ export const SlideSwiper: NextPage = () => {
         disableOnInteraction: false,
       }}
     >
-      <SwiperSlide>
-        <Image
-          src="/images/keyvisual1_pc.jpg"
-          alt=""
-          w={'100%'}
-          h={'auto'}
-          display={{ base: 'none', md: 'block' }}
-        />
-        <Image
-          src="/images/keyvisual1_sp.jpg"
-          alt=""
-          w={'100%'}
-          h={'auto'}
-          display={{ base: 'block', md: 'none' }}
-        />
-      </SwiperSlide>
-      <SwiperSlide>
+      {images.map((item, i) => (
+        <SwiperSlide key={i}>
+          <Image
+            src={item.pcSrc}
+            alt={item.alt}
+            w={'100%'}
+            h={'auto'}
+            display={{ base: 'none', md: 'block' }}
+          />
+          <Image
+            src={item.spSrc}
+            alt={item.alt}
+            w={'100%'}
+            h={'auto'}
+            display={{ base: 'block', md: 'none' }}
+          />
+        </SwiperSlide>
+      ))}
+      {/* <SwiperSlide>
         <Image
           src="/images/keyvisual2_pc.jpg"
           alt=""
@@ -76,7 +88,7 @@ export const SlideSwiper: NextPage = () => {
           h={'auto'}
           display={{ base: 'block', md: 'none' }}
         />
-      </SwiperSlide>
+      </SwiperSlide> */}
     </Swiper>
   );
 };
