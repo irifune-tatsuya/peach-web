@@ -50,7 +50,7 @@ export default async function sitemap() {
   }));
 
   const routes = [
-    '',
+    '/',
     '/article',
     '/article/search',
     '/contact',
@@ -58,7 +58,7 @@ export default async function sitemap() {
     '/faq/search',
     '/faq/search',
     '/news',
-    '/news-letter',
+    '/newsletter',
     '/peach-fight',
     '/peach-fight/search',
     '/pricing',
