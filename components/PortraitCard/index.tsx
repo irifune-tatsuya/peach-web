@@ -28,7 +28,7 @@ export default function PortraitCard({ article, category, maxW }: Props) {
             />
           )}
           <Stack p={2}>
-            <Heading size={'sm'} my={1} className={styles.articleTitle} h={10}>
+            <Heading as={'h3'} size={'sm'} my={1} className={styles.articleTitle} h={10}>
               {article.title}
             </Heading>
             <PublishedDate date={article.publishedAt || article.createdAt} />
