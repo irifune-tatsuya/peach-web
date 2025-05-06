@@ -12,7 +12,7 @@ export const ScrollToTopButton: NextPage = () => {
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       position="fixed"
       right={3}
-      bottom={20}
+      bottom={28}
       as={MdKeyboardArrowUp}
       color={'momo.100'}
       size={'small'}

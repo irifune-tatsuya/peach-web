@@ -3,7 +3,7 @@ import { CONTACT, IMAGEBASEURL } from '@/constants';
 import { Box, Image, Link, useDisclosure } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import { FaInstagram } from 'react-icons/fa';
-import { FaFacebookSquare } from 'react-icons/fa';
+import { FaSquareXTwitter } from 'react-icons/fa6';
 import { FaLine } from 'react-icons/fa';
 import { MenuButton } from '../MenuButton';
 import { NavDrawer } from '../NavDrawer';
@@ -37,8 +37,8 @@ export const Header: NextPage = () => {
           <Link href={CONTACT.instagram} target="_blank">
             <FaInstagram size={'2em'} />
           </Link>
-          <Link href={CONTACT.facebook} target="_blank">
-            <FaFacebookSquare size={'2em'} />
+          <Link href={CONTACT.X} target="_blank">
+            <FaSquareXTwitter size={'2em'} />
           </Link>
           <Link href={CONTACT.line} target="_blank">
             <FaLine size={'2em'} />

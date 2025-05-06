@@ -8,7 +8,6 @@ import PublishedDate from '../PublishedDate';
 import styles from './index.module.css';
 import { Box, Heading, Image, Link, Text } from '@chakra-ui/react';
 import TableOfContents from '../TableOfContents';
-import { FaInstagram, FaFacebookF } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { usePathname } from 'next/navigation';
 import { IMAGEBASEURL } from '@/constants';
@@ -98,35 +97,6 @@ export default function Article({ data, isShowToc = true, isFaqLayout = false }:
                 </Box>
               </Box>
               <Box display={'flex'} gap={2}>
-                <Link
-                  href={`https://www.instagram.com/${data.instagramid || 'irifune3333'}?ref=badge`}
-                  isExternal
-                  className={styles.instagramButton}
-                  display={'flex'}
-                  alignItems={'center'}
-                  justifyContent={'center'}
-                  borderRadius={7}
-                  w={{ base: 37 }}
-                  h={{ base: 37 }}
-                  _hover={{ textDecoration: 'none', opacity: 0.7 }}
-                >
-                  <FaInstagram className={styles.instagramIcon} size={30} color="white" />
-                </Link>
-                <Link
-                  href={`https://www.facebook.com/share.php?u=${fullPath}`}
-                  isExternal
-                  rel={'nofollow noopener'}
-                  display={'flex'}
-                  alignItems={'end'}
-                  justifyContent={'center'}
-                  bg={'#1877f2'}
-                  borderRadius={7}
-                  w={{ base: 37 }}
-                  h={{ base: 37 }}
-                  _hover={{ textDecoration: 'none', opacity: 0.7 }}
-                >
-                  <FaFacebookF size={30} color="white" />
-                </Link>
                 <Link
                   href={`https://x.com/share?url=${fullPath}&text=${data.title}&via=irifune333&related=irifune333&hashtags=ピーチウェブ`}
                   isExternal

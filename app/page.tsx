@@ -10,8 +10,8 @@ import {
   PEACHFILTER,
 } from '@/constants';
 import { FaInstagram } from 'react-icons/fa';
-import { FaFacebookSquare } from 'react-icons/fa';
 import { FaLine } from 'react-icons/fa';
+import { FaSquareXTwitter } from 'react-icons/fa6';
 import { ContactButton } from '@/components/ContactButton';
 import { getList } from '@/libs/microcms';
 import React from 'react';
@@ -120,8 +120,8 @@ export default async function Home() {
           <Link href={CONTACT.instagram} target="_blank">
             <FaInstagram size={'2.5em'} />
           </Link>
-          <Link href={CONTACT.facebook} target="_blank">
-            <FaFacebookSquare size={'2.5em'} />
+          <Link href={CONTACT.X} target="_blank">
+            <FaSquareXTwitter size={'2.5em'} />
           </Link>
           <Link href={CONTACT.line} target="_blank">
             <FaLine size={'2.5em'} />
