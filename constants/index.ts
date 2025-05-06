@@ -69,6 +69,6 @@ export const MENU = [
 // 連絡先
 export const CONTACT = {
   instagram: 'https://www.instagram.com/irifune3333',
-  facebook: 'https://www.facebook.com/share/Yzx3782Cmna8ybHg',
+  X: 'https://x.com/irifune333',
   line: 'https://line.me/ti/p/s-f8-4Mo0A',
 };

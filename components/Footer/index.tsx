@@ -1,7 +1,7 @@
 import { Box, UnorderedList, ListItem, Link, Image, Text } from '@chakra-ui/react';
 import { MENU, CONTACT, IMAGEBASEURL } from '@/constants';
 import { FaInstagram } from 'react-icons/fa';
-import { FaFacebookSquare } from 'react-icons/fa';
+import { FaSquareXTwitter } from 'react-icons/fa6';
 import { FaLine } from 'react-icons/fa';
 import { NextPage } from 'next';
 import { ContactButton } from '../ContactButton';
@@ -22,7 +22,7 @@ export const Footer: NextPage = () => {
           />
         </Link>
       </Box>
-      <Box display={'flex'} justifyContent={'center'} gap={10} mt={8}>
+      <Box display={'flex'} justifyContent={'center'} gap={4} mt={8}>
         <Box as="nav">
           <UnorderedList
             listStyleType={'none'}
@@ -58,8 +58,8 @@ export const Footer: NextPage = () => {
             <Link href={CONTACT.instagram} target="_blank">
               <FaInstagram size={'3em'} />
             </Link>
-            <Link href={CONTACT.facebook} target="_blank">
-              <FaFacebookSquare size={'3em'} />
+            <Link href={CONTACT.X} target="_blank">
+              <FaSquareXTwitter size={'3em'} />
             </Link>
             <Link href={CONTACT.line} target="_blank">
               <FaLine size={'3em'} />
@@ -71,7 +71,7 @@ export const Footer: NextPage = () => {
           <Box
             as="iframe"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.774229050928!2d133.99540741233992!3d34.66040427282121!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3554093457eafe59%3A0x9de44f38a281f416!2z44CSNzA0LTgxNzYg5bKh5bGx55yM5bKh5bGx5biC5p2x5Yy65Lit5bed55S677yU77yQ77yV4oiS77yRIOODtOOCo-ODs-ODhuODvOOCuOODu-ODl-ODrOOCpOOCuQ!5e0!3m2!1sja!2sjp!4v1725538334551!5m2!1sja!2sjp"
-            w={'30vw'}
+            w={{ base: '40vw', lg: '50vw' }}
             h={'100%'}
           ></Box>
         </Box>

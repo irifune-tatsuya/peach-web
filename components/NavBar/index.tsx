@@ -15,7 +15,7 @@ export const NavBar: NextPage = () => {
     <>
       <Box
         as="nav"
-        py={'0.5em'}
+        py={'1em'}
         px={'2em'}
         position={'fixed'}
         bottom={0}
@@ -34,8 +34,8 @@ export const NavBar: NextPage = () => {
           w={10}
           _hover={{ textDecoration: 'none' }}
         >
-          <IoBookOutline size={'1.5rem'} color={'ff7bac'} />
-          <Text fontSize={'xx-small'} fontWeight={'bold'} mt={'0.1em'}>
+          <IoBookOutline size={'2rem'} color={'ff7bac'} />
+          <Text fontSize={'x-small'} fontWeight={'bold'} mt={'0.2em'}>
             新着記事
           </Text>
         </Link>
@@ -47,8 +47,8 @@ export const NavBar: NextPage = () => {
           w={10}
           _hover={{ textDecoration: 'none' }}
         >
-          <ImDisplay size={'1.5rem'} color={'ff7bac'} />
-          <Text fontSize={'xx-small'} fontWeight={'bold'} mt={'0.1em'}>
+          <ImDisplay size={'2rem'} color={'ff7bac'} />
+          <Text fontSize={'x-small'} fontWeight={'bold'} mt={'0.2em'}>
             サービス
           </Text>
         </Link>
@@ -63,10 +63,10 @@ export const NavBar: NextPage = () => {
           <Image
             src={`${IMAGEBASEURL}/common/nav-momo.webp`}
             alt={'ホームに戻る'}
-            w={'1.5rem'}
+            w={'2rem'}
             h={'auto'}
           />
-          <Text fontSize={'xx-small'} fontWeight={'bold'} mt={'0.1em'}>
+          <Text fontSize={'x-small'} fontWeight={'bold'} mt={'0.4em'}>
             ホーム
           </Text>
         </Link>
@@ -78,8 +78,8 @@ export const NavBar: NextPage = () => {
           w={10}
           _hover={{ textDecoration: 'none' }}
         >
-          <GoMail size={'1.5rem'} color={'ff7bac'} />
-          <Text fontSize={'xx-small'} fontWeight={'bold'} mt={'0.1em'}>
+          <GoMail size={'2rem'} color={'ff7bac'} />
+          <Text fontSize={'x-small'} fontWeight={'bold'} mt={'0.2em'}>
             お問合せ
           </Text>
         </Link>
