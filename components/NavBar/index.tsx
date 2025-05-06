@@ -15,7 +15,8 @@ export const NavBar: NextPage = () => {
     <>
       <Box
         as="nav"
-        py={'1em'}
+        pt={'1em'}
+        pb={'2em'}
         px={'2em'}
         position={'fixed'}
         bottom={0}
