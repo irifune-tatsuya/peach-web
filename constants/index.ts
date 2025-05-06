@@ -60,6 +60,10 @@ export const MENU = [
     title: '利用規約',
     href: '/terms',
   },
+  {
+    title: '特定商取引法に基づく表記',
+    href: '/tokushoho',
+  },
 ];
 
 // 連絡先
