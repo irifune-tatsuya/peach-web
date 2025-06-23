@@ -1,14 +1,33 @@
-import { Box, Link, Text } from '@chakra-ui/react';
+'use client';
+
+import { Box, Link, Text, Icon } from '@chakra-ui/react';
 import { IoMail } from 'react-icons/io5';
 import { NextPage } from 'next';
+import { ElementType } from 'react';
 
-export const ContactButton: NextPage = () => {
+interface ContactButtonProps {
+  href?: string;
+  text?: string;
+  IconComponent?: ElementType;
+  iconSize?: string;
+}
+
+export const ContactButton: NextPage<ContactButtonProps> = ({
+  href = '/contact',
+  text = 'お問い合わせ',
+  IconComponent = IoMail,
+  iconSize = '1.5em',
+}) => {
+  const isExternal = href.startsWith('http');
+
   return (
     <Link
       display={'block'}
-      href="/contact"
+      href={href}
       textAlign={'center'}
       _hover={{ textDecoration: 'none' }}
+      target={isExternal ? '_blank' : undefined}
+      rel={isExternal ? 'noopener noreferrer' : undefined}
     >
       <Box
         py={'0.5em'}
@@ -24,10 +43,15 @@ export const ContactButton: NextPage = () => {
         color={'momo.100'}
         fontWeight={'bold'}
         className={'contactButton'}
+        transition="all 0.2s ease-in-out"
+        _hover={{
+          bg: 'momo.100',
+          color: 'white',
+        }}
       >
-        <IoMail size={'1.5em'} />
-        <Text ml={4} _hover={{ textDecorationLine: 'none' }}>
-          お問い合わせ
+        <Icon as={IconComponent} boxSize={iconSize} />
+        <Text ml={2} _hover={{ textDecorationLine: 'none' }}>
+          {text}
         </Text>
       </Box>
     </Link>
