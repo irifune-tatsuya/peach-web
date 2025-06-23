@@ -1,6 +1,14 @@
 'use client';
 
-import { Box, VStack, Heading, Link as ChakraLink, HStack, Icon } from '@chakra-ui/react';
+import {
+  Box,
+  VStack,
+  Heading,
+  Link as ChakraLink,
+  HStack,
+  Icon,
+  useBreakpointValue,
+} from '@chakra-ui/react';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { Link as ScrollLink } from 'react-scroll';
 
@@ -14,9 +22,15 @@ interface SlideNavProps {
   data: TocItem[];
   activeId: string;
   setActiveId: (id: string) => void;
+  onLinkClick?: () => void;
 }
 
-const SlideNav: React.FC<SlideNavProps> = ({ data, activeId, setActiveId }) => {
+const SlideNav: React.FC<SlideNavProps> = ({ data, activeId, setActiveId, onLinkClick }) => {
+  const offsetValue = useBreakpointValue({
+    base: -500,
+    md: -110,
+  });
+
   return (
     <Box as="nav" p={5} bg="white" boxShadow="md" borderRadius="lg">
       <Heading
@@ -43,8 +57,9 @@ const SlideNav: React.FC<SlideNavProps> = ({ data, activeId, setActiveId }) => {
                 spy={true}
                 smooth={true}
                 duration={500}
-                offset={-100}
+                offset={offsetValue}
                 onSetActive={(to: string) => setActiveId(to)}
+                onClick={onLinkClick}
                 display="block"
                 py={2}
                 px={3}
@@ -61,7 +76,11 @@ const SlideNav: React.FC<SlideNavProps> = ({ data, activeId, setActiveId }) => {
                 pl={isSubLevel ? 4 : 2}
               >
                 <HStack>
-                  <Icon as={MdKeyboardArrowRight} color={isActive ? 'momo.100' : 'gray.400'} />
+                  <Icon
+                    as={MdKeyboardArrowRight}
+                    boxSize="1.2em"
+                    color={isActive ? 'momo.100' : 'gray.400'}
+                  />
                   <Box as="span" flex="1">
                     {item.title}
                   </Box>
