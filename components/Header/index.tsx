@@ -13,6 +13,7 @@ export const Header: NextPage = () => {
   const { isOpen, onToggle, onClose } = useDisclosure();
   return (
     <Box
+      id="page-header"
       as="header"
       py={3}
       px={6}
