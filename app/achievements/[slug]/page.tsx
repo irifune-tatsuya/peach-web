@@ -22,11 +22,12 @@ import { notFound } from 'next/navigation';
 
 export const revalidate = 3600;
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ slug: string }>;
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const currentSlug = params.slug;
   const achievement = ACHIEVEMENTS.find((item) => item.slug === currentSlug);
   const title = achievement ? achievement.name : '制作実績のご紹介';
@@ -49,7 +50,8 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page(props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const currentSlug = params.slug;
   const achievement = ACHIEVEMENTS.find((item) => item.slug === currentSlug);
 

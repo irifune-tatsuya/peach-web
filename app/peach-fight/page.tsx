@@ -8,7 +8,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import SearchField from '@/components/SearchField';
 import { TopSwiper } from '@/components/TopSwiper';
 import styles from './layout.module.css';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { IoMail } from 'react-icons/io5';
 import { FaLine } from 'react-icons/fa';
 import ButtonArea from '@/components/ButtonArea';
@@ -143,7 +143,9 @@ export default async function PeachFight() {
       </Box>
       <Box maxW={1152} mx={'auto'} p={4} pb={{ base: 15, md: 156 }} pt={{ base: 15, md: 0 }}>
         <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }} mb={20}>
-          <SearchField category={category} />
+          <Suspense fallback={<Box>読み込み中...</Box>}>
+            <SearchField category={category} />
+          </Suspense>
         </Box>
         <GridArticleList articles={data.contents} category={category} />
         <Pagination totalCount={data.totalCount} basePath={`/${category}`} />

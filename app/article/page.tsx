@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { getList } from '@/libs/microcms';
 import { ARTICLEFILTER, LIMIT12 } from '@/constants';
 import Pagination from '@/components/Pagination';
@@ -34,7 +34,9 @@ export default async function Article() {
       <Title titleEn={'Articles'} titleJp={'新着記事一覧'} />
       <Box maxW={1152} mx={'auto'} p={4} pb={{ base: 15, md: 156 }}>
         <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }} mb={20}>
-          <SearchField category={category} />
+          <Suspense fallback={<Box>読み込み中...</Box>}>
+            <SearchField category={category} />
+          </Suspense>
         </Box>
         <GridArticleList articles={data.contents} category={category} />
         <Pagination totalCount={data.totalCount} basePath={`/${category}`} />

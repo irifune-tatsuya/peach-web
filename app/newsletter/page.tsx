@@ -1,6 +1,6 @@
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { Box, Grid, GridItem, Heading, Image, Link, Text } from '@chakra-ui/react';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { StartMailMagazineForm } from '@/components/StartMailMagazineForm';
 import { StopMailMagazineForm } from '@/components/StopMailMagazineForm';
 import { IMAGEBASEURL } from '@/constants';
@@ -126,7 +126,9 @@ export default async function Terms() {
             </Box>
             が可能です。
           </Text>
-          <StartMailMagazineForm />
+          <Suspense fallback={<Box color={'white'}>フォームを読み込んでいます...</Box>}>
+            <StartMailMagazineForm />
+          </Suspense>
         </Box>
       </Box>
       <Box as={'section'} py={{ base: 10, md: '70px' }}>
@@ -140,7 +142,9 @@ export default async function Terms() {
             </Box>
           </Box>
           <Text pb={10}>こちらのフォームよりニュースレターの配信停止をすることができます。</Text>
-          <StopMailMagazineForm />
+          <Suspense fallback={<Box>フォームを読み込んでいます...</Box>}>
+            <StopMailMagazineForm />
+          </Suspense>
         </Box>
       </Box>
       <Breadcrumbs breadcrumbs={breadcrumbs} />

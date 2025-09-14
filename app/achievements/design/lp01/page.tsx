@@ -282,11 +282,11 @@ export default async function Lp01() {
         </Center>
         <Center pb={20}>
           <Box w={{ base: '95vw', md: '60vw' }}>
-            <CoverflowSwiper
-              childrens={voices.map((item, i) => (
+            <CoverflowSwiper>
+              {voices.map((item, i) => (
                 <Lp01VoiceCard src={item.src} name={item.name} text={item.text} key={i} />
               ))}
-            />
+            </CoverflowSwiper>
           </Box>
         </Center>
       </Box>

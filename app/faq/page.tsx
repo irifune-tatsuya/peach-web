@@ -7,7 +7,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import SearchField from '@/components/SearchField';
 import ArticleList from '@/components/ArticleList';
 import TagList from '@/components/TagList';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 export const revalidate = 3600;
 
@@ -38,7 +38,9 @@ export default async function Faq() {
       <Title titleEn={'FAQ'} titleJp={'よくあるご質問'} />
       <Box maxW={1152} mx={'auto'} p={4} pb={{ base: 15, md: 156 }}>
         <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }} mb={20}>
-          <SearchField category={category} />
+          <Suspense fallback={<Box>読み込み中...</Box>}>
+            <SearchField category={category} />
+          </Suspense>
         </Box>
         <TagList tags={tags.contents} category={category} />
         <ArticleList articles={data.contents} category={category} />

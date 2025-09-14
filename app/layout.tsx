@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react';
 import './globals.css';
-import { Metadata, NextPage } from 'next';
+import { Metadata } from 'next';
 import { NavBar } from '@/components/NavBar';
 import { ScrollToTopButton } from '@/components/ScrollToTopButton';
 import { Provider } from './providers/chakra-ui/Provider';
@@ -8,6 +8,7 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import GoogleAnalytics from '@/components/GoogleAnalytics/';
 import { IMAGEBASEURL } from '@/constants';
+import { Suspense } from 'react';
 
 const siteName = 'ピーチウェブ -岡山のWEBブランディングサービス-';
 const description =
@@ -69,11 +70,7 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
 };
 
-type Props = {
-  children: React.ReactNode;
-};
-
-const RootLayout: NextPage<Props> = ({ children }) => {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja" suppressHydrationWarning={true}>
       <head>
@@ -83,7 +80,9 @@ const RootLayout: NextPage<Props> = ({ children }) => {
           type={'image/png'}
           sizes={'180x180'}
         />
-        <GoogleAnalytics />
+        <Suspense fallback={null}>
+          <GoogleAnalytics />
+        </Suspense>
       </head>
       <body suppressHydrationWarning={true}>
         <Provider>
@@ -98,6 +97,4 @@ const RootLayout: NextPage<Props> = ({ children }) => {
       </body>
     </html>
   );
-};
-
-export default RootLayout;
+}
