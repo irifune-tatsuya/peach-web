@@ -21,18 +21,20 @@ const breadcrumbs = [
 ];
 
 type Props = {
-  params: {
+  params: Promise<{
     tagId: string;
     current: string;
-  };
-  searchParams: {
+  }>;
+  searchParams: Promise<{
     q?: string;
-  };
+  }>;
 };
 
 export const revalidate = 3600;
 
-export default async function Page({ params, searchParams }: Props) {
+export default async function Page(props: Props) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const category = 'news';
   const current = parseInt(params.current as string, 10);
   const data = await getList({

@@ -17,7 +17,7 @@ export default function SearchField({ category }: Props) {
         location.href = `/${category}/search?q=${inputRef.current?.value}`;
       }
     },
-    [composing],
+    [composing, category],
   );
   const inputRef = useRef<HTMLInputElement>(null);
   const searchParams = useSearchParams();

@@ -15,9 +15,7 @@ export const ScrollToTopButton: NextPage = () => {
       bottom={28}
       as={MdKeyboardArrowUp}
       color={'momo.100'}
-      size={'small'}
-      w={50}
-      h={50}
+      boxSize={'50px'}
       borderRadius={'50%'}
       p={2}
       bg={'white'}

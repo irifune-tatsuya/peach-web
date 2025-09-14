@@ -6,21 +6,23 @@ import { Box } from '@chakra-ui/react';
 import SearchField from '@/components/SearchField';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import ArticleList from '@/components/ArticleList';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 type Props = {
-  params: {
+  params: Promise<{
     tagId: string;
     current: string;
-  };
-  searchParams: {
+  }>;
+  searchParams: Promise<{
     q?: string;
-  };
+  }>;
 };
 
 export const revalidate = 3600;
 
-export default async function Page({ params, searchParams }: Props) {
+export default async function Page(props: Props) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const category = 'faq';
   const { tagId } = params;
   const current = parseInt(params.current as string, 10);
@@ -57,7 +59,9 @@ export default async function Page({ params, searchParams }: Props) {
       />
       <Box maxW={1152} mx={'auto'} p={4} pb={{ base: 15, md: 156 }}>
         <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }} mb={20}>
-          <SearchField category={category} />
+          <Suspense fallback={<Box>読み込み中...</Box>}>
+            <SearchField category={category} />
+          </Suspense>
         </Box>
         <ArticleList articles={data.contents} category={category} />
         <Pagination

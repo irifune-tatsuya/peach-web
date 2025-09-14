@@ -11,12 +11,12 @@ import { IoMdHome } from 'react-icons/io';
 import ButtonArea from '@/components/ButtonArea';
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
-  searchParams: {
+  }>;
+  searchParams: Promise<{
     dk: string;
-  };
+  }>;
 };
 
 export const revalidate = 3600;
@@ -48,7 +48,9 @@ const ContactButtons = [
   },
 ];
 
-export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const data = await getDetail(params.slug, {
     draftKey: searchParams.dk,
   });
@@ -83,7 +85,9 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   };
 }
 
-export default async function Page({ params, searchParams }: Props) {
+export default async function Page(props: Props) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const data = await getDetail(params.slug, {
     draftKey: searchParams.dk,
   });
