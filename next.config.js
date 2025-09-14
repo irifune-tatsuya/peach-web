@@ -1,13 +1,7 @@
-const withPWA = require('next-pwa')({
-  dest: 'public',
-  register: true,
-  skipWaiting: true,
-});
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    serverActions: true,
+    serverActions: {},
   },
   images: {
     remotePatterns: [
@@ -17,6 +11,14 @@ const nextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/assets/:path*',
+        destination: 'https://www.assets.peach-web.co.jp/:path*',
+      },
+    ];
+  },
 };
 
-module.exports = withPWA(nextConfig);
+module.exports = nextConfig;

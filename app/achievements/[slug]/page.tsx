@@ -20,15 +20,13 @@ import { ACHIEVEMENTS } from '@/constants/achievements';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-type Props = {
-  params: {
-    slug: string;
-  };
-};
-
 export const revalidate = 3600;
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
   const currentSlug = params.slug;
   const achievement = ACHIEVEMENTS.find((item) => item.slug === currentSlug);
   const title = achievement ? achievement.name : '制作実績のご紹介';
@@ -51,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params }: { params: { slug: string } }) {
   const currentSlug = params.slug;
   const achievement = ACHIEVEMENTS.find((item) => item.slug === currentSlug);
 
