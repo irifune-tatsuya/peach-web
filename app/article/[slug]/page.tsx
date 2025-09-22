@@ -7,24 +7,23 @@ import { IMAGEBASEURL } from '@/constants';
 import { IoBookOutline } from 'react-icons/io5';
 import { IoMdHome } from 'react-icons/io';
 import ButtonArea from '@/components/ButtonArea';
+import { draftMode } from 'next/headers';
+import PreviewAlert from '@/components/PreviewAlert';
 
 type Props = {
-  params: Promise<{
-    slug: string;
-  }>;
-  searchParams: Promise<{
-    dk: string;
-  }>;
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ draftKey?: string }>;
 };
 
-export const revalidate = 3600;
+export const revalidate = 0;
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  const searchParams = await props.searchParams;
-  const params = await props.params;
-  const data = await getDetail(params.slug, {
-    draftKey: searchParams.dk,
-  });
+export async function generateMetadata({
+  params: paramsPromise,
+  searchParams: searchParamsPromise,
+}: Props): Promise<Metadata> {
+  const params = await paramsPromise;
+  const searchParams = await searchParamsPromise;
+  const data = await getDetail(params.slug, { draftKey: searchParams.draftKey });
 
   const defaultImageUrl = `${IMAGEBASEURL}/ogp.jpg`;
   const defaultDescription =
@@ -78,12 +77,14 @@ const ContactButtons = [
   },
 ];
 
-export default async function Page(props: Props) {
-  const searchParams = await props.searchParams;
-  const params = await props.params;
-  const data = await getDetail(params.slug, {
-    draftKey: searchParams.dk,
-  });
+export default async function Page({
+  params: paramsPromise,
+  searchParams: searchParamsPromise,
+}: Props) {
+  const params = await paramsPromise;
+  const searchParams = await searchParamsPromise;
+  const { isEnabled } = await draftMode();
+  const data = await getDetail(params.slug, { draftKey: searchParams.draftKey });
 
   const breadcrumbs = [
     {
@@ -105,6 +106,7 @@ export default async function Page(props: Props) {
 
   return (
     <>
+      {isEnabled && <PreviewAlert />}
       <Article data={data} />
       <ButtonArea buttons={ContactButtons} bg={'white'} />
       <Breadcrumbs breadcrumbs={breadcrumbs} />

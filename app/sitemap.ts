@@ -2,7 +2,7 @@ import { ARTICLEFILTER, FAQFILTER, NEWSFILTER, PEACHFILTER } from '@/constants';
 import { getList, getTagList } from '@/libs/microcms';
 
 export default async function sitemap() {
-  const baseURL = new URL(process.env.BASE_URL || 'http://localhost:3000');
+  const baseURL = new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000');
 
   const articleData = await getList({
     filters: ARTICLEFILTER,
