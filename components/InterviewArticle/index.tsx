@@ -25,9 +25,7 @@ type Props = {
 export default function InterviewArticle({ data, isShowToc = true }: Props) {
   const toc = renderToc(data.content);
   const pathName = usePathname();
-  const fullPath = `${new URL(process.env.BASE_URL || 'http://localhost:3000')}${pathName.slice(
-    1,
-  )}`;
+  const fullPath = `${process.env.NEXT_PUBLIC_BASE_URL}${pathName}`;
   const devidedContents = data.content
     .split(/<h2/g)
     .filter(Boolean)
@@ -192,9 +190,8 @@ export default function InterviewArticle({ data, isShowToc = true }: Props) {
         </Box>
         {isShowToc ? <TableOfContents toc={toc} /> : ''}
         {devidedContents.map((content, i) => (
-          <>
+          <React.Fragment key={i}>
             <Box
-              key={i}
               px={4}
               className={styles.content}
               dangerouslySetInnerHTML={{
@@ -269,7 +266,7 @@ export default function InterviewArticle({ data, isShowToc = true }: Props) {
             ) : (
               ''
             )}
-          </>
+          </React.Fragment>
         ))}
         <Box fontSize={'large'} display={'flex'} justifyContent={'end'} px={8} mb={20}>
           <PublishedDate

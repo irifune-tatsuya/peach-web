@@ -29,9 +29,7 @@ type startMailMagazineInputs = {
 export default function Article({ data, isShowToc = true, isFaqLayout = false }: Props) {
   const toc = renderToc(data.content);
   const pathName = usePathname();
-  const fullPath = `${new URL(process.env.BASE_URL || 'http://localhost:3000')}${pathName.slice(
-    1,
-  )}`;
+  const fullPath = `${process.env.NEXT_PUBLIC_BASE_URL}${pathName}`;
   return (
     <>
       <Box
@@ -74,7 +72,6 @@ export default function Article({ data, isShowToc = true, isFaqLayout = false }:
           ''
         ) : (
           <>
-            {' '}
             <Box
               px={4}
               h={'37px'}
