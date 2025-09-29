@@ -1,6 +1,8 @@
 'use client';
-import { Box, Image, Link, Text, useDisclosure } from '@chakra-ui/react';
 import { NextPage } from 'next';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useState } from 'react'; // 👈 useStateをインポート
 import { ImDisplay } from 'react-icons/im';
 import { IoBookOutline } from 'react-icons/io5';
 import { GoMail } from 'react-icons/go';
@@ -10,83 +12,41 @@ import { IMAGEBASEURL } from '@/constants';
 import React from 'react';
 
 export const NavBar: NextPage = () => {
-  const { isOpen, onToggle, onClose } = useDisclosure();
+  // 👇 useDisclosureをuseStateに置き換え
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
-      <Box
-        as="nav"
-        pt={'1em'}
-        pb={'2em'}
-        px={'2em'}
-        position={'fixed'}
-        bottom={0}
-        zIndex={10}
-        w={'100%'}
-        bg={'momo.300'}
-        display={{ base: 'flex', md: 'none' }}
-        justifyContent={'space-between'}
-        alignItems={'flex-end'}
-      >
-        <Link
-          href="/article"
-          display={'flex'}
-          flexFlow={'column'}
-          alignItems={'center'}
-          w={10}
-          _hover={{ textDecoration: 'none' }}
-        >
-          <IoBookOutline size={'2rem'} color={'ff7bac'} />
-          <Text fontSize={'x-small'} fontWeight={'bold'} mt={'0.2em'}>
-            新着記事
-          </Text>
+      <nav className="flex gap-4 w-full h-24 items-start justify-center bg-momo-300 fixed bottom-0 z-10 md:hidden pt-5">
+        <Link href="/article" className="flex w-14 flex-col items-center hover:no-underline">
+          <IoBookOutline size={'2rem'} className="text-momo-100" />
+          <span className="mt-[0.2em] text-[10px]">新着記事</span>
         </Link>
-        <Link
-          href="/service"
-          display={'flex'}
-          flexFlow={'column'}
-          alignItems={'center'}
-          w={10}
-          _hover={{ textDecoration: 'none' }}
-        >
-          <ImDisplay size={'2rem'} color={'ff7bac'} />
-          <Text fontSize={'x-small'} fontWeight={'bold'} mt={'0.2em'}>
-            サービス
-          </Text>
+
+        <Link href="/service" className="flex w-14 flex-col items-center hover:no-underline">
+          <ImDisplay size={'2rem'} className="text-momo-100" />
+          <span className="mt-[0.2em] text-[10px] font-bold">サービス</span>
         </Link>
-        <Link
-          href="/"
-          display={'flex'}
-          flexFlow={'column'}
-          alignItems={'center'}
-          w={10}
-          _hover={{ textDecoration: 'none' }}
-        >
+
+        <Link href="/" className="flex w-14 flex-col items-center hover:no-underline">
           <Image
             src={`${IMAGEBASEURL}/common/nav-momo.webp`}
             alt={'ホームに戻る'}
-            w={'2rem'}
-            h={'auto'}
+            width={32}
+            height={32}
+            className="h-auto w-8"
           />
-          <Text fontSize={'x-small'} fontWeight={'bold'} mt={'0.4em'}>
-            ホーム
-          </Text>
+          <span className="mt-[0.4em] text-[10px] font-bold">ホーム</span>
         </Link>
-        <Link
-          href="/contact"
-          display={'flex'}
-          flexFlow={'column'}
-          alignItems={'center'}
-          w={10}
-          _hover={{ textDecoration: 'none' }}
-        >
-          <GoMail size={'2rem'} color={'ff7bac'} />
-          <Text fontSize={'x-small'} fontWeight={'bold'} mt={'0.2em'}>
-            お問合せ
-          </Text>
+
+        <Link href="/contact" className="flex w-14 flex-col items-center hover:no-underline">
+          <GoMail size={'2rem'} className="text-momo-100" />
+          <span className="mt-[0.2em] text-[10px] font-bold">お問合せ</span>
         </Link>
-        <MenuButton onToggle={onToggle} />
-      </Box>
-      <NavDrawer isOpen={isOpen} onClose={onClose} />
+
+        <MenuButton onToggle={() => setIsOpen(!isOpen)} />
+      </nav>
+      <NavDrawer isOpen={isOpen} onCloseAction={() => setIsOpen(false)} />
     </>
   );
 };

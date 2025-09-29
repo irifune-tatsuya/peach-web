@@ -1,9 +1,9 @@
 'use client';
 
-import { Box, Link, Text, Icon } from '@chakra-ui/react';
-import { IoMail } from 'react-icons/io5';
 import { NextPage } from 'next';
 import { ElementType } from 'react';
+import Link from 'next/link'; // 👈 next/linkをインポート
+import { IoMail } from 'react-icons/io5';
 
 interface ContactButtonProps {
   href?: string;
@@ -22,38 +22,15 @@ export const ContactButton: NextPage<ContactButtonProps> = ({
 
   return (
     <Link
-      display={'block'}
       href={href}
-      textAlign={'center'}
-      _hover={{ textDecoration: 'none' }}
+      className="block text-center hover:no-underline"
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noopener noreferrer' : undefined}
     >
-      <Box
-        py={'0.5em'}
-        px={'1.5em'}
-        display={'flex'}
-        justifyContent={'center'}
-        alignItems={'center'}
-        height={'100%'}
-        borderRadius={40}
-        border={2}
-        borderStyle={'solid'}
-        borderColor={'momo.100'}
-        color={'momo.100'}
-        fontWeight={'bold'}
-        className={'contactButton'}
-        transition="all 0.2s ease-in-out"
-        _hover={{
-          bg: 'momo.100',
-          color: 'white',
-        }}
-      >
-        <Icon as={IconComponent} boxSize={iconSize} />
-        <Text ml={2} _hover={{ textDecorationLine: 'none' }}>
-          {text}
-        </Text>
-      </Box>
+      <div className="flex h-full items-center justify-center rounded-[40px] border-2 border-solid border-momo-100 py-[0.5em] px-[1.5em] font-bold text-momo-100 transition-all duration-200 ease-in-out hover:bg-momo-100 hover:text-white">
+        <IconComponent size={iconSize} />
+        <span className="ml-2 hover:no-underline">{text}</span>
+      </div>
     </Link>
   );
 };

@@ -1,4 +1,3 @@
-import { Box } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import { MdMenu } from 'react-icons/md';
 
@@ -8,13 +7,11 @@ type Props = {
 
 export const MenuButton: NextPage<Props> = ({ onToggle }) => {
   return (
-    <Box as="button" onClick={onToggle} p={0} w={10}>
-      <Box display={'flex'} flexFlow={'column'} alignItems={'center'}>
-        <MdMenu size={'2.2rem'} />
-        <Box as="span" fontSize={'x-small'} fontWeight={'bold'}>
-          メニュー
-        </Box>
-      </Box>
-    </Box>
+    <button onClick={onToggle} className="w-14">
+      <div className="flex flex-col items-center">
+        <MdMenu size={32} />
+        <span className="text-[10px]">メニュー</span>
+      </div>
+    </button>
   );
 };
