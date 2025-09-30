@@ -1,35 +1,40 @@
-import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
-import { NextPage } from 'next';
+import Link from 'next/link';
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
-import styles from './index.module.css';
 
-type breadcrumb = {
+type BreadcrumbItem = {
   title: string;
   href: string;
   isCurrentPage: boolean;
 };
 
 type Props = {
-  breadcrumbs: Array<breadcrumb>;
+  breadcrumbs: BreadcrumbItem[];
 };
 
-export const Breadcrumbs: NextPage<Props> = ({ breadcrumbs }) => {
+export const Breadcrumbs = ({ breadcrumbs }: Props) => {
   return (
-    <Box bg={'momo.300'} fontSize={'small'} py={10} px={4} mb={{ base: 16, md: 0 }}>
-      <Breadcrumb
-        spacing="8px"
-        separator={<MdOutlineKeyboardArrowRight color={'momo.400'} />}
-        maxW={1152}
-        className={styles.breadcrumb}
-      >
+    <nav aria-label="breadcrumb" className="bg-momo-300 px-4 py-4 text-sm">
+      <ol className="mx-auto flex max-w-6xl flex-wrap">
         {breadcrumbs.map((item, i) => (
-          <BreadcrumbItem key={i}>
-            <BreadcrumbLink href={item.href} isCurrentPage={item.isCurrentPage}>
-              {item.title}
-            </BreadcrumbLink>
-          </BreadcrumbItem>
+          <li key={i} className="flex items-center">
+            {item.isCurrentPage ? (
+              <span className="font-bold text-gray-500" aria-current="page">
+                {item.title}
+              </span>
+            ) : (
+              <Link
+                href={item.href}
+                className="transition-colors hover:text-momo-100 hover:underline"
+              >
+                {item.title}
+              </Link>
+            )}
+            {i < breadcrumbs.length - 1 && (
+              <MdOutlineKeyboardArrowRight className="mx-2 h-5 w-5 shrink-0" />
+            )}
+          </li>
         ))}
-      </Breadcrumb>
-    </Box>
+      </ol>
+    </nav>
   );
 };
