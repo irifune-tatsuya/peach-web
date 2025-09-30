@@ -17,7 +17,7 @@ export const Header: NextPage = () => {
   return (
     <header
       id="page-header"
-      className="hidden h-[76px] w-full bg-white px-6 py-3 fixed top-0 z-10 md:block"
+      className="hidden h-[76px] w-full bg-white px-6 py-3 fixed top-0 z-20 md:block"
     >
       <div className="flex justify-between">
         <Link href="/">

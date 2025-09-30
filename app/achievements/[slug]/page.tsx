@@ -1,32 +1,20 @@
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import Title from '@/components/Title';
-import {
-  Box,
-  Center,
-  Image,
-  Link,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  Tag,
-  Text,
-} from '@chakra-ui/react';
 import { IMAGEBASEURL } from '@/constants';
-import React from 'react';
-import { FaExternalLinkAlt } from 'react-icons/fa';
 import { ACHIEVEMENTS } from '@/constants/achievements';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
+import { FaExternalLinkAlt } from 'react-icons/fa';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export const revalidate = 3600;
 
-export async function generateMetadata(
-  props: {
-    params: Promise<{ slug: string }>;
-  }
-): Promise<Metadata> {
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const params = await props.params;
   const currentSlug = params.slug;
   const achievement = ACHIEVEMENTS.find((item) => item.slug === currentSlug);
@@ -77,167 +65,113 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
     },
   ];
 
+  const buttonBaseClasses =
+    'flex items-center justify-center gap-2 rounded-lg p-3 text-center font-bold transition-opacity hover:opacity-80';
+
   return (
     <>
-      <Title titleEn={`制作実績のご紹介`} titleJp={`${achievement.name}様`} />
-      <Box
-        bg={'linear-gradient(to bottom, #fcdee9, #ffffff);'}
-        position={'relative'}
-        overflow={'hidden'}
-        pt={{ base: 88, md: 120 }}
-        pb={{ base: 90, md: 180 }}
-      >
-        <Box p={4} maxW={810} mx={'auto'}>
-          <Center>
-            <Link
-              display={'block'}
-              bg={'momo.100'}
-              color={'white'}
-              fontWeight={'bold'}
-              textAlign={'center'}
-              p={3}
-              mb={8}
-              w={350}
-              rounded={'lg'}
+      <Title titleEn={'制作実績のご紹介'} titleJp={`${achievement.name}様`} />
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#fcdee9] to-white pt-[88px] pb-[90px] md:pt-32 md:pb-44">
+        <div className="mx-auto max-w-4xl p-4">
+          <div className="flex justify-center">
+            <a
               href={achievement.href}
-              isExternal
-              _hover={{ textDecoration: 'none', opacity: 0.8 }}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${buttonBaseClasses} mb-8 w-full max-w-sm bg-momo-100 text-white`}
             >
-              <Box
-                as={'span'}
-                display={'flex'}
-                justifyContent={'center'}
-                alignItems={'center'}
-                gap={1}
-              >
-                <Box as={'span'}>サイトを見る</Box>
-                <FaExternalLinkAlt />
-              </Box>
-            </Link>
-          </Center>
-          <Tabs colorScheme={'pink'} w={'100%'}>
-            <TabList>
-              <Tab>スマホ版</Tab>
-              <Tab>パソコン版</Tab>
-              <Tab>サイト解説</Tab>
-            </TabList>
-            <TabPanels>
-              <TabPanel px={0}>
-                <Center>
-                  <Image
-                    src={`${IMAGEBASEURL}/achievements/${achievement.slug}/fullpage_sp.webp`}
-                    alt={`${achievement.name}様のスマホサイト`}
-                    w={'100%'}
-                    h={'auto'}
-                    maxW={'430px'}
-                  />
-                </Center>
-              </TabPanel>
-              <TabPanel px={0}>
-                <Image
-                  src={`${IMAGEBASEURL}/achievements/${achievement.slug}/fullpage_pc.webp`}
-                  alt={`${achievement.name}様のパソコンサイト`}
-                  w={'100%'}
-                  h={'auto'}
-                />
-              </TabPanel>
-              <TabPanel px={0}>
-                <Box>
-                  <Tag bg={'momo.100'} color={'white'} fontWeight={'bold'} py={2} px={4}>
-                    ご依頼主様
-                  </Tag>
-                  <Text py={3} px={5}>
-                    {achievement.name}
-                  </Text>
-                </Box>
-                <Box mt={4}>
-                  <Tag bg={'momo.100'} color={'white'} fontWeight={'bold'} py={2} px={4}>
-                    業 種
-                  </Tag>
-                  <Text py={3} px={5}>
-                    {achievement.typeOfIndustry}
-                  </Text>
-                </Box>
-                <Box mt={4}>
-                  <Tag bg={'momo.100'} color={'white'} fontWeight={'bold'} py={2} px={4}>
-                    制作物
-                  </Tag>
-                  <Text py={3} px={5}>
-                    ランディングページ
-                  </Text>
-                </Box>
-                <Box mt={4}>
-                  <Tag bg={'momo.100'} color={'white'} fontWeight={'bold'} py={2} px={4}>
-                    テーマ
-                  </Tag>
-                  <Text py={3} px={5}>
-                    {achievement.theme}
-                  </Text>
-                </Box>
-                <Box mt={4}>
-                  <Tag bg={'momo.100'} color={'white'} fontWeight={'bold'} py={2} px={4}>
-                    ターゲット
-                  </Tag>
-                  <Text py={3} px={5}>
-                    {achievement.target}
-                  </Text>
-                </Box>
-                <Box mt={4}>
-                  <Tag bg={'momo.100'} color={'white'} fontWeight={'bold'} py={2} px={4}>
-                    制作のポイント
-                  </Tag>
-                  <Text py={3} px={5}>
-                    {achievement.point}
-                  </Text>
-                </Box>
-              </TabPanel>
-            </TabPanels>
-          </Tabs>
-        </Box>
-        <Center>
-          <Link
-            display={'block'}
-            bg={'momo.100'}
-            color={'white'}
-            fontWeight={'bold'}
-            textAlign={'center'}
-            p={3}
-            mt={8}
-            w={350}
-            rounded={'lg'}
-            href={achievement.href}
-            isExternal
-            _hover={{ textDecoration: 'none', opacity: 0.8 }}
-          >
-            <Box
-              as={'span'}
-              display={'flex'}
-              justifyContent={'center'}
-              alignItems={'center'}
-              gap={1}
-            >
-              <Box as={'span'}>サイトを見る</Box>
+              <span>サイトを見る</span>
               <FaExternalLinkAlt />
-            </Box>
-          </Link>
-        </Center>
-        <Center>
-          <Link
-            display={'block'}
-            bg={'momo.200'}
-            fontWeight={'bold'}
-            textAlign={'center'}
-            p={3}
-            mt={2}
-            w={350}
-            rounded={'lg'}
-            href={`/achievements`}
-            _hover={{ textDecoration: 'none', opacity: 0.8 }}
-          >
-            実績一覧に戻る
-          </Link>
-        </Center>
-      </Box>
+            </a>
+          </div>
+
+          <Tabs defaultValue="sp" className="w-full">
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="sp">スマホ版</TabsTrigger>
+              <TabsTrigger value="pc">パソコン版</TabsTrigger>
+              <TabsTrigger value="details">サイト解説</TabsTrigger>
+            </TabsList>
+            <TabsContent value="sp" className="mt-6">
+              <div className="flex justify-center">
+                <Image
+                  src={`${IMAGEBASEURL}/achievements/${achievement.slug}/fullpage_sp.webp`}
+                  alt={`${achievement.name}様のスマホサイト`}
+                  width={430}
+                  height={1200}
+                  className="h-auto w-full max-w-[430px]"
+                />
+              </div>
+            </TabsContent>
+            <TabsContent value="pc" className="mt-6">
+              <Image
+                src={`${IMAGEBASEURL}/achievements/${achievement.slug}/fullpage_pc.webp`}
+                alt={`${achievement.name}様のパソコンサイト`}
+                width={1200}
+                height={800}
+                className="h-auto w-full"
+              />
+            </TabsContent>
+            <TabsContent value="details" className="mt-6">
+              <div className="space-y-6 rounded-lg border bg-white p-6">
+                <div>
+                  <span className="rounded-md bg-momo-100 px-4 py-2 font-bold text-white">
+                    ご依頼主様
+                  </span>
+                  <p className="px-5 pt-3">{achievement.name}</p>
+                </div>
+                <div>
+                  <span className="rounded-md bg-momo-100 px-4 py-2 font-bold text-white">
+                    業 種
+                  </span>
+                  <p className="px-5 pt-3">{achievement.typeOfIndustry}</p>
+                </div>
+                <div>
+                  <span className="rounded-md bg-momo-100 px-4 py-2 font-bold text-white">
+                    制作物
+                  </span>
+                  <p className="px-5 pt-3">ランディングページ</p>
+                </div>
+                <div>
+                  <span className="rounded-md bg-momo-100 px-4 py-2 font-bold text-white">
+                    テーマ
+                  </span>
+                  <p className="px-5 pt-3">{achievement.theme}</p>
+                </div>
+                <div>
+                  <span className="rounded-md bg-momo-100 px-4 py-2 font-bold text-white">
+                    ターゲット
+                  </span>
+                  <p className="px-5 pt-3">{achievement.target}</p>
+                </div>
+                <div>
+                  <span className="rounded-md bg-momo-100 px-4 py-2 font-bold text-white">
+                    制作のポイント
+                  </span>
+                  <p className="px-5 pt-3">{achievement.point}</p>
+                </div>
+              </div>
+            </TabsContent>
+          </Tabs>
+
+          <div className="mt-8 flex flex-col items-center justify-center gap-2">
+            <a
+              href={achievement.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${buttonBaseClasses} w-full max-w-sm bg-momo-100 text-white`}
+            >
+              <span>サイトを見る</span>
+              <FaExternalLinkAlt />
+            </a>
+            <Link
+              href="/achievements"
+              className={`${buttonBaseClasses} w-full max-w-sm bg-momo-200 text-black`}
+            >
+              実績一覧に戻る
+            </Link>
+          </div>
+        </div>
+      </section>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );

@@ -26,6 +26,7 @@
     "@emotion/styled": "^11.13.0",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-tabs": "^1.1.13",
     "@tailwindcss/postcss": "^4.1.13",
     "@types/cheerio": "^0.22.31",
     "@types/gtag.js": "^0.0.20",
