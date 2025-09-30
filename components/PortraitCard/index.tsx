@@ -1,7 +1,7 @@
 import { Article } from '@/libs/microcms';
-import styles from './index.module.css';
 import PublishedDate from '../PublishedDate';
-import { Card, CardBody, Heading, Image, Link, Stack } from '@chakra-ui/react';
+import Image from 'next/image';
+import Link from 'next/link';
 import { IMAGEBASEURL } from '@/constants';
 
 type Props = {
@@ -11,30 +11,23 @@ type Props = {
 };
 
 export default function PortraitCard({ article, category, maxW }: Props) {
+  const imageUrl = article.subthumbnail?.url || `${IMAGEBASEURL}/portrait-no-image.webp`;
+  const altText = article.subthumbnail ? article.title : 'No Image';
+
   return (
-    <Card minW={250} w={'auto'} maxW={maxW}>
-      <Link href={`/${category}/${article.id}`} _hover={{ textDecoration: 'none' }}>
-        <CardBody p={0}>
-          {article.subthumbnail ? (
-            <Image src={article.subthumbnail?.url} alt={article.title} w={'100%'} h={'auto'} />
-          ) : (
-            <Image
-              src={`${IMAGEBASEURL}/portrait-no-image.webp`}
-              alt={'No Image'}
-              w={'100%'}
-              maxW={250}
-              h={'auto'}
-              loading={'lazy'}
-            />
-          )}
-          <Stack p={2}>
-            <Heading as={'h3'} size={'sm'} my={1} className={styles.articleTitle} h={10}>
-              {article.title}
-            </Heading>
-            <PublishedDate date={article.publishedAt || article.createdAt} />
-          </Stack>
-        </CardBody>
+    <div
+      className="min-w-[250px] w-auto overflow-hidden rounded-lg bg-white shadow-md"
+      style={{ maxWidth: `${maxW}px` }}
+    >
+      <Link href={`/${category}/${article.id}`} className="hover:no-underline">
+        <div className="relative w-full aspect-[2/3]">
+          <Image src={imageUrl} alt={altText} fill className="object-cover" />
+        </div>
+        <div className="flex flex-col p-2">
+          <h3 className="my-3 text-base line-clamp-2">{article.title}</h3>
+          <PublishedDate date={article.publishedAt || article.createdAt} />
+        </div>
       </Link>
-    </Card>
+    </div>
   );
 }

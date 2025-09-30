@@ -1,30 +1,20 @@
 import { IMAGEBASEURL } from '@/constants';
-import { Image } from '@chakra-ui/react';
-import React from 'react';
+import Image from 'next/image';
 
 type Props = {
-  mt?: Array<string>;
-  ml?: Array<string>;
-  display?: Array<string>;
+  className?: string;
 };
 
-export default function SideScrollIcon(props: Props) {
-  const {
-    mt = { base: '15px', sm: '30px' },
-    ml = { base: '10px' },
-    display = { base: 'block', md: 'none' },
-  } = props;
+export default function SideScrollIcon({ className }: Props) {
+  const defaultClasses = 'block md:hidden mt-[15px] sm:mt-[30px] ml-[10px] mb-[10px]';
+
   return (
     <Image
       src={`${IMAGEBASEURL}/common/side-scroll.webp`}
-      alt={'横にスクロールできます'}
-      display={display}
-      mt={mt}
-      ml={ml}
-      mb="10px"
-      w="60px"
-      h="20px"
-      loading={'lazy'}
+      alt="横にスクロールできます"
+      width={60}
+      height={20}
+      className={`${defaultClasses} ${className || ''}`}
     />
   );
 }

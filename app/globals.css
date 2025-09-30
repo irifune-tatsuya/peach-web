@@ -1,17 +1,13 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono',
-    'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono', 'Droid Sans Mono',
-    'Courier New', monospace;
-
   --color-momo-100: oklch(73.93% 0.17 3.39);
   --color-momo-200: oklch(86.9% 0.08 3.38);
   --color-momo-300: oklch(93.34% 0 0);
   --color-momo-400: oklch(87.85% 0 0);
   --color-momo-500: oklch(76.47% 0 0);
   --color-momo-600: oklch(92.83% 0.04 3.38);
-  --color-foreground: oklch(20.56% 0 0);
+  --color-foreground: oklch(37.3% 0.034 259.733);
   --color-background: oklch(100% 0 0);
 
   --animate-accordion-down: accordion-down 0.2s ease-out;
@@ -24,6 +20,7 @@
   --animate-slide-fade-out-to-right: slide-fade-out-to-right 300ms ease-in;
   --animate-slide-fade-out-to-bottom: slide-fade-out-to-bottom 300ms ease-in;
   --animate-slide-fade-out-to-left: slide-fade-out-to-left 300ms ease-in;
+  --animate-fade-in: fade-in 2s ease-in-out 0.5s forwards;
 
   @keyframes accordion-down {
     from {
@@ -122,10 +119,17 @@
       opacity: 0;
     }
   }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 }
 
 body {
-  font-family: var(--font-mono);
   color: var(--color-foreground);
   background: var(--color-background);
 }

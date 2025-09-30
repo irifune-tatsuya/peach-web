@@ -1,8 +1,4 @@
-'use client';
-
-import { Box, Link, Icon } from '@chakra-ui/react';
-import styles from './index.module.css';
-import { NextPage } from 'next';
+import Link from 'next/link';
 import { FiArrowRight } from 'react-icons/fi';
 
 type Props = {
@@ -10,69 +6,42 @@ type Props = {
   size: 'large' | 'small';
 };
 
-export const ViewMoreButton: NextPage<Props> = ({ href, size }) => {
-  let sizeData: {
-    letterSpacing: number;
-    circleBase: number;
-    circleMd: number;
-    mlBase: number;
-    mlMd: number;
-    IconW: number;
-  };
+export const ViewMoreButton = ({ href, size }: Props) => {
+  const isSmall = size === 'small';
 
-  if (size === 'small') {
-    sizeData = {
-      letterSpacing: 1.5,
-      circleBase: 30,
-      circleMd: 10,
-      mlBase: 3,
-      mlMd: 6,
-      IconW: 3,
-    };
-  } else {
-    sizeData = {
-      letterSpacing: 2,
-      circleBase: 62,
-      circleMd: 62,
-      mlBase: 30,
-      mlMd: 46,
-      IconW: 4,
-    };
-  }
   return (
-    <Box display={{ base: 'flex', md: 'block' }} justifyContent={'center'}>
-      <Link
-        href={href}
-        textDecoration={'none'}
-        _hover={{ textDecoration: 'none', coler: 'momo.100' }}
-        display={'flex'}
-        alignItems={'center'}
-      >
-        <Box
-          as={'span'}
-          fontWeight={'bold'}
-          fontSize={'small'}
-          letterSpacing={sizeData.letterSpacing}
-          textDecoration={'underline'}
-          textUnderlineOffset={3}
-          className={styles.viewMoreText}
+    <div className="flex justify-center md:block">
+      <Link href={href} className="group flex items-center no-underline">
+        <span
+          className={`
+            font-bold text-sm underline underline-offset-3
+            transition-colors group-hover:text-momo-100
+            ${isSmall ? 'tracking-[1.5px]' : 'tracking-[2px]'}
+          `}
         >
           View More
-        </Box>
-        <Box
-          w={{ base: sizeData.circleBase, md: sizeData.circleMd }}
-          h={{ base: sizeData.circleBase, md: sizeData.circleMd }}
-          bg={'momo.100'}
-          ml={{ base: sizeData.mlBase, md: sizeData.mlMd }}
-          position={'relative'}
-          borderRadius={'50%'}
-          className={styles.viewMoreButton}
+        </span>
+        <div
+          className={`
+            relative rounded-full bg-momo-100 transition-transform
+            group-hover:scale-110
+            ${
+              isSmall
+                ? 'ml-3 h-[40px] w-[40px] md:ml-6'
+                : 'ml-[30px] h-[62px] w-[62px] md:ml-[46px]'
+            }
+          `}
         >
-          <Box position={'absolute'} top={'50%'} left={'50%'} transform={'translate(-50%, -50%)'}>
-            <Icon as={FiArrowRight} color={'white'} w={sizeData.IconW} h={'auto'} />
-          </Box>
-        </Box>
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <FiArrowRight
+              className={`
+                text-white
+                ${isSmall ? 'h-4 w-4' : 'h-5 w-5'}
+              `}
+            />
+          </div>
+        </div>
       </Link>
-    </Box>
+    </div>
   );
 };
