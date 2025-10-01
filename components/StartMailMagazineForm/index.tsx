@@ -1,25 +1,17 @@
 'use client';
 
-import {
-  Box,
-  Button,
-  Center,
-  Checkbox,
-  FormControl,
-  FormErrorMessage,
-  Heading,
-  Icon,
-  Image,
-  Input,
-  Link,
-  Text,
-} from '@chakra-ui/react';
-import { NextPage } from 'next';
-import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
+import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 import { createStartMailMagazineData } from '@/app/_action/contact';
 import { IMAGEBASEURL } from '@/constants';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 type startMailMagazineInputs = {
   lastname: string;
@@ -28,13 +20,10 @@ type startMailMagazineInputs = {
   email: string;
 };
 
-export const StartMailMagazineForm: NextPage = () => {
+export const StartMailMagazineForm: React.FC = () => {
   const [isStartChecked, setIsStartChecked] = useState(false);
   const [startstatus, setStartStatus] = useState<string | null>(null);
 
-  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setIsStartChecked(event.target.checked);
-  };
   const {
     handleSubmit,
     register,
@@ -48,180 +37,155 @@ export const StartMailMagazineForm: NextPage = () => {
 
   if (startstatus === 'succcess') {
     return (
-      <Box mx={'auto'} bg={'momo.300'} p={8}>
-        <Heading fontSize={'x-large'} textAlign={'center'}>
-          登録完了！
-        </Heading>
-        <Text mt={5} lineHeight={'2rem'}>
-          ニュースレターの登録が完了しました。
-          <Box as={'br'} />
-          登録メールアドレス宛にサンクスメールをお送りしました。正しく受け取れていることをご確認ください。
-          <Box as={'br'} />
-          引き続きピーチウェブを宜しくお願い致します。
-        </Text>
-        <Center>
+      <Card className="bg-[var(--color-momo-300)] p-4 text-center">
+        <CardHeader>
+          <CardTitle>登録完了！</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <p className="leading-loose">
+            ニュースレターの登録が完了しました。
+            <br />
+            登録メールアドレス宛にサンクスメールをお送りしました。正しく受け取れていることをご確認ください。
+            <br />
+            引き続きピーチウェブを宜しくお願い致します。
+          </p>
           <Image
             src={`${IMAGEBASEURL}/common/square_logo.svg`}
-            width={'200px'}
-            height={'auto'}
-            maxW={300}
+            width={200}
+            height={200}
             alt={'ピーチウェブロゴ'}
-            loading={'lazy'}
+            className="mx-auto"
           />
-        </Center>
-      </Box>
+        </CardContent>
+      </Card>
     );
   }
 
   if (startstatus === 'error') {
     return (
-      <Box mx={'auto'} bg={'momo.300'} p={8}>
-        <Heading fontSize={'x-large'} textAlign={'center'}>
-          送信が失敗しました。
-        </Heading>
-        <Text mt={5} lineHeight={'2rem'}>
-          申し訳ございません。
-          <Box as={'br'} />
-          サーバー障害等の理由により、ニュースレターの登録送信に失敗しました。下記のメールアドレス宛までお問い合わせいただけますと幸いです。
-          <Box as={'br'} />
-          <Box as={'br'} />
-          合同会社ピーチウェブ
-          <Box as={'br'} />
-          irifune@peach-web.co.jp
-          <Box as={'br'} />
-          引き続きピーチウェブを宜しくお願い致します。
-        </Text>
-        <Center>
+      <Card className="bg-[var(--color-momo-300)] p-4 text-center">
+        <CardHeader>
+          <CardTitle>送信が失敗しました。</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <p className="leading-loose">
+            申し訳ございません。サーバー障害等の理由により、ニュースレターの登録送信に失敗しました。
+            <br />
+            下記のメールアドレス宛までお問い合わせいただけますと幸いです。
+            <br />
+            <br />
+            合同会社ピーチウェブ
+            <br />
+            irifune@peach-web.co.jp
+          </p>
           <Image
             src={`${IMAGEBASEURL}/common/square_logo.svg`}
-            width={'200px'}
-            height={'auto'}
-            maxW={300}
+            width={200}
+            height={200}
             alt={'ピーチウェブロゴ'}
-            loading={'lazy'}
+            className="mx-auto"
           />
-        </Center>
-      </Box>
+        </CardContent>
+      </Card>
     );
   }
 
   return (
-    <Box as={'form'} onSubmit={handleSubmit(onStartSubmit)}>
-      <Box as={'dl'} display={{ base: 'block', lg: 'flex' }}>
-        <Box as={'dt'} mt={5} fontSize={'large'} fontWeight={'bold'} w={220}>
-          ご氏名
-          <Box as={'sup'} color={'momo.100'} ml={1}>
-            ※
-          </Box>
-        </Box>
-        <Box as={'dd'} display={{ base: 'block', sm: 'flex' }} gap={{ base: 5, md: 5 }} w={'100%'}>
-          <FormControl isInvalid={Boolean(errors.lastname)}>
+    <form onSubmit={handleSubmit(onStartSubmit)} className="space-y-6">
+      <div className="grid grid-cols-1 gap-y-6 gap-x-4 lg:grid-cols-[220px_1fr]">
+        <Label htmlFor="lastname" className="mt-5 text-lg font-bold">
+          ご氏名<sup className="ml-1 text-[var(--color-momo-100)]">※</sup>
+        </Label>
+        <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
+          <div>
             <Input
-              type={'text'}
-              id={'lastname'}
-              placeholder={'姓'}
-              h={'60px'}
-              w={'100%'}
-              bg={'momo.300'}
+              id="lastname"
+              placeholder="姓"
+              className="h-14 bg-[var(--color-momo-300)] border-0"
               {...register('lastname', {
                 required: '性をご入力ください',
                 maxLength: { value: 10, message: '10文字以内で入力してください' },
               })}
             />
-            <FormErrorMessage>{errors.lastname && errors.lastname.message}</FormErrorMessage>
-          </FormControl>
-          <FormControl mt={{ base: 4, sm: 0 }} isInvalid={Boolean(errors.firstname)}>
+            {errors.lastname && (
+              <p className="mt-1 text-sm text-red-500">{errors.lastname.message}</p>
+            )}
+          </div>
+          <div>
             <Input
-              type={'text'}
-              id={'firstname'}
-              placeholder={'名'}
-              h={'60px'}
-              w={'100%'}
-              bg={'momo.300'}
+              id="firstname"
+              placeholder="名"
+              className="h-14 bg-[var(--color-momo-300)] border-0"
               {...register('firstname', {
                 required: '名をご入力ください',
                 maxLength: { value: 10, message: '10文字以内で入力してください' },
               })}
             />
-            <FormErrorMessage>{errors.firstname && errors.firstname.message}</FormErrorMessage>
-          </FormControl>
-        </Box>
-      </Box>
-      <Box as={'dl'} display={{ base: 'block', lg: 'flex' }} mt={4}>
-        <Box as={'dt'} mt={5} fontSize={'large'} fontWeight={'bold'} w={220}>
+            {errors.firstname && (
+              <p className="mt-1 text-sm text-red-500">{errors.firstname.message}</p>
+            )}
+          </div>
+        </div>
+
+        <Label htmlFor="company" className="mt-5 text-lg font-bold">
           御社名
-        </Box>
-        <FormControl>
+        </Label>
+        <div>
           <Input
-            type={'text'}
-            id={'company'}
-            placeholder={'合同会社ピーチウェブ'}
-            h={'60px'}
-            w={'100%'}
-            bg={'momo.300'}
+            id="company"
+            placeholder="合同会社ピーチウェブ"
+            className="h-14 bg-[var(--color-momo-300)] border-0"
             {...register('company', {
               maxLength: { value: 50, message: '50文字以内で入力してください' },
             })}
           />
-        </FormControl>
-      </Box>
-      <Box as={'dl'} display={{ base: 'block', lg: 'flex' }} mt={4}>
-        <Box as={'dt'} mt={5} fontSize={'large'} fontWeight={'bold'} w={220}>
-          メールアドレス
-          <Box as={'sup'} color={'momo.100'} ml={1}>
-            ※
-          </Box>
-        </Box>
-        <FormControl isInvalid={Boolean(errors.email)}>
+        </div>
+
+        <Label htmlFor="email" className="mt-5 text-lg font-bold">
+          メールアドレス<sup className="ml-1 text-[var(--color-momo-100)]">※</sup>
+        </Label>
+        <div>
           <Input
-            type={'email'}
-            id={'email'}
-            placeholder={'sample@xxxx.com'}
-            h={'60px'}
-            w={'100%'}
-            bg={'momo.300'}
+            id="email"
+            type="email"
+            placeholder="sample@xxxx.com"
+            className="h-14 bg-[var(--color-momo-300)] border-0"
             {...register('email', {
               required: 'メールアドレスを入力ください',
-              maxLength: { value: 50, message: '50文字以内で入力してください' },
               pattern: {
                 value: /^[a-zA-Z0-9-_\.]+@[a-zA-Z0-9-_\.]+$/,
-                message: 'メールアドレスをご入力してください',
+                message: 'メールアドレスの形式が正しくありません',
               },
             })}
           />
-          <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
-        </FormControl>
-      </Box>
-      <Box mt={4} display={'flex'} justifyContent={'center'}>
-        <Checkbox size="lg" colorScheme={'pink'} onChange={handleCheckboxChange}>
-          <Box as={'span'} fontWeight={'bold'} fontSize={'smaller'}>
-            <Link href={'/privacy'} isExternal color={'momo.100'} textDecoration={'underline'}>
-              プライバシーポリシー
-            </Link>
-            に同意する
-          </Box>
-        </Checkbox>
-      </Box>
-      <Box mt={8} display={'flex'} justifyContent={'center'}>
+          {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>}
+        </div>
+      </div>
+
+      <div className="flex items-center justify-center space-x-2 pt-2">
+        <Checkbox
+          id="terms"
+          onCheckedChange={(checked) => setIsStartChecked(Boolean(checked))}
+          className="border-momo-400"
+        />
+        <Label htmlFor="terms" className="text-sm font-bold">
+          <Link href="/privacy" target="_blank" className="text-[var(--color-momo-100)] underline">
+            プライバシーポリシー
+          </Link>
+          に同意する
+        </Label>
+      </div>
+
+      <div className="flex justify-center pt-4">
         <Button
-          type={'submit'}
-          borderRadius={'40px'}
-          bg={'momo.100'}
-          color={'white'}
-          h={'56px'}
-          w={'295px'}
-          textDecoration={'none'}
-          fontSize={'large'}
-          fontWeight={'bold'}
-          letterSpacing={2}
-          _hover={{ bg: 'momo.100', color: 'white' }}
-          isDisabled={!isStartChecked}
-          isLoading={isSubmitting}
+          type="submit"
+          className="h-14 w-72 rounded-full bg-[var(--color-momo-100)] text-lg font-bold text-white letter-spacing-2 hover:bg-[var(--color-momo-100)]/90"
+          disabled={!isStartChecked || isSubmitting}
         >
-          登録する
-          <Icon as={MdOutlineKeyboardArrowRight} boxSize={'2rem'} />
+          {isSubmitting ? '送信中...' : '登録する'}
+          <MdOutlineKeyboardArrowRight size="2rem" />
         </Button>
-      </Box>
-    </Box>
+      </div>
+    </form>
   );
 };

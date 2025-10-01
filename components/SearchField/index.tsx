@@ -1,34 +1,39 @@
 'use client';
 
 import { useCallback, useRef, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { Input } from '@chakra-ui/react';
+import { useSearchParams, useRouter } from 'next/navigation';
+import { Input } from '@/components/ui/input';
 import { IMAGEBASEURL } from '@/constants';
 
 type Props = { category: string };
 
 export default function SearchField({ category }: Props) {
+  const router = useRouter();
   const [composing, setComposition] = useState(false);
   const startComposition = () => setComposition(true);
   const endComposition = () => setComposition(false);
+
   const _onEnter: React.KeyboardEventHandler<HTMLInputElement> = useCallback(
     (e) => {
       if (e.code === 'Enter' && !composing) {
-        location.href = `/${category}/search?q=${inputRef.current?.value}`;
+        e.preventDefault();
+        const query = inputRef.current?.value || '';
+        router.push(`/${category}/search?q=${query}`);
       }
     },
-    [composing, category],
+    [composing, category, router],
   );
+
   const inputRef = useRef<HTMLInputElement>(null);
   const searchParams = useSearchParams();
   const defaultQuery = searchParams.get('q') || '';
+
   return (
     <Input
-      variant="flushed"
-      maxW={300}
-      pl={9}
-      pr={3}
-      bg={`url('${IMAGEBASEURL}/search.svg') no-repeat 10px center`}
+      className={`max-w-[300px] rounded-none border-0 border-b-2 bg-no-repeat bg-[10px_center] pl-9 pr-3 shadow-none focus-visible:ring-0 focus-visible:ring-offset-0`}
+      style={{
+        backgroundImage: `url('${IMAGEBASEURL}/search.svg')`,
+      }}
       type="search"
       name="q"
       ref={inputRef}

@@ -1,71 +1,59 @@
+'use client';
+
 import React from 'react';
 import {
   Accordion,
-  AccordionButton,
-  AccordionIcon,
+  AccordionContent,
   AccordionItem,
-  AccordionPanel,
-  Box,
-  Heading,
-  ListItem,
-  UnorderedList,
-} from '@chakra-ui/react';
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 import { Link } from 'react-scroll';
+import { List } from 'lucide-react';
 
-type toc = {
+type TocItem = {
   text?: string;
   id?: string;
   name?: string;
 };
 
 type Props = {
-  toc: toc[];
+  toc: TocItem[];
 };
 
 export default function TableOfContents({ toc }: Props) {
+  if (!toc || toc.length === 0) {
+    return null;
+  }
+
   return (
-    <>
-      {toc.length > 0 ? (
-        <Box as={'nav'} p={4} my={9}>
-          <Accordion allowToggle defaultIndex={[0]} bg={'momo.300'}>
-            <AccordionItem>
-              <Heading as={'h2'}>
-                <AccordionButton fontWeight={'bold'}>
-                  <AccordionIcon />
-                  <Box as={'span'} py={2} fontSize={'large'}>
-                    目次
-                  </Box>
-                </AccordionButton>
-              </Heading>
-              <AccordionPanel>
-                <UnorderedList listStyleType={'none'} pl={0}>
-                  {toc.map((item) => (
-                    <Link
-                      to={item.id || ''}
-                      smooth={true}
-                      duration={200}
-                      offset={-76}
-                      key={item.id}
-                    >
-                      <ListItem
-                        py={2}
-                        fontSize={'small'}
-                        textDecoration={'underline'}
-                        cursor={'pointer'}
-                        className={`toc-${item.name}`}
-                      >
-                        {item.text}
-                      </ListItem>
-                    </Link>
-                  ))}
-                </UnorderedList>
-              </AccordionPanel>
-            </AccordionItem>
-          </Accordion>
-        </Box>
-      ) : (
-        ''
-      )}
-    </>
+    <nav className="my-9 rounded-lg bg-momo-300 p-2 shadow-lg">
+      <Accordion type="single" collapsible className="w-full">
+        <AccordionItem value="item-1" className="border-b-0">
+          <AccordionTrigger className="px-4 font-bold hover:no-underline">
+            <div className="flex items-center gap-2">
+              <List className="h-5 w-5" />
+              <span className="py-2 text-lg">目次</span>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent className="pt-2">
+            <ul className="list-none space-y-1 p-2">
+              {toc.map((item) => (
+                <li key={item.id}>
+                  <Link
+                    to={item.id || ''}
+                    smooth={true}
+                    duration={200}
+                    offset={-76}
+                    className={`toc-${item.name} block cursor-pointer px-4 py-2 text-sm transition-all hover:pl-6`}
+                  >
+                    {item.text}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </nav>
   );
 }

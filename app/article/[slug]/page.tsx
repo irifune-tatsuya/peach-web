@@ -24,7 +24,6 @@ export async function generateMetadata({
   const params = await paramsPromise;
   const searchParams = await searchParamsPromise;
   const data = await getDetail(params.slug, { draftKey: searchParams.draftKey });
-
   const defaultImageUrl = `${IMAGEBASEURL}/ogp.jpg`;
   const defaultDescription =
     'あなたのビジネスが永く愛されますようWEBブランディングで岡山の企業をサポートする合同会社ピーチウェブの公式サイトです。';
@@ -58,18 +57,18 @@ export async function generateMetadata({
   };
 }
 
-const ContactButtons = [
+const contactButtons = [
   {
-    bg: 'momo.100',
-    color: 'white',
+    bgClassName: 'bg-[var(--color-momo-100)]',
+    textClassName: 'text-white',
     href: '/',
     isExternal: false,
     title: 'TOPページへ',
     icon: <IoMdHome />,
   },
   {
-    bg: 'momo.300',
-    color: 'black',
+    bgClassName: 'bg-[var(--color-momo-300)]',
+    textClassName: 'text-black',
     href: '/article',
     isExternal: false,
     title: '新着記事一覧へ',
@@ -108,7 +107,7 @@ export default async function Page({
     <>
       {isEnabled && <PreviewAlert />}
       <Article data={data} />
-      <ButtonArea buttons={ContactButtons} bg={'white'} />
+      <ButtonArea buttons={contactButtons} className="bg-white" />
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );

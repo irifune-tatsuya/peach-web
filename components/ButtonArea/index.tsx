@@ -1,15 +1,10 @@
-import { Box, Link, Text } from '@chakra-ui/react';
-import { IoMail } from 'react-icons/io5';
-import { NextPage } from 'next';
-import styles from './index.module.css';
-import { CONTACT } from '@/constants';
-import { FaLine } from 'react-icons/fa';
 import React from 'react';
 import SimpleButton from '../SimpleButton';
+import { cn } from '@/lib/utils';
 
 type Button = {
-  bg?: string;
-  color?: string;
+  bgClassName?: string;
+  textClassName?: string;
   href: string;
   isExternal: boolean;
   title: string;
@@ -17,34 +12,30 @@ type Button = {
 };
 
 type Props = {
-  bg?: string;
   buttons: Array<Button>;
+  className?: string;
 };
 
-export default function ButtonArea({
-  bg = 'momo.300',
-  buttons,
-}: Props) {
+export default function ButtonArea({ buttons, className }: Props) {
   return (
-    <Box
-      display={{ base: 'block', md: 'flex' }}
-      gap={8}
-      justifyContent={'center'}
-      py={10}
-      px={10}
-      bg={bg}
+    <div
+      className={cn(
+        'flex flex-col items-center gap-4 px-10 py-10 md:flex-row md:justify-center md:gap-8',
+        className,
+      )}
     >
       {buttons.map((button, i) => (
         <SimpleButton
           key={i}
-          bg={button.bg}
-          color={button.color}
+          bgClassName={button.bgClassName}
+          textClassName={button.textClassName}
           href={button.href}
           isExternal={button.isExternal}
           title={button.title}
           icon={button.icon}
+          className="w-full max-w-xs md:w-auto"
         />
       ))}
-    </Box>
+    </div>
   );
 }

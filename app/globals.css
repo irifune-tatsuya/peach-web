@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin "@tailwindcss/typography";
 
 @theme {
   --color-momo-100: oklch(73.93% 0.17 3.39);
@@ -21,6 +22,8 @@
   --animate-slide-fade-out-to-bottom: slide-fade-out-to-bottom 300ms ease-in;
   --animate-slide-fade-out-to-left: slide-fade-out-to-left 300ms ease-in;
   --animate-fade-in: fade-in 2s ease-in-out 0.5s forwards;
+  --animate-spin-clockwise: spin-clockwise 10s linear infinite;
+  --animate-zoom-in: zoom-in 1s ease-out forwards;
 
   @keyframes accordion-down {
     from {
@@ -124,6 +127,24 @@
       opacity: 0;
     }
     to {
+      opacity: 1;
+    }
+  }
+  @keyframes spin-clockwise {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes zoom-in {
+    from {
+      transform: scale(0.9);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
       opacity: 1;
     }
   }

@@ -1,7 +1,6 @@
 import { Article } from '@/libs/microcms';
-import { Box, SimpleGrid } from '@chakra-ui/react';
 import React from 'react';
-import ArticleCard from '../LandscapeCard';
+import LandscapeCard from '../LandscapeCard';
 
 type Props = {
   articles: Article[];
@@ -16,17 +15,15 @@ export default function GridArticleList({ articles, category }: Props) {
     return <p>記事がありません。</p>;
   }
   return (
-    <SimpleGrid
-      fontSize={'large'}
-      fontWeight={'normal'}
-      columns={{ base: 1, md: 2, lg: 3 }}
-      spacing={6}
-    >
-      {articles.map((article, i) => (
-        <Box key={i} _hover={{ opacity: 0.6 }}>
-          <ArticleCard article={article} category={category} maxW={450} />
-        </Box>
+    <ul className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+      {articles.map((article) => (
+        <li
+          key={article.id}
+          className="transition-opacity duration-300 ease-in-out hover:opacity-60"
+        >
+          <LandscapeCard article={article} category={category} maxW={400} />
+        </li>
       ))}
-    </SimpleGrid>
+    </ul>
   );
 }

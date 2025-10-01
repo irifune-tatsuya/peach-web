@@ -2,7 +2,6 @@ import { getList } from '@/libs/microcms';
 import { LIMIT30, NEWSFILTER } from '@/constants';
 import Pagination from '@/components/Pagination';
 import Title from '@/components/Title';
-import { Box } from '@chakra-ui/react';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import ArticleList from '@/components/ArticleList';
 import React from 'react';
@@ -46,7 +45,7 @@ export default async function Page(props: Props) {
   return (
     <>
       <Title titleEn={'News'} titleJp={'ニュース'} />
-      <Box maxW={1152} mx={'auto'} p={4} pb={{ base: 15, md: 156 }}>
+      <main className="mx-auto max-w-6xl p-4 pb-[60px] md:pb-[156px]">
         <ArticleList articles={data.contents} category={category} />
         <Pagination
           totalCount={data.totalCount}
@@ -54,7 +53,7 @@ export default async function Page(props: Props) {
           current={current}
           q={searchParams.q}
         />
-      </Box>
+      </main>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );

@@ -1,20 +1,18 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { FaInstagram, FaFacebookF, FaLine } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
+import { IoMdHome } from 'react-icons/io';
 import { formatRichText } from '@/libs/utils';
 import { renderToc } from '@/libs/render-toc';
 import { type Article } from '@/libs/microcms';
-import PublishedDate from '../PublishedDate';
-import styles from './index.module.css';
-import { Box, Grid, GridItem, Heading, Image, Link, Text } from '@chakra-ui/react';
-import TableOfContents from '../TableOfContents';
-import { FaInstagram, FaFacebookF } from 'react-icons/fa';
-import { FaXTwitter } from 'react-icons/fa6';
-import { usePathname } from 'next/navigation';
 import { IMAGEBASEURL } from '@/constants';
-import { FaLine } from 'react-icons/fa';
-import { FaArrowCircleRight } from 'react-icons/fa';
-import { IoMdHome } from 'react-icons/io';
+import PublishedDate from '../PublishedDate';
+import TableOfContents from '../TableOfContents';
 import { StartMailMagazineForm } from '../StartMailMagazineForm';
 
 type Props = {
@@ -26,268 +24,168 @@ export default function InterviewArticle({ data, isShowToc = true }: Props) {
   const toc = renderToc(data.content);
   const pathName = usePathname();
   const fullPath = `${process.env.NEXT_PUBLIC_BASE_URL}${pathName}`;
+
+  // h2タグでコンテンツを分割するロジックはそのまま
   const devidedContents = data.content
     .split(/<h2/g)
     .filter(Boolean)
-    .map((section) => {
-      if (section.charAt(0) === '<') {
-        const completedParagraph = section;
-        return completedParagraph;
-      } else {
-        const completedParagraph = `<h2${section}`;
-        return completedParagraph;
-      }
-    });
+    .map((section) => (section.startsWith('<') ? section : `<h2${section}`));
 
   const interviewedSNSLinks = [
     {
       sns: data.instagramid,
       href: `https://www.instagram.com/${data.instagramid}?ref=badge`,
-      isInstagram: true,
-      bg: '',
-      activeIcon: <FaInstagram className={styles.instagramIcon} size={32} color={'white'} />,
-      inactiveIcon: <FaInstagram size={32} color={'gray'} />,
+      bg: 'bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500', // Instagram's gradient
+      icon: <FaInstagram size={32} color="white" />,
     },
     {
       sns: data.facebookurl,
       href: data.facebookurl,
-      isInstagram: false,
-      bg: '#1877f2',
-      activeIcon: <FaFacebookF size={26} color={'white'} />,
-      inactiveIcon: <FaFacebookF size={26} color={'gray'} />,
+      bg: 'bg-[#1877f2]',
+      icon: <FaFacebookF size={26} color="white" />,
     },
     {
       sns: data.xid,
       href: `https://twitter.com/${data.xid}`,
-      isInstagram: false,
-      bg: '#000',
-      activeIcon: <FaXTwitter size={24} color={'white'} />,
-      inactiveIcon: <FaXTwitter size={24} color={'gray'} />,
+      bg: 'bg-black',
+      icon: <FaXTwitter size={24} color="white" />,
     },
     {
       sns: data.lineurl,
       href: data.lineurl,
-      isInstagram: false,
-      bg: 'white',
-      activeIcon: <FaLine size={45} color={'#06c755'} />,
-      inactiveIcon: <FaLine size={45} color={'gray'} />,
+      bg: 'bg-white',
+      icon: <FaLine size={45} color="#06c755" />,
     },
     {
       sns: data.url,
       href: data.url,
-      isInstagram: false,
-      bg: 'momo.100',
-      activeIcon: <IoMdHome size={30} color={'white'} />,
-      inactiveIcon: <IoMdHome size={30} color={'gray'} />,
+      bg: 'bg-[var(--color-momo-100)]',
+      icon: <IoMdHome size={30} color="white" />,
     },
   ];
 
   return (
-    <Box as={'article'}>
-      <Box maxW={900} mx={'auto'} pb={{ base: 15, md: 156 }} minH={'calc(100vh - 200px)'}>
+    <article>
+      <div className="mx-auto min-h-[calc(100vh-200px)] max-w-4xl pb-4 md:pb-40">
         {data.thumbnail ? (
-          <Image src={data.thumbnail?.url} alt={data.title} w={'100%'} maxW={900} h={'auto'} />
+          <Image
+            src={data.thumbnail.url}
+            alt={data.title}
+            width={data.thumbnail.width}
+            height={data.thumbnail.height}
+            className="h-auto w-full"
+            priority
+          />
         ) : (
           <Image
             src={`${IMAGEBASEURL}/no-image.webp`}
-            alt={'No Image'}
-            w={'100%'}
-            maxW={620}
-            h={'auto'}
+            alt="No Image"
+            width={620}
+            height={349}
+            className="h-auto w-full"
           />
-        )}{' '}
-        <Box
-          pt={{ base: '30px', md: '80px' }}
-          pb={{ base: '30px', md: '20px' }}
-          px={4}
-          mt={8}
-          mb={8}
-          borderTop={'1px solid #000'}
-        >
-          <Heading
-            as={'h1'}
-            fontSize={{ base: '1.5rem', md: '2.5rem' }}
-            textAlign={'left'}
-            lineHeight={1.5}
-          >
-            {data.title}
-          </Heading>
-          <Box
-            px={{ base: 4, md: 0 }}
-            mt={5}
-            mx={{ base: 'auto', md: 0 }}
-            display={{ base: 'block', md: 'flex' }}
-            justifyContent={'end'}
-            gap={3}
-          >
-            {data.instagramid ? (
+        )}
+
+        <div className="mt-8 border-t border-black px-4 pt-8 pb-5 md:pt-20 md:pb-5">
+          <h1 className="text-left text-2xl font-bold leading-normal md:text-4xl">{data.title}</h1>
+          <div className="mt-5 flex flex-col items-stretch justify-end gap-3 md:flex-row md:items-center">
+            {data.instagramid && (
               <Link
                 href={`https://www.instagram.com/${data.instagramid}?ref=badge`}
-                isExternal
-                className={styles.instagramButton}
-                display={'flex'}
-                alignItems={'center'}
-                justifyContent={'center'}
-                borderRadius={7}
-                h={12}
-                px={6}
-                _hover={{ textDecoration: 'none', opacity: 0.7 }}
-                color={'white'}
-                fontWeight={'bold'}
-                my={{ base: 1, md: 0 }}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-12 items-center justify-center rounded-lg bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 px-6 font-bold text-white transition-opacity hover:opacity-70"
               >
-                <FaInstagram className={styles.instagramIcon} size={32} color="white" />
-                <Box as={'span'} ml={1} zIndex={2}>{`${data.interviewed}さんをフォロー`}</Box>
+                <FaInstagram size={32} color="white" />
+                <span className="ml-1">{`${data.interviewed}さんをフォロー`}</span>
               </Link>
-            ) : (
-              ''
             )}
-            <Box display={'flex'} gap={3}>
+            <div className="flex gap-3">
               <Link
                 href={`https://www.facebook.com/share.php?u=${fullPath}`}
-                isExternal
-                rel={'nofollow noopener'}
-                display={'flex'}
-                alignItems={'center'}
-                justifyContent={'center'}
-                bg={'#1877f2'}
-                borderRadius={7}
-                h={12}
-                px={3}
-                _hover={{ textDecoration: 'none', opacity: 0.7 }}
-                color={'white'}
-                fontWeight={'bold'}
-                my={{ base: 1, md: 0 }}
+                target="_blank"
+                rel="nofollow noopener"
+                className="flex h-12 flex-1 items-center justify-center rounded-lg bg-[#1877f2] px-3 font-bold text-white transition-opacity hover:opacity-70 md:flex-none"
               >
                 <FaFacebookF size={26} color="white" />
-                <Box as={'span'} ml={1} zIndex={2}>
-                  記事をシェア
-                </Box>
+                <span className="ml-1">記事をシェア</span>
               </Link>
               <Link
                 href={`https://x.com/share?url=${fullPath}&text=${data.title}&via=irifune333&related=${data.xid}`}
-                isExternal
-                rel={'nofollow noopener'}
-                display={'flex'}
-                alignItems={'center'}
-                justifyContent={'center'}
-                bg={'#000'}
-                borderRadius={7}
-                h={12}
-                px={3}
-                _hover={{ textDecoration: 'none', opacity: 0.7 }}
-                color={'white'}
-                fontWeight={'bold'}
-                my={{ base: 1, md: 0 }}
+                target="_blank"
+                rel="nofollow noopener"
+                className="flex h-12 flex-1 items-center justify-center rounded-lg bg-black px-3 font-bold text-white transition-opacity hover:opacity-70 md:flex-none"
               >
                 <FaXTwitter size={24} color="white" />
-                <Box as={'span'} ml={1} zIndex={2}>
-                  記事をシェア
-                </Box>
+                <span className="ml-1">記事をシェア</span>
               </Link>
-            </Box>
-          </Box>
-        </Box>
-        {isShowToc ? <TableOfContents toc={toc} /> : ''}
+            </div>
+          </div>
+        </div>
+
+        {isShowToc && <TableOfContents toc={toc} />}
+
         {devidedContents.map((content, i) => (
           <React.Fragment key={i}>
-            <Box
-              px={4}
-              className={styles.content}
-              dangerouslySetInnerHTML={{
-                __html: `${formatRichText(content)}`,
-              }}
+            <div
+              className="prose prose-lg mb-8 max-w-none px-4 prose-h2:inline-block prose-h2:border-b-2 prose-h2:border-[var(--color-momo-100)] prose-h2:pb-1 prose-h2:no-underline"
+              dangerouslySetInnerHTML={{ __html: formatRichText(content) }}
             />
-            {data.instagramid || data.facebookurl || data.xid || data.lineurl || data.url ? (
-              <Box px={4} py={8}>
-                <Grid
-                  templateColumns={{ base: 'repeat(5, 1fr)', md: 'repeat(6, 1fr)' }}
-                  gap={3}
-                  maxW={{ base: 330, md: 700 }}
-                  mx={'auto'}
-                  position={'relative'}
-                  p={'1rem 2rem'}
-                  bg={'momo.600'}
-                  border={'2px dashed #000'}
-                >
-                  <GridItem
-                    colSpan={{ base: 5, md: 1 }}
-                    w={{ base: '100%', md: 300 }}
-                    mx={'auto'}
-                    textAlign={'center'}
-                    fontWeight={'bold'}
-                    fontSize={{ base: 'medium', md: 'large' }}
-                    lineHeight={10}
-                    display={'flex'}
-                    justifyContent={'center'}
-                    alignItems={'center'}
-                  >
-                    <Text mr={2}>{`${data.interviewed}さんをフォローする`}</Text>
-                    <FaArrowCircleRight size={24} />
-                  </GridItem>
-                  {interviewedSNSLinks.map((link, i) =>
-                    link.sns ? (
-                      <GridItem w={10} mx={'auto'} key={i}>
-                        <Link
-                          href={link.href}
-                          isExternal
-                          className={link.isInstagram ? styles.instagramButton : ''}
-                          bg={link.bg}
-                          display={'flex'}
-                          alignItems={'center'}
-                          justifyContent={'center'}
-                          borderRadius={7}
-                          h={10}
-                          _hover={{ textDecoration: 'none', opacity: 0.7 }}
-                        >
-                          {link.activeIcon}
-                        </Link>
-                      </GridItem>
-                    ) : (
-                      <GridItem w={10} mx={'auto'} key={i}>
-                        <Box
-                          display={'flex'}
-                          alignItems={'center'}
-                          justifyContent={'center'}
-                          borderRadius={7}
-                          h={10}
-                          bg={'momo.300'}
-                        >
-                          {link.inactiveIcon}
-                        </Box>
-                      </GridItem>
-                    ),
-                  )}
-                </Grid>
-                <Text textAlign={'center'} fontSize={{ base: 'small', md: 'medium' }} mt={2}>
-                  ※ 一方的な営業・勧誘目的で連絡を取るのはお控えください。
-                </Text>
-              </Box>
-            ) : (
-              ''
-            )}
+            {i < devidedContents.length - 1 &&
+              (data.instagramid || data.facebookurl || data.xid || data.lineurl || data.url) && (
+                <div className="px-4 pt-8 pb-32">
+                  <div className="mx-auto max-w-2xl rounded-2xl bg-momo-600 p-6 text-center shadow-lg md:p-8">
+                    <p className="text-xl font-bold text-momo-100 md:text-2xl">
+                      {`${data.interviewed}さんをフォロー`}
+                    </p>
+                    <div className="mt-6 flex justify-center">
+                      <div className="inline-grid grid-cols-3 gap-4 md:flex md:flex-row">
+                        {interviewedSNSLinks.map((link, j) => (
+                          <div key={j}>
+                            {link.sns ? (
+                              <Link
+                                href={link.href || ''}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`flex h-14 w-14 items-center justify-center rounded-full transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg ${link.bg}`}
+                              >
+                                {link.icon}
+                              </Link>
+                            ) : (
+                              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-200">
+                                {interviewedSNSLinks[j].icon}
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                  <p className="mt-2 text-center text-xs text-gray-600 md:text-sm">
+                    ※ 一方的な営業・勧誘目的で連絡を取るのはお控えください。
+                  </p>
+                </div>
+              )}
           </React.Fragment>
         ))}
-        <Box fontSize={'large'} display={'flex'} justifyContent={'end'} px={8} mb={20}>
-          <PublishedDate
-            date={data.publishedAt || data.createdAt}
-            simple={true}
-            fontSize={'large'}
-          />
-          <Text ml={1}>公開</Text>
-        </Box>
-        <Box px={4}>
-          <Heading className={styles.title}>次の記事更新はいつ？</Heading>
-          <Text className={styles.paragraph} mb={10}>
+
+        <div className="mb-20 flex justify-end px-8 text-lg">
+          <PublishedDate date={data.publishedAt || data.createdAt} simple={true} />
+          <p className="ml-1">公開</p>
+        </div>
+
+        <div className="px-4">
+          <h2 className="text-2xl font-bold">次の記事更新はいつ？</h2>
+          <p className="mb-10">
             ニュースレターを登録してピーチウェブの最新情報をいち早く手に入れてください！もちろん、
-            <Box as={'span'} color={'momo.100'} fontWeight={'bold'}>
+            <span className="font-bold text-[var(--color-momo-100)]">
               登録無料でいつでも解約可能
-            </Box>
+            </span>
             ですのでご安心ください。
-          </Text>
+          </p>
           <StartMailMagazineForm />
-        </Box>
-      </Box>
-    </Box>
+        </div>
+      </div>
+    </article>
   );
 }
