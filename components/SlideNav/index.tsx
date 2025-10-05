@@ -1,16 +1,33 @@
 'use client';
 
-import {
-  Box,
-  VStack,
-  Heading,
-  Link as ChakraLink,
-  HStack,
-  Icon,
-  useBreakpointValue,
-} from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { Link as ScrollLink } from 'react-scroll';
+import { cn } from '@/lib/utils'; // shadcn/uiでおなじみのクラス名結合ユーティリティ
+
+// --- Custom Hook to replace useBreakpointValue ---
+const useScrollOffset = () => {
+  const [offset, setOffset] = useState(-110); // Default to desktop offset
+
+  useEffect(() => {
+    const updateOffset = () => {
+      if (window.innerWidth < 768) {
+        // Tailwind's 'md' breakpoint is 768px
+        setOffset(-500); // Mobile offset
+      } else {
+        setOffset(-110); // Desktop offset
+      }
+    };
+
+    updateOffset(); // Initial check
+    window.addEventListener('resize', updateOffset); // Update on resize
+
+    return () => window.removeEventListener('resize', updateOffset); // Cleanup
+  }, []);
+
+  return offset;
+};
+// --- End of Custom Hook ---
 
 interface TocItem {
   id: string;
@@ -26,33 +43,19 @@ interface SlideNavProps {
 }
 
 const SlideNav: React.FC<SlideNavProps> = ({ data, activeId, setActiveId, onLinkClick }) => {
-  const offsetValue = useBreakpointValue({
-    base: -500,
-    md: -110,
-  });
+  const offsetValue = useScrollOffset();
 
   return (
-    <Box as="nav" p={5} bg="white" boxShadow="md" borderRadius="lg">
-      <Heading
-        as="h2"
-        size="sm"
-        mb={4}
-        pb={3}
-        textAlign="center"
-        borderBottom="1px solid"
-        borderColor="gray.200"
-      >
-        目次
-      </Heading>
-      <VStack as="ul" align="stretch" spacing={1}>
+    <nav className="rounded-lg bg-white p-5 shadow-md">
+      <h2 className="mb-4 border-b border-gray-200 pb-3 text-center text-sm font-bold">目次</h2>
+      <ul className="flex flex-col items-stretch space-y-1">
         {data.map((item) => {
           const isActive = activeId === item.id;
           const isSubLevel = item.level === 2;
 
           return (
-            <Box as="li" key={item.id} listStyleType="none">
-              <ChakraLink
-                as={ScrollLink}
+            <li key={item.id} className="list-none">
+              <ScrollLink
                 to={item.id}
                 spy={true}
                 smooth={true}
@@ -60,37 +63,26 @@ const SlideNav: React.FC<SlideNavProps> = ({ data, activeId, setActiveId, onLink
                 offset={offsetValue}
                 onSetActive={(to: string) => setActiveId(to)}
                 onClick={onLinkClick}
-                display="block"
-                py={2}
-                px={3}
-                borderRadius="md"
-                transition="all 0.2s ease-in-out"
-                cursor="pointer"
-                bg={isActive ? 'momo.600' : 'transparent'}
-                color={isActive ? 'momo.100' : 'gray.700'}
-                fontWeight={isActive ? 'bold' : 'normal'}
-                _hover={{
-                  bg: 'gray.100',
-                }}
-                fontSize={isSubLevel ? 'sm' : 'md'}
-                pl={isSubLevel ? 4 : 2}
+                className={cn(
+                  'block cursor-pointer rounded-md px-3 py-2 transition-all duration-200 ease-in-out hover:bg-gray-100',
+                  isActive
+                    ? 'bg-momo-600 font-bold text-momo-100'
+                    : 'bg-transparent font-normal text-gray-700',
+                  isSubLevel ? 'pl-4 text-sm' : 'pl-2 text-md',
+                )}
               >
-                <HStack>
-                  <Icon
-                    as={MdKeyboardArrowRight}
-                    boxSize="1.2em"
-                    color={isActive ? 'momo.100' : 'gray.400'}
+                <div className="flex items-center">
+                  <MdKeyboardArrowRight
+                    className={cn('h-5 w-5', isActive ? 'text-momo-100' : 'text-gray-400')}
                   />
-                  <Box as="span" flex="1">
-                    {item.title}
-                  </Box>
-                </HStack>
-              </ChakraLink>
-            </Box>
+                  <span className="flex-1">{item.title}</span>
+                </div>
+              </ScrollLink>
+            </li>
           );
         })}
-      </VStack>
-    </Box>
+      </ul>
+    </nav>
   );
 };
 

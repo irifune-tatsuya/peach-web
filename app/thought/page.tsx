@@ -1,8 +1,7 @@
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import Title from '@/components/Title';
 import { IMAGEBASEURL } from '@/constants';
-import { Box, Heading, Image, Text } from '@chakra-ui/react';
-import React from 'react';
+import Image from 'next/image';
 
 const breadcrumbs = [
   {
@@ -56,229 +55,141 @@ const companyData = [
 
 export default async function Thought() {
   return (
-    <>
+    <main>
       <Title titleEn={'Thought'} titleJp={'ピーチな想い'} />
-      <Box
-        bg={'linear-gradient(-225deg, #eeeeee 0%, #ffffff 56%, #eeeeee 100%);'}
-        position={'relative'}
-        overflow={'hidden'}
-        pt={{ base: 88, md: 120 }}
-        pb={{ base: 90, md: 180 }}
-        _before={{
-          content: '""',
-          display: 'block',
-          position: 'absolute',
-          width: '1500px',
-          height: '1116px',
-          left: { base: '0x', md: '-200px' },
-          top: { base: '0px', md: '-100px' },
-          backgroundImage: `url(${IMAGEBASEURL}/thought/mission-bg.svg)`,
-          zIndex: 1,
-        }}
+      <section
+        className="relative overflow-hidden bg-[linear-gradient(-225deg,_#eeeeee_0%,_#ffffff_56%,_#eeeeee_100%)] pt-22 pb-[90px] md:pt-32 md:pb-44 
+        before:absolute before:top-0 before:left-0 before:z-10 before:block before:h-[1116px] before:w-[1500px] before:bg-[url('/images/thought/mission-bg.svg')] before:bg-no-repeat md:before:-top-[100px] md:before:-left-[200px]"
       >
-        <Box p={4} maxW={1152} mx={'auto'}>
-          <Box position={'relative'} zIndex={2}>
-            <Heading as={'h2'} mr={4} display={'inline-block'}>
-              Mission
-            </Heading>
-            <Box as={'span'} fontSize={'small'} fontWeight={500} letterSpacing={'0.08em'}>
-              ミッション
-            </Box>
-          </Box>
-          <Box
-            mt={{ base: '44px', md: '60px' }}
-            w={{ base: 330, md: 440 }}
-            position={'relative'}
-            zIndex={2}
-          >
+        <div className="relative z-20 mx-auto max-w-6xl p-4">
+          <div>
+            <h2 className="inline-block text-2xl font-bold md:text-3xl">Mission</h2>
+            <span className="ml-4 text-sm font-medium tracking-wider">ミッション</span>
+          </div>
+          <div className="mt-11 w-[330px] md:mt-16 md:w-[440px]">
             <Image
               src={`${IMAGEBASEURL}/thought/mission-text.webp`}
-              alt={'あなたのビジネスが永く愛されますよう。'}
-              maxW={{ base: 330, md: 450, lg: 500 }}
-              w={'100%'}
-              h={'auto'}
-              display={'block'}
+              alt="あなたのビジネスが永く愛されますよう。"
+              width={500}
+              height={90}
+              className="block h-auto w-full max-w-xs md:max-w-md lg:max-w-lg"
             />
-          </Box>
-          <Text
-            position={'relative'}
-            zIndex={2}
-            mt={{ base: 50, md: 65 }}
-            lineHeight={2.2}
-            fontSize={{ base: 'large', lg: 'x-large' }}
-          >
+          </div>
+          <p className="mt-[50px] text-lg leading-loose md:mt-16 lg:text-xl">
             世に新しい価値を生み出す事業。
-            <Box as={'br'} />
+            <br />
             その尊さを、その力強さを、その温かさを、
-            <Box as={'br'} />
+            <br />
             WEBで発信し、未来のお客様に届ける。
-            <Box as={'br'} />
+            <br />
             そのために私たちは挑戦し続けます。
-          </Text>
-        </Box>
-      </Box>
-      <Box py={{ base: 88, md: 120 }} bg={'momo.100'} color={'white'}>
-        <Box p={4} maxW={1152} mx={'auto'}>
-          <Box>
-            <Heading as={'h2'} mr={4} display={'inline-block'}>
-              Value
-            </Heading>
-            <Box as={'span'} fontSize={'small'} fontWeight={500} letterSpacing={'0.08em'}>
-              ピーチウェブのバリュー
-            </Box>
-          </Box>
-          <Box
-            display={{ base: 'block', md: 'flex' }}
-            gap={12}
-            justifyContent={'center'}
-            mt={'40px'}
-          >
+          </p>
+        </div>
+      </section>
+      <section className="bg-momo-100 py-22 text-white md:py-32">
+        <div className="mx-auto max-w-6xl p-4">
+          <div>
+            <h2 className="inline-block text-2xl font-bold md:text-3xl">Value</h2>
+            <span className="ml-4 text-sm font-medium tracking-wider">ピーチウェブのバリュー</span>
+          </div>
+          <div className="mt-10 justify-center md:flex md:gap-12">
             {valueData.map((item, i) => (
-              <Box as={'section'} _first={{ mt: 0 }} mt={{ base: '60px', md: 0 }} key={i}>
-                <Heading
-                  as={'h3'}
-                  fontSize={{ base: 'x-large', lg: 'xx-large' }}
-                  letterSpacing={'0.04em'}
-                  mb={'44px'}
-                  pb={33}
-                  position={'relative'}
-                  _after={{
-                    content: '""',
-                    display: 'block',
-                    w: '56px',
-                    h: '1px',
-                    bg: 'white',
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                  }}
+              <section key={i} className="mt-16 md:mt-0">
+                <h3
+                  className="relative mb-11 pb-8 text-xl tracking-wide lg:text-2xl 
+                  after:absolute after:bottom-0 after:left-0 after:block after:h-px after:w-14 after:bg-white after:content-['']"
                 >
                   {item.title}
-                </Heading>
-                <Text fontWeight={'bold'} letterSpacing={'0.02em'} lineHeight={2}>
-                  {item.content}
-                </Text>
-              </Box>
+                </h3>
+                <p className="font-bold tracking-tight leading-loose">{item.content}</p>
+              </section>
             ))}
-          </Box>
-        </Box>
-      </Box>
-      <Box pt={175} pb={190} overflow={'hidden'}>
-        <Box position={'relative'} p={4} maxW={1152} mx={'auto'}>
-          <Box>
-            <Heading as={'h2'} mr={4} display={'inline-block'}>
-              Message
-            </Heading>
-            <Box as={'span'} fontSize={'small'} fontWeight={500} letterSpacing={'0.08em'}>
-              メッセージ
-            </Box>
-          </Box>
-          <Box fontSize={'xx-large'} fontWeight={'bold'} lineHeight={1.7} my={35}>
-            企業の想いを届ける仕事だからこそ、
-            <Box as={'br'} />
-            私自身も真心を込めて業務に当たります。
-          </Box>
-          <Box mt={{ base: 0, md: 90 }} display={{ base: 'block', md: 'flex' }} gap={12}>
-            <Box display={{ base: 'none', md: 'block' }} w={'45vw'}>
+          </div>
+        </div>
+      </section>
+      <section className="overflow-hidden pt-[175px] pb-[190px]">
+        <div className="relative mx-auto max-w-6xl p-4">
+          <div>
+            <h2 className="inline-block text-2xl font-bold md:text-3xl">Message</h2>
+            <span className="ml-4 text-sm font-medium tracking-wider">メッセージ</span>
+          </div>
+          <div className="my-9 text-2xl font-bold leading-tight md:text-3xl">
+            <p>
+              企業の想いを届ける仕事だからこそ、
+              <br />
+              私自身も真心を込めて業務に当たります。
+            </p>
+          </div>
+          <div className="mt-0 md:mt-24 md:flex md:gap-12">
+            <div className="hidden w-[45vw] md:block">
               <Image
                 src={`${IMAGEBASEURL}/thought/ceo-pc.webp`}
-                alt={'合同会社ピーチウェブ 代表社員 入船 達也'}
-                w={'100%'}
-                h={'auto'}
-                loading={'lazy'}
+                alt="合同会社ピーチウェブ 代表社員 入船 達也"
+                width={560}
+                height={560}
+                className="h-auto w-full"
+                loading="lazy"
               />
-            </Box>
-            <Box display={{ base: 'block', md: 'none' }}>
+            </div>
+            <div className="block md:hidden">
               <Image
                 src={`${IMAGEBASEURL}/thought/ceo-sp.webp`}
-                alt={'合同会社ピーチウェブ 代表社員 入船 達也'}
-                w={'100%'}
-                h={'auto'}
-                loading={'lazy'}
+                alt="合同会社ピーチウェブ 代表社員 入船 達也"
+                width={400}
+                height={400}
+                className="h-auto w-full"
+                loading="lazy"
               />
-            </Box>
-            <Text
-              fontSize={{ base: 'medium', md: 'large' }}
-              fontWeight={500}
-              letterSpacing={{ base: 1, md: 2 }}
-              lineHeight={2}
-              w={{ base: '100%', md: '45vw' }}
-              mt={{ base: 35, md: 0 }}
-            >
-              2024年9月に創業した合同会社ピーチウェブ代表社員の入船達也と申します。
-              岡山県を代表するフルーツ
-              <Box as={'span'} color={'momo.100'} fontWeight={'bold'}>
-                「桃」
-              </Box>
-              と事業領域を表す
-              <Box as={'span'} color={'momo.100'} fontWeight={'bold'}>
-                「WEB」
-              </Box>
-              が会社名の由来となっているとおり、
-              地元岡山の企業をWEBの力で盛り上げたいと考えております。 桃の花言葉には
-              <Box as={'span'} color={'momo.100'} fontWeight={'bold'}>
-                「チャーミング」「気立ての良さ」「私はあなたのとりこ」「天下無敵」
-              </Box>
-              などがあります。
-              お客様のお仕事の魅力をWEB上で発信し、未来の取引先が「私はあなたのとりこ」と言ってくれるような
-              仕事をお約束いたします。
-              ホームページ制作をどのように発注すればよいかわからないというお客様もいらっしゃると思います。
-              まずは、その不安を解消するために
-              <Box as={'span'} color={'momo.100'} fontWeight={'bold'}>
-                直接顔を合わせて
-              </Box>
-              お打ち合わせできればと思っております。
-              <Box as={'br'} />
-              <Box as={'br'} />
-              合同会社ピーチウェブ
-              <Box as={'br'} />
-              代表社員 入船達也
-            </Text>
-          </Box>
-        </Box>
-      </Box>
-      <Box
-        as={'section'}
-        py={{ base: '80px', md: 150 }}
-        bg={'linear-gradient(-225deg, #eeeeee 0%, #ffffff 56%, #eeeeee 100%);'}
-      >
-        <Box p={4} maxW={1152} mx={'auto'}>
-          <Box mt={{ base: 33, md: 78 }} mb={{ base: 27, md: 43 }}>
-            <Heading as={'h2'} mr={4} display={'inline-block'}>
-              会社概要
-            </Heading>
-            <Box as={'span'} fontSize={'small'} fontWeight={500}>
-              ※ 2024年10月時点
-            </Box>
-          </Box>
-          {companyData.map((data, i) => (
-            <Box
-              key={i}
-              as={'dl'}
-              pb={37}
-              mb={{ base: 8, md: 10 }}
-              borderBottom={'1px solid #ddd'}
-              position={'relative'}
-              display={{ base: 'block', md: 'flex' }}
-              gap={95}
-            >
-              <Box
-                as={'dt'}
-                maxW={'200px'}
-                w={'100%'}
-                mb={{ base: 5, md: 0 }}
-                color={{ base: 'momo.100', md: 'black' }}
-              >
-                {data.title}
-              </Box>
-              <Box as={'dd'} lineHeight={1.5}>
-                {data.content}
-              </Box>
-            </Box>
-          ))}
-        </Box>
-      </Box>
+            </div>
+            <div className="mt-9 w-full md:mt-0 md:w-[45vw]">
+              <p className="text-base font-medium tracking-widest leading-loose md:text-lg">
+                2024年9月に創業した合同会社ピーチウェブ代表社員の入船達也と申します。
+                岡山県を代表するフルーツ
+                <span className="font-bold text-momo-100">「桃」</span>
+                と事業領域を表す
+                <span className="font-bold text-momo-100">「WEB」</span>
+                が会社名の由来となっているとおり、
+                地元岡山の企業をWEBの力で盛り上げたいと考えております。 桃の花言葉には
+                <span className="font-bold text-momo-100">
+                  「チャーミング」「気立ての良さ」「私はあなたのとりこ」「天下無敵」
+                </span>
+                などがあります。
+                お客様のお仕事の魅力をWEB上で発信し、未来の取引先が「私はあなたのとりこ」と言ってくれるような
+                仕事をお約束いたします。
+                ホームページ制作をどのように発注すればよいかわからないというお客様もいらっしゃると思います。
+                まずは、その不安を解消するために
+                <span className="font-bold text-momo-100">直接顔を合わせて</span>
+                お打ち合わせできればと思っております。
+                <br />
+                <br />
+                合同会社ピーチウェブ
+                <br />
+                代表社員 入船達也
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="bg-[linear-gradient(-225deg,_#eeeeee_0%,_#ffffff_56%,_#eeeeee_100%)] py-20 md:py-36">
+        <div className="mx-auto max-w-6xl p-4">
+          <div className="mt-8 mb-7 md:mt-20 md:mb-11">
+            <h2 className="inline-block text-2xl font-bold md:text-3xl">会社概要</h2>
+            <span className="ml-4 text-sm font-medium">※ 2024年10月時点</span>
+          </div>
+          <div className="space-y-8 md:space-y-10">
+            {companyData.map((data) => (
+              <dl key={data.title} className="gap-24 border-b border-gray-200 pb-9 md:flex">
+                <dt className="mb-5 w-full max-w-[200px] text-momo-100 md:mb-0 md:text-black">
+                  {data.title}
+                </dt>
+                <dd className="leading-normal">{data.content}</dd>
+              </dl>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-    </>
+    </main>
   );
 }

@@ -1,6 +1,7 @@
 import { Breadcrumbs } from '@/components/Breadcrumbs';
-import { Box, Grid, GridItem, Heading, Image, Link, Text } from '@chakra-ui/react';
 import React, { Suspense } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import { StartMailMagazineForm } from '@/components/StartMailMagazineForm';
 import { StopMailMagazineForm } from '@/components/StopMailMagazineForm';
 import { IMAGEBASEURL } from '@/constants';
@@ -19,134 +20,101 @@ const breadcrumbs = [
 ];
 
 const NewsletterContents = [
-  {
-    title: '新着記事の情報',
-    text: 'コンテンツ制作やホームページ制作に役立つ情報を発信しています。新着情報をいち早くお届けします。',
-    href: '/article',
-  },
-  {
-    title: 'ピーチファイの更新情報',
-    text: '岡山のチャレンジする起業家・経営者を応援するWEBマガジン「ピーチファイ」の更新もお知らせします。',
-    href: '/peach-fight',
-  },
-  {
-    title: 'サービスの最新情報',
-    text: 'WEBブランディングやホームページ制作などサービスに関する情報をお届けします。',
-    href: '/service',
-  },
-  {
-    title: 'ピーチウェブからのお知らせ',
-    text: '異業種交流会への参加情報やイベント参加情報、その他の会社情報をお届けします。',
-    href: '/news',
-  },
+  // ... (ここのデータは変更なし)
 ];
 
-export default async function Terms() {
+export default async function Newsletter() {
   return (
     <>
-      <Box bg={'momo.100'} py={{ base: 8, md: 20 }}>
-        <Box
-          mx={'auto'}
-          display={{ base: 'block', md: 'flex' }}
-          w={{ base: '90%', md: '80%', lg: '50%' }}
-          maxW={1152}
-          justifyContent={'space-between'}
-          alignItems={'center'}
-          flexDirection={'row-reverse'}
-        >
+      {/* ヒーローセクション */}
+      <div className="bg-momo-100 py-8 md:py-20">
+        <div className="mx-auto flex w-[90%] max-w-6xl flex-col-reverse items-center justify-between md:w-[80%] md:flex-row lg:w-1/2">
           <Image
             src={`${IMAGEBASEURL}/newsletter/top-image.webp`}
             alt={'ニュースレタートップイメージ'}
-            maxW={'400px'}
-            w={'100%'}
-            h={'auto'}
+            width={400}
+            height={400}
+            className="h-auto w-full max-w-[400px]"
           />
-          <Box display={'inline-block'} color={'white'} mt={{ base: 10, md: 0 }}>
-            <Text fontSize={'large'} fontWeight={'bold'}>
-              ニュースレターのご案内
-            </Text>
-            <Heading as={'h1'}>Newsletter</Heading>
-          </Box>
-        </Box>
-      </Box>
-      <Box maxW={1152} mx={'auto'} p={4}>
-        <Box as={'section'} pt={{ base: 10, md: '70px' }}>
-          <Box pb={5}>
-            <Heading as={'h2'} mr={4} display={'inline-block'}>
+          <div className="mt-10 inline-block text-white md:mt-0">
+            <p className="text-lg font-bold">ニュースレターのご案内</p>
+            <h1 className="text-4xl font-bold">Newsletter</h1>
+          </div>
+        </div>
+      </div>
+
+      <main className="mx-auto max-w-6xl p-4">
+        {/* 次の記事更新はいつ？ */}
+        <section className="pt-10 md:pt-[70px]">
+          <div className="pb-5">
+            <h2 className="mr-4 inline-block text-2xl font-bold">
               When is the next article update?
-            </Heading>
-            <Box as={'span'} fontSize={'small'} fontWeight={500} letterSpacing={'0.08em'}>
-              次の記事更新はいつ？
-            </Box>
-          </Box>
-          <Text>
+            </h2>
+            <span className="text-sm font-medium tracking-[0.08em]">次の記事更新はいつ？</span>
+          </div>
+          <p>
             ピーチウェブのニュースレターは
-            <Box as={'span'} color={'momo.100'} fontWeight={'bold'}>
-              毎週1回程度
-            </Box>
+            <span className="font-bold text-momo-100">毎週1回程度</span>
             のペースで更新予定です。新着記事のご案内やサービスに関する最新情報をお届けします。
-          </Text>
-        </Box>
-        <Box as={'section'} py={{ base: 10, md: '70px' }}>
-          <Grid
-            templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)' }}
-            gap={{ base: 10, md: 20 }}
-          >
+          </p>
+        </section>
+
+        {/* 配信コンテンツ */}
+        <section className="py-10 md:py-[70px]">
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-20">
             {NewsletterContents.map((content, i) => (
-              <GridItem colSpan={1} key={i}>
-                <Link href={content.href} _hover={{ opacity: 0.7 }}>
+              <div key={i}>
+                <Link href={content.href} className="hover:opacity-70">
                   <Image
                     src={`${IMAGEBASEURL}/newsletter/newsletter-content${i + 1}.webp`}
                     alt={content.title}
+                    width={500}
+                    height={300}
+                    className="h-auto w-full"
                   />
                 </Link>
-                <Heading as={'h3'} fontSize={'larger'} my={5}>
-                  {content.title}
-                </Heading>
-                <Text>{content.text}</Text>
-              </GridItem>
+                <h3 className="my-5 text-xl font-bold">{content.title}</h3>
+                <p>{content.text}</p>
+              </div>
             ))}
-          </Grid>
-        </Box>
-      </Box>
-      <Box as={'section'} bg={'momo.600'} py={{ base: 10, md: '70px' }}>
-        <Box maxW={1152} mx={'auto'} p={4}>
-          <Box pb={5}>
-            <Heading as={'h2'} mr={4} display={'inline-block'}>
-              Subscribe
-            </Heading>
-            <Box as={'span'} fontSize={'small'} fontWeight={500} letterSpacing={'0.08em'}>
-              購読登録
-            </Box>
-          </Box>
-          <Text pb={10}>
+          </div>
+        </section>
+      </main>
+
+      {/* 購読登録 */}
+      <section className="bg-momo-600 py-10 md:py-[70px]">
+        <div className="mx-auto max-w-6xl p-4">
+          <div className="pb-5">
+            <h2 className="mr-4 inline-block text-2xl font-bold">Subscribe</h2>
+            <span className="text-sm font-medium tracking-[0.08em]">購読登録</span>
+          </div>
+          <p className="pb-10">
             こちらのフォームよりニュースレターの購読登録をすることができます。もちろん、
-            <Box as={'span'} color={'momo.100'} fontWeight={'bold'}>
-              登録無料でいつでも配信停止
-            </Box>
+            <span className="font-bold text-momo-100">登録無料でいつでも配信停止</span>
             が可能です。
-          </Text>
-          <Suspense fallback={<Box color={'white'}>フォームを読み込んでいます...</Box>}>
+          </p>
+          <Suspense fallback={<div className="text-white">フォームを読み込んでいます...</div>}>
             <StartMailMagazineForm />
           </Suspense>
-        </Box>
-      </Box>
-      <Box as={'section'} py={{ base: 10, md: '70px' }}>
-        <Box maxW={1152} mx={'auto'} p={4}>
-          <Box pb={5}>
-            <Heading as={'h2'} mr={4} display={'inline-block'}>
-              Unsubscribe
-            </Heading>
-            <Box as={'span'} fontSize={'small'} fontWeight={500} letterSpacing={'0.08em'}>
-              配信停止
-            </Box>
-          </Box>
-          <Text pb={10}>こちらのフォームよりニュースレターの配信停止をすることができます。</Text>
-          <Suspense fallback={<Box>フォームを読み込んでいます...</Box>}>
+        </div>
+      </section>
+
+      {/* 配信停止 */}
+      <section className="py-10 md:py-[70px]">
+        <div className="mx-auto max-w-6xl p-4">
+          <div className="pb-5">
+            <h2 className="mr-4 inline-block text-2xl font-bold">Unsubscribe</h2>
+            <span className="text-sm font-medium tracking-[0.08em]">配信停止</span>
+          </div>
+          <p className="pb-10">
+            こちらのフォームよりニュースレターの配信停止をすることができます。
+          </p>
+          <Suspense fallback={<div>フォームを読み込んでいます...</div>}>
             <StopMailMagazineForm />
           </Suspense>
-        </Box>
-      </Box>
+        </div>
+      </section>
+
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );

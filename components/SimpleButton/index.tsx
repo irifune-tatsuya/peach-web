@@ -1,7 +1,7 @@
-import React from 'react';
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
+import React from 'react';
 
 type Props = {
   bgClassName?: string;
@@ -25,6 +25,7 @@ export default function SimpleButton({
   return (
     <Button
       asChild
+      variant="custom"
       className={cn(
         'h-full rounded-full px-8 py-4 font-bold transition-transform duration-300 hover:scale-105',
         bgClassName,

@@ -1,27 +1,21 @@
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import Title from '@/components/Title';
-import {
-  Box,
-  Card,
-  CardBody,
-  Heading,
-  Image,
-  Link,
-  Stack,
-  Table,
-  Tbody,
-  Td,
-  Text,
-  Th,
-  Thead,
-  Tr,
-} from '@chakra-ui/react';
 import { FaCheckCircle } from 'react-icons/fa';
 import SideScrollIcon from '@/components/SideScrollIcon';
-import styles from './layout.module.css';
 import { ImDisplay } from 'react-icons/im';
 import { IMAGEBASEURL } from '@/constants';
 import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 
 const breadcrumbs = [
   {
@@ -126,203 +120,129 @@ export default async function Pricing() {
   return (
     <>
       <Title titleEn={'Pricing'} titleJp={'料金体系'} />
-      <Box
-        bg={'linear-gradient(to bottom, #fcdee9, #ffffff);'}
-        position={'relative'}
-        overflow={'hidden'}
-        pt={{ base: 88, md: 120 }}
-        pb={{ base: 90, md: 180 }}
-      >
-        <Box p={4} maxW={1152} mx={'auto'}>
-          <Box>
-            <Heading as={'h2'} mr={4} size={{ base: 'md', md: 'lg' }} display={'flex'}>
-              <FaCheckCircle color={'#ff7bac'} />
-              <Box as={'span'} ml={2}>
-                基本料金
-              </Box>
-            </Heading>
-          </Box>
-          <Box
-            maxW={960}
-            mx={'auto'}
-            py={8}
-            fontSize={{ base: 'medium', md: 'large' }}
-            fontWeight={500}
-            lineHeight={2}
-          >
-            <Text>
+      <section className="relative overflow-hidden bg-[linear-gradient(to_bottom,_#fcdee9,_#ffffff)] pb-[90px] pt-[88px] md:pb-[180px] md:pt-[120px]">
+        <div className="mx-auto max-w-6xl p-4">
+          <div>
+            <h2 className="flex items-center text-lg font-bold md:text-xl">
+              <FaCheckCircle className="text-momo-100" />
+              <span className="ml-2">基本料金</span>
+            </h2>
+          </div>
+          <div className="mx-auto max-w-[960px] py-8 text-base font-medium leading-loose md:text-lg">
+            <p>
               毎月の基本料金だけでも十分WEBブランディングを実現できます。始めのうちはオプションがないベーシックプランでのご導入をおすすめします。
-            </Text>
-          </Box>
-          <Box w={'100%'}>
-            <SideScrollIcon display={['block', 'block', 'block', 'none']} />
-            <Box
-              m={{ base: 1, md: 0 }}
-              listStyleType={'none'}
-              display={'flex'}
-              justifyContent={{ base: 'start', lg: 'center' }}
-              gap={{ base: 4, lg: 12 }}
-              overflow={'scroll'}
-              overflowY={'hidden'}
-              overflowX={{ base: 'scroll', lg: 'hidden' }}
-              sx={{
-                scrollSnapType: 'x mandatory',
-              }}
-              alignItems="start"
-            >
+            </p>
+          </div>
+          <div className="w-full">
+            <SideScrollIcon className="block lg:hidden" />
+            <div className="m-1 flex snap-x snap-mandatory gap-4 overflow-y-hidden overflow-x-scroll scroll-smooth lg:m-0 lg:justify-center lg:gap-12 lg:overflow-x-hidden">
               {basicPriceData.map((item, i) => (
-                <Card minW={280} w={'auto'} bg={'white'} key={i}>
-                  <CardBody>
-                    <Stack mt="6" spacing="5">
-                      <Heading as={'h3'} size={'lg'}>
-                        <Box display={'flex'} alignItems={'center'}>
-                          <Image
-                            src={`${IMAGEBASEURL}/pricing/plan-icon${i + 1}.webp`}
-                            alt={item.title}
-                            w={7}
-                            h={7}
-                          />
-                          <Box as={'span'} ml={2}>
-                            {item.title}
-                          </Box>
-                          <Box as={'span'} ml={2} fontSize={'medium'} color={'momo.100'}>
-                            {item.subtTitle}
-                          </Box>
-                        </Box>
-                      </Heading>
-                      <Text fontSize={'large'} fontWeight={'bold'} textAlign={'end'}>
-                        {item.price}
-                      </Text>
-                      <Box>
-                        {item.homepage.map((text, i) => (
-                          <Text key={i}>{text}</Text>
+                <Card className="min-w-[280px] flex-shrink-0 snap-center bg-white" key={i}>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Image
+                        src={`${IMAGEBASEURL}/pricing/plan-icon${i + 1}.webp`}
+                        alt={item.title}
+                        width={28}
+                        height={28}
+                      />
+                      <span className="ml-2">{item.title}</span>
+                      {item.subtTitle && (
+                        <span className="ml-2 text-base text-momo-100">{item.subtTitle}</span>
+                      )}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex flex-col space-y-5">
+                    <p className="text-right text-lg font-bold">{item.price}</p>
+                    <div>
+                      {item.homepage.map((text, i) => (
+                        <p key={i}>{text}</p>
+                      ))}
+                    </div>
+                    <Table>
+                      <TableBody>
+                        {item.contents.map((text, i) => (
+                          <TableRow key={i} className="[&_td]:px-1 [&_td]:py-2">
+                            <TableCell>{text}</TableCell>
+                          </TableRow>
                         ))}
-                      </Box>
-                      <Table variant="striped" colorScheme="gray">
-                        <Tbody>
-                          {item.contents.map((text, i) => (
-                            <Tr key={i}>
-                              <Td px={1} py={2}>
-                                {text}
-                              </Td>
-                            </Tr>
-                          ))}
-                        </Tbody>
-                      </Table>
-                    </Stack>
-                  </CardBody>
+                      </TableBody>
+                    </Table>
+                  </CardContent>
                 </Card>
               ))}
-            </Box>
-            <Text fontSize={'small'} textAlign={'center'}>
-              ※ 料金は全て税別です。
-            </Text>
-            <Box py={10}>
+            </div>
+            <p className="text-center text-sm">※ 料金は全て税別です。</p>
+            <div className="py-10">
               <Link
-                display={'block'}
-                w={250}
-                mx={'auto'}
                 href="/service"
-                textAlign={'center'}
-                _hover={{ textDecoration: 'none' }}
-                className={styles.contactButton}
+                className="mx-auto block w-[250px] text-center hover:no-underline"
               >
-                <Box
-                  py={'1em'}
-                  px={'2em'}
-                  display={'flex'}
-                  justifyContent={'center'}
-                  alignItems={'center'}
-                  height={'100%'}
-                  borderRadius={40}
-                  bg={'momo.100'}
-                  color={'white'}
-                  fontWeight={'bold'}
-                >
+                <div className="flex h-full items-center justify-center rounded-full bg-momo-100 px-[2em] py-[1em] font-bold text-white">
                   <ImDisplay size={'1.5em'} />
-                  <Text ml={2}>サービス内容を見る</Text>
-                </Box>
+                  <p className="ml-2">サービス内容を見る</p>
+                </div>
               </Link>
-            </Box>
-          </Box>
-        </Box>
-      </Box>
-      <Box
-        bg={'linear-gradient(to bottom, #fcdee9, #ffffff);'}
-        position={'relative'}
-        overflow={'hidden'}
-        pt={{ base: 88, md: 120 }}
-        pb={{ base: 90, md: 180 }}
-      >
-        <Box p={4} maxW={1152} mx={'auto'}>
-          <Box>
-            <Heading as={'h2'} mr={4} size={{ base: 'md', md: 'lg' }} display={'flex'}>
-              <FaCheckCircle color={'#ff7bac'} />
-              <Box as={'span'} ml={2}>
-                オプション料金
-              </Box>
-            </Heading>
-          </Box>
-          <Box
-            maxW={960}
-            mx={'auto'}
-            py={8}
-            fontSize={{ base: 'medium', md: 'large' }}
-            fontWeight={500}
-            lineHeight={2}
-          >
-            <Text>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="relative overflow-hidden bg-[linear-gradient(to_bottom,_#fcdee9,_#ffffff)] pb-[90px] pt-[88px] md:pb-[180px] md:pt-[120px]">
+        <div className="mx-auto max-w-6xl p-4">
+          <div>
+            <h2 className="flex items-center text-lg font-bold md:text-xl">
+              <FaCheckCircle className="text-momo-100" />
+              <span className="ml-2">オプション料金</span>
+            </h2>
+          </div>
+          <div className="mx-auto max-w-[960px] py-8 text-base font-medium leading-loose md:text-lg">
+            <p>
               毎月の基本料金に加えてさらに成果を出したい方向けのオプションとなります。オプションには月額制
               / 単発がございます。
-            </Text>
-          </Box>
-          <Box w={'100%'}>
-            <Box display={{ base: 'block', md: 'flex' }} gap={8} justifyContent={'center'}>
+            </p>
+          </div>
+          <div className="w-full">
+            <div className="justify-center gap-8 md:flex">
               <Table>
-                <Thead>
-                  <Tr>
-                    <Th fontSize={'medium'} textAlign={'center'} bg={'momo.600'} colSpan={2}>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead colSpan={2} className="bg-momo-600 text-center text-base">
                       {monthlyOptionData.title}
-                    </Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
                   {monthlyOptionData.contents.map((item, i) => (
-                    <Tr key={i}>
-                      <Td px={{ base: 1, lg: 6 }}>{item.title}</Td>
-                      <Td px={{ base: 1, lg: 6 }} textAlign={'right'}>
-                        {item.price}
-                      </Td>
-                    </Tr>
+                    <TableRow key={i}>
+                      <TableCell className="px-1 lg:px-6">{item.title}</TableCell>
+                      <TableCell className="px-1 text-right lg:px-6">{item.price}</TableCell>
+                    </TableRow>
                   ))}
-                </Tbody>
+                </TableBody>
               </Table>
-              <Table mt={{ base: 10, md: 0 }}>
-                <Thead>
-                  <Tr>
-                    <Th fontSize={'medium'} textAlign={'center'} bg={'momo.600'} colSpan={2}>
+              <Table className="mt-10 md:mt-0">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead colSpan={2} className="bg-momo-600 text-center text-base">
                       {singleOptionData.title}
-                    </Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
                   {singleOptionData.contents.map((item, i) => (
-                    <Tr key={i}>
-                      <Td px={{ base: 1, lg: 6 }}>{item.title}</Td>
-                      <Td px={{ base: 1, lg: 6 }} textAlign={'right'}>
-                        {item.price}
-                      </Td>
-                    </Tr>
+                    <TableRow key={i}>
+                      <TableCell className="px-1 lg:px-6">{item.title}</TableCell>
+                      <TableCell className="px-1 text-right lg:px-6">{item.price}</TableCell>
+                    </TableRow>
                   ))}
-                </Tbody>
+                </TableBody>
               </Table>
-            </Box>
-            <Text fontSize={'small'} textAlign={'center'}>
-              ※ 料金は全て税別です。
-            </Text>
-          </Box>
-        </Box>
-      </Box>
+            </div>
+            <p className="mt-4 text-center text-sm">※ 料金は全て税別です。</p>
+          </div>
+        </div>
+      </section>
+
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );

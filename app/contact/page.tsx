@@ -1,4 +1,3 @@
-import { Box, Text } from '@chakra-ui/react';
 import Title from '@/components/Title';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { ContactForm } from '@/components/ContactForm';
@@ -23,18 +22,18 @@ export default function Contact() {
   return (
     <>
       <Title titleEn={'Contact'} titleJp={'お問い合わせ'} />
-      <Box maxW={1152} mx={'auto'} p={4} pb={{ base: 15, md: 156 }}>
-        <Box maxW={960} mx={'auto'} pb={16} fontSize={'large'} fontWeight={500} lineHeight={2}>
-          <Text>
+      <div className="mx-auto max-w-6xl p-4 pb-[60px] md:pb-[624px]">
+        <div className="mx-auto max-w-[960px] pb-16 text-lg font-medium leading-loose">
+          <p>
             合同会社ピーチウェブへのご質問、仕事のご依頼、「ピーチファイ」インタビューへのご希望、その他弊社へのご相談などを受け付けております。
-            <Box as={'br'} />
+            <br />
             下記のフォームへご入力の上、送信してください。
-            <Box as={'br'} />※
+            <br />※
             弊社はお問い合わせいただいたメールのIPアドレスを取得、一時的に保管している場合があります。
-          </Text>
-        </Box>
+          </p>
+        </div>
         <ContactForm />
-      </Box>
+      </div>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );

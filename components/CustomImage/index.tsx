@@ -1,21 +1,17 @@
 'use client';
 
-import { Box, BoxProps } from '@chakra-ui/react';
-import NextImage, { ImageProps as NextImageProps } from 'next/image';
+import { cn } from '@/lib/utils';
+import NextImage, { type ImageProps as NextImageProps } from 'next/image';
 
-type CustomImageProps = BoxProps & Omit<NextImageProps, 'width' | 'height' | 'style'>;
+type CustomImageProps = Omit<NextImageProps, 'width' | 'height' | 'style' | 'fill'> & {
+  wrapperClassName?: string;
+};
 
-const CustomImage: React.FC<CustomImageProps> = ({
-  src,
-  alt,
-  priority = false,
-  sizes,
-  ...rest
-}) => {
+const CustomImage: React.FC<CustomImageProps> = ({ wrapperClassName, ...imageProps }) => {
   return (
-    <Box position="relative" {...rest}>
-      <NextImage src={src} alt={alt} fill priority={priority} sizes={sizes || '100vw'} />
-    </Box>
+    <div className={cn('relative', wrapperClassName)}>
+      <NextImage {...imageProps} fill sizes={imageProps.sizes || '100vw'} />
+    </div>
   );
 };
 
