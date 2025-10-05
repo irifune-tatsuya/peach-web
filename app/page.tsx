@@ -1,5 +1,5 @@
-import { Box, Heading, Image, Link, ListItem, OrderedList, Text } from '@chakra-ui/react';
-import styles from './layout.module.css';
+import Image from 'next/image';
+import Link from 'next/link';
 import { TopSwiper } from '@/components/TopSwiper';
 import {
   LIMIT05,
@@ -9,12 +9,10 @@ import {
   IMAGEBASEURL,
   PEACHFILTER,
 } from '@/constants';
-import { FaInstagram } from 'react-icons/fa';
-import { FaLine } from 'react-icons/fa';
+import { FaInstagram, FaLine } from 'react-icons/fa';
 import { FaSquareXTwitter } from 'react-icons/fa6';
 import { ContactButton } from '@/components/ContactButton';
 import { getList } from '@/libs/microcms';
-import React from 'react';
 import SideScrollArticleList from '@/components/SideScrollArticleList';
 import { ViewMoreButton } from '@/components/ViewMoreButton';
 import ContentTitle from '@/components/ContentTitle';
@@ -65,246 +63,141 @@ export default async function Home() {
     limit: LIMIT05,
     filters: NEWSFILTER,
   });
+
   return (
     <>
-      <Box
-        id={'key-visual'}
-        w={'100vw'}
-        h={{ base: 'calc(100vh - 55px)', md: 'calc(100vh - 76px)' }}
-        position={'relative'}
-        overflow={'hidden'}
+      <div
+        id="key-visual"
+        className="relative w-screen overflow-hidden h-[calc(100vh-55px)] md:h-[calc(100vh-76px)]"
       >
-        <Heading as={'h1'} display={'none'}>
-          合同会社ピーチウェブ公式サイト
-        </Heading>
-        <Box
-          position={'absolute'}
-          top={{ base: '50%', sm: '60%', lg: '50%' }}
-          left={'50%'}
-          transform={'translate(-50%, -50%)'}
-          zIndex={2}
-          w={'95%'}
-          maxW={'500px'}
-        >
-          <Box w={'100%'}>
+        <h1 className="sr-only">合同会社ピーチウェブ公式サイト</h1>
+        <div className="absolute left-1/2 top-1/2 z-20 w-[80%] max-w-lg -translate-x-1/2 -translate-y-1/2 animate-[var(--animate-fade-in)]">
+          <div className="w-full">
             <Image
               src={`${IMAGEBASEURL}/top/message.svg`}
-              alt={'あなたの仕事が永く愛されますように'}
-              w={'100%'}
-              h={'auto'}
-              className={styles.message}
+              alt="あなたの仕事が永く愛されますように"
+              width={512}
+              height={288}
+              className="h-auto w-full"
             />
-            <Text
-              color={'white'}
-              fontSize={{ base: 'small', sm: 'medium', md: 'large', lg: 'x-large' }}
-              fontWeight={'bold'}
-              textAlign={'center'}
-              mt={8}
-            >
-              I hope you and your business <Box as="br" />
+            <p className="mt-8 text-center font-bold text-white text-sm sm:text-base md:text-lg lg:text-xl">
+              I hope you and your business <br />
               will be loved for many years to come.
-            </Text>
-          </Box>
-        </Box>
+            </p>
+          </div>
+        </div>
         <TopSwiper images={swiperImages} />
-      </Box>
-      <Box as="section">
-        <Box
-          display={{ base: 'flex', md: 'none' }}
-          justifyContent={'center'}
-          alignItems={'center'}
-          gap={3}
-          p={2}
-          bg={'momo.300'}
-        >
+      </div>
+      <section>
+        <div className="flex items-center justify-center gap-3 bg-momo-300 p-2 md:hidden">
           <Link href={CONTACT.instagram} target="_blank">
-            <FaInstagram size={'2.5em'} />
+            <FaInstagram className="h-10 w-10" />
           </Link>
           <Link href={CONTACT.X} target="_blank">
-            <FaSquareXTwitter size={'2.5em'} />
+            <FaSquareXTwitter className="h-10 w-10" />
           </Link>
           <Link href={CONTACT.line} target="_blank">
-            <FaLine size={'2.5em'} />
+            <FaLine className="h-10 w-10" />
           </Link>
           <ContactButton />
-        </Box>
-      </Box>
-      <Box as="section" pt={{ base: 54, md: 124 }} pb={{ base: 54, md: 184 }}>
-        <Box mx={'auto'} maxW={1152} px={4}>
+        </div>
+      </section>
+      <section className="pb-14 pt-14 md:pb-[184px] md:pt-[124px]">
+        <div className="mx-auto max-w-6xl px-4">
           <ContentTitle TitleEn="Business" TitleJp="事業内容" mb={12} />
-          <Box display={{ base: 'block', md: 'flex' }} justifyContent={'space-between'}>
-            <Box w={{ base: '100%', md: '49%' }}>
-              <Text
-                fontSize={{ base: 'large', lg: 'x-large' }}
-                fontWeight={'bold'}
-                lineHeight={'1.8em'}
-                textAlign={{ base: 'center', md: 'left' }}
-                mb={{ base: 20, md: 8 }}
-              >
+          <div className="justify-between md:flex">
+            <div className="w-full md:w-[49%]">
+              <p className="mb-20 text-center text-lg font-bold leading-relaxed md:mb-8 md:text-left lg:text-xl">
                 あなたの仕事の魅力を最大限発揮する
-                <Box as="br" />
+                <br />
                 ホームページの制作・運用を通じて
-                <Box as="br" />
-                <Box as="span" color={'momo.100'}>
-                  永く愛されるブランド作りを行います。
-                </Box>
-              </Text>
+                <br />
+                <span className="text-momo-100">永く愛されるブランド作りを行います。</span>
+              </p>
               <ViewMoreButton href={'/thought'} size={'large'} />
-            </Box>
-            <OrderedList
-              w={{ base: '100%', md: '49%' }}
-              listStyleType={'none'}
-              mx={0}
-              mt={{ base: 20, md: 0 }}
-              borderTop={2}
-              borderColor={'momo.400'}
-              borderStyle={'solid'}
-              fontWeight={'bold'}
-            >
+            </div>
+            <ol className="mx-0 mt-20 w-full list-none border-t-2 border-solid border-momo-400 font-bold md:mt-0 md:w-[49%]">
               {businessLinks.map((item, i) => (
-                <ListItem key={i}>
+                <li key={i}>
                   <Link
                     href={item.href}
-                    display={{ base: 'grid', md: 'block' }}
-                    alignItems={'center'}
-                    gridAutoFlow={'column'}
-                    gridTemplateColumns={'40px auto'}
-                    gridTemplateRows={'auto auto'}
-                    gap={'0 12px'}
-                    px={'2em'}
-                    py={'1.5em'}
-                    borderBottom={2}
-                    borderColor={'momo.400'}
-                    borderStyle={'solid'}
-                    className={styles.slideColorButton}
-                    _hover={{ textDecoration: 'none' }}
+                    className="grid items-center gap-x-3 border-b-2 border-solid border-momo-400 px-8 py-6 grid-cols-[40px_auto] grid-rows-2 md:block hover:no-underline transition-colors hover:bg-momo-100 hover:text-white"
                   >
-                    <Box as={'span'} mr={4} color={'momo.500'} gridRow={'1 / span 2'}>
-                      {`0${i + 1}`}
-                    </Box>
-                    <Box as={'span'} mr={4} fontSize={{ base: 'x-large' }}>
-                      {item.title}
-                    </Box>
-                    <Box as={'span'}>{item.titleEn}</Box>
+                    <span className="mr-4 text-momo-500 row-span-2">{`0${i + 1}`}</span>
+                    <span className="mr-4 text-xl">{item.title}</span>
+                    <span>{item.titleEn}</span>
                   </Link>
-                </ListItem>
+                </li>
               ))}
-            </OrderedList>
-          </Box>
-        </Box>
-      </Box>
-      <Box as="section" pb={{ base: 30, md: 100 }}>
-        <Box w={'100%'} maxW={1080} mx={'auto'} p={4}>
-          <Link href={'/peach-fight'} w={'100%'} overflow={'hidden'}>
+            </ol>
+          </div>
+        </div>
+      </section>
+      <section className="pb-[30px] md:pb-24">
+        <div className="mx-auto w-full max-w-5xl p-4">
+          <Link href={'/peach-fight'} className="block w-full overflow-hidden">
             <Image
               src={`${IMAGEBASEURL}/top/peach_fight_banner.webp`}
               alt={'岡山のチャレンジ応援マガジンピーチファイ'}
-              transition={'transform 0.3s ease'}
-              _hover={{ transform: 'scale(1.1)' }}
-              borderRadius={'32px'}
+              width={1080}
+              height={538}
+              className="rounded-[32px] transition-transform duration-300 ease-in-out hover:scale-110"
             />
           </Link>
-        </Box>
-      </Box>
-      <Box as="section" pb={{ base: 100, md: 200 }}>
-        <Box mx={'auto'} maxW={1152} px={4}>
-          <Box
-            display={'flex'}
-            justifyContent={'space-between'}
-            alignItems={'center'}
-            mb={{ base: 8, md: 12 }}
-          >
+        </div>
+      </section>
+      <section className="pb-24 md:pb-48">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="mb-8 flex items-center justify-between md:mb-12">
             <ContentTitle TitleEn="Peach Fight" TitleJp="ピーチファイ" mb={0} />
             <ViewMoreButton href={'/peach-fight'} size={'small'} />
-          </Box>
-          <SideScrollIcon display={['block']} />
+          </div>
+          <SideScrollIcon />
           <SideScrollArticleList articles={peachFightData.contents} category={'peach-fight'} />
-        </Box>
-      </Box>
-      <Box as="section" pb={{ base: 100, md: 200 }}>
-        <Box mx={'auto'} maxW={1152} px={4}>
-          <Box
-            display={'flex'}
-            justifyContent={'space-between'}
-            alignItems={'center'}
-            mb={{ base: 8, md: 12 }}
-          >
+        </div>
+      </section>
+      <section className="pb-24 md:pb-48">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="mb-8 flex items-center justify-between md:mb-12">
             <ContentTitle TitleEn="Article" TitleJp="新着記事" mb={0} />
             <ViewMoreButton href={'/article'} size={'small'} />
-          </Box>
-          <SideScrollIcon display={['block']} />
+          </div>
+          <SideScrollIcon />
           <SideScrollArticleList articles={articleData.contents} category={'article'} />
-        </Box>
-      </Box>
-      <Box as="section" pb={{ base: 100, md: 20 }} maxW={1152} px={4} mx={'auto'}>
-        <Box>
-          <Box
-            display={'flex'}
-            justifyContent={'space-between'}
-            alignItems={'center'}
-            mb={{ base: 8, md: 12 }}
-          >
-            <ContentTitle TitleEn="News" TitleJp="ニュース" mb={0} />
-            <ViewMoreButton href={'/news'} size={'small'} />
-          </Box>
-        </Box>
+        </div>
+      </section>
+      <section className="mx-auto max-w-6xl px-4 pb-24 md:pb-5">
+        <div className="mb-8 flex items-center justify-between md:mb-12">
+          <ContentTitle TitleEn="News" TitleJp="ニュース" mb={0} />
+          <ViewMoreButton href={'/news'} size={'small'} />
+        </div>
         <ArticleList articles={newsData.contents} category={'news'} />
-      </Box>
-      <Box
-        as="section"
-        pt={{ base: 54, md: 20 }}
-        pb={{ base: 54, md: 20 }}
-        px={8}
-        mb={14}
-        bg={'momo.300'}
-      >
-        <Box mx={'auto'} maxW={1152} px={4}>
-          <Box
-            display={'flex'}
-            gap={14}
-            flexDirection={{ base: 'column', md: 'row' }}
-            justifyContent={'center'}
-          >
+      </section>
+      <section className="mb-14 bg-momo-300 px-8 py-14 md:py-5">
+        <div className="mx-auto max-w-6xl px-4">
+          <div className="flex flex-col justify-center gap-14 md:flex-row">
             {bottomLinks.map((item, i) => (
               <Link
                 key={i}
                 href={item.href}
-                display={'block'}
-                maxW={300}
-                overflow={'hidden'}
-                position={'relative'}
-                zIndex={1}
-                _hover={{ textDecoration: 'none' }}
+                className="relative z-10 block max-w-[300px] overflow-hidden hover:no-underline"
               >
                 <Image
                   src={item.src}
                   alt={item.titleJp}
-                  w={'100%'}
-                  h={'auto'}
-                  transition={'transform 0.3s ease'}
-                  _hover={{ transform: 'scale(1.2)' }}
-                  loading={'lazy'}
+                  width={300}
+                  height={200}
+                  className="h-auto w-full transition-transform duration-300 ease-in-out hover:scale-125"
                 />
-                <Box
-                  position={'absolute'}
-                  top={'50%'}
-                  left={'50%'}
-                  transform={'translate(-50%, -50%)'}
-                  w={'100%'}
-                  color={'white'}
-                  fontWeight={'bold'}
-                  textAlign={'center'}
-                  zIndex={2}
-                  _hover={{ textDecoration: 'none' }}
-                >
-                  <Text fontSize={'x-large'}>{item.titleJp}</Text>
-                  <Text fontSize={'large'}>{item.titleEn}</Text>
-                </Box>
+                <div className="absolute left-1/2 top-1/2 z-20 w-full -translate-x-1/2 -translate-y-1/2 text-center font-bold text-white">
+                  <p className="text-xl">{item.titleJp}</p>
+                  <p className="text-lg">{item.titleEn}</p>
+                </div>
               </Link>
             ))}
-          </Box>
-        </Box>
-      </Box>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

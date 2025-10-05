@@ -1,13 +1,7 @@
-import axios from 'axios';
+'use server';
 
-type formInputs = {
-  lastname: string;
-  firstname: string;
-  company?: string;
-  email: string;
-  phone?: string;
-  message: string;
-};
+import axios from 'axios';
+import type { ContactFormValues } from '@/lib/schema';
 
 type startMailMagazineInputs = {
   lastname: string;
@@ -20,7 +14,7 @@ type stopMailMagazineInputs = {
   email: string;
 };
 
-export async function createContactData(data: formInputs) {
+export async function createContactData(data: ContactFormValues) {
   const portalId = process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID;
   const formGuid = process.env.NEXT_PUBLIC_HUBSPOT_FORM_ID;
   const config = {

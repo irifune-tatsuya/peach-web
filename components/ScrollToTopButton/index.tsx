@@ -1,26 +1,20 @@
 'use client';
 
-import { Icon } from '@chakra-ui/react';
-import { NextPage } from 'next';
 import { MdKeyboardArrowUp } from 'react-icons/md';
-import styles from './index.module.css';
 
-export const ScrollToTopButton: NextPage = () => {
+export const ScrollToTopButton = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <Icon
-      display={{ base: 'block', md: 'none' }}
-      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      position="fixed"
-      right={3}
-      bottom={28}
-      as={MdKeyboardArrowUp}
-      color={'momo.100'}
-      boxSize={'50px'}
-      borderRadius={'50%'}
-      p={2}
-      bg={'white'}
-      zIndex={10}
-      className={styles.button}
-    />
+    <button
+      type="button"
+      onClick={scrollToTop}
+      className="fixed bottom-28 right-3 z-10 block h-[50px] w-[50px] rounded-full bg-white p-2 text-momo-100 shadow-lg transition-transform hover:scale-105 active:scale-95 md:hidden"
+      aria-label="ページトップに戻る"
+    >
+      <MdKeyboardArrowUp className="h-full w-full" />
+    </button>
   );
 };

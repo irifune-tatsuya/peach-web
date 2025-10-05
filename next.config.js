@@ -9,6 +9,12 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'www.assets.peach-web.co.jp',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.microcms-assets.io',
+        port: '',
+        pathname: '/assets/**',
+      },
     ],
   },
   async rewrites() {

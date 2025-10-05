@@ -19,26 +19,26 @@ type Props = {
 
 export const revalidate = 0;
 
-const ContactButtons = [
+const contactButtons = [
   {
-    bg: 'momo.100',
-    color: 'white',
+    bgClassName: 'bg-[var(--color-momo-100)]',
+    textClassName: 'text-white',
     href: '/contact',
     isExternal: false,
     title: 'フォームから取材応募',
     icon: <IoMail />,
   },
   {
-    bg: '#06c755',
-    color: 'white',
+    bgClassName: 'bg-[#06c755]',
+    textClassName: 'text-white',
     href: CONTACT.line,
     isExternal: true,
     title: 'LINEから取材応募',
     icon: <FaLine />,
   },
   {
-    bg: 'momo.300',
-    color: 'black',
+    bgClassName: 'bg-[var(--color-momo-300)]',
+    textClassName: 'text-black',
     href: '/peach-fight',
     isExternal: false,
     title: 'ピーチファイTOPへ',
@@ -115,7 +115,7 @@ export default async function Page({
     <>
       {isEnabled && <PreviewAlert />}
       <InterviewArticle data={data} />
-      <ButtonArea buttons={ContactButtons} bg={'white'} />
+      <ButtonArea buttons={contactButtons} className="bg-white" />
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );

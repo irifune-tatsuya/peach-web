@@ -1,113 +1,95 @@
-import {
-  Box,
-  Link,
-  Text,
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerBody,
-  DrawerFooter,
-  Icon,
-  UnorderedList,
-  ListItem,
-  DrawerHeader,
-  useBreakpointValue,
-} from '@chakra-ui/react';
+'use client';
 import { NextPage } from 'next';
+import Link from 'next/link';
 import { MENU } from '@/constants';
 import { IoMail, IoCloseOutline } from 'react-icons/io5';
 import { FaArrowRight } from 'react-icons/fa';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetFooter,
+  SheetClose,
+  SheetTitle,
+  SheetDescription,
+} from '@/components/ui/sheet';
+import { useEffect, useState } from 'react';
+
+function useMediaQuery(query: string): boolean {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia(query);
+    if (media.matches !== matches) {
+      setMatches(media.matches);
+    }
+    const listener = () => {
+      setMatches(media.matches);
+    };
+    window.addEventListener('resize', listener);
+    return () => window.removeEventListener('resize', listener);
+  }, [matches, query]);
+
+  return matches;
+}
 
 type Props = {
   isOpen: boolean;
-  onClose: () => void;
+  onCloseAction: () => void;
 };
 
-export const NavDrawer: NextPage<Props> = ({ isOpen, onClose }) => {
-  const placement = useBreakpointValue({ base: 'bottom', md: 'right' }) as
-    | 'left'
-    | 'right'
-    | 'top'
-    | 'bottom';
+export const NavDrawer: NextPage<Props> = ({ isOpen, onCloseAction }) => {
+  const isDesktop = useMediaQuery('(min-width: 768px)');
+  const side = isDesktop ? 'right' : 'bottom';
+
   return (
-    <Drawer isOpen={isOpen} placement={placement} onClose={onClose} autoFocus={false}>
-      <DrawerOverlay />
-      <DrawerContent bg={'white'}>
-        <DrawerHeader display={'flex'} justifyContent={'end'}>
-          <Icon
-            display={{ base: 'none', md: 'block' }}
-            onClick={onClose}
-            as={IoCloseOutline}
-            w={12}
-            h={12}
-            borderRadius={'50%'}
-            p={2}
-            bg={'momo.300'}
-          />
-        </DrawerHeader>
-        <DrawerBody pt={10}>
-          <Box as="nav" display={'flex'} justifyContent={{ base: 'center', md: 'end' }}>
-            <UnorderedList listStyleType={'none'} w={'100%'}>
+    <Sheet open={isOpen} onOpenChange={onCloseAction}>
+      <SheetContent side={side} className="bg-white">
+        <SheetHeader className="flex flex-row justify-end">
+          <SheetTitle className="sr-only">ナビゲーションメニュー</SheetTitle>
+          <SheetDescription className="sr-only">
+            サイトの主要なページへ移動するためのナビゲーションです。
+          </SheetDescription>
+          <SheetClose asChild>
+            <button className="hidden h-12 w-12 rounded-full bg-momo-300 p-2 md:block">
+              <IoCloseOutline className="h-full w-full" />
+            </button>
+          </SheetClose>
+        </SheetHeader>
+        <div className="pt-10">
+          <nav className="flex justify-center md:justify-end">
+            <ul className="w-full list-none">
               {MENU.map((item, i) => (
-                <ListItem borderBottom={'1px'} borderColor={'momo.400'} key={i}>
+                <li key={i} className="border-b border-momo-400">
                   <Link
                     href={item.href}
-                    display={'flex'}
-                    justifyContent={'space-between'}
-                    alignItems={'center'}
-                    fontWeight={'bold'}
-                    py={4}
-                    px={2}
-                    _hover={{ textDecoration: 'none', color: 'momo.100' }}
+                    className="flex items-center justify-between px-2 py-4 font-bold hover:text-momo-100 hover:no-underline"
+                    onClick={onCloseAction}
                   >
                     {item.title}
-                    <Icon as={FaArrowRight} color={'momo.100'} />
+                    <FaArrowRight className="text-momo-100" />
                   </Link>
-                </ListItem>
+                </li>
               ))}
-            </UnorderedList>
-          </Box>
-        </DrawerBody>
-        <DrawerFooter display={{ base: 'block', md: 'none' }}>
-          <Box
-            w={'100%'}
-            px={2}
-            display={'flex'}
-            justifyContent={'space-between'}
-            alignItems={'center'}
-          >
-            <Link display={'block'} href="/contact" textAlign={'center'}>
-              <Box
-                py={'1em'}
-                px={'2em'}
-                maxW={200}
-                display={'flex'}
-                justifyContent={'center'}
-                alignItems={'center'}
-                height={'100%'}
-                bg={'momo.100'}
-                color={'white'}
-                fontWeight={'bold'}
-                borderRadius={30}
-                fontSize={'small'}
-              >
+            </ul>
+          </nav>
+        </div>
+        <SheetFooter className="md:hidden">
+          <div className="flex w-full items-center justify-between px-2">
+            <Link href="/contact" className="block text-center" onClick={onCloseAction}>
+              <div className="flex h-full max-w-[200px] items-center justify-center rounded-[30px] bg-momo-100 px-['2em'] py-['1em'] text-sm font-bold text-white">
                 <IoMail size={'1.5em'} />
-                <Text ml={4}>お問い合わせ</Text>
-              </Box>
+                <span className="ml-4">お問い合わせ</span>
+              </div>
             </Link>
-            <Icon
-              display={{ base: 'block', md: 'none' }}
-              onClick={onClose}
-              as={IoCloseOutline}
-              w={12}
-              h={12}
-              borderRadius={'50%'}
-              p={2}
-              bg={'momo.300'}
-            />
-          </Box>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
+            <SheetClose asChild>
+              <button className="block h-12 w-12 rounded-full bg-momo-300 p-2 md:hidden">
+                <IoCloseOutline className="h-full w-full" />
+              </button>
+            </SheetClose>
+          </div>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
   );
 };

@@ -1,6 +1,5 @@
 'use client';
 import { CONTACT, IMAGEBASEURL } from '@/constants';
-import { Box, Image, Link, useDisclosure } from '@chakra-ui/react';
 import { NextPage } from 'next';
 import { FaInstagram } from 'react-icons/fa';
 import { FaSquareXTwitter } from 'react-icons/fa6';
@@ -8,33 +7,30 @@ import { FaLine } from 'react-icons/fa';
 import { MenuButton } from '../MenuButton';
 import { NavDrawer } from '../NavDrawer';
 import { ContactButton } from '../ContactButton';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useState } from 'react';
 
 export const Header: NextPage = () => {
-  const { isOpen, onToggle, onClose } = useDisclosure();
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <Box
+    <header
       id="page-header"
-      as="header"
-      py={3}
-      px={6}
-      h={76}
-      position={'fixed'}
-      top={0}
-      zIndex={10}
-      w={'100%'}
-      bg={'white'}
-      display={{ base: 'none', md: 'block' }}
+      className="hidden h-[76px] w-full bg-white px-6 py-3 fixed top-0 z-20 md:block"
     >
-      <Box display={'flex'} justifyContent={'space-between'}>
+      <div className="flex justify-between">
         <Link href="/">
           <Image
             src={`${IMAGEBASEURL}/common/rectangle_logo.svg`}
-            width={{ md: 150, lg: 190 }}
-            height={'auto'}
+            width={190}
+            height={40}
+            className="h-auto w-[150px] lg:w-[190px]"
             alt={'ピーチウェブヘッダーロゴ'}
+            priority
           />
         </Link>
-        <Box display={'flex'} alignItems={'center'} gap={5}>
+        <div className="flex items-center gap-5">
           <Link href={CONTACT.instagram} target="_blank">
             <FaInstagram size={'2em'} />
           </Link>
@@ -44,13 +40,13 @@ export const Header: NextPage = () => {
           <Link href={CONTACT.line} target="_blank">
             <FaLine size={'2em'} />
           </Link>
-          <Box as="nav" ml={'auto'} display={'flex'} alignItems={'center'} height={'100%'}>
+          <nav className="ml-auto flex h-full items-center">
             <ContactButton />
-          </Box>
-          <MenuButton onToggle={onToggle} />
-        </Box>
-        <NavDrawer onClose={onClose} isOpen={isOpen} />
-      </Box>
-    </Box>
+          </nav>
+          <MenuButton onToggle={() => setIsOpen(!isOpen)} />
+        </div>
+        <NavDrawer onCloseAction={() => setIsOpen(false)} isOpen={isOpen} />
+      </div>
+    </header>
   );
 };

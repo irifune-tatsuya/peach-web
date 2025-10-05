@@ -6,7 +6,6 @@ import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
-import styles from './index.module.css';
 import React from 'react';
 
 export const CoverflowSwiper = ({ children }: { children: React.ReactNode[] }) => {
@@ -25,12 +24,12 @@ export const CoverflowSwiper = ({ children }: { children: React.ReactNode[] }) =
         slideShadows: true,
       }}
       navigation={true}
-      pagination={true}
+      pagination={{ clickable: true }}
       modules={[EffectCoverflow, Navigation, Pagination]}
-      className={styles.swiper}
+      className="w-full pt-8 pb-12"
     >
       {children.map((item, i) => (
-        <SwiperSlide className={styles.swiperSlide} key={i}>
+        <SwiperSlide key={i} className="!w-[75%] max-w-[400px] md:!w-[50%]">
           {item}
         </SwiperSlide>
       ))}

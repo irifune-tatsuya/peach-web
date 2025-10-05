@@ -1,21 +1,11 @@
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import Title from '@/components/Title';
-import {
-  Box,
-  Card,
-  CardBody,
-  Heading,
-  Image,
-  Link,
-  SimpleGrid,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
-import { FaCheckCircle } from 'react-icons/fa';
 import { IMAGEBASEURL } from '@/constants';
-import React from 'react';
-import { FaExternalLinkAlt } from 'react-icons/fa';
 import { ACHIEVEMENTS } from '@/constants/achievements';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
+import { FaCheckCircle, FaExternalLinkAlt } from 'react-icons/fa';
 
 const breadcrumbs = [
   {
@@ -37,189 +27,105 @@ const designLinks = [
   },
 ];
 
-export default async function Pricing() {
+export default async function Achievements() {
+  const sectionClasses =
+    'relative overflow-hidden bg-gradient-to-b from-[#fcdee9] to-white pt-[88px] pb-[90px] md:pt-32 md:pb-44';
+  const gridClasses = 'grid grid-cols-2 gap-x-2 gap-y-6 md:grid-cols-3 lg:grid-cols-4';
+  const cardClasses =
+    'group overflow-hidden rounded-lg bg-white shadow-md transition-transform duration-200 ease-in-out hover:scale-105';
+  const buttonBaseClasses =
+    'flex items-center justify-center gap-1 rounded-lg p-3 text-center text-sm font-bold text-white transition-opacity hover:opacity-80';
+
   return (
     <>
       <Title titleEn={'Achievements & Designs'} titleJp={'実績&デザイン集'} />
-      <Box
-        bg={'linear-gradient(to bottom, #fcdee9, #ffffff);'}
-        position={'relative'}
-        overflow={'hidden'}
-        pt={{ base: 88, md: 120 }}
-        pb={{ base: 90, md: 180 }}
-      >
-        <Box p={4} maxW={1152} mx={'auto'}>
-          <Box>
-            <Heading as={'h2'} mr={4} size={{ base: 'md', md: 'lg' }} display={'flex'}>
-              <FaCheckCircle color={'#ff7bac'} />
-              <Box as={'span'} ml={2}>
-                制作実績
-              </Box>
-            </Heading>
-          </Box>
-          <Box
-            maxW={960}
-            mx={'auto'}
-            py={8}
-            fontSize={{ base: 'medium', md: 'large' }}
-            fontWeight={500}
-            lineHeight={2}
-          >
-            <Text>弊社で制作したホームページ、ランディングページの実績をご紹介します。</Text>
-          </Box>
-          <Box w={'100%'}>
-            <SimpleGrid
-              fontSize={'large'}
-              fontWeight={'normal'}
-              columns={{ base: 2, md: 3, lg: 4 }}
-              spacing={6}
-              gap={2}
-            >
-              {ACHIEVEMENTS.map((item, i) => (
-                <Card
-                  key={i}
-                  rounded={'lg'}
-                  transition={'transform 0.2s ease'}
-                  _hover={{ transform: 'scale(1.02)' }}
-                >
-                  <CardBody p={2}>
-                    <Heading
-                      as={'h3'}
-                      fontSize={{ base: 'x-small', md: 'medium' }}
-                      textAlign={'center'}
-                      py={3}
-                    >
-                      {`${item.name}様`}
-                    </Heading>
-                    <Link href={`achievements/${item.slug}`}>
+      <section className={sectionClasses}>
+        <div className="mx-auto max-w-6xl p-4">
+          <h2 className="flex items-center text-xl font-bold md:text-2xl">
+            <FaCheckCircle className="mr-2 text-momo-100" />
+            <span>制作実績</span>
+          </h2>
+          <div className="mx-auto max-w-4xl py-8 font-medium leading-loose text-base md:text-lg">
+            <p>弊社で制作したホームページ、ランディングページの実績をご紹介します。</p>
+          </div>
+          <div className={gridClasses}>
+            {ACHIEVEMENTS.map((item) => (
+              <div key={item.slug} className={cardClasses}>
+                <div className="p-2">
+                  <h3 className="py-3 text-center text-xs font-bold md:text-base">{`${item.name}様`}</h3>
+                  <Link href={`/achievements/${item.slug}`}>
+                    <div className="relative aspect-[3/4] w-full overflow-hidden rounded-md">
                       <Image
                         src={`${IMAGEBASEURL}/achievements/${item.slug}/thumbnail.webp`}
                         alt={`${item.name}様の制作実績`}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-110"
                       />
-                    </Link>
-                    <Stack py={5}>
-                      <Link
-                        bg={'momo.100'}
-                        color={'white'}
-                        fontWeight={'bold'}
-                        fontSize={'small'}
-                        textAlign={'center'}
-                        p={3}
-                        rounded={'lg'}
-                        href={item.href}
-                        isExternal
-                        _hover={{ textDecoration: 'none', opacity: 0.8 }}
-                      >
-                        <Box
-                          as={'span'}
-                          display={'flex'}
-                          justifyContent={'center'}
-                          alignItems={'center'}
-                          gap={1}
-                        >
-                          <Box as={'span'}>サイトを見る</Box>
-                          <FaExternalLinkAlt />
-                        </Box>
-                      </Link>
-                      <Link
-                        bg={'momo.200'}
-                        fontWeight={'bold'}
-                        fontSize={'small'}
-                        textAlign={'center'}
-                        p={3}
-                        rounded={'lg'}
-                        href={`achievements/${item.slug}`}
-                        _hover={{ textDecoration: 'none', opacity: 0.8 }}
-                      >
-                        <Box as={'span'}>詳細を見る</Box>
-                      </Link>
-                    </Stack>
-                  </CardBody>
-                </Card>
-              ))}
-            </SimpleGrid>
-          </Box>
-        </Box>
-      </Box>
-      <Box
-        bg={'linear-gradient(to bottom, #fcdee9, #ffffff);'}
-        position={'relative'}
-        overflow={'hidden'}
-        pt={{ base: 88, md: 120 }}
-        pb={{ base: 90, md: 180 }}
-      >
-        <Box p={4} maxW={1152} mx={'auto'}>
-          <Box>
-            <Heading as={'h2'} mr={4} size={{ base: 'md', md: 'lg' }} display={'flex'}>
-              <FaCheckCircle color={'#ff7bac'} />
-              <Box as={'span'} ml={2}>
-                デザイン提案
-              </Box>
-            </Heading>
-          </Box>
-          <Box
-            maxW={960}
-            mx={'auto'}
-            py={8}
-            fontSize={{ base: 'medium', md: 'large' }}
-            fontWeight={500}
-            lineHeight={2}
-          >
-            <Text>
-              ホームページやランディングページのデザイン提案です。気に入るものはありますでしょうか？
-            </Text>
-          </Box>
-          <Box w={'100%'}>
-            <SimpleGrid
-              fontSize={'large'}
-              fontWeight={'normal'}
-              columns={{ base: 2, md: 3, lg: 4 }}
-              spacing={6}
-              gap={2}
-            >
-              {designLinks.map((item, i) => (
-                <Card
-                  key={i}
-                  rounded={'lg'}
-                  transition={'transform 0.2s ease'}
-                  _hover={{ transform: 'scale(1.02)' }}
-                >
-                  <CardBody p={2}>
-                    <Heading
-                      as={'h3'}
-                      fontSize={{ base: 'x-small', md: 'medium' }}
-                      textAlign={'center'}
-                      py={3}
+                    </div>
+                  </Link>
+                  <div className="flex flex-col gap-2 py-5">
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`${buttonBaseClasses} bg-momo-100`}
                     >
-                      {item.name}
-                    </Heading>
-                    <Link href={`achievements/design/${item.slug}`}>
+                      <span>サイトを見る</span>
+                      <FaExternalLinkAlt />
+                    </a>
+                    <Link
+                      href={`/achievements/${item.slug}`}
+                      className={`${buttonBaseClasses} bg-momo-200 !text-black`}
+                    >
+                      <span>詳細を見る</span>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className={sectionClasses}>
+        <div className="mx-auto max-w-6xl p-4">
+          <h2 className="flex items-center text-xl font-bold md:text-2xl">
+            <FaCheckCircle className="mr-2 text-momo-100" />
+            <span>デザイン提案</span>
+          </h2>
+          <div className="mx-auto max-w-4xl py-8 font-medium leading-loose text-base md:text-lg">
+            <p>
+              ホームページやランディングページのデザイン提案です。気に入るものはありますでしょうか？
+            </p>
+          </div>
+          <div className={gridClasses}>
+            {designLinks.map((item) => (
+              <div key={item.slug} className={cardClasses}>
+                <div className="p-2">
+                  <h3 className="py-3 text-center text-xs font-bold md:text-base">{item.name}</h3>
+                  <Link href={`/achievements/design/${item.slug}`}>
+                    <div className="relative aspect-[3/4] w-full overflow-hidden rounded-md">
                       <Image
                         src={`${IMAGEBASEURL}/achievements/${item.slug}/thumbnail.webp`}
-                        alt={`${item.name}`}
+                        alt={item.name}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-110"
                       />
+                    </div>
+                  </Link>
+                  <div className="flex flex-col gap-2 py-5">
+                    <Link
+                      href={`/achievements/design/${item.slug}`}
+                      className={`${buttonBaseClasses} bg-momo-200 !text-black`}
+                    >
+                      <span>デザインを見る</span>
                     </Link>
-                    <Stack py={5}>
-                      <Link
-                        bg={'momo.200'}
-                        fontWeight={'bold'}
-                        fontSize={'small'}
-                        textAlign={'center'}
-                        p={3}
-                        rounded={'lg'}
-                        href={`/achievements/design/${item.slug}`}
-                        _hover={{ textDecoration: 'none', opacity: 0.8 }}
-                      >
-                        <Box as={'span'}>デザインを見る</Box>
-                      </Link>
-                    </Stack>
-                  </CardBody>
-                </Card>
-              ))}
-            </SimpleGrid>
-          </Box>
-        </Box>
-      </Box>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );

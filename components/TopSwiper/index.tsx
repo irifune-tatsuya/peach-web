@@ -1,31 +1,29 @@
 'use client';
 
-import { Image } from '@chakra-ui/react';
+import Image from 'next/image';
 import { Autoplay, EffectFade } from 'swiper/modules';
-import 'swiper/css/effect-fade';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import styles from './index.module.css';
-import { NextPage } from 'next';
+import 'swiper/css/effect-fade';
 
-type Image = {
+type SlideImage = {
   h?: string;
   src: string;
   alt: string;
   borderRadius?: number;
 };
 
-type Props = { images: Array<Image> };
+type Props = {
+  images: SlideImage[];
+};
 
-export const TopSwiper: NextPage<Props> = (props) => {
-  const { images } = props;
-  const imageH = { base: 'calc(100vh - 55px)', md: 'calc(100vh - 76px)' };
+export const TopSwiper = ({ images }: Props) => {
+  const imageHeightClass = 'h-[calc(100vh-55px)] md:h-[calc(100vh-76px)]';
+
   return (
     <Swiper
       modules={[Autoplay, EffectFade]}
-      slidesPerView={'auto'}
+      slidesPerView={1}
       centeredSlides={true}
       loop={true}
       speed={2500}
@@ -34,19 +32,24 @@ export const TopSwiper: NextPage<Props> = (props) => {
         disableOnInteraction: false,
       }}
       effect={'fade'}
-      className={styles.slideWrapper}
+      className="w-full"
+      allowTouchMove={false}
     >
       {images.map((image, i) => (
         <SwiperSlide key={i}>
-          <Image
-            borderRadius={image.borderRadius ?? 0}
-            src={image.src}
-            objectFit={'cover'}
-            alt={image.alt}
-            w={'100vw'}
-            h={image.h ?? imageH}
-            loading={'lazy'}
-          />
+          <div className={`relative w-screen ${image.h ?? imageHeightClass}`}>
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              className="object-cover"
+              style={{
+                borderRadius: `${image.borderRadius ?? 0}px`,
+              }}
+              priority={i === 0}
+              sizes="100vw"
+            />
+          </div>
         </SwiperSlide>
       ))}
     </Swiper>

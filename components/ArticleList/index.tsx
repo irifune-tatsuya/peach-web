@@ -1,5 +1,5 @@
 import { Article } from '@/libs/microcms';
-import { Box, Link, ListItem, OrderedList, Tag, Text } from '@chakra-ui/react';
+import Link from 'next/link';
 import React from 'react';
 import PublishedDate from '../PublishedDate';
 
@@ -9,74 +9,45 @@ type Props = {
 };
 
 export default function ArticleList({ articles, category }: Props) {
-  if (!articles) {
-    return null;
-  }
-  if (articles.length === 0) {
-    return <p>記事がありません。</p>;
+  if (!articles || articles.length === 0) {
+    return <p className="p-4">記事がありません。</p>;
   }
   return (
-    <OrderedList
-      borderTop={1}
-      borderStyle={'solid'}
-      borderColor={'momo.400'}
-      listStyleType={'none'}
-      m={0}
-    >
-      {articles.map((item, i) => (
-        <ListItem key={i} borderBottom={1} borderStyle={'solid'} borderColor={'momo.400'} p={0}>
+    <ol className="m-0 list-none border-t border-solid border-momo-400">
+      {articles.map((item) => (
+        <li key={item.id} className="border-b border-solid border-momo-400">
           <Link
             href={`/${category}/${item.id}`}
-            display={{ base: 'block', md: 'flex' }}
-            py={6}
-            px={5}
-            alignItems={`center`}
-            _hover={{ textDecoration: 'none' }}
+            className="block px-5 py-6 hover:bg-gray-50 hover:no-underline md:flex md:items-center"
           >
-            <Box display={'flex'}>
-              {category === 'faq' ? (
-                ''
-              ) : (
+            <div className="flex shrink-0 items-center">
+              {category !== 'faq' && (
                 <PublishedDate date={item.publishedAt || item.createdAt} simple={true} />
               )}
-              {category === 'faq' ? (
-                item.tags?.map((tag, i) => (
-                  <Tag
-                    size={'sm'}
-                    ml={6}
-                    whiteSpace={'nowrap'}
-                    justifyContent={'center'}
-                    py={2}
-                    px={3}
-                    fontSize={'xx-small'}
-                    fontWeight={'bold'}
-                    key={i}
-                  >
-                    {`#${tag.name}`}
-                  </Tag>
-                ))
-              ) : (
-                <Tag
-                  size={'sm'}
-                  ml={6}
-                  whiteSpace={'nowrap'}
-                  justifyContent={'center'}
-                  py={2}
-                  px={3}
-                  fontSize={'xx-small'}
-                  fontWeight={'bold'}
-                  key={i}
-                >
-                  お知らせ
-                </Tag>
-              )}
-            </Box>
-            <Box ml={{ base: 0, md: 8 }} mt={{ base: 3, md: 0 }} lineHeight={1.5}>
-              <Text className={'articleTitle'}>{item.title}</Text>
-            </Box>
+
+              <div className="ml-6 flex flex-wrap gap-2">
+                {category === 'faq' ? (
+                  item.tags?.map((tag) => (
+                    <span
+                      key={tag.id}
+                      className="whitespace-nowrap rounded-full bg-momo-100 px-3 py-1 text-xs font-bold text-white"
+                    >
+                      {`#${tag.name}`}
+                    </span>
+                  ))
+                ) : (
+                  <span className="whitespace-nowrap rounded-full bg-momo-100 px-3 py-1 text-xs font-bold text-white">
+                    お知らせ
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className="mt-3 leading-normal md:ml-8 md:mt-0">
+              <p>{item.title}</p>
+            </div>
           </Link>
-        </ListItem>
+        </li>
       ))}
-    </OrderedList>
+    </ol>
   );
 }

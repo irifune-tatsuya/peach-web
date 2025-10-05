@@ -8,7 +8,7 @@ export const NEWSFILTER = 'category[equals]news';
 export const FAQFILTER = 'category[equals]faq';
 export const CATEGORYFILTER = 'category[equals]faq';
 
-export const IMAGEBASEURL = '/assets';
+export const IMAGEBASEURL = 'https://www.assets.peach-web.co.jp';
 
 // ヘッダーやフッターに表示するメニュー
 export const MENU = [

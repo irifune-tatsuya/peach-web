@@ -1,32 +1,23 @@
 import { Breadcrumbs } from '@/components/Breadcrumbs';
-import Title from '@/components/Title';
-import {
-  Box,
-  Card,
-  CardBody,
-  Center,
-  Heading,
-  Image,
-  Link,
-  ListItem,
-  Stack,
-  Table,
-  Tbody,
-  Td,
-  Text,
-  Th,
-  Thead,
-  Tr,
-  UnorderedList,
-} from '@chakra-ui/react';
-import { FaCheckCircle } from 'react-icons/fa';
-import { FaRegCircle } from 'react-icons/fa';
-import styles from './layout.module.css';
 import SideScrollIcon from '@/components/SideScrollIcon';
-import { ImDisplay } from 'react-icons/im';
-import { ImCoinYen } from 'react-icons/im';
+import { SiteLinkButton } from '@/components/SiteLinkButton';
+import Title from '@/components/Title';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 import { IMAGEBASEURL } from '@/constants';
-import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import type { ReactNode } from 'react';
+import { FaCheckCircle } from 'react-icons/fa';
+import { ImCoinYen, ImDisplay } from 'react-icons/im';
 
 const breadcrumbs = [
   {
@@ -46,16 +37,19 @@ const togetherData = [
     title: '顔の見えるホームページ屋さん',
     content:
       'ホームページ制作会社の多くは、オンライン上でサービスが完結するよう「申込み〜打合せ〜納品〜追加提案」まで一度も担当者が会社やお店を訪れないというケースがあります。弊社では、お客様先へ足を運んで、ご納得いくようサービス提供を行ってまいります。',
+    image: `${IMAGEBASEURL}/reason/together1.webp`,
   },
   {
     title: '丁寧なヒアリング',
     content:
       '経営コンサルタントが使用するフレームワークを使用して、丁寧にお客様の事業の理解いたします。ヒアリング内容は運用時に目的を達成したかどうかの指標としても生かされます。ホームページを作りたいけど、どうやって注文すればよいかわからないという方に弊社はおすすめです。',
+    image: `${IMAGEBASEURL}/reason/together2.webp`,
   },
   {
     title: '標準の運用サービスが充実',
     content:
       'ホームページは作って終わりではありません。継続的なSEO対策、ブログやお知らせ記事の更新、メニューやメッセージが変わった場合の改修作業などが標準プランの範囲内で全て対応しております。他社様ですとこれらのサービスが追加プションというケースも珍しくありません。',
+    image: `${IMAGEBASEURL}/reason/together3.webp`,
   },
 ];
 
@@ -64,585 +58,332 @@ const designData = [
     title: 'レスポンシブ対応',
     content:
       'パソコン、タブレット、スマートフォンなどあらゆる画面サイズに対応したユニバーサルなデザインを指します。レスポンシブ対応がきちんとされていることで、各デバイスでの閲覧性が向上し、お客様により的確に自社の世界観を伝えることができます。',
+    image: `${IMAGEBASEURL}/reason/design1.webp`,
   },
   {
     title: 'オリジナルバナーデザイン',
     content:
       '昨今人気の「生成AIによるイラスト」や「海外のフリーフォト」はサイトの世界観を壊す可能性があります。弊社ではホームページ内の画像デザインも料金内で一括して行います。これによりちぐはぐで怪しげな雰囲気をなくし、お客様に安心と信頼感をお届けします。',
+    image: `${IMAGEBASEURL}/reason/design2.webp`,
   },
   {
     title: 'テンプレートなし',
     content:
       '弊社では基本的にテンプレートから選んでサイトを構築することがございません。お客様によってブランディングの方向が異なるため当然のことと思っております。制作までの事前打合せでお時間をいただきますが、その分他にはない個性的なサイトをお届けします。',
+    image: `${IMAGEBASEURL}/reason/design3.webp`,
   },
 ];
 
+const buttonData = {
+  service: {
+    href: '/service',
+    icon: <ImDisplay size="1.5em" />,
+    text: 'サービス内容を見る',
+  },
+  pricing: {
+    href: '/pricing',
+    icon: <ImCoinYen size="1.5em" />,
+    text: '価格とプランを見る',
+  },
+};
+
+const ReasonCard = ({ item }: { item: { title: string; content: string; image: string } }) => (
+  <Card className="min-w-[280px] w-auto max-w-[350px] snap-start flex-shrink-0">
+    <CardHeader>
+      <Image
+        src={item.image}
+        alt={item.title}
+        width={310}
+        height={174}
+        className="rounded-t-lg"
+        loading="lazy"
+      />
+    </CardHeader>
+    <CardContent className="space-y-5">
+      <CardTitle className="text-base md:text-lg">{item.title}</CardTitle>
+      <p className="text-sm md:text-base">{item.content}</p>
+    </CardContent>
+  </Card>
+);
+
 export default async function Reason() {
   return (
-    <>
+    <main>
       <Title titleEn={'Reasons'} titleJp={'選ばれる理由'} />
-      <Box
-        bg={'linear-gradient(-225deg, #eeeeee 0%, #ffffff 56%, #eeeeee 100%);'}
-        position={'relative'}
-        overflow={'hidden'}
-        pt={{ base: 88, md: 120 }}
-        pb={{ base: 90, md: 180 }}
-      >
-        <Box p={4} maxW={1152} mx={'auto'}>
-          <Box>
-            <Heading as={'h2'} mr={4} size={{ base: 'md', md: 'lg' }} display={'flex'}>
-              <FaCheckCircle color={'#ff7bac'} />
-              <Box as={'span'} ml={2}>
-                一緒に作るWEBブランディング
-              </Box>
-            </Heading>
-          </Box>
-          <Box
-            maxW={960}
-            mx={'auto'}
-            py={8}
-            fontSize={{ base: 'medium', md: 'large' }}
-            fontWeight={500}
-            lineHeight={2}
-          >
-            <Text>
+      <section className="relative overflow-hidden bg-[linear-gradient(-225deg,_#eeeeee_0%,_#ffffff_56%,_#eeeeee_100%)] pt-[88px] pb-[90px] md:pt-32 md:pb-44">
+        <div className="mx-auto max-w-6xl p-4">
+          <h2 className="flex items-center text-xl font-bold md:text-2xl">
+            <FaCheckCircle className="text-momo-100" />
+            <span className="ml-2">一緒に作るWEBブランディング</span>
+          </h2>
+          <div className="mx-auto max-w-4xl py-8 font-medium leading-loose text-base md:text-lg">
+            <p>
               ピーチウェブのサービスがお客様に選ばれる理由の1つ目は、
-              <Box as={'span'} color={'momo.100'} fontWeight={'bold'}>
-                「丸投げ」
-              </Box>
+              <span className="font-bold text-momo-100">「丸投げ」</span>
               にしながらも
-              <Box as={'span'} color={'momo.100'} fontWeight={'bold'}>
-                「一緒に作り上げる」
-              </Box>
+              <span className="font-bold text-momo-100">「一緒に作り上げる」</span>
               ことができるお客様と弊社の距離感にあります。このちょうどいい距離感を守るために以下のような配慮を行っております。
-            </Text>
-          </Box>
-          <Box w={'100%'}>
+            </p>
+          </div>
+          <div className="w-full">
             <SideScrollIcon />
-            <Box
-              m={{ base: 1, md: 0 }}
-              listStyleType={'none'}
-              display={'flex'}
-              gap={4}
-              overflow={'scroll'}
-              overflowY={'hidden'}
-              sx={{
-                scrollSnapType: 'x mandatory',
-              }}
-              alignItems="start"
-            >
+            <div className="m-1 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto md:m-0">
               {togetherData.map((item, i) => (
-                <Card minW={280} w={'auto'} maxW={350} key={i}>
-                  <CardBody>
-                    <Image
-                      src={`${IMAGEBASEURL}/reason/together${i + 1}.webp`}
-                      alt={item.title}
-                      minW={240}
-                      w={'100%'}
-                      maxW={310}
-                      h={'auto'}
-                      loading={'lazy'}
-                    />
-                    <Stack mt="6" spacing="5">
-                      <Heading as={'h3'} size={{ base: 'sm', md: 'md' }}>
-                        {item.title}
-                      </Heading>
-                      <Text fontSize={{ base: 'small', md: 'medium' }}>{item.content}</Text>
-                    </Stack>
-                  </CardBody>
-                </Card>
+                <ReasonCard item={item} key={i} />
               ))}
-            </Box>
-          </Box>
-          <Box mt={10}>
-            <Box py={10}>
-              <Link
-                display={'block'}
-                w={250}
-                mx={'auto'}
-                href="/service"
-                textAlign={'center'}
-                _hover={{ textDecoration: 'none' }}
-                className={styles.contactButton}
-              >
-                <Box
-                  py={'1em'}
-                  px={'2em'}
-                  display={'flex'}
-                  justifyContent={'center'}
-                  alignItems={'center'}
-                  height={'100%'}
-                  borderRadius={40}
-                  bg={'momo.100'}
-                  color={'white'}
-                  fontWeight={'bold'}
-                >
-                  <ImDisplay size={'1.5em'} />
-                  <Text ml={2}>サービス内容を見る</Text>
-                </Box>
-              </Link>
-            </Box>
-          </Box>
-        </Box>
-      </Box>
-      <Box
-        bg={'white'}
-        position={'relative'}
-        overflow={'hidden'}
-        pt={{ base: 88, md: 120 }}
-        pb={{ base: 90, md: 180 }}
-      >
-        <Box p={4} maxW={1152} mx={'auto'}>
-          <Box>
-            <Heading as={'h2'} mr={4} size={{ base: 'md', md: 'lg' }} display={'flex'}>
-              <FaCheckCircle color={'#ff7bac'} />
-              <Box as={'span'} ml={2}>
-                他社様とのサービス比較
-              </Box>
-            </Heading>
-          </Box>
-          <Box
-            maxW={960}
-            mx={'auto'}
-            py={8}
-            fontSize={{ base: 'medium', md: 'large' }}
-            fontWeight={500}
-            lineHeight={2}
-          >
-            <Text>
+            </div>
+          </div>
+          <div className="mt-10 py-10">
+            <SiteLinkButton {...buttonData.service} />
+          </div>
+        </div>
+      </section>
+      <section className="relative overflow-hidden bg-white pt-[88px] pb-[90px] md:pt-32 md:pb-44">
+        <div className="mx-auto max-w-6xl p-4">
+          <h2 className="flex items-center text-xl font-bold md:text-2xl">
+            <FaCheckCircle className="text-momo-100" />
+            <span className="ml-2">他社様とのサービス比較</span>
+          </h2>
+          <div className="mx-auto max-w-4xl py-8 font-medium leading-loose text-base md:text-lg">
+            <p>
               お客様に選ばれる理由の2つ目は、他社様より
-              <Box as={'span'} color={'momo.100'} fontWeight={'bold'}>
+              <span className="font-bold text-momo-100">
                 わかりやすい料金設定とコストパフォーマンスのよさ
-              </Box>
+              </span>
               にあります。「一見固定金額のように見えて後からオプションを加算された」という
-              <Box as={'span'} color={'momo.100'} fontWeight={'bold'}>
-                お客様の不安の声
-              </Box>
+              <span className="font-bold text-momo-100">お客様の不安の声</span>
               にお答えしたいと思っております！
-            </Text>
-          </Box>
-          <Box mt={{ base: '44px', md: '60px' }}>
+            </p>
+          </div>
+          <div className="mt-11 md:mt-16">
             <SideScrollIcon />
-            <Box
-              m={{ base: 1, md: 0 }}
-              listStyleType={'none'}
-              display={'flex'}
-              gap={4}
-              overflow={'scroll'}
-              overflowY={'hidden'}
-              sx={{
-                scrollSnapType: 'x mandatory',
-              }}
-              alignItems="start"
-            >
-              <Table>
-                <Thead>
-                  <Tr fontSize={'small'}>
-                    <Th minW={150} textAlign={'center'} fontWeight={'bold'}>
-                      比較項目
-                    </Th>
-                    <Th minW={160}>
-                      <Center>
+            <div className="m-1 overflow-x-auto md:m-0">
+              <Table className="w-full min-w-[980px] text-sm">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="min-w-[150px] text-center font-bold">比較項目</TableHead>
+                    <TableHead className="min-w-[160px]">
+                      <div className="flex justify-center">
                         <Image
                           src={`${IMAGEBASEURL}/common/rectangle_logo.svg`}
                           alt={'ピーチウェブ'}
-                          w={'100px'}
-                          h={'auto'}
+                          width={100}
+                          height={28}
                         />
-                      </Center>
-                    </Th>
-                    <Th minW={170} textAlign={'center'} fontWeight={'bold'}>
+                      </div>
+                    </TableHead>
+                    <TableHead className="min-w-[170px] text-center font-bold">
                       マーケットプレイス
-                    </Th>
-                    <Th minW={160} textAlign={'center'} fontWeight={'bold'}>
-                      月額制A社
-                    </Th>
-                    <Th minW={160} textAlign={'center'} fontWeight={'bold'}>
+                    </TableHead>
+                    <TableHead className="min-w-[160px] text-center font-bold">月額制A社</TableHead>
+                    <TableHead className="min-w-[160px] text-center font-bold">
                       一括支払B社
-                    </Th>
-                  </Tr>
-                </Thead>
-                <Tbody fontSize={'small'}>
-                  <Tr>
-                    <Td bg={'momo.200'} fontWeight={'bold'}>
-                      HP制作費用
-                    </Td>
-                    <Td textAlign={'center'} position={'relative'} bg={'momo.600'}>
-                      基本無料
-                      <FaRegCircle className={styles.tableIcon} />
-                    </Td>
-                    <Td textAlign={'center'}>5~30万円程度</Td>
-                    <Td textAlign={'center'} position={'relative'} bg={'momo.600'}>
-                      基本無料
-                      <FaRegCircle className={styles.tableIcon} />
-                    </Td>
-                    <Td textAlign={'center'}>30万円以上</Td>
-                  </Tr>
-                  <Tr>
-                    <Td bg={'momo.200'} fontWeight={'bold'}>
-                      月額費用
-                    </Td>
-                    <Td textAlign={'center'}>60,000円</Td>
-                    <Td textAlign={'center'} position={'relative'} bg={'momo.600'}>
-                      なし
-                      <FaRegCircle className={styles.tableIcon} />
-                    </Td>
-                    <Td textAlign={'center'}>10,000円以上</Td>
-                    <Td textAlign={'center'} position={'relative'} bg={'momo.600'}>
-                      なし
-                      <FaRegCircle className={styles.tableIcon} />
-                    </Td>
-                  </Tr>
-                  <Tr>
-                    <Td bg={'momo.200'} fontWeight={'bold'}>
-                      価格表示
-                    </Td>
-                    <Td textAlign={'center'} position={'relative'} bg={'momo.600'}>
-                      HPにて記載
-                      <FaRegCircle className={styles.tableIcon} />
-                    </Td>
-                    <Td textAlign={'center'} position={'relative'} bg={'momo.600'}>
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell className="bg-momo-200 font-bold">HP制作費用</TableCell>
+                    <TableCell className="bg-momo-600 text-center text-white">基本無料</TableCell>
+                    <TableCell className="text-center">5~30万円程度</TableCell>
+                    <TableCell className="bg-momo-600 text-center text-white">基本無料</TableCell>
+                    <TableCell className="text-center">30万円以上</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="bg-momo-200 font-bold">月額費用</TableCell>
+                    <TableCell className="text-center">60,000円</TableCell>
+                    <TableCell className="bg-momo-600 text-center text-white">なし</TableCell>
+                    <TableCell className="text-center">10,000円以上</TableCell>
+                    <TableCell className="bg-momo-600 text-center text-white">なし</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="bg-momo-200 font-bold">価格表示</TableCell>
+                    <TableCell className="bg-momo-600 text-center text-white">HPにて記載</TableCell>
+                    <TableCell className="bg-momo-600 text-center text-white">
                       商品ページに記載
-                      <FaRegCircle className={styles.tableIcon} />
-                    </Td>
-                    <Td textAlign={'center'}>なし</Td>
-                    <Td textAlign={'center'}>なし</Td>
-                  </Tr>
-                  <Tr>
-                    <Td bg={'momo.200'} fontWeight={'bold'}>
-                      デザイン自由度
-                    </Td>
-                    <Td textAlign={'center'} position={'relative'} bg={'momo.600'}>
-                      高い
-                      <FaRegCircle className={styles.tableIcon} />
-                    </Td>
-                    <Td textAlign={'center'}>制作者による</Td>
-                    <Td textAlign={'center'}>低い</Td>
-                    <Td textAlign={'center'}>高い</Td>
-                  </Tr>
-                  <Tr>
-                    <Td bg={'momo.200'} fontWeight={'bold'}>
-                      ページ更新
-                    </Td>
-                    <Td textAlign={'center'} position={'relative'} bg={'momo.600'}>
+                    </TableCell>
+                    <TableCell className="text-center">なし</TableCell>
+                    <TableCell className="text-center">なし</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="bg-momo-200 font-bold">デザイン自由度</TableCell>
+                    <TableCell className="bg-momo-600 text-center text-white">高い</TableCell>
+                    <TableCell className="text-center">制作者による</TableCell>
+                    <TableCell className="text-center">低い</TableCell>
+                    <TableCell className="text-center">高い</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="bg-momo-200 font-bold">ページ更新</TableCell>
+                    <TableCell className="bg-momo-600 text-center text-white">
                       基本毎月4回
-                      <FaRegCircle className={styles.tableIcon} />
-                    </Td>
-                    <Td textAlign={'center'}>なし</Td>
-                    <Td textAlign={'center'}>追加料金が発生</Td>
-                    <Td textAlign={'center'}>追加料金が発生</Td>
-                  </Tr>
-                  <Tr>
-                    <Td bg={'momo.200'} fontWeight={'bold'}>
-                      SEO対策
-                    </Td>
-                    <Td textAlign={'center'} position={'relative'} bg={'momo.600'}>
-                      基本含む
-                      <FaRegCircle className={styles.tableIcon} />
-                    </Td>
-                    <Td textAlign={'center'}>なし</Td>
-                    <Td textAlign={'center'}>追加料金が発生</Td>
-                    <Td textAlign={'center'}>追加料金が発生</Td>
-                  </Tr>
-                  <Tr>
-                    <Td bg={'momo.200'} fontWeight={'bold'}>
-                      客先訪問
-                    </Td>
-                    <Td textAlign={'center'} position={'relative'} bg={'momo.600'}>
+                    </TableCell>
+                    <TableCell className="text-center">なし</TableCell>
+                    <TableCell className="text-center">追加料金が発生</TableCell>
+                    <TableCell className="text-center">追加料金が発生</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="bg-momo-200 font-bold">SEO対策</TableCell>
+                    <TableCell className="bg-momo-600 text-center text-white">基本含む</TableCell>
+                    <TableCell className="text-center">なし</TableCell>
+                    <TableCell className="text-center">追加料金が発生</TableCell>
+                    <TableCell className="text-center">追加料金が発生</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="bg-momo-200 font-bold">客先訪問</TableCell>
+                    <TableCell className="bg-momo-600 text-center text-white">
                       毎月1回以上
-                      <FaRegCircle className={styles.tableIcon} />
-                    </Td>
-                    <Td textAlign={'center'}>なし</Td>
-                    <Td textAlign={'center'}>なし</Td>
-                    <Td textAlign={'center'}>追加料金が発生</Td>
-                  </Tr>
-                </Tbody>
+                    </TableCell>
+                    <TableCell className="text-center">なし</TableCell>
+                    <TableCell className="text-center">なし</TableCell>
+                    <TableCell className="text-center">追加料金が発生</TableCell>
+                  </TableRow>
+                </TableBody>
               </Table>
-            </Box>
-            <Box mt={10}>
-              <Box py={10}>
-                <Link
-                  display={'block'}
-                  w={250}
-                  mx={'auto'}
-                  href="/pricing"
-                  textAlign={'center'}
-                  _hover={{ textDecoration: 'none' }}
-                  className={styles.contactButton}
-                >
-                  <Box
-                    py={'1em'}
-                    px={'2em'}
-                    display={'flex'}
-                    justifyContent={'center'}
-                    alignItems={'center'}
-                    height={'100%'}
-                    borderRadius={40}
-                    bg={'momo.100'}
-                    color={'white'}
-                    fontWeight={'bold'}
-                  >
-                    <ImCoinYen size={'1.5em'} />
-                    <Text ml={2}>価格とプランを見る</Text>
-                  </Box>
-                </Link>
-              </Box>
-            </Box>
-          </Box>
-        </Box>
-      </Box>
-      <Box
-        bg={'linear-gradient(-225deg, #eeeeee 0%, #ffffff 56%, #eeeeee 100%);'}
-        position={'relative'}
-        overflow={'hidden'}
-        pt={{ base: 88, md: 120 }}
-        pb={{ base: 90, md: 180 }}
-      >
-        <Box p={4} maxW={1152} mx={'auto'}>
-          <Box>
-            <Heading as={'h2'} mr={4} size={{ base: 'md', md: 'lg' }} display={'flex'}>
-              <FaCheckCircle color={'#ff7bac'} />
-              <Box as={'span'} ml={2}>
-                フルカスタマイズデザイン
-              </Box>
-            </Heading>
-          </Box>
-          <Box mt={{ base: '44px', md: '60px' }}>
-            <Box
-              maxW={960}
-              mx={'auto'}
-              py={8}
-              fontSize={{ base: 'medium', md: 'large' }}
-              fontWeight={500}
-              lineHeight={2}
-            >
-              <Text>
+            </div>
+            <div className="mt-10 py-10">
+              <SiteLinkButton {...buttonData.pricing} />
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="relative overflow-hidden bg-[linear-gradient(-225deg,_#eeeeee_0%,_#ffffff_56%,_#eeeeee_100%)] pt-[88px] pb-[90px] md:pt-32 md:pb-44">
+        <div className="mx-auto max-w-6xl p-4">
+          <h2 className="flex items-center text-xl font-bold md:text-2xl">
+            <FaCheckCircle className="text-momo-100" />
+            <span className="ml-2">フルカスタマイズデザイン</span>
+          </h2>
+          <div className="mt-11 md:mt-16">
+            <div className="mx-auto max-w-4xl py-8 font-medium leading-loose text-base md:text-lg">
+              <p>
                 お客様に選ばれる理由の3つ目は、
-                <Box as={'span'} color={'momo.100'} fontWeight={'bold'}>
+                <span className="font-bold text-momo-100">
                   テンプレートを使用しなしフルカスタマイズデザイン
-                </Box>
+                </span>
                 という点にあります。安価なホームページ制作会社にありがちな無個性でスマホ対応していないデザインには決してしません。
-              </Text>
-            </Box>
-            <Box w={'100%'}>
+              </p>
+            </div>
+            <div className="w-full">
               <SideScrollIcon />
-              <Box
-                m={{ base: 1, md: 0 }}
-                listStyleType={'none'}
-                display={'flex'}
-                gap={4}
-                overflow={'scroll'}
-                overflowY={'hidden'}
-                sx={{
-                  scrollSnapType: 'x mandatory',
-                }}
-                alignItems="start"
-              >
+              <div className="m-1 flex snap-x snap-mandatory items-start gap-4 overflow-x-auto md:m-0">
                 {designData.map((item, i) => (
-                  <Card minW={280} w={'auto'} maxW={350} key={i}>
-                    <CardBody>
-                      <Image
-                        src={`${IMAGEBASEURL}/reason/design${i + 1}.webp`}
-                        alt={item.title}
-                        minW={240}
-                        w={'100%'}
-                        maxW={310}
-                        h={'auto'}
-                        loading={'lazy'}
-                      />
-                      <Stack mt="6" spacing="5">
-                        <Heading as={'h3'} size={{ base: 'sm', md: 'md' }}>
-                          {item.title}
-                        </Heading>
-                        <Text fontSize={{ base: 'small', md: 'medium' }}>{item.content}</Text>
-                      </Stack>
-                    </CardBody>
-                  </Card>
+                  <ReasonCard item={item} key={i} />
                 ))}
-              </Box>
-            </Box>
-          </Box>
-        </Box>
-      </Box>
-      <Box
-        bg={'white'}
-        position={'relative'}
-        overflow={'hidden'}
-        pt={{ base: 88, md: 120 }}
-        pb={{ base: 90, md: 180 }}
-      >
-        <Box p={4} maxW={1152} mx={'auto'}>
-          <Box>
-            <Heading as={'h2'} mr={4} size={{ base: 'md', md: 'lg' }} display={'flex'}>
-              <FaCheckCircle color={'#ff7bac'} />
-              <Box as={'span'} ml={2}>
-                WEB集客との違い
-              </Box>
-            </Heading>
-          </Box>
-          <Box mt={{ base: '44px', md: '60px' }}>
-            <Box
-              maxW={960}
-              mx={'auto'}
-              py={8}
-              fontSize={{ base: 'medium', md: 'large' }}
-              fontWeight={500}
-              lineHeight={2}
-            >
-              <Text>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="relative overflow-hidden bg-white pt-[88px] pb-[90px] md:pt-32 md:pb-44">
+        <div className="mx-auto max-w-6xl p-4">
+          <h2 className="flex items-center text-xl font-bold md:text-2xl">
+            <FaCheckCircle className="text-momo-100" />
+            <span className="ml-2">WEB集客との違い</span>
+          </h2>
+          <div className="mt-11 md:mt-16">
+            <div className="mx-auto max-w-4xl py-8 font-medium leading-loose text-base md:text-lg">
+              <p>
                 お客様に選ばれる理由の4つ目は、弊社のサービスが
-                <Box as={'span'} color={'momo.100'} fontWeight={'bold'}>
-                  WEBブランディング
-                </Box>
+                <span className="font-bold text-momo-100">WEBブランディング</span>
                 という点にあります。よく似た概念のWEB集客と比較してみると以下のようになります。
-              </Text>
-            </Box>
+              </p>
+            </div>
             <SideScrollIcon />
-            <Box
-              m={{ base: 1, md: 0 }}
-              listStyleType={'none'}
-              display={'flex'}
-              gap={4}
-              overflow={'scroll'}
-              overflowY={'hidden'}
-              sx={{
-                scrollSnapType: 'x mandatory',
-              }}
-              alignItems="start"
-            >
-              <Table>
-                <Thead>
-                  <Tr fontSize={'small'}>
-                    <Th minW={100} textAlign={'center'} fontWeight={'bold'}>
-                      比較項目
-                    </Th>
-                    <Th minW={300} textAlign={'center'} fontWeight={'bold'}>
+            <div className="m-1 overflow-x-auto md:m-0">
+              <Table className="w-full min-w-[720px] text-sm">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="min-w-[100px] text-center font-bold">比較項目</TableHead>
+                    <TableHead className="min-w-[300px] text-center font-bold">
                       WEBブランディング
-                    </Th>
-                    <Th minW={300} textAlign={'center'} fontWeight={'bold'}>
-                      WEB集客
-                    </Th>
-                  </Tr>
-                </Thead>
-                <Tbody fontSize={'small'}>
-                  <Tr>
-                    <Td bg={'momo.200'} fontWeight={'bold'} textAlign={'center'}>
-                      目的
-                    </Td>
-                    <Td>
+                    </TableHead>
+                    <TableHead className="min-w-[300px] text-center font-bold">WEB集客</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell className="bg-momo-200 text-center font-bold">目的</TableCell>
+                    <TableCell>
                       企業やサービスの認知度とイメージを向上させ、顧客との信頼関係を構築することを⽬指す。
-                    </Td>
-                    <Td>
+                    </TableCell>
+                    <TableCell>
                       サイトへのアクセス数を増やし、⾏動（購⼊、登録、問い合わせなど）を促すことを⽬指す。
-                    </Td>
-                  </Tr>
-                  <Tr>
-                    <Td bg={'momo.200'} fontWeight={'bold'} textAlign={'center'}>
-                      手法
-                    </Td>
-                    <Td>
-                      <UnorderedList>
-                        <ListItem>ビジュアルデザインの統⼀</ListItem>
-                        <ListItem>⼀貫したメッセージの発信</ListItem>
-                        <ListItem>ブランド価値の訴求</ListItem>
-                        <ListItem>⼝コミやレビューの活⽤</ListItem>
-                      </UnorderedList>
-                    </Td>
-                    <Td>
-                      <UnorderedList>
-                        <ListItem>SEO対策</ListItem>
-                        <ListItem>広告（リスティング広告、SNS広告）</ListItem>
-                        <ListItem>商品サービスのマーケティング</ListItem>
-                        <ListItem>メールマーケティング（メルマガ配信）</ListItem>
-                      </UnorderedList>
-                    </Td>
-                  </Tr>
-                  <Tr>
-                    <Td bg={'momo.200'} fontWeight={'bold'} textAlign={'center'}>
-                      目標
-                    </Td>
-                    <Td>
-                      <UnorderedList>
-                        <ListItem>ブランド認知度の向上</ListItem>
-                        <ListItem>ブランド好感度の向上</ListItem>
-                        <ListItem>リピート率の向上</ListItem>
-                        <ListItem>顧客ロイヤルティの向上</ListItem>
-                      </UnorderedList>
-                    </Td>
-                    <Td>
-                      <UnorderedList>
-                        <ListItem>クリック数</ListItem>
-                        <ListItem>訪問者数</ListItem>
-                        <ListItem>成約率</ListItem>
-                      </UnorderedList>
-                    </Td>
-                  </Tr>
-                  <Tr>
-                    <Td bg={'momo.200'} fontWeight={'bold'} textAlign={'center'}>
-                      KPI
-                    </Td>
-                    <Td>
-                      <UnorderedList>
-                        <ListItem>商品や企業名での検索数</ListItem>
-                        <ListItem>ユーザーのホームページの滞在時間</ListItem>
-                        <ListItem>ホームページへの再来訪率</ListItem>
-                        <ListItem>⼝コミやレビューの数など</ListItem>
-                      </UnorderedList>
-                    </Td>
-                    <Td>
-                      <UnorderedList>
-                        <ListItem>サイト全体の訪問者数</ListItem>
-                        <ListItem>訪問者が閲覧したページの枚数</ListItem>
-                        <ListItem>コンバージョン率</ListItem>
-                        <ListItem>コンバージョンに必要なコスト</ListItem>
-                      </UnorderedList>
-                    </Td>
-                  </Tr>
-                  <Tr>
-                    <Td bg={'momo.200'} fontWeight={'bold'} textAlign={'center'}>
-                      効果
-                    </Td>
-                    <Td>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="bg-momo-200 text-center font-bold">手法</TableCell>
+                    <TableCell>
+                      <ul className="list-disc space-y-1 pl-5">
+                        <li>ビジュアルデザインの統⼀</li>
+                        <li>⼀貫したメッセージの発信</li>
+                        <li>ブランド価値の訴求</li>
+                        <li>⼝コミやレビューの活⽤</li>
+                      </ul>
+                    </TableCell>
+                    <TableCell>
+                      <ul className="list-disc space-y-1 pl-5">
+                        <li>SEO対策</li>
+                        <li>広告（リスティング広告、SNS広告）</li>
+                        <li>商品サービスのマーケティング</li>
+                        <li>メールマーケティング（メルマガ配信）</li>
+                      </ul>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="bg-momo-200 text-center font-bold">目標</TableCell>
+                    <TableCell>
+                      <ul className="list-disc space-y-1 pl-5">
+                        <li>ブランド認知度の向上</li>
+                        <li>ブランド好感度の向上</li>
+                        <li>リピート率の向上</li>
+                        <li>顧客ロイヤルティの向上</li>
+                      </ul>
+                    </TableCell>
+                    <TableCell>
+                      <ul className="list-disc space-y-1 pl-5">
+                        <li>クリック数</li>
+                        <li>訪問者数</li>
+                        <li>成約率</li>
+                      </ul>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="bg-momo-200 text-center font-bold">KPI</TableCell>
+                    <TableCell>
+                      <ul className="list-disc space-y-1 pl-5">
+                        <li>商品や企業名での検索数</li>
+                        <li>ユーザーのホームページの滞在時間</li>
+                        <li>ホームページへの再来訪率</li>
+                        <li>⼝コミやレビューの数など</li>
+                      </ul>
+                    </TableCell>
+                    <TableCell>
+                      <ul className="list-disc space-y-1 pl-5">
+                        <li>サイト全体の訪問者数</li>
+                        <li>訪問者が閲覧したページの枚数</li>
+                        <li>コンバージョン率</li>
+                        <li>コンバージョンに必要なコスト</li>
+                      </ul>
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="bg-momo-200 text-center font-bold">効果</TableCell>
+                    <TableCell>
                       ⻑期的に影響を与えるもので、⼀度築かれたブランド価値は⻑期間維持されやすい。
-                    </Td>
-                    <Td>⽐較的短期間でコンバージョン率が向上するが、継続的な取り組みが必要。</Td>
-                  </Tr>
-                </Tbody>
+                    </TableCell>
+                    <TableCell>
+                      ⽐較的短期間でコンバージョン率が向上するが、継続的な取り組みが必要。
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
               </Table>
-            </Box>
-            <Box mt={10}>
-              <Box py={10}>
-                <Link
-                  display={'block'}
-                  w={250}
-                  mx={'auto'}
-                  href="/service"
-                  textAlign={'center'}
-                  _hover={{ textDecoration: 'none' }}
-                  className={styles.contactButton}
-                >
-                  <Box
-                    py={'1em'}
-                    px={'2em'}
-                    display={'flex'}
-                    justifyContent={'center'}
-                    alignItems={'center'}
-                    height={'100%'}
-                    borderRadius={40}
-                    bg={'momo.100'}
-                    color={'white'}
-                    fontWeight={'bold'}
-                  >
-                    <ImDisplay size={'1.5em'} />
-                    <Text ml={2}>サービス内容を見る</Text>
-                  </Box>
-                </Link>
-              </Box>
-            </Box>
-          </Box>
-        </Box>
-      </Box>
+            </div>
+            <div className="mt-10 py-10">
+              <SiteLinkButton {...buttonData.service} />
+            </div>
+          </div>
+        </div>
+      </section>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-    </>
+    </main>
   );
 }

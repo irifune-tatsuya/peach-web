@@ -1,5 +1,3 @@
-import { Box, Heading } from '@chakra-ui/react';
-
 type Props = {
   TitleEn: string;
   TitleJp: string;
@@ -8,18 +6,9 @@ type Props = {
 
 export default function ContentTitle({ TitleEn, TitleJp, mb }: Props) {
   return (
-    <Heading as={'h2'} mb={mb} color={'momo.100'}>
-      <Box
-        as={'span'}
-        fontSize={{ base: 'x-large', md: 'xx-large' }}
-        fontWeight={'bold'}
-        letterSpacing={'0.08em'}
-      >
-        {TitleEn}
-      </Box>
-      <Box as={'span'} fontSize={'small'} fontWeight={'bold'} ml={2}>
-        {TitleJp}
-      </Box>
-    </Heading>
+    <h2 className="font-bold text-momo-100" style={{ marginBottom: `${mb}px` }}>
+      <span className="text-xl tracking-[0.08em] md:text-2xl">{TitleEn}</span>
+      <span className="ml-2 text-sm">{TitleJp}</span>
+    </h2>
   );
 }

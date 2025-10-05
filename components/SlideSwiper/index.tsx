@@ -1,11 +1,10 @@
 'use client';
 
-import { Image } from '@chakra-ui/react';
+import Image from 'next/image';
 import { EffectCreative, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-creative';
-import { NextPage } from 'next';
 
 type Img = {
   pcSrc: string;
@@ -17,7 +16,7 @@ type Props = {
   images: Img[];
 };
 
-export const SlideSwiper: NextPage<Props> = ({ images }) => {
+export const SlideSwiper = ({ images }: Props) => {
   return (
     <Swiper
       effect={'creative'}
@@ -44,51 +43,23 @@ export const SlideSwiper: NextPage<Props> = ({ images }) => {
           <Image
             src={item.pcSrc}
             alt={item.alt}
-            w={'100%'}
-            h={'auto'}
-            display={{ base: 'none', md: 'block' }}
+            width={1220}
+            height={1060}
+            className="hidden h-auto w-full md:block"
+            priority={i === 0}
+            sizes="(min-width: 768px) 80vw, 100vw"
           />
           <Image
             src={item.spSrc}
             alt={item.alt}
-            w={'100%'}
-            h={'auto'}
-            display={{ base: 'block', md: 'none' }}
+            width={680}
+            height={960}
+            className="block h-auto w-full md:hidden"
+            priority={i === 0}
+            sizes="(min-width: 768px) 80vw, 100vw"
           />
         </SwiperSlide>
       ))}
-      {/* <SwiperSlide>
-        <Image
-          src="/images/keyvisual2_pc.jpg"
-          alt=""
-          w={'100%'}
-          h={'auto'}
-          display={{ base: 'none', md: 'block' }}
-        />
-        <Image
-          src="/images/keyvisual2_sp.jpg"
-          alt=""
-          w={'100%'}
-          h={'auto'}
-          display={{ base: 'block', md: 'none' }}
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <Image
-          src="/images/keyvisual3_pc.jpg"
-          alt=""
-          w={'100%'}
-          h={'auto'}
-          display={{ base: 'none', md: 'block' }}
-        />
-        <Image
-          src="/images/keyvisual3_sp.jpg"
-          alt=""
-          w={'100%'}
-          h={'auto'}
-          display={{ base: 'block', md: 'none' }}
-        />
-      </SwiperSlide> */}
     </Swiper>
   );
 };

@@ -1,142 +1,140 @@
 'use client';
 
-import {
-  Box,
-  Button,
-  Center,
-  Checkbox,
-  FormControl,
-  FormErrorMessage,
-  Heading,
-  Icon,
-  Image,
-  Input,
-  Link,
-  Text,
-} from '@chakra-ui/react';
-import { NextPage } from 'next';
-import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
+import Link from 'next/link';
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
+
 import { createStopMailMagazineData } from '@/app/_action/contact';
-import { IMAGEBASEURL } from '@/constants';
+import { stopMailMagazineSchema, type StopMailMagazineValues } from '@/lib/schema';
 
-type stopMailMagazineInputs = {
-  email: string;
-};
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 
-export const StopMailMagazineForm: NextPage = () => {
+export const StopMailMagazineForm: React.FC = () => {
   const [isStopChecked, setIsStopChecked] = useState(false);
   const [stopstatus, setStopStatus] = useState<string | null>(null);
 
-  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setIsStopChecked(event.target.checked);
-  };
-  const {
-    handleSubmit,
-    register,
-    formState: { errors, isSubmitting },
-  } = useForm<stopMailMagazineInputs>();
+  const form = useForm<StopMailMagazineValues>({
+    resolver: zodResolver(stopMailMagazineSchema),
+    defaultValues: {
+      email: '',
+    },
+  });
 
-  const onStopSubmit = async (data: stopMailMagazineInputs) => {
+  const {
+    formState: { isSubmitting },
+  } = form;
+
+  const onStopSubmit = async (data: StopMailMagazineValues) => {
     const result = await createStopMailMagazineData(data);
     setStopStatus(result);
   };
 
   if (stopstatus === 'succcess') {
     return (
-      <Box mx={'auto'} bg={'momo.300'} p={8}>
-        <Heading fontSize={'x-large'} textAlign={'center'}>
-          配信停止されました。
-        </Heading>
-        <Text mt={5} lineHeight={'2rem'}>
-          ニュースレターの配信を停止しました。
-          <Box as={'br'} />
-          停止後もシステムの都合上、まれに行き違いで1回程度ニュースレターが届くことがございますが、正しく配信停止されておりますのでご安心ください。
-        </Text>
-      </Box>
+      <Card className="bg-momo-300 p-4 text-center">
+        <CardHeader>
+          <CardTitle>配信停止されました。</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <p className="leading-loose">
+            ニュースレターの配信を停止しました。
+            <br />
+            システムの都合上、まれに行き違いでニュースレターが届くことがございますが、正しく配信停止されておりますのでご安心ください。
+          </p>
+        </CardContent>
+      </Card>
     );
   }
 
   if (stopstatus === 'error') {
     return (
-      <Box mx={'auto'} bg={'momo.300'} p={8}>
-        <Heading fontSize={'x-large'} textAlign={'center'}>
-          停止に失敗しました。
-        </Heading>
-        <Text mt={5} lineHeight={'2rem'}>
-          申し訳ございません。
-          <Box as={'br'} />
-          サーバー障害等の理由により、ニュースレターの配信停止に失敗しました。下記のメールアドレス宛までお問い合わせいただけますと幸いです。
-          <Box as={'br'} />
-          <Box as={'br'} />
-          合同会社ピーチウェブ
-          <Box as={'br'} />
-          irifune@peach-web.co.jp
-        </Text>
-      </Box>
+      <Card className="bg-momo-300 p-4 text-center">
+        <CardHeader>
+          <CardTitle>停止に失敗しました。</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <p className="leading-loose">
+            申し訳ございません。
+            <br />
+            サーバー障害等の理由により、配信停止に失敗しました。下記のメールアドレス宛までお問い合わせいただけますと幸いです。
+            <br />
+            <br />
+            合同会社ピーチウェブ
+            <br />
+            irifune@peach-web.co.jp
+          </p>
+        </CardContent>
+      </Card>
     );
   }
 
   return (
-    <Box as={'form'} onSubmit={handleSubmit(onStopSubmit)}>
-      <Box as={'dl'} display={{ base: 'block', lg: 'flex' }} mt={4}>
-        <Box as={'dt'} mt={5} fontSize={'large'} fontWeight={'bold'} w={220}>
-          メールアドレス
-          <Box as={'sup'} color={'momo.100'} ml={1}>
-            ※
-          </Box>
-        </Box>
-        <FormControl isInvalid={Boolean(errors.email)}>
-          <Input
-            type={'email'}
-            id={'email'}
-            placeholder={'sample@xxxx.com'}
-            h={'60px'}
-            w={'100%'}
-            bg={'momo.300'}
-            {...register('email', {
-              required: 'メールアドレスを入力ください',
-              maxLength: { value: 50, message: '50文字以内で入力してください' },
-              pattern: {
-                value: /^[a-zA-Z0-9-_\.]+@[a-zA-Z0-9-_\.]+$/,
-                message: 'メールアドレスをご入力してください',
-              },
-            })}
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onStopSubmit)}>
+        <div className="mt-4 items-start gap-x-4 lg:flex">
+          <FormLabel className="mt-4 block text-lg font-bold lg:w-[220px]">
+            メールアドレス<sup className="ml-1 text-momo-100">※</sup>
+          </FormLabel>
+          <div className="w-full">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      placeholder="sample@xxxx.com"
+                      {...field}
+                      className="h-[60px] w-full border-0 bg-momo-300"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        </div>
+
+        <div className="mt-4 flex items-center justify-center space-x-2">
+          <Checkbox
+            id="terms-stop"
+            onCheckedChange={(checked) => setIsStopChecked(Boolean(checked))}
+            className="border-momo-400"
           />
-          <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
-        </FormControl>
-      </Box>
-      <Box mt={4} display={'flex'} justifyContent={'center'}>
-        <Checkbox size="lg" colorScheme={'pink'} onChange={handleCheckboxChange}>
-          <Box as={'span'} fontWeight={'bold'} fontSize={'smaller'}>
-            <Link href={'/privacy'} isExternal color={'momo.100'} textDecoration={'underline'}>
+          <Label htmlFor="terms-stop" className="text-sm font-bold">
+            <Link href={'/privacy'} target="_blank" className="text-momo-100 underline">
               プライバシーポリシー
             </Link>
             に同意する
-          </Box>
-        </Checkbox>
-      </Box>
-      <Box mt={8} display={'flex'} justifyContent={'center'}>
-        <Button
-          type={'submit'}
-          borderRadius={'40px'}
-          bg={'momo.100'}
-          color={'white'}
-          h={'56px'}
-          w={'295px'}
-          textDecoration={'none'}
-          fontSize={'large'}
-          fontWeight={'bold'}
-          letterSpacing={2}
-          _hover={{ bg: 'momo.100', color: 'white' }}
-          isDisabled={!isStopChecked}
-          isLoading={isSubmitting}
-        >
-          配信停止する
-          <Icon as={MdOutlineKeyboardArrowRight} boxSize={'2rem'} />
-        </Button>
-      </Box>
-    </Box>
+          </Label>
+        </div>
+
+        <div className="mt-8 flex justify-center">
+          <Button
+            type="submit"
+            disabled={!isStopChecked || isSubmitting}
+            className="h-14 w-[295px] rounded-full bg-momo-100 text-lg font-bold tracking-widest text-white hover:bg-momo-100/90"
+          >
+            {isSubmitting ? '処理中...' : '配信停止する'}
+            <MdOutlineKeyboardArrowRight className="ml-1 h-8 w-8" />
+          </Button>
+        </div>
+      </form>
+    </Form>
   );
 };

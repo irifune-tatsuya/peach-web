@@ -1,9 +1,7 @@
-import { Box } from '@chakra-ui/react';
 import './globals.css';
 import { Metadata } from 'next';
 import { NavBar } from '@/components/NavBar';
 import { ScrollToTopButton } from '@/components/ScrollToTopButton';
-import { Provider } from './providers/chakra-ui/Provider';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import GoogleAnalytics from '@/components/GoogleAnalytics/';
@@ -85,15 +83,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Suspense>
       </head>
       <body suppressHydrationWarning={true}>
-        <Provider>
-          <Header />
-          <Box as="main" mt={{ base: 0, md: 76 }} mx={'auto'}>
-            {children}
-          </Box>
-          <ScrollToTopButton />
-          <NavBar />
-          <Footer />
-        </Provider>
+        <Header />
+        <main className="mx-auto mt-0 md:mt-20 pb-[96px] md:pb-0">{children}</main>
+        <ScrollToTopButton />
+        <NavBar />
+        <Footer />
       </body>
     </html>
   );

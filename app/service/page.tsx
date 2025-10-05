@@ -1,45 +1,35 @@
-import React from 'react';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import ButtonArea from '@/components/ButtonArea';
+import SideScrollIcon from '@/components/SideScrollIcon';
+import { SiteLinkButton } from '@/components/SiteLinkButton';
 import {
   Accordion,
-  AccordionButton,
-  AccordionIcon,
+  AccordionContent,
   AccordionItem,
-  AccordionPanel,
-  Box,
-  Card,
-  CardBody,
-  Center,
-  Heading,
-  Image,
-  Link,
-  ListItem,
-  Stack,
-  Tag,
-  Text,
-  UnorderedList,
-} from '@chakra-ui/react';
-import { FaCheckCircle } from 'react-icons/fa';
-import styles from './layout.module.css';
-import SideScrollIcon from '@/components/SideScrollIcon';
+  AccordionTrigger,
+} from '@/components/ui/accordion';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { CONTACT, IMAGEBASEURL } from '@/constants';
+import Image from 'next/image';
+import Link from 'next/link';
+import { FaCheckCircle, FaLine } from 'react-icons/fa';
 import { ImCoinYen } from 'react-icons/im';
-import { IMAGEBASEURL, CONTACT } from '@/constants';
 import { IoMail } from 'react-icons/io5';
-import { FaLine } from 'react-icons/fa';
-import ButtonArea from '@/components/ButtonArea';
 
 const ContactButtons = [
   {
-    bg: 'momo.100',
-    color: 'white',
+    bgClassName: 'bg-momo-100 hover:bg-momo-100/90',
+    textClassName: 'text-white',
     href: '/contact',
     isExternal: false,
     title: 'フォームからお問い合わせ',
     icon: <IoMail />,
   },
   {
-    bg: '#06c755',
-    color: 'white',
+    bgClassName: 'bg-[#06c755] hover:bg-[#06c755]/90',
+    textClassName: 'text-white',
     href: CONTACT.line,
     isExternal: true,
     title: 'LINEからお問い合わせ',
@@ -65,25 +55,21 @@ const services = [
     title: 'ホームページを無料制作',
     description:
       'お客様との面談を通じて事業内容や強み、想定するお客様を明確にします。その後、面談内容をもとにフルカスタマイズホームページを制作。WEBブランディングにはホームページが不可欠であるため、通常30万円〜50万円相当を無料でお作りします。',
-    flexDirection: 1,
   },
   {
     title: '毎月4回の記事更新',
     description:
       'ユーザーが何度も訪問したくなるホームページに成長させるためにブログ記事、お知らせ、FAQなどの記事を毎月4回投稿します。記事の内容については毎月のお打ち合わせで確定し、下書きのやり取りを経て実際に公開されます。',
-    flexDirection: 2,
   },
   {
     title: '運用レポートの発行',
     description:
       '毎月1回のお打ち合わせの際に「運用レポート」を発行いたします。人気の記事の確認やユーザーの傾向などを踏まえてWEBブランディングを進めることで、継続的なPDCAを回していきます。',
-    flexDirection: 1,
   },
   {
     title: '有料級オプションが標準',
     description:
       '他の制作会社では有料オプションとなってしまう「専門ツールを使用したSEO対策」、「チラシやポスターなどのデザイン制作1点」「ページの修正」「お客様先へのご訪問」などが全て月額料金内で標準で含まれております。',
-    flexDirection: 2,
   },
 ];
 
@@ -224,483 +210,315 @@ const faq = [
   },
 ];
 
+// 横スクロールのカードを共通コンポーネントにしたよ！
+const StoryCard = ({
+  item,
+  index,
+  type,
+  imageUrl,
+}: {
+  item: { title: string; description: string };
+  index: number;
+  type: 'シナリオ' | 'ステップ';
+  imageUrl: string;
+}) => (
+  <Card className="min-w-[280px] w-auto max-w-[350px] snap-start flex-shrink-0">
+    <CardHeader>
+      <Image
+        src={imageUrl}
+        alt={item.title}
+        width={310}
+        height={174}
+        className="rounded-t-lg"
+        loading="lazy"
+      />
+    </CardHeader>
+    <CardContent className="space-y-4">
+      <CardTitle className="text-base md:text-lg">
+        <Badge>
+          {type}
+          {index + 1}
+        </Badge>
+        <p className="mt-2">{item.title}</p>
+      </CardTitle>
+      <p className="text-sm md:text-base">{item.description}</p>
+    </CardContent>
+  </Card>
+);
+
 export default async function Service() {
   return (
-    <>
-      <Box w={'100%'} h={{ base: 300, md: 600 }} position={'relative'}>
+    <main>
+      <section className="relative h-[300px] w-full md:h-[600px]">
         <Image
           src={`${IMAGEBASEURL}/service/title.webp`}
-          alt={'サービス内容トップ画像'}
-          objectFit={'cover'}
-          w={'100vw'}
-          h={{ base: 300, md: 600 }}
+          alt="サービス内容トップ画像"
+          fill
+          className="object-cover"
+          priority
         />
-        <Heading
-          as={'h1'}
-          w={'100%'}
-          position={'absolute'}
-          top={'50%'}
-          left={'50%'}
-          transform={'translate(-50%, -50%)'}
-          zIndex={2}
-          bg={'momo.100'}
-          color={'white'}
-          py={{ base: 4, md: 5 }}
-          textAlign={'center'}
-          fontSize={{ base: 'x-large', md: 'xxx-large' }}
-        >
-          <Box as={'span'} fontSize={{ base: 'small', md: 'large' }}>
-            顧客との長期的な信頼関係を構築する
-          </Box>
-          <Box as={'br'} />
+        <div className="absolute inset-0 bg-black/30" />
+        <h1 className="absolute top-1/2 left-1/2 z-10 w-full -translate-x-1/2 -translate-y-1/2 bg-momo-100/80 py-4 text-center text-xl font-bold text-white backdrop-blur-sm md:py-5 md:text-4xl">
+          <span className="text-sm md:text-lg">顧客との長期的な信頼関係を構築する</span>
+          <br />
           WEBブランディング事業
-        </Heading>
-      </Box>
-      <Box bg={'white'} position={'relative'} overflow={'hidden'} pt={{ base: 88, md: 120 }}>
-        <Box
-          maxW={960}
-          mx={{ base: 4, lg: 'auto' }}
-          py={8}
-          bg={'momo.300'}
-          borderRadius={12}
-          className={styles.arrowBottom}
-        >
-          <Text fontSize={{ base: 'medium', md: 'large' }} fontWeight={'bold'} textAlign={'center'}>
+        </h1>
+      </section>
+
+      <section className="bg-white pt-16 md:pt-24">
+        <div className="mx-4 max-w-4xl rounded-lg bg-momo-300 py-8 lg:mx-auto">
+          <p className="text-center font-bold text-base md:text-lg">
             こんな
-            <Box
-              as={'span'}
-              color={'momo.100'}
-              fontSize={{ base: 'x-large', md: 'xx-large' }}
-              mx={1}
-            >
-              お悩み
-            </Box>
+            <span className="mx-1 text-xl font-bold text-momo-100 md:text-2xl">お悩み</span>
             ございませんか？
-          </Text>
-          <Box
-            mt={3}
-            display={{ base: 'block', md: 'flex' }}
-            justifyContent={'center'}
-            gap={4}
-            alignItems={'center'}
-          >
-            <Box mx={{ base: 'auto', md: 0 }} w={250} h={250}>
+          </p>
+          <div className="mt-3 items-center justify-center gap-4 md:flex">
+            <div className="mx-auto h-[250px] w-[250px] md:mx-0">
               <Image
                 src={`${IMAGEBASEURL}/service/issue.webp`}
-                alt={'こんなお悩みはございませんか？'}
-                w={250}
-                h={250}
+                alt="こんなお悩みはございませんか？"
+                width={250}
+                height={250}
               />
-            </Box>
-            <UnorderedList
-              mt={{ base: 8, md: 0 }}
-              ml={0}
-              px={4}
-              listStyleType={'none'}
-              fontSize={{ base: 'medium', md: 'large' }}
-              fontWeight={'bold'}
-            >
-              <ListItem
-                px={5}
-                py={3}
-                borderBottom={'1px solid #c3c3c3'}
-                borderTop={'1px solid #c3c3c3'}
-              >
+            </div>
+            <ul className="mt-8 list-none px-4 font-bold text-base md:mt-0 md:text-lg">
+              <li className="border-t border-b border-gray-300 px-5 py-3">
                 SNSを始めたが更新が面倒くさい！
-              </ListItem>
-              <ListItem px={5} py={3} borderBottom={'1px solid #c3c3c3'}>
+              </li>
+              <li className="border-b border-gray-300 px-5 py-3">
                 WEBの集客を実感したことがない！
-              </ListItem>
-              <ListItem px={5} py={3} borderBottom={'1px solid #c3c3c3'}>
+              </li>
+              <li className="border-b border-gray-300 px-5 py-3">
                 ちゃんとしたホームページは高い！
-              </ListItem>
-              <ListItem px={5} py={3} borderBottom={'1px solid #c3c3c3'}>
-                BtoBなのでWEB活用が難しい！
-              </ListItem>
-            </UnorderedList>
-          </Box>
-        </Box>
-        <Box
-          mt={8}
-          py={8}
-          bg={'momo.100'}
-          color={'white'}
-          display={{ base: 'block', md: 'flex' }}
-          justifyContent={'center'}
-          gap={4}
-          alignItems={'center'}
-        >
-          <Box w={300} h={300} mx={{ base: 'auto', md: 0 }}>
-            <Image
-              src={`${IMAGEBASEURL}/service/solution.webp`}
-              alt={'解決策をご提案'}
-              w={300}
-              h={300}
-              loading={'lazy'}
-            />
-          </Box>
-          <Box fontWeight={'bold'} textAlign={'center'}>
-            <Text
-              fontSize={{ base: 'small', md: 'medium' }}
-              mx={{ base: 'auto', md: 0 }}
-              className={styles.solutionArrowBottom}
-            >
-              その悩みまるっと解決！
-            </Text>
-            <Text fontSize={{ base: 'medium', md: 'large', lg: 'x-large' }} mt={6}>
+              </li>
+              <li className="border-b border-gray-300 px-5 py-3">BtoBなのでWEB活用が難しい！</li>
+            </ul>
+          </div>
+        </div>
+        <div className="mt-8 items-center justify-center gap-4 bg-momo-100 py-8 text-white md:flex">
+          <Image
+            src={`${IMAGEBASEURL}/service/solution.webp`}
+            alt="解決策をご提案"
+            width={300}
+            height={300}
+            loading="lazy"
+            className="mx-auto md:mx-0"
+          />
+          <div className="text-center font-bold">
+            <p className="mx-auto text-sm md:mx-0 md:text-base">その悩みまるっと解決！</p>
+            <p className="mt-6 text-base md:text-lg lg:text-xl">
               顧客との長期的な信頼関係を構築する
-            </Text>
-            <Center>
+            </p>
+            <div className="flex justify-center">
               <Image
                 src={`${IMAGEBASEURL}/service/service-title.webp`}
-                alt={'ピーチウェブのWEBブランディングサービス'}
-                w={'100%'}
-                h={'auto'}
-                maxW={500}
-                maxH={20}
-                loading={'lazy'}
+                alt="ピーチウェブのWEBブランディングサービス"
+                width={500}
+                height={20}
+                loading="lazy"
+                className="h-auto max-h-16 w-full max-w-md"
               />
-            </Center>
-            <Box
-              textAlign={{ base: 'center', md: 'start' }}
-              color={'momo.100'}
-              fontSize={{ base: 'medium', md: 'large', lg: 'larger' }}
-              maxW={{ md: 400, lg: 440 }}
-              mx={'auto'}
-            >
-              <Box
-                mt={5}
-                display={'flex'}
-                flexFlow={{ base: 'column', md: 'row' }}
-                gap={{ base: 2, md: 4 }}
-              >
-                <Text className={styles.solutionTag} mx={{ base: 5, md: 0 }}>
+            </div>
+            <div className="mx-auto mt-5 max-w-sm space-y-2 text-base font-bold text-momo-100 md:max-w-md md:text-lg">
+              <div className="flex flex-col gap-2 md:flex-row md:gap-4">
+                <p className="flex-1 rounded-full bg-white px-5 py-2 text-center">
                   ホームページ無料作成
-                </Text>
-                <Text className={styles.solutionTag} mx={{ base: 5, md: 0 }}>
-                  月額5万円から
-                </Text>
-              </Box>
-              <Box
-                mt={2}
-                display={'flex'}
-                flexFlow={{ base: 'column', md: 'row' }}
-                gap={{ base: 2, md: 4 }}
-              >
-                <Text className={styles.solutionTag} mx={{ base: 5, md: 0 }}>
-                  SEO対策付き
-                </Text>
-                <Text className={styles.solutionTag} mx={{ base: 5, md: 0 }}>
+                </p>
+                <p className="flex-1 rounded-full bg-white px-5 py-2 text-center">月額5万円から</p>
+              </div>
+              <div className="flex flex-col gap-2 md:flex-row md:gap-4">
+                <p className="flex-1 rounded-full bg-white px-5 py-2 text-center">SEO対策付き</p>
+                <p className="flex-1 rounded-full bg-white px-5 py-2 text-center">
                   オリジナルデザイン
-                </Text>
-              </Box>
-              <Box
-                mt={2}
-                display={'flex'}
-                flexFlow={{ base: 'column', md: 'row' }}
-                gap={{ base: 2, md: 4 }}
-              >
-                <Text className={styles.solutionTag} mx={{ base: 5, md: 0 }}>
+                </p>
+              </div>
+              <div className="flex flex-col gap-2 md:flex-row md:gap-4">
+                <p className="flex-1 rounded-full bg-white px-5 py-2 text-center">
                   記事更新毎月4回
-                </Text>
-                <Text className={styles.solutionTag} mx={{ base: 5, md: 0 }}>
+                </p>
+                <p className="flex-1 rounded-full bg-white px-5 py-2 text-center">
                   追加デザイン制作
-                </Text>
-              </Box>
-            </Box>
-          </Box>
-        </Box>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
         <ButtonArea buttons={ContactButtons} />
-      </Box>
-      <Box bg={'white'} position={'relative'} overflow={'hidden'} pt={{ base: 20, md: 40 }}>
-        <Box p={4} maxW={1152} mx={'auto'}>
-          <Box>
-            <Heading as={'h2'} mr={4} size={{ base: 'md', md: 'lg' }} display={'flex'}>
-              <FaCheckCircle color={'#ff7bac'} />
-              <Box as={'span'} ml={2}>
-                WEBブランディングとは？
-              </Box>
-            </Heading>
-          </Box>
-          <Box
-            maxW={960}
-            mx={'auto'}
-            pt={8}
-            fontSize={{ base: 'medium', md: 'large' }}
-            fontWeight={500}
-            lineHeight={2}
-          >
-            <Text>
+      </section>
+
+      <section className="bg-white pt-20 md:pt-40">
+        <div className="mx-auto max-w-6xl p-4">
+          <h2 className="flex items-center text-xl font-bold md:text-2xl">
+            <FaCheckCircle className="text-momo-100" />
+            <span className="ml-2">WEBブランディングとは？</span>
+          </h2>
+          <div className="mx-auto max-w-4xl pt-8 font-medium leading-loose text-base md:text-lg">
+            <p>
               弊社のWEBブランディングは
-              <Box as={'span'} color={'momo.100'} fontWeight={'bold'}>
+              <span className="font-bold text-momo-100">
                 「企業や商品サービスの認知度とイメージを向上させ、顧客との信頼関係を長期的に構築すること」
-              </Box>
+              </span>
               と定義しています。
-              <Box as={'br'} />
+              <br />
               短期的な売上を求めるのではなく、リピート、口コミ、固定ファンの獲得までを狙って、永く愛される企業や商品サービスに育てることを目標にしております。ベーシックプラン（月額6万円・税別）では以下のようなサービスを提供します。
-            </Text>
-          </Box>
-          <Box maxW={960} mx={'auto'}>
+            </p>
+          </div>
+          <div className="mx-auto max-w-4xl">
             {services.map((item, i) => (
-              <Box
-                display={{ base: 'block', md: 'flex' }}
-                flexDirection={item.flexDirection % 2 ? 'row' : 'row-reverse'}
-                gap={8}
-                mt={{ base: 20, md: 120, lg: 40 }}
+              <div
                 key={i}
+                className={`mt-10 items-center gap-8 md:mt-20 md:flex ${
+                  i % 2 ? 'md:flex-row-reverse' : 'md:flex-row'
+                }`}
               >
                 <Image
                   src={`${IMAGEBASEURL}/service/service${i + 1}.webp`}
                   alt={item.title}
-                  w={400}
-                  h={267}
-                  loading={'lazy'}
+                  width={400}
+                  height={267}
+                  loading="lazy"
+                  className="mx-auto h-auto w-full max-w-md flex-shrink-0 md:mx-0"
                 />
-                <Box mt={{ base: 8, md: 0 }}>
-                  <Heading
-                    as={'h3'}
-                    color={'momo.100'}
-                    fontSize={'x-large'}
-                    borderBottom={'dashed 2px #febdd6'}
-                  >
+                <div className="mt-8 md:mt-0">
+                  <h3 className="border-b-2 border-dashed border-momo-100/50 text-xl font-bold text-momo-100">
                     {item.title}
-                  </Heading>
-                  <Text mt={4} lineHeight={2} fontSize={{ base: 'medium', md: 'large' }}>
-                    {item.description}
-                  </Text>
-                </Box>
-              </Box>
+                  </h3>
+                  <p className="mt-4 leading-loose text-base md:text-lg">{item.description}</p>
+                </div>
+              </div>
             ))}
-            <Box py={10}>
-              <Link
-                display={'block'}
-                w={250}
-                mx={'auto'}
+            <div className="py-10">
+              <SiteLinkButton
                 href="/pricing"
-                textAlign={'center'}
-                _hover={{ textDecoration: 'none' }}
-                className={styles.contactButton}
-              >
-                <Box
-                  py={'1em'}
-                  px={'2em'}
-                  display={'flex'}
-                  justifyContent={'center'}
-                  alignItems={'center'}
-                  height={'100%'}
-                  borderRadius={40}
-                  bg={'momo.100'}
-                  color={'white'}
-                  fontWeight={'bold'}
-                >
-                  <ImCoinYen size={'1.5em'} />
-                  <Text ml={2}>価格とプランを見る</Text>
-                </Box>
-              </Link>
-            </Box>
-          </Box>
-        </Box>
-      </Box>
-      <Box
-        position={'relative'}
-        overflow={'hidden'}
-        pt={{ base: 88, md: 120 }}
-        bg={'linear-gradient(-225deg, #eeeeee 0%, #ffffff 56%, #eeeeee 100%);'}
-      >
-        <Box p={4} maxW={1152} mx={'auto'}>
-          <Box>
-            <Heading as={'h2'} mr={4} size={{ base: 'md', md: 'lg' }} display={'flex'}>
-              <FaCheckCircle color={'#ff7bac'} />
-              <Box as={'span'} ml={2}>
-                ブランディングストーリー
-              </Box>
-            </Heading>
-            <Box
-              maxW={960}
-              mx={'auto'}
-              pt={8}
-              fontSize={{ base: 'medium', md: 'large' }}
-              fontWeight={500}
-              lineHeight={2}
-            >
-              <Text>
-                WEB上のブランドはどのように醸成されるのでしょうか？ここではとある経営コンサルティング会社を想定して、弊社のサービスでブランド化する流れをご紹介します。
-              </Text>
-            </Box>
-          </Box>
-          <SideScrollIcon display={['block']} />
-          <Box
-            listStyleType={'none'}
-            display={'flex'}
-            gap={4}
-            overflow={'scroll'}
-            overflowY={'hidden'}
-            sx={{
-              scrollSnapType: 'x mandatory',
-            }}
-            alignItems="start"
-          >
+                icon={<ImCoinYen size="1.5em" />}
+                text="価格とプランを見る"
+                className="py-10"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[linear-gradient(-225deg,_#eeeeee_0%,_#ffffff_56%,_#eeeeee_100%)] pt-20 md:pt-32">
+        <div className="mx-auto max-w-6xl p-4">
+          <h2 className="flex items-center text-xl font-bold md:text-2xl">
+            <FaCheckCircle className="text-momo-100" />
+            <span className="ml-2">ブランディングストーリー</span>
+          </h2>
+          <div className="mx-auto max-w-4xl pt-8 font-medium leading-loose text-base md:text-lg">
+            <p>
+              WEB上のブランドはどのように醸成されるのでしょうか？ここではとある経営コンサルティング会社を想定して、弊社のサービスでブランド化する流れをご紹介します。
+            </p>
+          </div>
+        </div>
+        <div className="mx-auto max-w-6xl px-4">
+          <SideScrollIcon />
+          <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto py-4">
             {brandingScenario.map((step, i) => (
-              <Card minW={280} w={'auto'} maxW={350} key={i}>
-                <CardBody>
-                  <Image
-                    src={`${IMAGEBASEURL}/service/scenario${i + 1}.webp`}
-                    alt={step.title}
-                    minW={240}
-                    w={'100%'}
-                    maxW={310}
-                    h={'auto'}
-                    loading={'lazy'}
-                  />
-                  <Stack mt="6" spacing="5">
-                    <Heading as={'h3'} size={{ base: 'sm', md: 'md' }}>
-                      <Tag size={'sm'} bg={'momo.100'} color={'white'}>{`シナリオ${i + 1}`}</Tag>
-                      <Text mt={2}>{step.title}</Text>
-                    </Heading>
-                    <Text fontSize={{ base: 'small', md: 'medium' }}>{step.description}</Text>
-                  </Stack>
-                </CardBody>
-              </Card>
+              <StoryCard
+                key={i}
+                item={step}
+                index={i}
+                type="シナリオ"
+                imageUrl={`${IMAGEBASEURL}/service/scenario${i + 1}.webp`}
+              />
             ))}
-          </Box>
-        </Box>
-        <Box bg={'momo.100'} py={10}>
-          <Box
-            display={{ base: 'block', md: 'flex' }}
-            justifyContent={'center'}
-            alignItems={'center'}
-            gap={8}
-          >
-            <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
+          </div>
+        </div>
+        <div className="bg-momo-100 py-10">
+          <div className="items-center justify-center gap-8 md:flex">
+            <div className="flex flex-col items-center">
               <Image
                 src={`${IMAGEBASEURL}/service/ceo-circle.webp`}
-                alt={'ピーチウェブ代表社員 入船達也'}
-                h={300}
-                w={300}
-                loading={'lazy'}
+                alt="ピーチウェブ代表社員 入船達也"
+                width={300}
+                height={300}
+                loading="lazy"
+                className="h-[200px] w-[200px] rounded-full object-cover md:h-[300px] md:w-[300px]"
               />
-              <Text color={'white'} textAlign={'center'} fontWeight={'bold'} mt={4}>
+              <p className="mt-4 text-center font-bold text-white">
                 合同会社ピーチウェブ
-                <Box as={'br'} />
+                <br />
                 代表社員　入船　達也
-              </Text>
-            </Box>
-            <Box
-              textAlign={'center'}
-              fontWeight={'bold'}
-              maxW={{ base: 400, lg: 600 }}
-              fontSize={{ base: 'large', md: 'x-large' }}
-              color={'white'}
-            >
-              <Text className={styles.balloon} color={'momo.100'}>
-                シナリオ通りに記事更新を
-                <Box as={'br'} display={{ base: 'block', lg: 'none' }} />
-                続けるのは大変ですよね...
-              </Text>
-              <Box display={'flex'} justifyContent={'center'} alignItems={'end'}>
+              </p>
+            </div>
+            <div className="mt-8 text-center font-bold text-white md:mt-0">
+              <div className="mx-auto max-w-xs rounded-lg bg-white p-4 text-lg text-momo-100 md:max-w-md md:text-xl">
+                <p>
+                  シナリオ通りに記事更新を
+                  <br className="lg:hidden" />
+                  続けるのは大変ですよね...
+                </p>
+              </div>
+              <div className="mt-4 flex items-end justify-center">
                 <Image
                   src={`${IMAGEBASEURL}/service/service-title.webp`}
-                  alt={'ピーチウェブのWEBブランディングサービス'}
-                  w={{ base: 300, lg: 400 }}
-                  h={{ base: '48px', lg: '64px' }}
-                  loading={'lazy'}
+                  alt="ピーチウェブのWEBブランディングサービス"
+                  width={400}
+                  height={64}
+                  loading="lazy"
+                  className="h-auto w-full max-w-[300px] lg:max-w-[400px]"
                 />
-                <Text>なら</Text>
-              </Box>
-              <Text mt={5} lineHeight={2}>
+                <p>なら</p>
+              </div>
+              <p className="mt-5 leading-loose text-lg md:text-xl">
                 全部丸投げしていいんです。
-                <Box as={'br'} />
+                <br />
                 お客様はWEBを気にすることなく
-                <Box as={'br'} />
+                <br />
                 「事業に全力投球」してください！
-              </Text>
-            </Box>
-          </Box>
-        </Box>
-      </Box>
-      <Box position={'relative'} overflow={'hidden'} pt={{ base: 88, md: 120 }}>
-        <Box p={4} maxW={1152} mx={'auto'}>
-          <Box>
-            <Heading as={'h2'} mr={4} size={{ base: 'md', md: 'lg' }} display={'flex'}>
-              <FaCheckCircle color={'#ff7bac'} />
-              <Box as={'span'} ml={2}>
-                サービスの流れ
-              </Box>
-            </Heading>
-          </Box>
-          <SideScrollIcon display={['block']} />
-          <Box
-            listStyleType={'none'}
-            display={'flex'}
-            gap={4}
-            overflow={'scroll'}
-            overflowY={'hidden'}
-            sx={{
-              scrollSnapType: 'x mandatory',
-            }}
-            alignItems="start"
-          >
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="pt-20 md:pt-32">
+        <div className="mx-auto max-w-6xl p-4">
+          <h2 className="flex items-center text-xl font-bold md:text-2xl">
+            <FaCheckCircle className="text-momo-100" />
+            <span className="ml-2">サービスの流れ</span>
+          </h2>
+        </div>
+        <div className="mx-auto max-w-6xl px-4">
+          <SideScrollIcon />
+          <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto py-4">
             {steps.map((step, i) => (
-              <Card minW={280} w={'auto'} maxW={350} key={i}>
-                <CardBody>
-                  <Image
-                    src={`${IMAGEBASEURL}/service/step${i + 1}.webp`}
-                    alt={step.title}
-                    minW={240}
-                    w={'100%'}
-                    maxW={310}
-                    h={'auto'}
-                    loading={'lazy'}
-                  />
-                  <Stack mt="6" spacing="5">
-                    <Heading as={'h3'} size={{ base: 'sm', md: 'md' }}>
-                      <Tag size={'sm'} bg={'momo.100'} color={'white'}>{`ステップ${i + 1}`}</Tag>
-                      <Text mt={2}>{step.title}</Text>
-                    </Heading>
-                    <Text fontSize={{ base: 'small', md: 'medium' }}>{step.description}</Text>
-                  </Stack>
-                </CardBody>
-              </Card>
+              <StoryCard
+                key={i}
+                item={step}
+                index={i}
+                type="ステップ"
+                imageUrl={`${IMAGEBASEURL}/service/step${i + 1}.webp`}
+              />
             ))}
-          </Box>
-        </Box>
+          </div>
+        </div>
         <ButtonArea buttons={ContactButtons} />
-      </Box>
-      <Box p={4} maxW={1152} mx={'auto'} pt={{ base: 88, md: 120 }}>
-        <Box>
-          <Heading as={'h2'} mr={4} size={{ base: 'md', md: 'lg' }} display={'flex'}>
-            <FaCheckCircle color={'#ff7bac'} />
-            <Box as={'span'} ml={2}>
-              よくあるご質問
-            </Box>
-          </Heading>
-        </Box>
-        <Accordion maxW={960} mx={'auto'} pt={10}>
-          {faq.map((item, i) => (
-            <AccordionItem key={i}>
-              <Heading as={'h3'} bg={'momo.600'}>
-                <AccordionButton>
-                  <Box
-                    as="span"
-                    flex="1"
-                    textAlign="left"
-                    fontSize={{ base: 'medium', md: 'large' }}
-                    fontWeight={'bold'}
-                    lineHeight={2}
-                  >
-                    {item.q}
-                  </Box>
-                  <AccordionIcon />
-                </AccordionButton>
-              </Heading>
-              <AccordionPanel pb={4} fontSize={{ base: 'medium', md: 'large' }} lineHeight={2}>
-                {item.a}
-              </AccordionPanel>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </Box>
+      </section>
+
+      <section className="px-4 pt-20 pb-24 md:pt-32 md:pb-40">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="flex items-center text-xl font-bold md:text-2xl">
+            <FaCheckCircle className="text-momo-100" />
+            <span className="ml-2">よくあるご質問</span>
+          </h2>
+          <Accordion type="single" collapsible className="mx-auto mt-10 w-full max-w-4xl">
+            {faq.map((item, i) => (
+              <AccordionItem value={`item-${i}`} key={i}>
+                <AccordionTrigger className="bg-momo-600 px-4 text-left font-bold leading-loose text-white text-base hover:no-underline md:text-lg">
+                  {item.q}
+                </AccordionTrigger>
+                <AccordionContent className="p-4 leading-loose text-base md:text-lg">
+                  {item.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-    </>
+    </main>
   );
 }

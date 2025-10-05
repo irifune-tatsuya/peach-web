@@ -3,7 +3,6 @@ import { ARTICLEFILTER, LIMIT30 } from '@/constants';
 import Pagination from '@/components/Pagination';
 import GridArticleList from '@/components/GridArticleList';
 import Title from '@/components/Title';
-import { Box } from '@chakra-ui/react';
 import SearchField from '@/components/SearchField';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import React, { Suspense } from 'react';
@@ -50,12 +49,12 @@ export default async function Page(props: Props) {
   return (
     <>
       <Title titleEn={'Search Results'} titleJp={'記事検索の結果'} />
-      <Box maxW={1152} mx={'auto'} p={4} pb={{ base: 15, md: 156 }}>
-        <Box as={'nav'} display={'flex'} justifyContent={{ base: 'center', md: 'start' }}>
-          <Suspense fallback={<Box>読み込み中...</Box>}>
+      <main className="mx-auto max-w-6xl p-4 pb-[60px] md:pb-[156px]">
+        <nav className="flex justify-center md:justify-start">
+          <Suspense fallback={<div className="animate-pulse">読み込み中...</div>}>
             <SearchField category={'article'} />
           </Suspense>
-        </Box>
+        </nav>
         <GridArticleList articles={data.contents} category={'article'} />
         <Pagination
           totalCount={data.totalCount}
@@ -63,7 +62,7 @@ export default async function Page(props: Props) {
           current={current}
           q={searchParams.q}
         />
-      </Box>
+      </main>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
