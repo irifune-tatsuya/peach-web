@@ -6,6 +6,45 @@ import Title from '@/components/Title';
 import SearchField from '@/components/SearchField';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import React, { Suspense } from 'react';
+import { Metadata } from 'next';
+import { FAQFILTER } from '@/constants';
+
+const baseTitle = 'よくあるご質問';
+const description =
+  'ピーチウェブへのよくあるご質問をまとめております。サービスに関するものから事務的なものまで様々な疑問にお答えします。もし見つからない場合はお問い合わせフォームからご質問ください。';
+
+type Props = {
+  params: Promise<{
+    current: string;
+  }>;
+  searchParams: Promise<{
+    q?: string;
+  }>;
+};
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const searchParams = await props.searchParams;
+  const query = searchParams.q || '';
+  const params = await props.params;
+  const current = params.current || '1';
+  const pageTitle = query
+    ? `「${query}」の検索結果 - ${current}ページ目`
+    : `${baseTitle} - ${current}ページ目`;
+
+  return {
+    title: pageTitle,
+    description: description,
+    openGraph: {
+      title: pageTitle,
+      description: description,
+      type: 'website',
+    },
+    robots: {
+      index: false,
+      follow: true,
+    },
+  };
+}
 
 const breadcrumbs = [
   {
@@ -25,15 +64,6 @@ const breadcrumbs = [
   },
 ];
 
-type Props = {
-  params: Promise<{
-    current: string;
-  }>;
-  searchParams: Promise<{
-    q?: string;
-  }>;
-};
-
 export const revalidate = 3600;
 
 export default async function Page(props: Props) {
@@ -49,7 +79,7 @@ export default async function Page(props: Props) {
   return (
     <>
       <Title titleEn={'Search Results'} titleJp={'記事検索の結果'} />
-      <main className="mx-auto max-w-6xl p-4 pb-[60px] md:pb-[156px]">
+      <div className="mx-auto max-w-6xl p-4 pb-[60px] md:pb-[156px]">
         <nav className="flex justify-center md:justify-start">
           <Suspense fallback={<div className="animate-pulse">読み込み中...</div>}>
             <SearchField category={'article'} />
@@ -62,7 +92,7 @@ export default async function Page(props: Props) {
           current={current}
           q={searchParams.q}
         />
-      </main>
+      </div>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );

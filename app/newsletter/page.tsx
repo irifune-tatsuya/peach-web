@@ -5,6 +5,21 @@ import Link from 'next/link';
 import { StartMailMagazineForm } from '@/components/StartMailMagazineForm';
 import { StopMailMagazineForm } from '@/components/StopMailMagazineForm';
 import { IMAGEBASEURL } from '@/constants';
+import { Metadata } from 'next';
+
+const pageTitle = 'ニュースレターのご案内';
+const description =
+  'ピーチウェブの最新情報をいち早くお届けするニュースレターの登録と解除をご利用できるページとなります。';
+
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: description,
+  openGraph: {
+    title: pageTitle,
+    description: description,
+    type: 'article',
+  },
+};
 
 const breadcrumbs = [
   {
@@ -42,9 +57,7 @@ export default async function Newsletter() {
           </div>
         </div>
       </div>
-
-      <main className="mx-auto max-w-6xl p-4">
-        {/* 次の記事更新はいつ？ */}
+      <div className="mx-auto max-w-6xl p-4">
         <section className="pt-10 md:pt-[70px]">
           <div className="pb-5">
             <h2 className="mr-4 inline-block text-2xl font-bold">
@@ -58,8 +71,6 @@ export default async function Newsletter() {
             のペースで更新予定です。新着記事のご案内やサービスに関する最新情報をお届けします。
           </p>
         </section>
-
-        {/* 配信コンテンツ */}
         <section className="py-10 md:py-[70px]">
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-20">
             {NewsletterContents.map((content, i) => (
@@ -79,9 +90,7 @@ export default async function Newsletter() {
             ))}
           </div>
         </section>
-      </main>
-
-      {/* 購読登録 */}
+      </div>
       <section className="bg-momo-600 py-10 md:py-[70px]">
         <div className="mx-auto max-w-6xl p-4">
           <div className="pb-5">
@@ -98,8 +107,6 @@ export default async function Newsletter() {
           </Suspense>
         </div>
       </section>
-
-      {/* 配信停止 */}
       <section className="py-10 md:py-[70px]">
         <div className="mx-auto max-w-6xl p-4">
           <div className="pb-5">
@@ -114,7 +121,6 @@ export default async function Newsletter() {
           </Suspense>
         </div>
       </section>
-
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );

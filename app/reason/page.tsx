@@ -2,7 +2,6 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import SideScrollIcon from '@/components/SideScrollIcon';
 import { SiteLinkButton } from '@/components/SiteLinkButton';
 import Title from '@/components/Title';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Table,
@@ -14,10 +13,23 @@ import {
 } from '@/components/ui/table';
 import { IMAGEBASEURL } from '@/constants';
 import Image from 'next/image';
-import Link from 'next/link';
-import type { ReactNode } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import { ImCoinYen, ImDisplay } from 'react-icons/im';
+import { Metadata } from 'next';
+
+const pageTitle = '選ばれる理由';
+const description =
+  '弊社の強み、他社と比較して選ばれる理由についてお話します。ホームページ制作は高い！どんなページが良いか一緒に考えてほしいという方は弊社の強みに共感していただけると思います！';
+
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: description,
+  openGraph: {
+    title: pageTitle,
+    description: description,
+    type: 'article',
+  },
+};
 
 const breadcrumbs = [
   {
@@ -108,7 +120,7 @@ const ReasonCard = ({ item }: { item: { title: string; content: string; image: s
 
 export default async function Reason() {
   return (
-    <main>
+    <>
       <Title titleEn={'Reasons'} titleJp={'選ばれる理由'} />
       <section className="relative overflow-hidden bg-[linear-gradient(-225deg,_#eeeeee_0%,_#ffffff_56%,_#eeeeee_100%)] pt-[88px] pb-[90px] md:pt-32 md:pb-44">
         <div className="mx-auto max-w-6xl p-4">
@@ -384,6 +396,6 @@ export default async function Reason() {
         </div>
       </section>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-    </main>
+    </>
   );
 }

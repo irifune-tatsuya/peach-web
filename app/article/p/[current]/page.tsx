@@ -6,6 +6,42 @@ import Title from '@/components/Title';
 import SearchField from '@/components/SearchField';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import React, { Suspense } from 'react';
+import { Metadata } from 'next';
+
+const pageTitle = '新着記事一覧';
+const description =
+  'マーケティングや経営に関する専門的な記事、ピーチウェブからのご提案などお客様の役に立つ記事を日々更新しております。';
+
+type Props = {
+  params: Promise<{
+    current: string;
+  }>;
+  searchParams: Promise<{
+    q?: string;
+  }>;
+};
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
+  const current = params.current || '1';
+  const title = `${pageTitle} - ${current}ページ目`;
+  return {
+    title: title,
+    description: description,
+    robots: {
+      index: true,
+      follow: true,
+    },
+    alternates: {
+      canonical: `/article/p/${current}`,
+    },
+    openGraph: {
+      title: title,
+      description: description,
+      type: 'website',
+    },
+  };
+}
 
 const breadcrumbs = [
   {
@@ -19,15 +55,6 @@ const breadcrumbs = [
     isCurrentPage: false,
   },
 ];
-
-type Props = {
-  params: Promise<{
-    current: string;
-  }>;
-  searchParams: Promise<{
-    q?: string;
-  }>;
-};
 
 export const revalidate = 3600;
 
@@ -45,7 +72,7 @@ export default async function Page(props: Props) {
   return (
     <>
       <Title titleEn={'Articles'} titleJp={'新着記事一覧'} />
-      <main className="mx-auto max-w-6xl p-4 pb-[60px] md:pb-[156px]">
+      <div className="mx-auto max-w-6xl p-4 pb-[60px] md:pb-[156px]">
         <nav className="mb-20 flex justify-center md:justify-start">
           <Suspense fallback={<div className="animate-pulse">読み込み中...</div>}>
             <SearchField category={category} />
@@ -58,7 +85,7 @@ export default async function Page(props: Props) {
           current={current}
           q={searchParams.q}
         />
-      </main>
+      </div>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );

@@ -17,6 +17,21 @@ import Link from 'next/link';
 import { FaCheckCircle, FaLine } from 'react-icons/fa';
 import { ImCoinYen } from 'react-icons/im';
 import { IoMail } from 'react-icons/io5';
+import { Metadata } from 'next';
+
+const pageTitle = 'サービス内容';
+const description =
+  'ピーチウェブのWEBブランディングのサービスについてご紹介します。ホームページを作るだけでなく記事を更新してお客様との信頼関係を醸成できるサービスを目指しております。';
+
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: description,
+  openGraph: {
+    title: pageTitle,
+    description: description,
+    type: 'article',
+  },
+};
 
 const ContactButtons = [
   {
@@ -248,7 +263,7 @@ const StoryCard = ({
 
 export default async function Service() {
   return (
-    <main>
+    <>
       <section className="relative h-[300px] w-full md:h-[600px]">
         <Image
           src={`${IMAGEBASEURL}/service/title.webp`}
@@ -519,6 +534,6 @@ export default async function Service() {
       </section>
 
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-    </main>
+    </>
   );
 }

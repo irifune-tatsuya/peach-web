@@ -12,6 +12,21 @@ import Link from 'next/link';
 import { IoMail } from 'react-icons/io5';
 import { FaLine } from 'react-icons/fa';
 import ButtonArea from '@/components/ButtonArea';
+import { Metadata } from 'next';
+
+const pageTitle = 'ピーチファイ';
+const description =
+  '岡山のチャレンジする起業家を応援するインタビューマガジン「ピーチファイ」です。ピーチのようにフレッシュな岡山の人々をファイトと応援しましょう！';
+
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: description,
+  openGraph: {
+    title: pageTitle,
+    description: description,
+    type: 'article',
+  },
+};
 
 export const revalidate = 3600;
 
@@ -67,8 +82,6 @@ export default async function PeachFight() {
       <div className="hidden">
         <Title titleEn={'ピーチファイ'} titleJp={'岡山のチャレンジ応援マガジン'} />
       </div>
-
-      {/* --- キービジュアルセクション --- */}
       <section id="key-visual" className="relative h-screen overflow-hidden">
         <div className="absolute top-2/4 left-1/2 z-20 w-[85%] max-w-xl -translate-x-1/2 -translate-y-1/2 sm:top-[40%]">
           <div className="w-full animate-[var(--animate-zoom-in)]">
@@ -82,7 +95,6 @@ export default async function PeachFight() {
             />
           </div>
         </div>
-
         <Link
           href={'/contact'}
           className="absolute bottom-[-20px] left-1/2 z-20 h-[145px] w-[145px] -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full border-2 border-black bg-white md:bottom-[30px]"
@@ -108,9 +120,7 @@ export default async function PeachFight() {
           <TopSwiper images={swiperImages} />
         </div>
       </section>
-
-      {/* --- メインコンテンツセクション --- */}
-      <main className="mx-auto max-w-6xl p-4 pt-4 pb-[60px] md:pt-0 md:pb-[156px]">
+      <div className="mx-auto max-w-6xl p-4 pt-4 pb-[60px] md:pt-0 md:pb-[156px]">
         <nav className="mb-20 flex justify-center md:justify-start">
           <Suspense fallback={<div className="animate-pulse">読み込み中...</div>}>
             <SearchField category={category} />
@@ -118,9 +128,7 @@ export default async function PeachFight() {
         </nav>
         <GridArticleList articles={data.contents} category={category} />
         <Pagination totalCount={data.totalCount} basePath={`/${category}`} />
-      </main>
-
-      {/* --- ピーチファイについて --- */}
+      </div>
       <section className="mx-auto max-w-6xl p-4">
         <h2 className="mb-8 text-2xl font-bold text-[var(--color-momo-100)]">
           岡山のチャレンジ応援WEBマガジン
@@ -156,7 +164,6 @@ export default async function PeachFight() {
           </div>
         </div>
       </section>
-
       <ButtonArea buttons={contactButtons} className="bg-white" />
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>

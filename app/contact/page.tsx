@@ -2,6 +2,21 @@ import Title from '@/components/Title';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { ContactForm } from '@/components/ContactForm';
 import React from 'react';
+import { Metadata } from 'next';
+
+const pageTitle = 'お問い合わせ';
+const description =
+  'ピーチウェブのサービスに関する業務ご依頼やご質問等、気になることは何でもフォームよりご連絡くださいませ。後日代表よりご返信させていただきます。';
+
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: description,
+  openGraph: {
+    title: pageTitle,
+    description: description,
+    type: 'article',
+  },
+};
 
 export const revalidate = 3600;
 
