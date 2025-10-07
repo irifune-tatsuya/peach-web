@@ -21,16 +21,24 @@ export async function generateMetadata({
   const params = await paramsPromise;
   const searchParams = await searchParamsPromise;
   const data = await getDetail(params.slug, { draftKey: searchParams.draftKey });
-
   const defaultImageUrl = `${IMAGEBASEURL}/ogp.jpg`;
   const imageUrl = data?.thumbnail?.url || defaultImageUrl;
+  const url = `/news/${data.id}`;
 
   return {
     title: data.title,
     description: data.description,
+    robots: {
+      index: true,
+      follow: true,
+    },
+    alternates: {
+      canonical: url,
+    },
     openGraph: {
       title: data.title,
       description: data.description,
+      url: url,
       images: [
         {
           url: imageUrl,
@@ -41,7 +49,7 @@ export async function generateMetadata({
     },
     twitter: {
       title: data.title,
-      description: data.title,
+      description: data.description,
       images: [
         {
           url: imageUrl,

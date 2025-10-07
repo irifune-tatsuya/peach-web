@@ -2,6 +2,21 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import Title from '@/components/Title';
 import { IMAGEBASEURL } from '@/constants';
 import Image from 'next/image';
+import { Metadata } from 'next';
+
+const pageTitle = 'ピーチな想い';
+const description =
+  '弊社のミッション、ビジョン、代表のご挨拶についてお話します。合同会社ピーチウェブ代表社員入船たち屋からのご挨拶もざいます。共感していただけることを願っております。';
+
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: description,
+  openGraph: {
+    title: pageTitle,
+    description: description,
+    type: 'article',
+  },
+};
 
 const breadcrumbs = [
   {
@@ -55,7 +70,7 @@ const companyData = [
 
 export default async function Thought() {
   return (
-    <main>
+    <>
       <Title titleEn={'Thought'} titleJp={'ピーチな想い'} />
       <section
         className="relative overflow-hidden bg-[linear-gradient(-225deg,_#eeeeee_0%,_#ffffff_56%,_#eeeeee_100%)] pt-22 pb-[90px] md:pt-32 md:pb-44 
@@ -190,6 +205,6 @@ export default async function Thought() {
       </section>
 
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-    </main>
+    </>
   );
 }

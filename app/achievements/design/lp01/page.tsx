@@ -6,6 +6,21 @@ import { IMAGEBASEURL } from '@/constants';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { Metadata } from 'next';
+
+const pageTitle = 'ランディングページデザイン提案01';
+const description =
+  '若々しい起業家のためのランディングページデザインで、多くの写真を使用して視覚的に訴求できるように心がけました。こちらは起業家の挨拶セクションとなります。';
+
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: description,
+  openGraph: {
+    title: pageTitle,
+    description: description,
+    type: 'article',
+  },
+};
 
 const braketHeadingClasses =
   "relative inline-block before:content-['['] after:content-[']'] before:absolute before:-left-4 after:absolute after:-right-4";
@@ -113,7 +128,7 @@ export default async function Lp01() {
           </h1>
           <nav>{/* ナビゲーションリンクなど */}</nav>
         </header>
-        <main className="relative mx-auto min-h-screen p-0">
+        <div className="relative mx-auto min-h-screen p-0">
           <div className="mb-24">
             <div className="ml-9 md:mt-32 md:ml-44 xl:ml-72">
               <SlideSwiper images={swiperImages} />
@@ -144,7 +159,7 @@ export default async function Lp01() {
               </div>
             </section>
           </div>
-        </main>
+        </div>
       </div>
       <section id="lp01-mission" className="relative mt-20">
         <div

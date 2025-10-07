@@ -6,6 +6,44 @@ import Title from '@/components/Title';
 import SearchField from '@/components/SearchField';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import React, { Suspense } from 'react';
+import { Metadata } from 'next';
+
+const baseTitle = 'ピーチファイ';
+const description =
+  '岡山のチャレンジする起業家を応援するインタビューマガジン「ピーチファイ」です。ピーチのようにフレッシュな岡山の人々をファイトと応援しましょう！';
+
+type Props = {
+  params: Promise<{
+    current: string;
+  }>;
+  searchParams: Promise<{
+    q?: string;
+  }>;
+};
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const searchParams = await props.searchParams;
+  const query = searchParams.q || '';
+  const params = await props.params;
+  const current = params.current || '1';
+  const pageTitle = query
+    ? `「${query}」の検索結果 - ${current}ページ目`
+    : `${baseTitle} - ${current}ページ目`;
+
+  return {
+    title: pageTitle,
+    description: description,
+    openGraph: {
+      title: pageTitle,
+      description: description,
+      type: 'website',
+    },
+    robots: {
+      index: false,
+      follow: true,
+    },
+  };
+}
 
 const breadcrumbs = [
   {
@@ -25,15 +63,6 @@ const breadcrumbs = [
   },
 ];
 
-type Props = {
-  params: Promise<{
-    current: string;
-  }>;
-  searchParams: Promise<{
-    q?: string;
-  }>;
-};
-
 export const revalidate = 3600;
 
 export default async function Page(props: Props) {
@@ -49,7 +78,7 @@ export default async function Page(props: Props) {
   return (
     <>
       <Title titleEn={'Search Results'} titleJp={'ピーチファイの検索結果'} />
-      <main className="mx-auto max-w-6xl p-4 mb-16 md:mb-0">
+      <div className="mx-auto max-w-6xl p-4 mb-16 md:mb-0">
         <nav className="mb-20 flex justify-center md:justify-start">
           <Suspense fallback={<div className="animate-pulse">読み込み中...</div>}>
             <SearchField category={'peach-fight'} />
@@ -62,7 +91,7 @@ export default async function Page(props: Props) {
           current={current}
           q={searchParams.q}
         />
-      </main>
+      </div>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );

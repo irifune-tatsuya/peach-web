@@ -5,6 +5,44 @@ import Title from '@/components/Title';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import ArticleList from '@/components/ArticleList';
 import React from 'react';
+import { Metadata } from 'next';
+
+const pageTitle = 'ニュース';
+const description =
+  '合同会社ピーチウェブの最新情報をお届けしております。異業種交流会への参加情報やイベント開催情報など気になる情報をいち早くご確認いただくことができます。';
+
+type Props = {
+  params: Promise<{
+    tagId: string;
+    current: string;
+  }>;
+  searchParams: Promise<{
+    q?: string;
+  }>;
+};
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const params = await props.params;
+  const current = params.current || '1';
+  const title = `${pageTitle} - ${current}ページ目`;
+
+  return {
+    title: title,
+    description: description,
+    robots: {
+      index: true,
+      follow: true,
+    },
+    alternates: {
+      canonical: `/news/p/${current}`,
+    },
+    openGraph: {
+      title: title,
+      description: description,
+      type: 'website',
+    },
+  };
+}
 
 const breadcrumbs = [
   {
@@ -18,16 +56,6 @@ const breadcrumbs = [
     isCurrentPage: false,
   },
 ];
-
-type Props = {
-  params: Promise<{
-    tagId: string;
-    current: string;
-  }>;
-  searchParams: Promise<{
-    q?: string;
-  }>;
-};
 
 export const revalidate = 3600;
 
@@ -45,7 +73,7 @@ export default async function Page(props: Props) {
   return (
     <>
       <Title titleEn={'News'} titleJp={'ニュース'} />
-      <main className="mx-auto max-w-6xl p-4 pb-[60px] md:pb-[156px]">
+      <div className="mx-auto max-w-6xl p-4 pb-[60px] md:pb-[156px]">
         <ArticleList articles={data.contents} category={category} />
         <Pagination
           totalCount={data.totalCount}
@@ -53,7 +81,7 @@ export default async function Page(props: Props) {
           current={current}
           q={searchParams.q}
         />
-      </main>
+      </div>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );

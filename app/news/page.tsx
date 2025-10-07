@@ -5,6 +5,21 @@ import Title from '@/components/Title';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import ArticleList from '@/components/ArticleList';
 import React from 'react';
+import { Metadata } from 'next';
+
+const pageTitle = 'ニュース';
+const description =
+  '合同会社ピーチウェブの最新情報をお届けしております。異業種交流会への参加情報やイベント開催情報など気になる情報をいち早くご確認いただくことができます。';
+
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: description,
+  openGraph: {
+    title: pageTitle,
+    description: description,
+    type: 'article',
+  },
+};
 
 export const revalidate = 3600;
 
@@ -30,10 +45,10 @@ export default async function News() {
   return (
     <>
       <Title titleEn={'News'} titleJp={'ニュース'} />
-      <main className="mx-auto max-w-6xl p-4 pb-[60px] md:pb-[156px]">
+      <div className="mx-auto max-w-6xl p-4 pb-[60px] md:pb-[156px]">
         <ArticleList articles={data.contents} category={category} />
         <Pagination totalCount={data.totalCount} basePath={`/${category}`} />
-      </main>
+      </div>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );

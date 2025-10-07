@@ -6,6 +6,34 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import SearchField from '@/components/SearchField';
 import { ARTICLEFILTER } from '@/constants';
 import React, { Suspense } from 'react';
+import { Metadata } from 'next';
+
+type Props = {
+  searchParams: {
+    q?: string;
+  };
+};
+
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const query = searchParams.q || '';
+  const pageTitle = query ? `「${query}」の検索結果` : '記事の検索結果';
+  const description =
+    'マーケティングや経営に関する専門的な記事、ピーチウェブからのご提案などお客様の役に立つ記事を日々更新しております。';
+
+  return {
+    title: pageTitle,
+    description: description,
+    openGraph: {
+      title: pageTitle,
+      description: description,
+      type: 'website',
+    },
+    robots: {
+      index: false,
+      follow: true,
+    },
+  };
+}
 
 const breadcrumbs = [
   {
@@ -25,12 +53,6 @@ const breadcrumbs = [
   },
 ];
 
-type Props = {
-  searchParams: Promise<{
-    q?: string;
-  }>;
-};
-
 export const revalidate = 3600;
 
 export default async function Search(props: Props) {
@@ -44,7 +66,7 @@ export default async function Search(props: Props) {
   return (
     <>
       <Title titleEn={'Search Results'} titleJp={'記事の検索結果'} />
-      <main className="mx-auto max-w-6xl p-4 pb-[60px] md:pb-[156px]">
+      <div className="mx-auto max-w-6xl p-4 pb-[60px] md:pb-[156px]">
         <nav className="mb-20 flex justify-center md:justify-start">
           <Suspense fallback={<div className="animate-pulse">読み込み中...</div>}>
             <SearchField category={category} />
@@ -56,7 +78,7 @@ export default async function Search(props: Props) {
           basePath={`/${category}/search`}
           q={searchParams.q}
         />
-      </main>
+      </div>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );

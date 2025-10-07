@@ -25,17 +25,23 @@ export async function generateMetadata({
   const searchParams = await searchParamsPromise;
   const data = await getDetail(params.slug, { draftKey: searchParams.draftKey });
   const defaultImageUrl = `${IMAGEBASEURL}/ogp.jpg`;
-  const defaultDescription =
-    'あなたのビジネスが永く愛されますようWEBブランディングで岡山の企業をサポートする合同会社ピーチウェブの公式サイトです。';
   const imageUrl = data?.thumbnail?.url || defaultImageUrl;
-  const description = data?.description || defaultDescription;
+  const url = `/article/${data.id}`;
 
   return {
     title: data.title,
-    description: description,
+    description: data.description,
+    robots: {
+      index: true,
+      follow: true,
+    },
+    alternates: {
+      canonical: url,
+    },
     openGraph: {
       title: data.title,
-      description: description,
+      description: data.description,
+      url: url,
       images: [
         {
           url: imageUrl,
@@ -46,7 +52,7 @@ export async function generateMetadata({
     },
     twitter: {
       title: data.title,
-      description: description,
+      description: data.description,
       images: [
         {
           url: imageUrl,

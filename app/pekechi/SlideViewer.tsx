@@ -91,7 +91,7 @@ export default function SlideViewer({ slides }: SlideViewerProps) {
           </CollapsibleContent>
         </Collapsible>
       </div>
-      <main className="mx-auto max-w-[1200px] px-4 pb-40 pt-8 md:px-8 md:pb-16 md:pt-16">
+      <div className="mx-auto max-w-[1200px] px-4 pb-40 pt-8 md:px-8 md:pb-16 md:pt-16">
         <div className="md:grid md:grid-cols-[250px_1fr] md:gap-8">
           <aside className="hidden md:block">
             <div className="sticky top-20">
@@ -114,7 +114,7 @@ export default function SlideViewer({ slides }: SlideViewerProps) {
             iconSize="1.2rem"
           />
         </div>
-      </main>
+      </div>
     </>
   );
 }

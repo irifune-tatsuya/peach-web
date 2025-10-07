@@ -1,6 +1,20 @@
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import Title from '@/components/Title';
 import React from 'react';
+import { Metadata } from 'next';
+
+const pageTitle = 'プライバシーポリシー';
+const description = 'ピーチウェブのWebサービスをご利用いただく際のご利用規約をまとめたページです。';
+
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: description,
+  openGraph: {
+    title: pageTitle,
+    description: description,
+    type: 'article',
+  },
+};
 
 const breadcrumbs = [
   {
