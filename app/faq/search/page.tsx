@@ -13,12 +13,13 @@ const description =
   'ピーチウェブへのよくあるご質問をまとめております。サービスに関するものから事務的なものまで様々な疑問にお答えします。もし見つからない場合はお問い合わせフォームからご質問ください。';
 
 type Props = {
-  searchParams: {
+  searchParams: Promise<{
     q?: string;
-  };
+  }>;
 };
 
-export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const searchParams = await props.searchParams;
   const query = searchParams.q || '';
   const pageTitle = query ? `「${query}」の検索結果` : baseTitle;
 
@@ -58,7 +59,7 @@ const breadcrumbs = [
 export const revalidate = 3600;
 
 export default async function Search(props: Props) {
-  const searchParams = props.searchParams;
+  const searchParams = (await props.searchParams);
   const category = 'faq';
   const data = await getList({
     filters: FAQFILTER,

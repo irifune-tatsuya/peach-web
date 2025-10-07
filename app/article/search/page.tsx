@@ -9,12 +9,13 @@ import React, { Suspense } from 'react';
 import { Metadata } from 'next';
 
 type Props = {
-  searchParams: {
+  searchParams: Promise<{
     q?: string;
-  };
+  }>;
 };
 
-export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const searchParams = await props.searchParams;
   const query = searchParams.q || '';
   const pageTitle = query ? `「${query}」の検索結果` : '記事の検索結果';
   const description =

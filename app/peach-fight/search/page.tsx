@@ -13,12 +13,13 @@ const description =
   '岡山のチャレンジする起業家を応援するインタビューマガジン「ピーチファイ」です。ピーチのようにフレッシュな岡山の人々をファイトと応援しましょう！';
 
 type Props = {
-  searchParams: {
+  searchParams: Promise<{
     q?: string;
-  };
+  }>;
 };
 
-export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
+  const searchParams = await props.searchParams;
   const query = searchParams.q || '';
   const pageTitle = query ? `「${query}」の検索結果` : baseTitle;
 
