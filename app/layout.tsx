@@ -9,7 +9,7 @@ import { IMAGEBASEURL } from '@/constants';
 import { Suspense } from 'react';
 import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
-import type { Organization } from 'schema-dts';
+import type { Organization, WebSite } from 'schema-dts';
 
 const siteName = 'ピーチウェブ -岡山のWEBブランディングサービス-';
 const description =
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const jsonLdData: Organization = {
+  const organizationJsonLd: Organization = {
     '@type': 'Organization',
     name: siteConfig.name,
     url: siteConfig.url,
@@ -87,6 +87,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     sameAs: [siteConfig.sns.instagram, siteConfig.sns.facebook, siteConfig.sns.x],
   };
 
+  const webSiteJsonLd: WebSite = {
+    '@type': 'WebSite',
+    name: siteConfig.name,
+    url: siteConfig.url,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${siteConfig.url}/article/search?q={search_term_string}`,
+      queryInput: 'required name=search_term_string', // ← ココを修正！
+    } as any,
+  };
+
   return (
     <html lang="ja" suppressHydrationWarning={true}>
       <head>
@@ -96,7 +107,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type={'image/png'}
           sizes={'180x180'}
         />
-        <JsonLd jsonLdData={{ '@context': 'https://schema.org', ...jsonLdData }} />
+        <JsonLd jsonLdData={{ '@context': 'https://schema.org', ...organizationJsonLd }} />
+        <JsonLd jsonLdData={{ '@context': 'https://schema.org', ...webSiteJsonLd }} />
         <Suspense fallback={null}>
           <GoogleAnalytics />
         </Suspense>
