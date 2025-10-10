@@ -9,7 +9,7 @@ import { formatRichText } from '@/lib/richtext';
 import { renderToc } from '@/lib/render-toc';
 import { type Article as ArticleType } from '@/lib/microcms';
 import { IMAGEBASEURL } from '@/constants';
-import { PublishedDate } from '../../ui/PublishedDate';
+import { PublishedDate } from '@/components/ui/PublishedDate';
 import { TableOfContents } from '@/components/common/TableOfContents';
 import { StartMailMagazineForm } from '@/components/features/StartMailMagazineForm';
 

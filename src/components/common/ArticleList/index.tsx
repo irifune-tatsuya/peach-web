@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Article } from '@/lib/microcms';
 import Link from 'next/link';
 import React from 'react';
-import { PublishedDate } from '../../ui/PublishedDate';
+import { PublishedDate } from '@/components/ui/PublishedDate';
 
 type Props = {
   articles: Article[];

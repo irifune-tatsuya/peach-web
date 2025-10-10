@@ -6,7 +6,7 @@ import { FaLine } from 'react-icons/fa';
 import { NextPage } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ContactButton } from '../../ui/ContactButton';
+import { ContactButton } from '@/components/ui/ContactButton';
 
 export const Footer: React.FC = () => {
   return (
