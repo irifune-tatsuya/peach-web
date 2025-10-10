@@ -1,5 +1,9 @@
 import { Metadata } from 'next';
 import SlideViewer from './SlideViewer';
+import { JsonLd } from '@/components/common/JsonLd';
+import { siteConfig } from '@/config/site';
+import type { Service, ImageObject, BreadcrumbList, WithContext } from 'schema-dts';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 
 const title = 'ぺけち営業スライド';
 const description =
@@ -174,6 +178,57 @@ const slideData: Slide[] = [
   },
 ];
 
+const breadcrumbs = [
+  {
+    title: 'ホーム',
+    href: '/',
+    isCurrentPage: false,
+  },
+  {
+    title: title,
+    href: '/pekechi',
+    isCurrentPage: true,
+  },
+];
+
 export default function Page() {
-  return <SlideViewer slides={slideData} />;
+  const jsonLdData: WithContext<Service> = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'X運用代行サービス「ぺけち」',
+    description: description,
+    url: `${siteConfig.url}/pekechi`,
+    provider: {
+      '@type': 'Organization',
+      '@id': siteConfig.url,
+      name: siteConfig.name,
+    },
+    serviceType: 'X (旧Twitter) 運用代行サービス',
+    image: slideData.map((slide) => ({
+      '@type': 'ImageObject',
+      url: `${siteConfig.url}/pekechi/${slide.fileName}`, // 注意: ここは実際の画像URLパスに合わせて調整してね！
+      name: slide.altText,
+      description: slide.altText,
+    })) as ImageObject[],
+  };
+
+  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: breadcrumb.title,
+      item: `${siteConfig.url}${breadcrumb.href}`,
+    })),
+  };
+
+  return (
+    <>
+      <JsonLd jsonLdData={jsonLdData} />
+      <JsonLd jsonLdData={breadcrumbJsonLd} />
+      <SlideViewer slides={slideData} />
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
+    </>
+  );
 }

@@ -7,6 +7,9 @@ import SearchField from '@/components/SearchField';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import React, { Suspense } from 'react';
 import { Metadata } from 'next';
+import { JsonLd } from '@/components/common/JsonLd';
+import { siteConfig } from '@/config/site';
+import type { CollectionPage, BreadcrumbList, WithContext } from 'schema-dts';
 
 const pageTitle = '新着記事一覧';
 const description =
@@ -43,19 +46,6 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   };
 }
 
-const breadcrumbs = [
-  {
-    title: 'ホーム',
-    href: '/',
-    isCurrentPage: false,
-  },
-  {
-    title: '新着記事',
-    href: '/article',
-    isCurrentPage: false,
-  },
-];
-
 export const revalidate = 3600;
 
 export default async function Page(props: Props) {
@@ -69,8 +59,50 @@ export default async function Page(props: Props) {
     offset: LIMIT12 * (current - 1),
     q: searchParams.q,
   });
+
+  const title = `${pageTitle} - ${current}ページ目`;
+
+  const collectionPageJsonLd: WithContext<CollectionPage> = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: title,
+    description: description,
+    url: `${siteConfig.url}/article/p/${current}`,
+  };
+
+  const breadcrumbs = [
+    {
+      title: 'ホーム',
+      href: '/',
+      isCurrentPage: false,
+    },
+    {
+      title: '新着記事一覧',
+      href: '/article',
+      isCurrentPage: false,
+    },
+    {
+      title: `${current}ページ目`,
+      href: `/article/p/${current}`,
+      isCurrentPage: true,
+    },
+  ];
+
+  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: breadcrumb.title,
+      item: `${siteConfig.url}${breadcrumb.href}`,
+    })),
+  };
+
   return (
     <>
+      <JsonLd jsonLdData={collectionPageJsonLd} />
+      <JsonLd jsonLdData={breadcrumbJsonLd} />
       <Title titleEn={'Articles'} titleJp={'新着記事一覧'} />
       <div className="mx-auto max-w-6xl p-4 pb-[60px] md:pb-[156px]">
         <nav className="mb-20 flex justify-center md:justify-start">

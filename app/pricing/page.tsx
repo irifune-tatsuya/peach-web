@@ -17,6 +17,9 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Metadata } from 'next';
+import { JsonLd } from '@/components/common/JsonLd';
+import { siteConfig } from '@/config/site';
+import type { Service, Offer, BreadcrumbList, WithContext } from 'schema-dts';
 
 const pageTitle = '料金体系';
 const description =
@@ -132,8 +135,41 @@ const singleOptionData = {
 };
 
 export default async function Pricing() {
+  const serviceJsonLd: WithContext<Service> = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'WEBブランディングサービス',
+    description: description,
+    url: `${siteConfig.url}/pricing`,
+    provider: {
+      '@type': 'Organization',
+      '@id': siteConfig.url,
+      name: siteConfig.name,
+    },
+    serviceType: 'WEBブランディング',
+    offers: basicPriceData.map((plan) => ({
+      '@type': 'Offer',
+      name: plan.title,
+      price: parseInt(plan.price.replace(/[^0-9]/g, '')),
+      priceCurrency: 'JPY',
+      description: [...plan.homepage, ...plan.contents].join('、'),
+    })) as Offer[],
+  };
+
+  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: breadcrumb.title,
+      item: `${siteConfig.url}${breadcrumb.href}`,
+    })),
+  };
   return (
     <>
+      <JsonLd jsonLdData={serviceJsonLd} />
+      <JsonLd jsonLdData={breadcrumbJsonLd} />
       <Title titleEn={'Pricing'} titleJp={'料金体系'} />
       <section className="relative overflow-hidden bg-[linear-gradient(to_bottom,_#fcdee9,_#ffffff)] pb-[90px] pt-[88px] md:pb-[180px] md:pt-[120px]">
         <div className="mx-auto max-w-6xl p-4">

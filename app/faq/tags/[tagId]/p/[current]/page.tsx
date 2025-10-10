@@ -7,6 +7,9 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import ArticleList from '@/components/ArticleList';
 import React, { Suspense } from 'react';
 import { Metadata } from 'next';
+import { JsonLd } from '@/components/common/JsonLd';
+import { siteConfig } from '@/config/site';
+import type { CollectionPage, BreadcrumbList, WithContext } from 'schema-dts';
 
 type Props = {
   params: Promise<{
@@ -61,6 +64,17 @@ export default async function Page(props: Props) {
   });
   const tag = await getTag(tagId);
 
+  const pageTitle = `「${tag.name}」に関するよくあるご質問 - ${current}ページ目`;
+  const description = `「${tag.name}」に関連するよくあるご質問の一覧（${current}ページ目）です。ピーチウェブのサービスについて、より深くご理解いただけます。`;
+
+  const collectionPageJsonLd: WithContext<CollectionPage> = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: pageTitle,
+    description: description,
+    url: `${siteConfig.url}/faq/tags/${tagId}/p/${current}`,
+  };
+
   const breadcrumbs = [
     {
       title: 'ホーム',
@@ -75,12 +89,30 @@ export default async function Page(props: Props) {
     {
       title: `${tag.name}タグの記事一覧`,
       href: `/faq/tags/${tag.id}`,
+      isCurrentPage: false,
+    },
+    {
+      title: `${current}ページ目`,
+      href: `/faq/tags/${tag.id}/p/${current}`,
       isCurrentPage: true,
     },
   ];
 
+  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: breadcrumb.title,
+      item: `${siteConfig.url}${breadcrumb.href}`,
+    })),
+  };
+
   return (
     <>
+      <JsonLd jsonLdData={collectionPageJsonLd} />
+      <JsonLd jsonLdData={breadcrumbJsonLd} />
       <Title
         titleEn={`FAQ -${tag.id.charAt(0).toUpperCase() + tag.id.slice(1)}-`}
         titleJp={`${tag.name}タグの記事一覧`}

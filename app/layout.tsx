@@ -7,6 +7,9 @@ import { Footer } from '@/components/Footer';
 import GoogleAnalytics from '@/components/GoogleAnalytics/';
 import { IMAGEBASEURL } from '@/constants';
 import { Suspense } from 'react';
+import { JsonLd } from '@/components/common/JsonLd';
+import { siteConfig } from '@/config/site';
+import type { Organization } from 'schema-dts';
 
 const siteName = 'ピーチウェブ -岡山のWEBブランディングサービス-';
 const description =
@@ -69,6 +72,21 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const jsonLdData: Organization = {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    url: siteConfig.url,
+    logo: siteConfig.logo,
+    description: siteConfig.description,
+    address: {
+      '@type': 'PostalAddress',
+      ...siteConfig.address,
+    },
+    telephone: siteConfig.telephone,
+    foundingDate: siteConfig.foundingDate,
+    sameAs: [siteConfig.sns.instagram, siteConfig.sns.facebook, siteConfig.sns.x],
+  };
+
   return (
     <html lang="ja" suppressHydrationWarning={true}>
       <head>
@@ -78,6 +96,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type={'image/png'}
           sizes={'180x180'}
         />
+        <JsonLd jsonLdData={{ '@context': 'https://schema.org', ...jsonLdData }} />
         <Suspense fallback={null}>
           <GoogleAnalytics />
         </Suspense>

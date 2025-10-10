@@ -6,6 +6,9 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { IMAGEBASEURL } from '@/constants';
 import { draftMode } from 'next/headers';
 import PreviewAlert from '@/components/PreviewAlert';
+import { JsonLd } from '@/components/common/JsonLd';
+import { siteConfig } from '@/config/site';
+import type { FAQPage, Question, Answer, BreadcrumbList, WithContext } from 'schema-dts';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -87,8 +90,39 @@ export default async function Page({
     },
   ];
 
+  const faqPageJsonLd: WithContext<FAQPage> = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    name: data.title,
+    description: data.description,
+    url: `${siteConfig.url}/faq/${data.id}`,
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: data.title,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: data.content,
+        },
+      } as Question,
+    ],
+  };
+
+  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: breadcrumb.title,
+      item: `${siteConfig.url}${breadcrumb.href}`,
+    })),
+  };
+
   return (
     <>
+      <JsonLd jsonLdData={faqPageJsonLd} />
+      <JsonLd jsonLdData={breadcrumbJsonLd} />
       {isEnabled && <PreviewAlert />}
       <Article data={data} isFaqLayout={true} />
       <Breadcrumbs breadcrumbs={breadcrumbs} />

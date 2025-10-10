@@ -7,6 +7,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { Metadata } from 'next';
+import { JsonLd } from '@/components/common/JsonLd';
+import { siteConfig } from '@/config/site';
+import type { CreativeWork, ImageObject, BreadcrumbList, WithContext } from 'schema-dts';
 
 const pageTitle = 'ランディングページデザイン提案01';
 const description =
@@ -112,8 +115,39 @@ const footerLinks = [
 ];
 
 export default async function Lp01() {
+  const creativeWorkJsonLd: WithContext<CreativeWork> = {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: pageTitle,
+    description: description,
+    url: `${siteConfig.url}/achievements/design/lp01`,
+    author: {
+      '@type': 'Organization',
+      '@id': siteConfig.url,
+      name: siteConfig.name,
+    },
+    image: swiperImages.map((img) => ({
+      '@type': 'ImageObject',
+      contentUrl: img.pcSrc,
+      name: img.alt,
+    })) as ImageObject[],
+  };
+
+  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: breadcrumb.title,
+      item: `${siteConfig.url}${breadcrumb.href}`,
+    })),
+  };
+
   return (
     <>
+      <JsonLd jsonLdData={creativeWorkJsonLd} />
+      <JsonLd jsonLdData={breadcrumbJsonLd} />
       <div id="lp01-top" className="relative">
         <div className="absolute top-0 left-0 z-[-1] bg-[#b7e0ff] w-[100px] md:w-[200px] xl:w-[350px] min-h-[850px] md:bottom-0 h-[calc(((100vw-35px)*(960/680))+850px)] md:h-[calc(((100vw-280px)*(1060/1220))+80px)] lg:h-[calc(((100vw-280px)*(1060/1220))+450px)] xl:h-[calc(((100vw-280px)*(1060/1220))+180px)]" />
         <header className="z-10 mx-auto md:absolute md:top-0 md:right-0 md:left-0 md:flex md:flex-col md:px-0 md:py-4">

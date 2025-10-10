@@ -13,6 +13,9 @@ import { IoMail } from 'react-icons/io5';
 import { FaLine } from 'react-icons/fa';
 import ButtonArea from '@/components/ButtonArea';
 import { Metadata } from 'next';
+import { JsonLd } from '@/components/common/JsonLd';
+import { siteConfig } from '@/config/site';
+import type { CollectionPage, BreadcrumbList, WithContext } from 'schema-dts';
 
 const pageTitle = 'ピーチファイ';
 const description =
@@ -77,8 +80,30 @@ export default async function PeachFight() {
     limit: LIMIT12,
     filters: PEACHFILTER,
   });
+
+  const collectionPageJsonLd: WithContext<CollectionPage> = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: '岡山のチャレンジ応援マガジン「ピーチファイ」',
+    description: description,
+    url: `${siteConfig.url}/peach-fight`,
+  };
+
+  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: breadcrumb.title,
+      item: `${siteConfig.url}${breadcrumb.href}`,
+    })),
+  };
+
   return (
     <>
+      <JsonLd jsonLdData={collectionPageJsonLd} />
+      <JsonLd jsonLdData={breadcrumbJsonLd} />
       <div className="hidden">
         <Title titleEn={'ピーチファイ'} titleJp={'岡山のチャレンジ応援マガジン'} />
       </div>

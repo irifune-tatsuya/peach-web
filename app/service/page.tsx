@@ -9,15 +9,16 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CONTACT, IMAGEBASEURL } from '@/constants';
 import Image from 'next/image';
-import Link from 'next/link';
 import { FaCheckCircle, FaLine } from 'react-icons/fa';
 import { ImCoinYen } from 'react-icons/im';
 import { IoMail } from 'react-icons/io5';
 import { Metadata } from 'next';
+import { JsonLd } from '@/components/common/JsonLd';
+import { siteConfig } from '@/config/site';
+import type { Service, FAQPage, Question, Answer, BreadcrumbList, WithContext } from 'schema-dts';
 
 const pageTitle = 'サービス内容';
 const description =
@@ -225,7 +226,6 @@ const faq = [
   },
 ];
 
-// 横スクロールのカードを共通コンポーネントにしたよ！
 const StoryCard = ({
   item,
   index,
@@ -262,8 +262,52 @@ const StoryCard = ({
 );
 
 export default async function Service() {
+  const serviceJsonLd: WithContext<Service> = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'WEBブランディング事業',
+    description: description,
+    url: `${siteConfig.url}/service`,
+    provider: {
+      '@type': 'Organization',
+      '@id': siteConfig.url,
+      name: siteConfig.name,
+    },
+    serviceType: 'WEBブランディング',
+  };
+
+  const faqJsonLd: WithContext<FAQPage> = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map(
+      (item) =>
+        ({
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.a,
+          },
+        } as Question),
+    ),
+  };
+
+  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: breadcrumb.title,
+      item: `${siteConfig.url}${breadcrumb.href}`,
+    })),
+  };
+
   return (
     <>
+      <JsonLd jsonLdData={serviceJsonLd} />
+      <JsonLd jsonLdData={faqJsonLd} />
+      <JsonLd jsonLdData={breadcrumbJsonLd} />
       <section className="relative h-[300px] w-full md:h-[600px]">
         <Image
           src={`${IMAGEBASEURL}/service/title.webp`}

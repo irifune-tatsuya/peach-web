@@ -2,6 +2,9 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import Title from '@/components/Title';
 import React from 'react';
 import { Metadata } from 'next';
+import { JsonLd } from '@/components/common/JsonLd';
+import { siteConfig } from '@/config/site';
+import type { AboutPage, BreadcrumbList, WithContext } from 'schema-dts';
 
 const pageTitle = 'プライバシーポリシー';
 const description =
@@ -36,8 +39,34 @@ export default async function Privacy() {
   const nestedListClasses = 'mt-2 list-roman space-y-2 pl-5';
   const doubleNestedListClasses = 'mt-2 list-disc space-y-1 pl-5';
 
+  const jsonLdData: WithContext<AboutPage> = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: pageTitle,
+    description: description,
+    url: `${siteConfig.url}/privacy`,
+    mainEntity: {
+      '@type': 'Organization',
+      '@id': siteConfig.url,
+      name: siteConfig.name,
+    },
+  };
+
+  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: breadcrumb.title,
+      item: `${siteConfig.url}${breadcrumb.href}`,
+    })),
+  };
+
   return (
     <>
+      <JsonLd jsonLdData={jsonLdData} />
+      <JsonLd jsonLdData={breadcrumbJsonLd} />
       <Title titleEn={'Privacy Policy'} titleJp={'プライバシーポリシー'} />
       <div className="mx-auto max-w-6xl p-4 pb-[60px] text-sm md:pb-[156px]">
         <p className="mb-12 text-sm">

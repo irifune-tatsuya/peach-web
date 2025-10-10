@@ -16,6 +16,9 @@ import Image from 'next/image';
 import { FaCheckCircle } from 'react-icons/fa';
 import { ImCoinYen, ImDisplay } from 'react-icons/im';
 import { Metadata } from 'next';
+import { JsonLd } from '@/components/common/JsonLd';
+import { siteConfig } from '@/config/site';
+import type { AboutPage, BreadcrumbList, WithContext } from 'schema-dts';
 
 const pageTitle = '選ばれる理由';
 const description =
@@ -119,8 +122,33 @@ const ReasonCard = ({ item }: { item: { title: string; content: string; image: s
 );
 
 export default async function Reason() {
+  const aboutPageJsonLd: WithContext<AboutPage> = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: pageTitle,
+    description: description,
+    url: `${siteConfig.url}/reason`,
+    mainEntity: {
+      '@type': 'Organization',
+      '@id': siteConfig.url,
+      name: siteConfig.name,
+    },
+  };
+
+  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: breadcrumb.title,
+      item: `${siteConfig.url}${breadcrumb.href}`,
+    })),
+  };
   return (
     <>
+      <JsonLd jsonLdData={aboutPageJsonLd} />
+      <JsonLd jsonLdData={breadcrumbJsonLd} />
       <Title titleEn={'Reasons'} titleJp={'選ばれる理由'} />
       <section className="relative overflow-hidden bg-[linear-gradient(-225deg,_#eeeeee_0%,_#ffffff_56%,_#eeeeee_100%)] pt-[88px] pb-[90px] md:pt-32 md:pb-44">
         <div className="mx-auto max-w-6xl p-4">

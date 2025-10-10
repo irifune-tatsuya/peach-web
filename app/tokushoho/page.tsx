@@ -3,6 +3,9 @@ import Title from '@/components/Title';
 import React from 'react';
 import { ContactButton } from '@/components/ContactButton';
 import { Metadata } from 'next';
+import { JsonLd } from '@/components/common/JsonLd';
+import { siteConfig } from '@/config/site';
+import type { AboutPage, BreadcrumbList, WithContext } from 'schema-dts';
 
 const pageTitle = '特定商取引法に基づく表記';
 const description =
@@ -37,8 +40,34 @@ export default async function Tokushoho() {
   const nestedListClasses = 'mt-2 list-circle space-y-2 pl-5';
   const doubleNestedListClasses = 'mt-2 list-[square] space-y-1 pl-5';
 
+  const jsonLdData: WithContext<AboutPage> = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: pageTitle,
+    description: description,
+    url: `${siteConfig.url}/tokushoho`,
+    mainEntity: {
+      '@type': 'Organization',
+      '@id': siteConfig.url,
+      name: siteConfig.name,
+    },
+  };
+
+  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: breadcrumb.title,
+      item: `${siteConfig.url}${breadcrumb.href}`,
+    })),
+  };
+
   return (
     <>
+      <JsonLd jsonLdData={jsonLdData} />
+      <JsonLd jsonLdData={breadcrumbJsonLd} />
       <Title titleEn={'Tokushoho'} titleJp={'特定商取引法に基づく表記'} />
       <div className="mx-auto max-w-6xl p-4 pb-[60px] text-sm md:pb-[156px]">
         <h2 className={headingClasses}>1.事業者の名称</h2>
