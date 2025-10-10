@@ -3,7 +3,7 @@ import SlideViewer from './SlideViewer';
 import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import type { Service, ImageObject, BreadcrumbList, WithContext } from 'schema-dts';
-import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 
 const title = 'ぺけち営業スライド';
 const description =

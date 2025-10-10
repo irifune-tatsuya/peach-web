@@ -1,11 +1,11 @@
 import React from 'react';
 import { Metadata } from 'next';
 import { getDetail } from '@/lib/microcms';
-import Article from '@/components/Article';
-import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { Article } from '@/components/features/Article';
+import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { IMAGEBASEURL } from '@/constants';
 import { draftMode } from 'next/headers';
-import PreviewAlert from '@/components/PreviewAlert';
+import { PreviewAlert } from '@/components/common/PreviewAlert';
 import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import type { Article as ArticleSchema, BreadcrumbList, WithContext } from 'schema-dts';

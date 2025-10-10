@@ -1,7 +1,7 @@
-import { Breadcrumbs } from '@/components/Breadcrumbs';
-import ButtonArea from '@/components/ButtonArea';
-import SideScrollIcon from '@/components/SideScrollIcon';
-import { SiteLinkButton } from '@/components/SiteLinkButton';
+import { Breadcrumbs } from '@/components/common/Breadcrumbs';
+import ButtonArea from '@/components/common/ButtonArea';
+import { SideScrollIcon } from '@/components/ui/SideScrollIcon';
+import { SiteLinkButton } from '@/components/ui/SiteLinkButton';
 import {
   Accordion,
   AccordionContent,

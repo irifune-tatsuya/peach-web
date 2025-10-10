@@ -1,9 +1,9 @@
-import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import React, { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { StartMailMagazineForm } from '@/components/StartMailMagazineForm';
-import { StopMailMagazineForm } from '@/components/StopMailMagazineForm';
+import { StartMailMagazineForm } from '@/components/features/StartMailMagazineForm';
+import { StopMailMagazineForm } from '@/components/features/StopMailMagazineForm';
 import { IMAGEBASEURL } from '@/constants';
 import { Metadata } from 'next';
 import { JsonLd } from '@/components/common/JsonLd';

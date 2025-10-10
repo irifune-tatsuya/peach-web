@@ -1,12 +1,12 @@
 import { getList, getTagList } from '@/lib/microcms';
 import { FAQFILTER, LIMIT30 } from '@/constants';
-import Pagination from '@/components/Pagination';
-import Title from '@/components/Title';
-import SearchField from '@/components/SearchField';
-import { Breadcrumbs } from '@/components/Breadcrumbs';
-import ArticleList from '@/components/ArticleList';
+import { Pagination } from '@/components/ui/Pagination';
+import Title from '@/components/ui/Title';
+import { SearchField } from '@/components/ui/SearchField';
+import { Breadcrumbs } from '@/components/common/Breadcrumbs';
+import { ArticleList } from '@/components/common/ArticleList';
 import React, { Suspense } from 'react';
-import TagList from '@/components/TagList';
+import { TagList } from '@/components/common/TagList';
 import { Metadata } from 'next';
 import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';

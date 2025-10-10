@@ -1,5 +1,5 @@
-import { Breadcrumbs } from '@/components/Breadcrumbs';
-import Title from '@/components/Title';
+import { Breadcrumbs } from '@/components/common/Breadcrumbs';
+import Title from '@/components/ui/Title';
 import { IMAGEBASEURL } from '@/constants';
 import { ACHIEVEMENTS } from '@/constants/achievements';
 import Image from 'next/image';

@@ -1,10 +1,10 @@
 import { getList } from '@/lib/microcms';
 import { PEACHFILTER, LIMIT12 } from '@/constants';
-import Pagination from '@/components/Pagination';
-import GridArticleList from '@/components/GridArticleList';
-import Title from '@/components/Title';
-import SearchField from '@/components/SearchField';
-import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { Pagination } from '@/components/ui/Pagination';
+import { GridArticleList } from '@/components/common/GridArticleList';
+import Title from '@/components/ui/Title';
+import { SearchField } from '@/components/ui/SearchField';
+import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import React, { Suspense } from 'react';
 import { Metadata } from 'next';
 import { JsonLd } from '@/components/common/JsonLd';

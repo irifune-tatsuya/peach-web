@@ -1,7 +1,7 @@
-import { Breadcrumbs } from '@/components/Breadcrumbs';
-import { SlideSwiper } from '@/components/SlideSwiper';
-import { CoverflowSwiper } from '@/components/CoverflowSwiper';
-import { Lp01VoiceCard } from '@/components/Lp01VoiceCard';
+import { Breadcrumbs } from '@/components/common/Breadcrumbs';
+import { SlideSwiper } from '@/components/features/SlideSwiper';
+import { CoverflowSwiper } from '@/components/features/CoverflowSwiper';
+import { Lp01VoiceCard } from '@/components/features/Lp01VoiceCard';
 import { IMAGEBASEURL } from '@/constants';
 import Image from 'next/image';
 import Link from 'next/link';

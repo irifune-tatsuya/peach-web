@@ -1,7 +1,7 @@
-import { Breadcrumbs } from '@/components/Breadcrumbs';
-import Title from '@/components/Title';
+import { Breadcrumbs } from '@/components/common/Breadcrumbs';
+import Title from '@/components/ui/Title';
 import { FaCheckCircle } from 'react-icons/fa';
-import SideScrollIcon from '@/components/SideScrollIcon';
+import { SideScrollIcon } from '@/components/ui/SideScrollIcon';
 import { ImDisplay } from 'react-icons/im';
 import { IMAGEBASEURL } from '@/constants';
 import React from 'react';

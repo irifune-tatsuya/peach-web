@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { TopSwiper } from '@/components/TopSwiper';
+import { TopSwiper } from '@/components/common/TopSwiper';
 import {
   LIMIT05,
   ARTICLEFILTER,
@@ -11,13 +11,13 @@ import {
 } from '@/constants';
 import { FaInstagram, FaLine } from 'react-icons/fa';
 import { FaSquareXTwitter } from 'react-icons/fa6';
-import { ContactButton } from '@/components/ContactButton';
+import { ContactButton } from '@/components/ui/ContactButton';
 import { getList } from '@/lib/microcms';
-import SideScrollArticleList from '@/components/SideScrollArticleList';
-import { ViewMoreButton } from '@/components/ViewMoreButton';
-import ContentTitle from '@/components/ContentTitle';
-import ArticleList from '@/components/ArticleList';
-import SideScrollIcon from '@/components/SideScrollIcon';
+import { SideScrollArticleList } from '@/components/features/SideScrollArticleList';
+import { ViewMoreButton } from '@/components/features/ViewMoreButton';
+import ContentTitle from '@/components/features/ContentTitle';
+import { ArticleList } from '@/components/common/ArticleList';
+import { SideScrollIcon } from '@/components/ui/SideScrollIcon';
 
 export const revalidate = 3600;
 
@@ -104,7 +104,7 @@ export default async function Home() {
       </section>
       <section className="pb-14 pt-14 md:pb-[184px] md:pt-[124px]">
         <div className="mx-auto max-w-6xl px-4">
-          <ContentTitle TitleEn="Business" TitleJp="事業内容" mb={12} />
+          <ContentTitle titleEn="Business" titleJp="事業内容" mb={12} />
           <div className="justify-between md:flex">
             <div className="w-full md:w-[49%]">
               <p className="mb-20 text-center text-lg font-bold leading-relaxed md:mb-8 md:text-left lg:text-xl">
@@ -149,7 +149,7 @@ export default async function Home() {
       <section className="pb-24 md:pb-48">
         <div className="mx-auto max-w-6xl px-4">
           <div className="mb-8 flex items-center justify-between md:mb-12">
-            <ContentTitle TitleEn="Peach Fight" TitleJp="ピーチファイ" mb={0} />
+            <ContentTitle titleEn="Peach Fight" titleJp="ピーチファイ" mb={0} />
             <ViewMoreButton href={'/peach-fight'} size={'small'} />
           </div>
           <SideScrollIcon />
@@ -159,7 +159,7 @@ export default async function Home() {
       <section className="pb-24 md:pb-48">
         <div className="mx-auto max-w-6xl px-4">
           <div className="mb-8 flex items-center justify-between md:mb-12">
-            <ContentTitle TitleEn="Article" TitleJp="新着記事" mb={0} />
+            <ContentTitle titleEn="Article" titleJp="新着記事" mb={0} />
             <ViewMoreButton href={'/article'} size={'small'} />
           </div>
           <SideScrollIcon />
@@ -168,7 +168,7 @@ export default async function Home() {
       </section>
       <section className="mx-auto max-w-6xl px-4 pb-24 md:pb-5">
         <div className="mb-8 flex items-center justify-between md:mb-12">
-          <ContentTitle TitleEn="News" TitleJp="ニュース" mb={0} />
+          <ContentTitle titleEn="News" titleJp="ニュース" mb={0} />
           <ViewMoreButton href={'/news'} size={'small'} />
         </div>
         <ArticleList articles={newsData.contents} category={'news'} />

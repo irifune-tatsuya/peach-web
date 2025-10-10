@@ -1,10 +1,10 @@
 import './globals.css';
 import { Metadata } from 'next';
-import { NavBar } from '@/components/NavBar';
-import { ScrollToTopButton } from '@/components/ScrollToTopButton';
-import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer';
-import GoogleAnalytics from '@/components/GoogleAnalytics/';
+import { NavBar } from '@/components/common/NavBar';
+import { ScrollToTopButton } from '@/components/ui/ScrollToTopButton';
+import { Header } from '@/components/common/Header';
+import { Footer } from '@/components/common/Footer';
+import GoogleAnalytics from '@/components/common/GoogleAnalytics/';
 import { IMAGEBASEURL } from '@/constants';
 import { Suspense } from 'react';
 import { JsonLd } from '@/components/common/JsonLd';

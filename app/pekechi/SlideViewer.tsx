@@ -4,10 +4,10 @@ import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { MdMenu, MdClose } from 'react-icons/md';
 import { FaCalendarAlt } from 'react-icons/fa';
-import CustomImage from '@/components/CustomImage';
+import { CustomImage } from '@/components/ui/CustomImage';
 import { IMAGEBASEURL } from '@/constants';
-import SlideNav from '@/components/SlideNav';
-import { ContactButton } from '@/components/ContactButton';
+import { SlideNav } from '@/components/features/SlideNav';
+import { ContactButton } from '@/components/ui/ContactButton';
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 

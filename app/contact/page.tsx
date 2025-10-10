@@ -1,6 +1,6 @@
-import Title from '@/components/Title';
-import { Breadcrumbs } from '@/components/Breadcrumbs';
-import { ContactForm } from '@/components/ContactForm';
+import Title from '@/components/ui/Title';
+import { Breadcrumbs } from '@/components/common/Breadcrumbs';
+import { ContactForm } from '@/components/features/ContactForm';
 import React from 'react';
 import { Metadata } from 'next';
 import { JsonLd } from '@/components/common/JsonLd';

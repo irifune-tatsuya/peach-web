@@ -1,11 +1,11 @@
 import React, { Suspense } from 'react';
 import { getList } from '@/lib/microcms';
 import { ARTICLEFILTER, LIMIT12 } from '@/constants';
-import Pagination from '@/components/Pagination';
-import GridArticleList from '@/components/GridArticleList';
-import Title from '@/components/Title';
-import { Breadcrumbs } from '@/components/Breadcrumbs';
-import SearchField from '@/components/SearchField';
+import { Pagination } from '@/components/ui/Pagination';
+import { GridArticleList } from '@/components/common/GridArticleList';
+import Title from '@/components/ui/Title';
+import { Breadcrumbs } from '@/components/common/Breadcrumbs';
+import { SearchField } from '@/components/ui/SearchField';
 import { Metadata } from 'next';
 import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';

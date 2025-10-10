@@ -1,9 +1,9 @@
 import { getList } from '@/lib/microcms';
 import { LIMIT30, NEWSFILTER } from '@/constants';
-import Pagination from '@/components/Pagination';
-import Title from '@/components/Title';
-import { Breadcrumbs } from '@/components/Breadcrumbs';
-import ArticleList from '@/components/ArticleList';
+import { Pagination } from '@/components/ui/Pagination';
+import Title from '@/components/ui/Title';
+import { Breadcrumbs } from '@/components/common/Breadcrumbs';
+import { ArticleList } from '@/components/common/ArticleList';
 import React from 'react';
 import { Metadata } from 'next';
 import { JsonLd } from '@/components/common/JsonLd';

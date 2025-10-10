@@ -1,7 +1,7 @@
-import { Breadcrumbs } from '@/components/Breadcrumbs';
-import SideScrollIcon from '@/components/SideScrollIcon';
-import { SiteLinkButton } from '@/components/SiteLinkButton';
-import Title from '@/components/Title';
+import { Breadcrumbs } from '@/components/common/Breadcrumbs';
+import { SideScrollIcon } from '@/components/ui/SideScrollIcon';
+import { SiteLinkButton } from '@/components/ui/SiteLinkButton';
+import Title from '@/components/ui/Title';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Table,

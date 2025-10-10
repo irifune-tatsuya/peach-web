@@ -1,7 +1,7 @@
-import { Breadcrumbs } from '@/components/Breadcrumbs';
-import Title from '@/components/Title';
+import { Breadcrumbs } from '@/components/common/Breadcrumbs';
+import Title from '@/components/ui/Title';
 import React from 'react';
-import { ContactButton } from '@/components/ContactButton';
+import { ContactButton } from '@/components/ui/ContactButton';
 import { Metadata } from 'next';
 import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
