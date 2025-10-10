@@ -1,7 +1,7 @@
 import { draftMode } from 'next/headers';
 import { NextRequest } from 'next/server';
 import { redirect } from 'next/navigation';
-import { getDetail } from '@/libs/microcms';
+import { getDetail } from '@/lib/microcms';
 
 export const GET = async (req: NextRequest) => {
   const searchParams = req.nextUrl.searchParams;

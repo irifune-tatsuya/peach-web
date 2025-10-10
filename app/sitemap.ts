@@ -1,5 +1,5 @@
 import { ARTICLEFILTER, FAQFILTER, NEWSFILTER, PEACHFILTER } from '@/constants';
-import { getList, getTagList } from '@/libs/microcms';
+import { getList, getTagList } from '@/lib/microcms';
 
 export default async function sitemap() {
   const baseURL = new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000');

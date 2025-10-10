@@ -1,4 +1,4 @@
-import { Article } from '@/libs/microcms';
+import { Article } from '@/lib/microcms';
 import LandscapeCard from '../LandscapeCard';
 import PortraitCard from '../PortraitCard';
 

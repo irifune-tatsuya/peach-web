@@ -3,7 +3,7 @@
 import { usePathname, useSearchParams } from 'next/navigation';
 import Script from 'next/script';
 import { useEffect } from 'react';
-import { IS_GATAG, GA_TAG_ID, pageview } from '@/libs/gtag';
+import { IS_GATAG, GA_TAG_ID, pageview } from '@/lib/gtag';
 import React from 'react';
 
 const GoogleAnalytics = () => {

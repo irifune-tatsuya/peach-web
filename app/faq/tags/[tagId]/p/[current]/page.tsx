@@ -1,4 +1,4 @@
-import { getList, getTag } from '@/libs/microcms';
+import { getList, getTag } from '@/lib/microcms';
 import { LIMIT30 } from '@/constants';
 import Pagination from '@/components/Pagination';
 import Title from '@/components/Title';

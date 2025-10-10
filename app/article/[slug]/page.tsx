@@ -1,6 +1,6 @@
 import React from 'react';
 import { Metadata } from 'next';
-import { getDetail } from '@/libs/microcms';
+import { getDetail } from '@/lib/microcms';
 import Article from '@/components/Article';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { IMAGEBASEURL } from '@/constants';

@@ -1,4 +1,4 @@
-import { Article } from '@/libs/microcms';
+import { Article } from '@/lib/microcms';
 import PublishedDate from '../PublishedDate';
 import Image from 'next/image';
 import Link from 'next/link';

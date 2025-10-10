@@ -1,4 +1,4 @@
-import { Tag } from '@/libs/microcms';
+import { Tag } from '@/lib/microcms';
 import TagListItem from '../TagListItem';
 
 type Props = {

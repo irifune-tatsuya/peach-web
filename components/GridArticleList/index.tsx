@@ -1,4 +1,4 @@
-import { Article } from '@/libs/microcms';
+import { Article } from '@/lib/microcms';
 import React from 'react';
 import LandscapeCard from '../LandscapeCard';
 

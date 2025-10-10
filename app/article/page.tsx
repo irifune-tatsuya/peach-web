@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { getList } from '@/libs/microcms';
+import { getList } from '@/lib/microcms';
 import { ARTICLEFILTER, LIMIT12 } from '@/constants';
 import Pagination from '@/components/Pagination';
 import GridArticleList from '@/components/GridArticleList';

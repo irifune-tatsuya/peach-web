@@ -1,5 +1,5 @@
 import { IMAGEBASEURL } from '@/constants';
-import { formatDate } from '@/libs/utils';
+import { formatDate } from '@/lib/date';
 import Image from 'next/image';
 
 type Props = {

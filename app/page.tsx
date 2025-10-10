@@ -12,7 +12,7 @@ import {
 import { FaInstagram, FaLine } from 'react-icons/fa';
 import { FaSquareXTwitter } from 'react-icons/fa6';
 import { ContactButton } from '@/components/ContactButton';
-import { getList } from '@/libs/microcms';
+import { getList } from '@/lib/microcms';
 import SideScrollArticleList from '@/components/SideScrollArticleList';
 import { ViewMoreButton } from '@/components/ViewMoreButton';
 import ContentTitle from '@/components/ContentTitle';

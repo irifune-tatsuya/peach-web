@@ -1,4 +1,4 @@
-import { getList } from '@/libs/microcms';
+import { getList } from '@/lib/microcms';
 import { ARTICLEFILTER, LIMIT30 } from '@/constants';
 import Pagination from '@/components/Pagination';
 import GridArticleList from '@/components/GridArticleList';

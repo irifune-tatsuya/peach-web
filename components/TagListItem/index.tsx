@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Tag } from '@/libs/microcms';
+import { Tag } from '@/lib/microcms';
 import { Badge } from '@/components/ui/badge';
 
 type Props = {

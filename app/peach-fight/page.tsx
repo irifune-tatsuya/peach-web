@@ -1,4 +1,4 @@
-import { getList } from '@/libs/microcms';
+import { getList } from '@/lib/microcms';
 import { LIMIT12, PEACHFILTER, IMAGEBASEURL, CONTACT } from '@/constants';
 import Pagination from '@/components/Pagination';
 import GridArticleList from '@/components/GridArticleList';
