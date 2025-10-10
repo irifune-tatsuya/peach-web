@@ -8,6 +8,9 @@ import ArticleList from '@/components/ArticleList';
 import React, { Suspense } from 'react';
 import TagList from '@/components/TagList';
 import { Metadata } from 'next';
+import { JsonLd } from '@/components/common/JsonLd';
+import { siteConfig } from '@/config/site';
+import type { CollectionPage, BreadcrumbList, WithContext } from 'schema-dts';
 
 const pageTitle = 'よくあるご質問';
 const description =
@@ -64,6 +67,16 @@ export default async function Page(props: Props) {
     q: searchParams.q,
   });
 
+  const title = `${pageTitle} - ${current}ページ目`;
+
+  const collectionPageJsonLd: WithContext<CollectionPage> = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: title,
+    description: description,
+    url: `${siteConfig.url}/faq/p/${current}`,
+  };
+
   const breadcrumbs = [
     {
       title: 'ホーム',
@@ -75,10 +88,28 @@ export default async function Page(props: Props) {
       href: '/faq',
       isCurrentPage: false,
     },
+    {
+      title: `${current}ページ目`,
+      href: `/faq/p/${current}`,
+      isCurrentPage: true,
+    },
   ];
+
+  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: breadcrumb.title,
+      item: `${siteConfig.url}${breadcrumb.href}`,
+    })),
+  };
 
   return (
     <>
+      <JsonLd jsonLdData={collectionPageJsonLd} />
+      <JsonLd jsonLdData={breadcrumbJsonLd} />
       <Title titleEn={'FAQ'} titleJp={'よくあるご質問'} />
       <div className="mx-auto max-w-6xl p-4 pb-[60px] md:pb-[156px]">
         <nav className="mb-20 flex justify-center md:justify-start">

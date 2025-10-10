@@ -3,6 +3,9 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { ContactForm } from '@/components/ContactForm';
 import React from 'react';
 import { Metadata } from 'next';
+import { JsonLd } from '@/components/common/JsonLd';
+import { siteConfig } from '@/config/site';
+import type { ContactPage, BreadcrumbList, WithContext } from 'schema-dts';
 
 const pageTitle = 'お問い合わせ';
 const description =
@@ -34,8 +37,34 @@ const breadcrumbs = [
 ];
 
 export default function Contact() {
+  const jsonLdData: WithContext<ContactPage> = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: pageTitle,
+    description: description,
+    url: `${siteConfig.url}/contact`,
+    mainEntity: {
+      '@type': 'Organization',
+      '@id': siteConfig.url,
+      name: siteConfig.name,
+    },
+  };
+
+  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: breadcrumb.title,
+      item: `${siteConfig.url}${breadcrumb.href}`,
+    })),
+  };
+
   return (
     <>
+      <JsonLd jsonLdData={jsonLdData} />
+      <JsonLd jsonLdData={breadcrumbJsonLd} />
       <Title titleEn={'Contact'} titleJp={'お問い合わせ'} />
       <div className="mx-auto max-w-6xl p-4 pb-[60px] md:pb-[624px]">
         <div className="mx-auto max-w-[960px] pb-16 text-lg font-medium leading-loose">

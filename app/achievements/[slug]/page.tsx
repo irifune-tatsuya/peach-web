@@ -9,6 +9,9 @@ import Link from 'next/link';
 import React from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { JsonLd } from '@/components/common/JsonLd';
+import { siteConfig } from '@/config/site';
+import type { CreativeWork, BreadcrumbList, WithContext } from 'schema-dts';
 
 export const revalidate = 3600;
 
@@ -68,8 +71,44 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
   const buttonBaseClasses =
     'flex items-center justify-center gap-2 rounded-lg p-3 text-center font-bold transition-opacity hover:opacity-80';
 
+  const title = `${achievement.name}様の制作実績`;
+
+  const creativeWorkJsonLd: WithContext<CreativeWork> = {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: title,
+    description: achievement.point,
+    url: `${siteConfig.url}/achievements/${currentSlug}`,
+    author: {
+      '@type': 'Organization',
+      '@id': siteConfig.url,
+      name: siteConfig.name,
+    },
+    image: [
+      `${IMAGEBASEURL}/achievements/${achievement.slug}/fullpage_sp.webp`,
+      `${IMAGEBASEURL}/achievements/${achievement.slug}/fullpage_pc.webp`,
+    ],
+    exampleOfWork: {
+      '@type': 'WebSite',
+      url: achievement.href,
+    },
+  };
+
+  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: breadcrumb.title,
+      item: `${siteConfig.url}${breadcrumb.href}`,
+    })),
+  };
+
   return (
     <>
+      <JsonLd jsonLdData={creativeWorkJsonLd} />
+      <JsonLd jsonLdData={breadcrumbJsonLd} />
       <Title titleEn={'制作実績のご紹介'} titleJp={`${achievement.name}様`} />
       <section className="relative overflow-hidden bg-gradient-to-b from-[#fcdee9] to-white pt-[88px] pb-[90px] md:pt-32 md:pb-44">
         <div className="mx-auto max-w-4xl p-4">

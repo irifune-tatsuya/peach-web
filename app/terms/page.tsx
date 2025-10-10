@@ -2,8 +2,11 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import Title from '@/components/Title';
 import React from 'react';
 import { Metadata } from 'next';
+import { JsonLd } from '@/components/common/JsonLd';
+import { siteConfig } from '@/config/site';
+import type { AboutPage, BreadcrumbList, WithContext } from 'schema-dts';
 
-const pageTitle = 'プライバシーポリシー';
+const pageTitle = '利用規約';
 const description = 'ピーチウェブのWebサービスをご利用いただく際のご利用規約をまとめたページです。';
 
 export const metadata: Metadata = {
@@ -34,8 +37,34 @@ export default async function Terms() {
   const listClasses = 'mb-12 list-decimal space-y-4 pl-5';
   const nestedListClasses = 'mt-2 list-roman space-y-2 pl-5';
 
+  const jsonLdData: WithContext<AboutPage> = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: pageTitle,
+    description: description,
+    url: `${siteConfig.url}/terms`,
+    mainEntity: {
+      '@type': 'Organization',
+      '@id': siteConfig.url,
+      name: siteConfig.name,
+    },
+  };
+
+  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: breadcrumb.title,
+      item: `${siteConfig.url}${breadcrumb.href}`,
+    })),
+  };
+
   return (
     <>
+      <JsonLd jsonLdData={jsonLdData} />
+      <JsonLd jsonLdData={breadcrumbJsonLd} />
       <Title titleEn={'Terms'} titleJp={'利用規約'} />
       <div className="mx-auto max-w-6xl p-4 pb-[60px] text-sm md:pb-[156px]">
         <p className="mb-12 text-sm">

@@ -7,6 +7,9 @@ import SearchField from '@/components/SearchField';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import React, { Suspense } from 'react';
 import { Metadata } from 'next';
+import { JsonLd } from '@/components/common/JsonLd';
+import { siteConfig } from '@/config/site';
+import type { CollectionPage, BreadcrumbList, WithContext } from 'schema-dts';
 
 type Props = {
   params: Promise<{
@@ -72,8 +75,32 @@ export default async function Tags(props: Props) {
     },
   ];
 
+  const pageTitle = `「${tag.name}」に関するよくあるご質問`;
+  const description = `「${tag.name}」に関連するよくあるご質問の一覧です。ピーチウェブのサービスについて、より深くご理解いただけます。`;
+
+  const collectionPageJsonLd: WithContext<CollectionPage> = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: pageTitle,
+    description: description,
+    url: `${siteConfig.url}/faq/tags/${tagId}`,
+  };
+
+  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: breadcrumb.title,
+      item: `${siteConfig.url}${breadcrumb.href}`,
+    })),
+  };
+
   return (
     <>
+      <JsonLd jsonLdData={collectionPageJsonLd} />
+      <JsonLd jsonLdData={breadcrumbJsonLd} />
       <Title
         titleEn={`FAQ -${tag.id.charAt(0).toUpperCase() + tag.id.slice(1)}-`}
         titleJp={`${tag.name}タグの記事一覧`}

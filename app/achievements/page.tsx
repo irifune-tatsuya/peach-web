@@ -7,6 +7,15 @@ import Link from 'next/link';
 import React from 'react';
 import { FaCheckCircle, FaExternalLinkAlt } from 'react-icons/fa';
 import { Metadata } from 'next';
+import { JsonLd } from '@/components/common/JsonLd';
+import { siteConfig } from '@/config/site';
+import type {
+  CollectionPage,
+  CreativeWork,
+  ItemList,
+  BreadcrumbList,
+  WithContext,
+} from 'schema-dts';
 
 const pageTitle = '実績&デザイン集';
 const description =
@@ -51,8 +60,46 @@ export default async function Achievements() {
   const buttonBaseClasses =
     'flex items-center justify-center gap-1 rounded-lg p-3 text-center text-sm font-bold text-white transition-opacity hover:opacity-80';
 
+  const collectionPageJsonLd: WithContext<CollectionPage> = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: pageTitle,
+    description: description,
+    url: `${siteConfig.url}/achievements`,
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: [
+        ...ACHIEVEMENTS.map((item, index) => ({
+          '@type': 'CreativeWork',
+          position: index + 1,
+          name: `${item.name}様 制作実績`,
+          url: `${siteConfig.url}/achievements/${item.slug}`,
+        })),
+        ...designLinks.map((item, index) => ({
+          '@type': 'CreativeWork',
+          position: ACHIEVEMENTS.length + index + 1,
+          name: item.name,
+          url: `${siteConfig.url}/achievements/design/${item.slug}`,
+        })),
+      ],
+    } as ItemList,
+  };
+
+  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: breadcrumb.title,
+      item: `${siteConfig.url}${breadcrumb.href}`,
+    })),
+  };
+
   return (
     <>
+      <JsonLd jsonLdData={collectionPageJsonLd} />
+      <JsonLd jsonLdData={breadcrumbJsonLd} />
       <Title titleEn={'Achievements & Designs'} titleJp={'実績&デザイン集'} />
       <section className={sectionClasses}>
         <div className="mx-auto max-w-6xl p-4">

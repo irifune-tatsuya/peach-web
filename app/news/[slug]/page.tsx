@@ -6,6 +6,9 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { IMAGEBASEURL } from '@/constants';
 import { draftMode } from 'next/headers';
 import PreviewAlert from '@/components/PreviewAlert';
+import { JsonLd } from '@/components/common/JsonLd';
+import { siteConfig } from '@/config/site';
+import type { Article as ArticleSchema, BreadcrumbList, WithContext } from 'schema-dts';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -87,8 +90,49 @@ export default async function Page({
     },
   ];
 
+  const articleJsonLd: WithContext<ArticleSchema> = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: data.title,
+    description: data.description,
+    image: data.thumbnail?.url || `${IMAGEBASEURL}/ogp.jpg`,
+    datePublished: data.publishedAt,
+    dateModified: data.updatedAt,
+    author: {
+      '@type': 'Organization',
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: siteConfig.name,
+      url: siteConfig.url,
+      logo: {
+        '@type': 'ImageObject',
+        url: siteConfig.logo,
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${siteConfig.url}/news/${data.id}`,
+    },
+  };
+
+  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: breadcrumb.title,
+      item: `${siteConfig.url}${breadcrumb.href}`,
+    })),
+  };
+
   return (
     <>
+      <JsonLd jsonLdData={articleJsonLd} />
+      <JsonLd jsonLdData={breadcrumbJsonLd} />
       {isEnabled && <PreviewAlert />}
       <Article data={data} isShowToc={false} />
       <Breadcrumbs breadcrumbs={breadcrumbs} />
