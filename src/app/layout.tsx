@@ -94,7 +94,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     potentialAction: {
       '@type': 'SearchAction',
       target: `${siteConfig.url}/article/search?q={search_term_string}`,
-      queryInput: 'required name=search_term_string', // ← ココを修正！
+      queryInput: 'required name=search_term_string',
     } as any,
   };
 

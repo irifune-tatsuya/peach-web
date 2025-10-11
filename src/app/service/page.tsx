@@ -21,8 +21,22 @@ import { siteConfig } from '@/config/site';
 import type { Service, FAQPage, Question, Answer, BreadcrumbList, WithContext } from 'schema-dts';
 
 const pageTitle = 'サービス内容';
+
 const description =
   'ピーチウェブのWEBブランディングのサービスについてご紹介します。ホームページを作るだけでなく記事を更新してお客様との信頼関係を醸成できるサービスを目指しております。';
+
+const breadcrumbs = [
+  {
+    title: 'ホーム',
+    href: '/',
+    isCurrentPage: false,
+  },
+  {
+    title: 'サービス内容',
+    href: '/service',
+    isCurrentPage: true,
+  },
+];
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -50,19 +64,6 @@ const ContactButtons = [
     isExternal: true,
     title: 'LINEからお問い合わせ',
     icon: <FaLine />,
-  },
-];
-
-const breadcrumbs = [
-  {
-    title: 'ホーム',
-    href: '/',
-    isCurrentPage: false,
-  },
-  {
-    title: 'サービス内容',
-    href: '/service',
-    isCurrentPage: true,
   },
 ];
 
@@ -261,48 +262,48 @@ const StoryCard = ({
   </Card>
 );
 
-export default async function Service() {
-  const serviceJsonLd: WithContext<Service> = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: 'WEBブランディング事業',
-    description: description,
-    url: `${siteConfig.url}/service`,
-    provider: {
-      '@type': 'Organization',
-      '@id': siteConfig.url,
-      name: siteConfig.name,
-    },
-    serviceType: 'WEBブランディング',
-  };
+const serviceJsonLd: WithContext<Service> = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'WEBブランディング事業',
+  description: description,
+  url: `${siteConfig.url}/service`,
+  provider: {
+    '@type': 'Organization',
+    '@id': siteConfig.url,
+    name: siteConfig.name,
+  },
+  serviceType: 'WEBブランディング',
+};
 
-  const faqJsonLd: WithContext<FAQPage> = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faq.map(
-      (item) =>
-        ({
-          '@type': 'Question',
-          name: item.q,
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text: item.a,
-          },
-        } as Question),
-    ),
-  };
+const faqJsonLd: WithContext<FAQPage> = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map(
+    (item) =>
+      ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.a,
+        },
+      } as Question),
+  ),
+};
 
-  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: breadcrumb.title,
-      item: `${siteConfig.url}${breadcrumb.href}`,
-    })),
-  };
+const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: breadcrumb.title,
+    item: `${siteConfig.url}${breadcrumb.href}`,
+  })),
+};
 
+const ServicePage = () => {
   return (
     <>
       <JsonLd jsonLdData={serviceJsonLd} />
@@ -323,7 +324,6 @@ export default async function Service() {
           WEBブランディング事業
         </h1>
       </section>
-
       <section className="bg-white pt-16 md:pt-24">
         <div className="mx-4 max-w-4xl rounded-lg bg-momo-300 py-8 lg:mx-auto">
           <p className="text-center font-bold text-base md:text-lg">
@@ -404,7 +404,6 @@ export default async function Service() {
         </div>
         <ButtonArea buttons={ContactButtons} />
       </section>
-
       <section className="bg-white pt-20 md:pt-40">
         <div className="mx-auto max-w-6xl p-4">
           <h2 className="flex items-center text-xl font-bold md:text-2xl">
@@ -457,7 +456,6 @@ export default async function Service() {
           </div>
         </div>
       </section>
-
       <section className="bg-[linear-gradient(-225deg,_#eeeeee_0%,_#ffffff_56%,_#eeeeee_100%)] pt-20 md:pt-32">
         <div className="mx-auto max-w-6xl p-4">
           <h2 className="flex items-center text-xl font-bold md:text-2xl">
@@ -531,7 +529,6 @@ export default async function Service() {
           </div>
         </div>
       </section>
-
       <section className="pt-20 md:pt-32">
         <div className="mx-auto max-w-6xl p-4">
           <h2 className="flex items-center text-xl font-bold md:text-2xl">
@@ -555,7 +552,6 @@ export default async function Service() {
         </div>
         <ButtonArea buttons={ContactButtons} />
       </section>
-
       <section className="px-4 pt-20 pb-24 md:pt-32 md:pb-40">
         <div className="mx-auto max-w-6xl">
           <h2 className="flex items-center text-xl font-bold md:text-2xl">
@@ -576,8 +572,9 @@ export default async function Service() {
           </Accordion>
         </div>
       </section>
-
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default ServicePage;

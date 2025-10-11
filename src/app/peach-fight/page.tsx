@@ -17,21 +17,11 @@ import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import type { CollectionPage, BreadcrumbList, WithContext } from 'schema-dts';
 
-const pageTitle = 'ピーチファイ';
+export const revalidate = 3600;
+const baseTitle = '岡山のチャレンジ応援マガジン「ピーチファイ」';
 const description =
   '岡山のチャレンジする起業家を応援するインタビューマガジン「ピーチファイ」です。ピーチのようにフレッシュな岡山の人々をファイトと応援しましょう！';
-
-export const metadata: Metadata = {
-  title: pageTitle,
-  description: description,
-  openGraph: {
-    title: pageTitle,
-    description: description,
-    type: 'article',
-  },
-};
-
-export const revalidate = 3600;
+const segmentName = `peach-fight`;
 
 const breadcrumbs = [
   {
@@ -40,16 +30,26 @@ const breadcrumbs = [
     isCurrentPage: false,
   },
   {
-    title: '岡山のチャレンジ応援マガジン「ピーチファイ」',
-    href: '/peach-fight',
+    title: baseTitle,
+    href: `/${segmentName}`,
     isCurrentPage: true,
   },
 ];
 
+export const metadata: Metadata = {
+  title: baseTitle,
+  description: description,
+  openGraph: {
+    title: baseTitle,
+    description: description,
+    type: 'article',
+  },
+};
+
 const swiperImages = [
   {
-    src: `${IMAGEBASEURL}/peach-fight/peach-fight-bg.webp`,
-    alt: 'ピーチファイ',
+    src: `${IMAGEBASEURL}/${segmentName}/peach-fight-bg.webp`,
+    alt: baseTitle,
     borderRadius: 60,
     h: 'h-[80vh]',
   },
@@ -74,45 +74,44 @@ const contactButtons = [
   },
 ];
 
-export default async function PeachFight() {
-  const category = 'peach-fight';
-  const data = await getList({
-    limit: LIMIT12,
-    filters: PEACHFILTER,
-  });
+const data = await getList({
+  limit: LIMIT12,
+  filters: PEACHFILTER,
+});
 
-  const collectionPageJsonLd: WithContext<CollectionPage> = {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: '岡山のチャレンジ応援マガジン「ピーチファイ」',
-    description: description,
-    url: `${siteConfig.url}/peach-fight`,
-  };
+const collectionPageJsonLd: WithContext<CollectionPage> = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: baseTitle,
+  description: description,
+  url: `${siteConfig.url}/peach-fight`,
+};
 
-  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: breadcrumb.title,
-      item: `${siteConfig.url}${breadcrumb.href}`,
-    })),
-  };
+const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: breadcrumb.title,
+    item: `${siteConfig.url}${breadcrumb.href}`,
+  })),
+};
 
+const PeachFightPage = () => {
   return (
     <>
       <JsonLd jsonLdData={collectionPageJsonLd} />
       <JsonLd jsonLdData={breadcrumbJsonLd} />
       <div className="hidden">
-        <Title titleEn={'ピーチファイ'} titleJp={'岡山のチャレンジ応援マガジン'} />
+        <Title titleEn={'Peach-Fight'} titleJp={baseTitle} />
       </div>
       <section id="key-visual" className="relative h-screen overflow-hidden">
         <div className="absolute top-2/4 left-1/2 z-20 w-[85%] max-w-xl -translate-x-1/2 -translate-y-1/2 sm:top-[40%]">
           <div className="w-full animate-[var(--animate-zoom-in)]">
             <Image
-              src={`${IMAGEBASEURL}/${category}/peach-fight-logo.webp`}
-              alt="岡山のチャレンジ応援マガジン「ピーチファイ」"
+              src={`${IMAGEBASEURL}/${segmentName}/peach-fight-logo.webp`}
+              alt={baseTitle}
               width={576}
               height={181}
               className="h-auto w-full"
@@ -126,7 +125,7 @@ export default async function PeachFight() {
         >
           <span className="absolute top-0 right-0 bottom-0 left-0 m-auto block h-[124px] w-[124px] animate-[var(--animate-spin-clockwise)]">
             <Image
-              src={`${IMAGEBASEURL}/${category}/entry_circle.webp`}
+              src={`${IMAGEBASEURL}/${segmentName}/entry_circle.webp`}
               alt="エントリーサークル"
               width={124}
               height={124}
@@ -134,7 +133,7 @@ export default async function PeachFight() {
           </span>
           <span className="absolute top-1/2 left-1/2 h-[46.4px] w-[50px] -translate-x-1/2 -translate-y-1/2">
             <Image
-              src={`${IMAGEBASEURL}/${category}/entry_momo.webp`}
+              src={`${IMAGEBASEURL}/${segmentName}/entry_momo.webp`}
               alt="エントリーボタン"
               width={50}
               height={46.4}
@@ -148,11 +147,11 @@ export default async function PeachFight() {
       <div className="mx-auto max-w-6xl p-4 pt-4 pb-[60px] md:pt-0 md:pb-[156px]">
         <nav className="mb-20 flex justify-center md:justify-start">
           <Suspense fallback={<div className="animate-pulse">読み込み中...</div>}>
-            <SearchField category={category} />
+            <SearchField category={segmentName} />
           </Suspense>
         </nav>
-        <GridArticleList articles={data.contents} category={category} />
-        <Pagination totalCount={data.totalCount} basePath={`/${category}`} />
+        <GridArticleList articles={data.contents} category={segmentName} />
+        <Pagination totalCount={data.totalCount} basePath={`/${segmentName}`} />
       </div>
       <section className="mx-auto max-w-6xl p-4">
         <h2 className="mb-8 text-2xl font-bold text-[var(--color-momo-100)]">
@@ -180,7 +179,7 @@ export default async function PeachFight() {
           </div>
           <div className="mt-20 md:mt-0">
             <Image
-              src={`${IMAGEBASEURL}/${category}/entrepreneurs.webp`}
+              src={`${IMAGEBASEURL}/${segmentName}/entrepreneurs.webp`}
               alt="起業家様や新しいビジネスを展開する会社の従業員様"
               width={500}
               height={500}
@@ -193,4 +192,6 @@ export default async function PeachFight() {
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default PeachFightPage;

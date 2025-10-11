@@ -7,18 +7,9 @@ import { siteConfig } from '@/config/site';
 import type { AboutPage, BreadcrumbList, WithContext } from 'schema-dts';
 
 const pageTitle = 'プライバシーポリシー';
+
 const description =
   'お問い合わせフォーム等で収集したお客様の個人情報の保護規定についてご案内しているプライバシポリシーのページです。';
-
-export const metadata: Metadata = {
-  title: pageTitle,
-  description: description,
-  openGraph: {
-    title: pageTitle,
-    description: description,
-    type: 'article',
-  },
-};
 
 const breadcrumbs = [
   {
@@ -33,36 +24,46 @@ const breadcrumbs = [
   },
 ];
 
-export default async function Privacy() {
-  const headingClasses = 'my-5 border-b-2 border-momo-400 pb-2 text-lg font-bold';
-  const listClasses = 'mb-12 list-decimal space-y-4 pl-5';
-  const nestedListClasses = 'mt-2 list-roman space-y-2 pl-5';
-  const doubleNestedListClasses = 'mt-2 list-disc space-y-1 pl-5';
-
-  const jsonLdData: WithContext<AboutPage> = {
-    '@context': 'https://schema.org',
-    '@type': 'AboutPage',
-    name: pageTitle,
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: description,
+  openGraph: {
+    title: pageTitle,
     description: description,
-    url: `${siteConfig.url}/privacy`,
-    mainEntity: {
-      '@type': 'Organization',
-      '@id': siteConfig.url,
-      name: siteConfig.name,
-    },
-  };
+    type: 'article',
+  },
+};
 
-  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: breadcrumb.title,
-      item: `${siteConfig.url}${breadcrumb.href}`,
-    })),
-  };
+const jsonLdData: WithContext<AboutPage> = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: pageTitle,
+  description: description,
+  url: `${siteConfig.url}/privacy`,
+  mainEntity: {
+    '@type': 'Organization',
+    '@id': siteConfig.url,
+    name: siteConfig.name,
+  },
+};
 
+const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: breadcrumb.title,
+    item: `${siteConfig.url}${breadcrumb.href}`,
+  })),
+};
+
+const headingClasses = 'my-5 border-b-2 border-momo-400 pb-2 text-lg font-bold';
+const listClasses = 'mb-12 list-decimal space-y-4 pl-5';
+const nestedListClasses = 'mt-2 list-roman space-y-2 pl-5';
+const doubleNestedListClasses = 'mt-2 list-disc space-y-1 pl-5';
+
+const PrivacyPage = () => {
   return (
     <>
       <JsonLd jsonLdData={jsonLdData} />
@@ -215,4 +216,6 @@ export default async function Privacy() {
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default PrivacyPage;

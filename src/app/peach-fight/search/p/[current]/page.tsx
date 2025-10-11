@@ -11,9 +11,10 @@ import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import type { SearchResultsPage, BreadcrumbList, WithContext } from 'schema-dts';
 
-const baseTitle = 'ピーチファイ';
-const description =
-  '岡山のチャレンジする起業家を応援するインタビューマガジン「ピーチファイ」です。ピーチのようにフレッシュな岡山の人々をファイトと応援しましょう！';
+export const revalidate = 3600;
+const baseTitle = 'ピーチファイの検索結果';
+const baseDescription = '岡山のチャレンジするフレッシュな起業家のストーリをぜひお楽しみください！';
+const parentSegment = 'peach-fight';
 
 type Props = {
   params: Promise<{
@@ -24,14 +25,17 @@ type Props = {
   }>;
 };
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
+export const generateMetadata = async (props: Props): Promise<Metadata> => {
+  const params = await props.params;
   const searchParams = await props.searchParams;
   const query = searchParams.q || '';
-  const params = await props.params;
   const current = params.current || '1';
   const pageTitle = query
-    ? `「${query}」の検索結果 - ${current}ページ目`
+    ? `「${query}」${baseTitle} - ${current}ページ目`
     : `${baseTitle} - ${current}ページ目`;
+  const description = query
+    ? `「${query}」に関連する${baseTitle}です。${baseDescription}`
+    : `${baseTitle}です。${baseDescription}`;
 
   return {
     title: pageTitle,
@@ -46,33 +50,25 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       follow: true,
     },
   };
-}
+};
 
-export const revalidate = 3600;
-
-export default async function Page(props: Props) {
-  const searchParams = await props.searchParams;
+const PeachFightSearchPCurrentPage = async (props: Props) => {
   const params = await props.params;
+  const searchParams = await props.searchParams;
   const query = searchParams.q || '';
   const current = parseInt(params.current as string, 10);
+  const pageTitle = query
+    ? `「${query}」${baseTitle} - ${current}ページ目`
+    : `${baseTitle} - ${current}ページ目`;
+  const description = query
+    ? `「${query}」に関連する${baseTitle}です。${baseDescription}`
+    : `${baseTitle}です。${baseDescription}`;
   const data = await getList({
     filters: PEACHFILTER,
     limit: LIMIT30,
     offset: LIMIT30 * (current - 1),
     q: searchParams.q,
   });
-
-  const pageTitle = query
-    ? `「${query}」の検索結果 - ${current}ページ目`
-    : `${baseTitle} - ${current}ページ目`;
-
-  const searchPageJsonLd: WithContext<SearchResultsPage> = {
-    '@context': 'https://schema.org',
-    '@type': 'SearchResultsPage',
-    name: pageTitle,
-    description: description,
-    url: `${siteConfig.url}/peach-fight/search/p/${current}${query ? `?q=${query}` : ''}`,
-  };
 
   const breadcrumbs = [
     {
@@ -82,20 +78,28 @@ export default async function Page(props: Props) {
     },
     {
       title: '岡山のチャレンジ応援マガジン「ピーチファイ」',
-      href: '/peach-fight',
+      href: `/${parentSegment}`,
       isCurrentPage: false,
     },
     {
-      title: query ? `「${query}」の検索結果` : '検索結果',
-      href: `/peach-fight/search${query ? `?q=${query}` : ''}`,
+      title: query ? `「${query}」${baseTitle}` : baseTitle,
+      href: `/${parentSegment}/search${query ? `?q=${query}` : ''}`,
       isCurrentPage: false,
     },
     {
       title: `${current}ページ目`,
-      href: `/peach-fight/search/p/${current}${query ? `?q=${query}` : ''}`,
+      href: `/${parentSegment}/search/p/${current}${query ? `?q=${query}` : ''}`,
       isCurrentPage: true,
     },
   ];
+
+  const searchPageJsonLd: WithContext<SearchResultsPage> = {
+    '@context': 'https://schema.org',
+    '@type': 'SearchResultsPage',
+    name: pageTitle,
+    description: description,
+    url: `${siteConfig.url}/${parentSegment}/search/p/${current}${query ? `?q=${query}` : ''}`,
+  };
 
   const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
     '@context': 'https://schema.org',
@@ -112,17 +116,24 @@ export default async function Page(props: Props) {
     <>
       <JsonLd jsonLdData={searchPageJsonLd} />
       <JsonLd jsonLdData={breadcrumbJsonLd} />
-      <Title titleEn={'Search Results'} titleJp={'ピーチファイの検索結果'} />
+      <Title
+        titleEn={'Search Results'}
+        titleJp={
+          query
+            ? `「${query}」${baseTitle}（${current}ページ目）`
+            : `${baseTitle}（${current}ページ目）`
+        }
+      />
       <div className="mx-auto max-w-6xl p-4 mb-16 md:mb-0">
         <nav className="mb-20 flex justify-center md:justify-start">
           <Suspense fallback={<div className="animate-pulse">読み込み中...</div>}>
-            <SearchField category={'peach-fight'} />
+            <SearchField category={parentSegment} />
           </Suspense>
         </nav>
-        <GridArticleList articles={data.contents} category={'peach-fight'} />
+        <GridArticleList articles={data.contents} category={parentSegment} />
         <Pagination
           totalCount={data.totalCount}
-          basePath="/article/search"
+          basePath={`/${parentSegment}/search`}
           current={current}
           q={searchParams.q}
         />
@@ -130,4 +141,6 @@ export default async function Page(props: Props) {
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default PeachFightSearchPCurrentPage;

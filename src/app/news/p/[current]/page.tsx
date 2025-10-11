@@ -10,9 +10,11 @@ import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import type { CollectionPage, BreadcrumbList, WithContext } from 'schema-dts';
 
-const pageTitle = 'ニュース';
-const description =
-  '合同会社ピーチウェブの最新情報をお届けしております。異業種交流会への参加情報やイベント開催情報など気になる情報をいち早くご確認いただくことができます。';
+export const revalidate = 3600;
+const baseTitle = 'お知らせ一覧';
+const baseDescription =
+  '最新の制作実績やイベント開催情報など気になる情報をいち早くご確認いただくことができます。';
+const parentSegment = 'news';
 
 type Props = {
   params: Promise<{
@@ -24,52 +26,42 @@ type Props = {
   }>;
 };
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
+export const generateMetadata = async (props: Props): Promise<Metadata> => {
   const params = await props.params;
   const current = params.current || '1';
-  const title = `${pageTitle} - ${current}ページ目`;
+  const pageTitle = `${baseTitle} - ${current}ページ目`;
+  const description = `${baseTitle}（${current}ページ目）です。${baseDescription}`;
 
   return {
-    title: title,
+    title: pageTitle,
     description: description,
     robots: {
       index: true,
       follow: true,
     },
     alternates: {
-      canonical: `/news/p/${current}`,
+      canonical: `/${parentSegment}/p/${current}`,
     },
     openGraph: {
-      title: title,
+      title: pageTitle,
       description: description,
       type: 'website',
     },
   };
-}
+};
 
-export const revalidate = 3600;
-
-export default async function Page(props: Props) {
-  const searchParams = await props.searchParams;
+const NewsPCurrentPage = async (props: Props) => {
   const params = await props.params;
-  const category = 'news';
+  const searchParams = await props.searchParams;
   const current = parseInt(params.current as string, 10);
+  const pageTitle = `${baseTitle} - ${current}ページ目`;
+  const description = `${baseTitle}（${current}ページ目）です。${baseDescription}`;
   const data = await getList({
     limit: LIMIT30,
     offset: LIMIT30 * (current - 1),
     filters: NEWSFILTER,
     q: searchParams.q,
   });
-
-  const title = `${pageTitle} - ${current}ページ目`;
-
-  const collectionPageJsonLd: WithContext<CollectionPage> = {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: title,
-    description: description,
-    url: `${siteConfig.url}/news/p/${current}`,
-  };
 
   const breadcrumbs = [
     {
@@ -78,16 +70,24 @@ export default async function Page(props: Props) {
       isCurrentPage: false,
     },
     {
-      title: 'ニュース',
-      href: '/news',
+      title: baseTitle,
+      href: `/${parentSegment}`,
       isCurrentPage: false,
     },
     {
       title: `${current}ページ目`,
-      href: `/news/p/${current}`,
+      href: `/${parentSegment}/p/${current}`,
       isCurrentPage: true,
     },
   ];
+
+  const collectionPageJsonLd: WithContext<CollectionPage> = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: pageTitle,
+    description: description,
+    url: `${siteConfig.url}/${parentSegment}/p/${current}`,
+  };
 
   const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
     '@context': 'https://schema.org',
@@ -104,12 +104,12 @@ export default async function Page(props: Props) {
     <>
       <JsonLd jsonLdData={collectionPageJsonLd} />
       <JsonLd jsonLdData={breadcrumbJsonLd} />
-      <Title titleEn={'News'} titleJp={'ニュース'} />
+      <Title titleEn={'News'} titleJp={`${baseTitle}（${current}ページ目）`} />
       <div className="mx-auto max-w-6xl p-4 pb-[60px] md:pb-[156px]">
-        <ArticleList articles={data.contents} category={category} />
+        <ArticleList articles={data.contents} category={parentSegment} />
         <Pagination
           totalCount={data.totalCount}
-          basePath={`/${category}`}
+          basePath={`/${parentSegment}`}
           current={current}
           q={searchParams.q}
         />
@@ -117,4 +117,6 @@ export default async function Page(props: Props) {
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default NewsPCurrentPage;

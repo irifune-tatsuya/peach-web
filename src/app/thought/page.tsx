@@ -8,18 +8,9 @@ import { siteConfig } from '@/config/site';
 import type { AboutPage, BreadcrumbList, WithContext } from 'schema-dts';
 
 const pageTitle = 'ピーチな想い';
+
 const description =
   '弊社のミッション、ビジョン、代表のご挨拶についてお話します。合同会社ピーチウェブ代表社員入船たち屋からのご挨拶もざいます。共感していただけることを願っております。';
-
-export const metadata: Metadata = {
-  title: pageTitle,
-  description: description,
-  openGraph: {
-    title: pageTitle,
-    description: description,
-    type: 'article',
-  },
-};
 
 const breadcrumbs = [
   {
@@ -33,6 +24,16 @@ const breadcrumbs = [
     isCurrentPage: true,
   },
 ];
+
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: description,
+  openGraph: {
+    title: pageTitle,
+    description: description,
+    type: 'article',
+  },
+};
 
 const valueData = [
   {
@@ -71,31 +72,31 @@ const companyData = [
   },
 ];
 
-export default async function Thought() {
-  const aboutPageJsonLd: WithContext<AboutPage> = {
-    '@context': 'https://schema.org',
-    '@type': 'AboutPage',
-    name: pageTitle,
-    description: description,
-    url: `${siteConfig.url}/thought`,
-    mainEntity: {
-      '@type': 'Organization',
-      '@id': siteConfig.url,
-      name: siteConfig.name,
-    },
-  };
+const aboutPageJsonLd: WithContext<AboutPage> = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: pageTitle,
+  description: description,
+  url: `${siteConfig.url}/thought`,
+  mainEntity: {
+    '@type': 'Organization',
+    '@id': siteConfig.url,
+    name: siteConfig.name,
+  },
+};
 
-  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: breadcrumb.title,
-      item: `${siteConfig.url}${breadcrumb.href}`,
-    })),
-  };
+const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: breadcrumb.title,
+    item: `${siteConfig.url}${breadcrumb.href}`,
+  })),
+};
 
+const ThoughtPage = () => {
   return (
     <>
       <JsonLd jsonLdData={aboutPageJsonLd} />
@@ -236,4 +237,6 @@ export default async function Thought() {
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default ThoughtPage;

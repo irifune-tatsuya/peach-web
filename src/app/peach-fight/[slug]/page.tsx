@@ -15,51 +15,21 @@ import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import type { Article as ArticleSchema, BreadcrumbList, WithContext } from 'schema-dts';
 
+export const revalidate = 0;
+const parentSegment = 'peach-fight';
+
 type Props = {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ draftKey?: string }>;
 };
 
-export const revalidate = 0;
-
-const contactButtons = [
-  {
-    bgClassName: 'bg-[var(--color-momo-100)]',
-    textClassName: 'text-white',
-    href: '/contact',
-    isExternal: false,
-    title: 'フォームから取材応募',
-    icon: <IoMail />,
-  },
-  {
-    bgClassName: 'bg-[#06c755]',
-    textClassName: 'text-white',
-    href: CONTACT.line,
-    isExternal: true,
-    title: 'LINEから取材応募',
-    icon: <FaLine />,
-  },
-  {
-    bgClassName: 'bg-[var(--color-momo-300)]',
-    textClassName: 'text-black',
-    href: '/peach-fight',
-    isExternal: false,
-    title: 'ピーチファイTOPへ',
-    icon: <IoMdHome />,
-  },
-];
-
-export async function generateMetadata({
-  params: paramsPromise,
-  searchParams: searchParamsPromise,
-}: Props): Promise<Metadata> {
-  const params = await paramsPromise;
-  const searchParams = await searchParamsPromise;
+export const generateMetadata = async (props: Props): Promise<Metadata> => {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   const data = await getDetail(params.slug, { draftKey: searchParams.draftKey });
-
   const defaultImageUrl = `${IMAGEBASEURL}/ogp.jpg`;
   const imageUrl = data?.thumbnail?.url || defaultImageUrl;
-  const url = `/peach-fight/${data.id}`;
+  const url = `/${parentSegment}/${data.id}`;
 
   return {
     title: data.title,
@@ -94,14 +64,38 @@ export async function generateMetadata({
       ],
     },
   };
-}
+};
 
-export default async function Page({
-  params: paramsPromise,
-  searchParams: searchParamsPromise,
-}: Props) {
-  const params = await paramsPromise;
-  const searchParams = await searchParamsPromise;
+const contactButtons = [
+  {
+    bgClassName: 'bg-[var(--color-momo-100)]',
+    textClassName: 'text-white',
+    href: '/contact',
+    isExternal: false,
+    title: 'フォームから取材応募',
+    icon: <IoMail />,
+  },
+  {
+    bgClassName: 'bg-[#06c755]',
+    textClassName: 'text-white',
+    href: CONTACT.line,
+    isExternal: true,
+    title: 'LINEから取材応募',
+    icon: <FaLine />,
+  },
+  {
+    bgClassName: 'bg-[var(--color-momo-300)]',
+    textClassName: 'text-black',
+    href: `/${parentSegment}`,
+    isExternal: false,
+    title: 'ピーチファイTOPへ',
+    icon: <IoMdHome />,
+  },
+];
+
+const PeachFightSlugPage = async (props: Props) => {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   const { isEnabled } = await draftMode();
   const data = await getDetail(params.slug, { draftKey: searchParams.draftKey });
 
@@ -113,12 +107,12 @@ export default async function Page({
     },
     {
       title: '岡山のチャレンジ応援マガジン「ピーチファイ」',
-      href: '/peach-fight',
+      href: `/${parentSegment}`,
       isCurrentPage: false,
     },
     {
       title: data.title,
-      href: `/peach-fight/${data.id}`,
+      href: `/${parentSegment}/${data.id}`,
       isCurrentPage: true,
     },
   ];
@@ -147,7 +141,7 @@ export default async function Page({
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `${siteConfig.url}/peach-fight/${data.id}`,
+      '@id': `${siteConfig.url}/${parentSegment}/${data.id}`,
     },
   };
 
@@ -172,4 +166,6 @@ export default async function Page({
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default PeachFightSlugPage;

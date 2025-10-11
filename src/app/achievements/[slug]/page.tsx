@@ -14,34 +14,48 @@ import { siteConfig } from '@/config/site';
 import type { CreativeWork, BreadcrumbList, WithContext } from 'schema-dts';
 
 export const revalidate = 3600;
+const parentSegment = 'achievements';
 
-export async function generateMetadata(props: {
+type Props = {
   params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
+};
+
+export const generateMetadata = async (props: Props): Promise<Metadata> => {
   const params = await props.params;
   const currentSlug = params.slug;
   const achievement = ACHIEVEMENTS.find((item) => item.slug === currentSlug);
-  const title = achievement ? achievement.name : '制作実績のご紹介';
+  const pageTitle = achievement ? achievement.name : '制作実績のご紹介';
   const description = achievement
     ? achievement.point
     : 'ピーチウェブが制作したホームページの実績やホームページデザインの提案をするページとなります。制作をご検討中の方や具体的なサイトのイメージを持ちたい方向けに役立てていただけますと幸いです。';
 
   return {
-    title: `${title}様の制作実績`,
+    title: `${pageTitle}様の制作実績`,
     description: description,
+    robots: {
+      index: true,
+      follow: true,
+    },
+    alternates: {
+      canonical: `/${parentSegment}/${currentSlug}`,
+    },
     openGraph: {
-      title: `${title}様の制作実績`,
+      title: `${pageTitle}様の制作実績`,
       description: description,
+      url: `/${parentSegment}/${currentSlug}`,
       type: 'article',
     },
     twitter: {
-      title: `${title}様の制作実績`,
+      title: `${pageTitle}様の制作実績`,
       description: description,
     },
   };
-}
+};
 
-export default async function Page(props: { params: Promise<{ slug: string }> }) {
+const buttonBaseClasses =
+  'flex items-center justify-center gap-2 rounded-lg p-3 text-center font-bold transition-opacity hover:opacity-80';
+
+const AchievementSlugPage = async (props: Props) => {
   const params = await props.params;
   const currentSlug = params.slug;
   const achievement = ACHIEVEMENTS.find((item) => item.slug === currentSlug);
@@ -58,18 +72,15 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
     },
     {
       title: '実績&デザイン集',
-      href: '/achievements',
+      href: `/${parentSegment}`,
       isCurrentPage: false,
     },
     {
       title: `${achievement.name}様の制作実績`,
-      href: `/achievements/${currentSlug}`,
+      href: `/${parentSegment}/${currentSlug}`,
       isCurrentPage: true,
     },
   ];
-
-  const buttonBaseClasses =
-    'flex items-center justify-center gap-2 rounded-lg p-3 text-center font-bold transition-opacity hover:opacity-80';
 
   const title = `${achievement.name}様の制作実績`;
 
@@ -78,15 +89,15 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
     '@type': 'CreativeWork',
     name: title,
     description: achievement.point,
-    url: `${siteConfig.url}/achievements/${currentSlug}`,
+    url: `${siteConfig.url}/${parentSegment}/${currentSlug}`,
     author: {
       '@type': 'Organization',
       '@id': siteConfig.url,
       name: siteConfig.name,
     },
     image: [
-      `${IMAGEBASEURL}/achievements/${achievement.slug}/fullpage_sp.webp`,
-      `${IMAGEBASEURL}/achievements/${achievement.slug}/fullpage_pc.webp`,
+      `${IMAGEBASEURL}/${parentSegment}/${achievement.slug}/fullpage_sp.webp`,
+      `${IMAGEBASEURL}/${parentSegment}/${achievement.slug}/fullpage_pc.webp`,
     ],
     exampleOfWork: {
       '@type': 'WebSite',
@@ -123,7 +134,6 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
               <FaExternalLinkAlt />
             </a>
           </div>
-
           <Tabs defaultValue="sp" className="w-full">
             <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="sp">スマホ版</TabsTrigger>
@@ -133,7 +143,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
             <TabsContent value="sp" className="mt-6">
               <div className="flex justify-center">
                 <Image
-                  src={`${IMAGEBASEURL}/achievements/${achievement.slug}/fullpage_sp.webp`}
+                  src={`${IMAGEBASEURL}/${parentSegment}/${achievement.slug}/fullpage_sp.webp`}
                   alt={`${achievement.name}様のスマホサイト`}
                   width={430}
                   height={1200}
@@ -143,7 +153,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
             </TabsContent>
             <TabsContent value="pc" className="mt-6">
               <Image
-                src={`${IMAGEBASEURL}/achievements/${achievement.slug}/fullpage_pc.webp`}
+                src={`${IMAGEBASEURL}/${parentSegment}/${achievement.slug}/fullpage_pc.webp`}
                 alt={`${achievement.name}様のパソコンサイト`}
                 width={1200}
                 height={800}
@@ -191,7 +201,6 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
               </div>
             </TabsContent>
           </Tabs>
-
           <div className="mt-8 flex flex-col items-center justify-center gap-2">
             <a
               href={achievement.href}
@@ -214,4 +223,6 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default AchievementSlugPage;

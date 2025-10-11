@@ -10,23 +10,21 @@ import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import type { FAQPage, Question, Answer, BreadcrumbList, WithContext } from 'schema-dts';
 
+export const revalidate = 0;
+const parentSegment = 'faq';
+
 type Props = {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ draftKey?: string }>;
 };
 
-export const revalidate = 0;
-
-export async function generateMetadata({
-  params: paramsPromise,
-  searchParams: searchParamsPromise,
-}: Props): Promise<Metadata> {
-  const params = await paramsPromise;
-  const searchParams = await searchParamsPromise;
+export const generateMetadata = async (props: Props): Promise<Metadata> => {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   const data = await getDetail(params.slug, { draftKey: searchParams.draftKey });
   const defaultImageUrl = `${IMAGEBASEURL}/ogp.jpg`;
   const imageUrl = data?.thumbnail?.url || defaultImageUrl;
-  const url = `/faq/${data.id}`;
+  const url = `/${parentSegment}/${data.id}`;
 
   return {
     title: data.title,
@@ -61,14 +59,11 @@ export async function generateMetadata({
       ],
     },
   };
-}
+};
 
-export default async function Page({
-  params: paramsPromise,
-  searchParams: searchParamsPromise,
-}: Props) {
-  const params = await paramsPromise;
-  const searchParams = await searchParamsPromise;
+const FaqSlugPage = async (props: Props) => {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   const { isEnabled } = await draftMode();
   const data = await getDetail(params.slug, { draftKey: searchParams.draftKey });
 
@@ -80,12 +75,12 @@ export default async function Page({
     },
     {
       title: 'よくあるご質問',
-      href: '/faq',
+      href: `/${parentSegment}`,
       isCurrentPage: false,
     },
     {
       title: data.title,
-      href: `/faq/${data.id}`,
+      href: `/${parentSegment}/${data.id}`,
       isCurrentPage: true,
     },
   ];
@@ -95,7 +90,7 @@ export default async function Page({
     '@type': 'FAQPage',
     name: data.title,
     description: data.description,
-    url: `${siteConfig.url}/faq/${data.id}`,
+    url: `${siteConfig.url}/${parentSegment}/${data.id}`,
     mainEntity: [
       {
         '@type': 'Question',
@@ -128,4 +123,6 @@ export default async function Page({
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default FaqSlugPage;

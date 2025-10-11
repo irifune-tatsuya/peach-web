@@ -8,18 +8,9 @@ import { siteConfig } from '@/config/site';
 import type { AboutPage, BreadcrumbList, WithContext } from 'schema-dts';
 
 const pageTitle = '特定商取引法に基づく表記';
+
 const description =
   '合同会社ピーチウェブの特定商取引法に基づく表記ページです。事業者名、住所、連絡先、販売価格、支払い方法、返品条件など、お取引に関する大切な情報を掲載しています。安心してサービスをご利用いただくために、事前にご確認ください。';
-
-export const metadata: Metadata = {
-  title: pageTitle,
-  description: description,
-  openGraph: {
-    title: pageTitle,
-    description: description,
-    type: 'article',
-  },
-};
 
 const breadcrumbs = [
   {
@@ -34,36 +25,46 @@ const breadcrumbs = [
   },
 ];
 
-export default async function Tokushoho() {
-  const headingClasses = 'my-5 border-b-2 border-momo-400 pb-2 text-lg font-bold';
-  const listClasses = 'mb-12 list-disc space-y-4 pl-5';
-  const nestedListClasses = 'mt-2 list-circle space-y-2 pl-5';
-  const doubleNestedListClasses = 'mt-2 list-[square] space-y-1 pl-5';
-
-  const jsonLdData: WithContext<AboutPage> = {
-    '@context': 'https://schema.org',
-    '@type': 'AboutPage',
-    name: pageTitle,
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: description,
+  openGraph: {
+    title: pageTitle,
     description: description,
-    url: `${siteConfig.url}/tokushoho`,
-    mainEntity: {
-      '@type': 'Organization',
-      '@id': siteConfig.url,
-      name: siteConfig.name,
-    },
-  };
+    type: 'article',
+  },
+};
 
-  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: breadcrumb.title,
-      item: `${siteConfig.url}${breadcrumb.href}`,
-    })),
-  };
+const headingClasses = 'my-5 border-b-2 border-momo-400 pb-2 text-lg font-bold';
+const listClasses = 'mb-12 list-disc space-y-4 pl-5';
+const nestedListClasses = 'mt-2 list-circle space-y-2 pl-5';
+const doubleNestedListClasses = 'mt-2 list-[square] space-y-1 pl-5';
 
+const jsonLdData: WithContext<AboutPage> = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: pageTitle,
+  description: description,
+  url: `${siteConfig.url}/tokushoho`,
+  mainEntity: {
+    '@type': 'Organization',
+    '@id': siteConfig.url,
+    name: siteConfig.name,
+  },
+};
+
+const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: breadcrumb.title,
+    item: `${siteConfig.url}${breadcrumb.href}`,
+  })),
+};
+
+const TokushohoPage = () => {
   return (
     <>
       <JsonLd jsonLdData={jsonLdData} />
@@ -83,7 +84,6 @@ export default async function Tokushoho() {
           ヴィンテージ・プレイス201号
         </p>
         <h2 className={headingClasses}>4. 電話番号</h2>
-        {/* ↓↓↓ ここの<p>を<div>に修正したよ！ ↓↓↓ */}
         <div className="mb-12">
           080-1641-0445（受付時間：平日9:00~21:00）
           <br />
@@ -277,4 +277,6 @@ export default async function Tokushoho() {
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default TokushohoPage;

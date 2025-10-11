@@ -5,15 +5,29 @@ import { siteConfig } from '@/config/site';
 import type { Service, ImageObject, BreadcrumbList, WithContext } from 'schema-dts';
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 
-const title = 'ぺけち営業スライド';
+const pageTitle = 'ぺけち営業スライド';
+
 const description =
   'X運用代行サービス「ぺけち」のご紹介。知名度が低い、集客に手が回らない、SNSのノウハウがない…そんなスモールビジネスオーナーの悩みを専門家が解決。あなたの会社のファンを増やし、Webからの新規顧客獲得をサポートします。';
 
+const breadcrumbs = [
+  {
+    title: 'ホーム',
+    href: '/',
+    isCurrentPage: false,
+  },
+  {
+    title: pageTitle,
+    href: '/pekechi',
+    isCurrentPage: true,
+  },
+];
+
 export const metadata: Metadata = {
-  title: title,
+  title: pageTitle,
   description: description,
   openGraph: {
-    title: title,
+    title: pageTitle,
     description: description,
   },
 };
@@ -178,51 +192,38 @@ const slideData: Slide[] = [
   },
 ];
 
-const breadcrumbs = [
-  {
-    title: 'ホーム',
-    href: '/',
-    isCurrentPage: false,
+const jsonLdData: WithContext<Service> = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'X運用代行サービス「ぺけち」',
+  description: description,
+  url: `${siteConfig.url}/pekechi`,
+  provider: {
+    '@type': 'Organization',
+    '@id': siteConfig.url,
+    name: siteConfig.name,
   },
-  {
-    title: title,
-    href: '/pekechi',
-    isCurrentPage: true,
-  },
-];
+  serviceType: 'X (旧Twitter) 運用代行サービス',
+  image: slideData.map((slide) => ({
+    '@type': 'ImageObject',
+    url: `${siteConfig.url}/pekechi/${slide.fileName}`,
+    name: slide.altText,
+    description: slide.altText,
+  })) as ImageObject[],
+};
 
-export default function Page() {
-  const jsonLdData: WithContext<Service> = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: 'X運用代行サービス「ぺけち」',
-    description: description,
-    url: `${siteConfig.url}/pekechi`,
-    provider: {
-      '@type': 'Organization',
-      '@id': siteConfig.url,
-      name: siteConfig.name,
-    },
-    serviceType: 'X (旧Twitter) 運用代行サービス',
-    image: slideData.map((slide) => ({
-      '@type': 'ImageObject',
-      url: `${siteConfig.url}/pekechi/${slide.fileName}`, // 注意: ここは実際の画像URLパスに合わせて調整してね！
-      name: slide.altText,
-      description: slide.altText,
-    })) as ImageObject[],
-  };
+const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: breadcrumb.title,
+    item: `${siteConfig.url}${breadcrumb.href}`,
+  })),
+};
 
-  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: breadcrumb.title,
-      item: `${siteConfig.url}${breadcrumb.href}`,
-    })),
-  };
-
+const PekechiPage = () => {
   return (
     <>
       <JsonLd jsonLdData={jsonLdData} />
@@ -231,4 +232,6 @@ export default function Page() {
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default PekechiPage;

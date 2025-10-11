@@ -8,21 +8,12 @@ import { IMAGEBASEURL } from '@/constants';
 import { Metadata } from 'next';
 import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
-import type { WebPage, CreativeWorkSeries, BreadcrumbList, WithContext } from 'schema-dts';
+import type { WebPage, BreadcrumbList, WithContext } from 'schema-dts';
 
 const pageTitle = 'ニュースレターのご案内';
+
 const description =
   'ピーチウェブの最新情報をいち早くお届けするニュースレターの登録と解除をご利用できるページとなります。';
-
-export const metadata: Metadata = {
-  title: pageTitle,
-  description: description,
-  openGraph: {
-    title: pageTitle,
-    description: description,
-    type: 'article',
-  },
-};
 
 const breadcrumbs = [
   {
@@ -36,6 +27,45 @@ const breadcrumbs = [
     isCurrentPage: true,
   },
 ];
+
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: description,
+  openGraph: {
+    title: pageTitle,
+    description: description,
+    type: 'article',
+  },
+};
+
+const jsonLdData: WithContext<WebPage> = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: pageTitle,
+  description: description,
+  url: `${siteConfig.url}/newsletter`,
+  mainEntity: {
+    '@type': 'Newsletter',
+    name: 'ピーチウェブ ニュースレター',
+    description: 'ピーチウェブの新着記事やサービスに関する最新情報をお届けします。',
+    publisher: {
+      '@type': 'Organization',
+      '@id': siteConfig.url,
+      name: siteConfig.name,
+    },
+  } as any,
+};
+
+const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: breadcrumb.title,
+    item: `${siteConfig.url}${breadcrumb.href}`,
+  })),
+};
 
 const NewsletterContents = [
   {
@@ -60,36 +90,7 @@ const NewsletterContents = [
   },
 ];
 
-export default async function Newsletter() {
-  const jsonLdData: WithContext<WebPage> = {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    name: pageTitle,
-    description: description,
-    url: `${siteConfig.url}/newsletter`,
-    mainEntity: {
-      '@type': 'Newsletter',
-      name: 'ピーチウェブ ニュースレター',
-      description: 'ピーチウェブの新着記事やサービスに関する最新情報をお届けします。',
-      publisher: {
-        '@type': 'Organization',
-        '@id': siteConfig.url,
-        name: siteConfig.name,
-      },
-    } as any,
-  };
-
-  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: breadcrumb.title,
-      item: `${siteConfig.url}${breadcrumb.href}`,
-    })),
-  };
-
+const NewsletterPage = () => {
   return (
     <>
       <JsonLd jsonLdData={jsonLdData} />
@@ -176,4 +177,6 @@ export default async function Newsletter() {
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default NewsletterPage;

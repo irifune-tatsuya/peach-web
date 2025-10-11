@@ -13,23 +13,21 @@ import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import type { Article as ArticleSchema, BreadcrumbList, WithContext } from 'schema-dts';
 
+export const revalidate = 0;
+const parentSegment = 'article';
+
 type Props = {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ draftKey?: string }>;
 };
 
-export const revalidate = 0;
-
-export async function generateMetadata({
-  params: paramsPromise,
-  searchParams: searchParamsPromise,
-}: Props): Promise<Metadata> {
-  const params = await paramsPromise;
-  const searchParams = await searchParamsPromise;
+export const generateMetadata = async (props: Props): Promise<Metadata> => {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   const data = await getDetail(params.slug, { draftKey: searchParams.draftKey });
   const defaultImageUrl = `${IMAGEBASEURL}/ogp.jpg`;
   const imageUrl = data?.thumbnail?.url || defaultImageUrl;
-  const url = `/article/${data.id}`;
+  const url = `/${parentSegment}/${data.id}`;
 
   return {
     title: data.title,
@@ -64,7 +62,7 @@ export async function generateMetadata({
       ],
     },
   };
-}
+};
 
 const contactButtons = [
   {
@@ -85,12 +83,9 @@ const contactButtons = [
   },
 ];
 
-export default async function Page({
-  params: paramsPromise,
-  searchParams: searchParamsPromise,
-}: Props) {
-  const params = await paramsPromise;
-  const searchParams = await searchParamsPromise;
+const ArticleSlugPage = async (props: Props) => {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   const { isEnabled } = await draftMode();
   const data = await getDetail(params.slug, { draftKey: searchParams.draftKey });
 
@@ -102,12 +97,12 @@ export default async function Page({
     },
     {
       title: '新着記事一覧',
-      href: '/article',
+      href: `/${parentSegment}`,
       isCurrentPage: false,
     },
     {
       title: data.title,
-      href: `/article/${data.id}`,
+      href: `/${parentSegment}/${data.id}`,
       isCurrentPage: true,
     },
   ];
@@ -136,7 +131,7 @@ export default async function Page({
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `${siteConfig.url}/article/${data.id}`,
+      '@id': `${siteConfig.url}/${parentSegment}/${data.id}`,
     },
   };
 
@@ -161,4 +156,6 @@ export default async function Page({
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default ArticleSlugPage;

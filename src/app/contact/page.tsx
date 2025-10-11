@@ -8,20 +8,9 @@ import { siteConfig } from '@/config/site';
 import type { ContactPage, BreadcrumbList, WithContext } from 'schema-dts';
 
 const pageTitle = 'お問い合わせ';
+
 const description =
   'ピーチウェブのサービスに関する業務ご依頼やご質問等、気になることは何でもフォームよりご連絡くださいませ。後日代表よりご返信させていただきます。';
-
-export const metadata: Metadata = {
-  title: pageTitle,
-  description: description,
-  openGraph: {
-    title: pageTitle,
-    description: description,
-    type: 'article',
-  },
-};
-
-export const revalidate = 3600;
 
 const breadcrumbs = [
   {
@@ -36,31 +25,41 @@ const breadcrumbs = [
   },
 ];
 
-export default function Contact() {
-  const jsonLdData: WithContext<ContactPage> = {
-    '@context': 'https://schema.org',
-    '@type': 'ContactPage',
-    name: pageTitle,
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: description,
+  openGraph: {
+    title: pageTitle,
     description: description,
-    url: `${siteConfig.url}/contact`,
-    mainEntity: {
-      '@type': 'Organization',
-      '@id': siteConfig.url,
-      name: siteConfig.name,
-    },
-  };
+    type: 'article',
+  },
+};
 
-  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: breadcrumb.title,
-      item: `${siteConfig.url}${breadcrumb.href}`,
-    })),
-  };
+const jsonLdData: WithContext<ContactPage> = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: pageTitle,
+  description: description,
+  url: `${siteConfig.url}/contact`,
+  mainEntity: {
+    '@type': 'Organization',
+    '@id': siteConfig.url,
+    name: siteConfig.name,
+  },
+};
 
+const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: breadcrumb.title,
+    item: `${siteConfig.url}${breadcrumb.href}`,
+  })),
+};
+
+const ContactPage = () => {
   return (
     <>
       <JsonLd jsonLdData={jsonLdData} />
@@ -81,4 +80,6 @@ export default function Contact() {
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default ContactPage;

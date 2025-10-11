@@ -1,6 +1,5 @@
 import { getList } from '@/lib/microcms';
 import { Pagination } from '@/components/ui/Pagination';
-import { GridArticleList } from '@/components/common/GridArticleList';
 import Title from '@/components/ui/Title';
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { SearchField } from '@/components/ui/SearchField';
@@ -10,10 +9,12 @@ import { Metadata } from 'next';
 import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import type { SearchResultsPage, BreadcrumbList, WithContext } from 'schema-dts';
+import { ArticleList } from '@/components/common/ArticleList';
 
-const baseTitle = 'よくあるご質問';
-const description =
-  'ピーチウェブへのよくあるご質問をまとめております。サービスに関するものから事務的なものまで様々な疑問にお答えします。もし見つからない場合はお問い合わせフォームからご質問ください。';
+export const revalidate = 3600;
+const baseTitle = 'よくあるご質問の検索結果';
+const baseDescription = `サービスに関するものから事務的なものまで様々な疑問にお答えします。`;
+const parentSegment = 'faq';
 
 type Props = {
   searchParams: Promise<{
@@ -21,10 +22,13 @@ type Props = {
   }>;
 };
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
+export const generateMetadata = async (props: Props): Promise<Metadata> => {
   const searchParams = await props.searchParams;
   const query = searchParams.q || '';
   const pageTitle = query ? `「${query}」の検索結果` : baseTitle;
+  const description = query
+    ? `「${query}」に関連する${baseTitle}です。${baseDescription}`
+    : `${baseTitle}です。${baseDescription}`;
 
   return {
     title: pageTitle,
@@ -39,28 +43,19 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       follow: true,
     },
   };
-}
+};
 
-export const revalidate = 3600;
-
-export default async function Search(props: Props) {
+const FaqSearchPage = async (props: Props) => {
   const searchParams = await props.searchParams;
-  const category = 'faq';
   const query = searchParams.q || '';
+  const pageTitle = query ? `「${query}」の検索結果` : baseTitle;
+  const description = query
+    ? `「${query}」に関連する${baseTitle}です。${baseDescription}`
+    : `${baseTitle}です。${baseDescription}`;
   const data = await getList({
     filters: FAQFILTER,
     q: searchParams.q,
   });
-
-  const pageTitle = query ? `「${query}」の検索結果` : baseTitle;
-
-  const searchPageJsonLd: WithContext<SearchResultsPage> = {
-    '@context': 'https://schema.org',
-    '@type': 'SearchResultsPage',
-    name: pageTitle,
-    description: description,
-    url: `${siteConfig.url}/faq/search${query ? `?q=${query}` : ''}`,
-  };
 
   const breadcrumbs = [
     {
@@ -69,16 +64,24 @@ export default async function Search(props: Props) {
       isCurrentPage: false,
     },
     {
-      title: 'よくあるご質問',
-      href: '/faq',
+      title: baseTitle,
+      href: `/${parentSegment}`,
       isCurrentPage: false,
     },
     {
-      title: query ? `「${query}」の検索結果` : '検索結果',
-      href: `/faq/search${query ? `?q=${query}` : ''}`,
+      title: query ? `「${query}」の検索結果` : baseTitle,
+      href: `/${parentSegment}/search${query ? `?q=${query}` : ''}`,
       isCurrentPage: true,
     },
   ];
+
+  const searchPageJsonLd: WithContext<SearchResultsPage> = {
+    '@context': 'https://schema.org',
+    '@type': 'SearchResultsPage',
+    name: pageTitle,
+    description: description,
+    url: `${siteConfig.url}/${parentSegment}/search${query ? `?q=${query}` : ''}`,
+  };
 
   const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
     '@context': 'https://schema.org',
@@ -95,17 +98,22 @@ export default async function Search(props: Props) {
     <>
       <JsonLd jsonLdData={searchPageJsonLd} />
       <JsonLd jsonLdData={breadcrumbJsonLd} />
-      <Title titleEn={'Search Results'} titleJp={'よくあるご質問の検索結果'} />
+      <Title
+        titleEn={'Search Results'}
+        titleJp={query ? `「${query}」に関する${baseTitle}` : baseTitle}
+      />
       <div className="mx-auto max-w-6xl p-4 pb-[60px] md:pb-[156px]">
         <nav className="flex justify-center md:justify-start">
           <Suspense fallback={<div className="animate-pulse">読み込み中...</div>}>
-            <SearchField category={category} />
+            <SearchField category={parentSegment} />
           </Suspense>
         </nav>
-        <GridArticleList articles={data.contents} category={category} />
+        <ArticleList articles={data.contents} category={parentSegment} />
         <Pagination totalCount={data.totalCount} q={searchParams.q} />
       </div>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default FaqSearchPage;

@@ -7,17 +7,8 @@ import { siteConfig } from '@/config/site';
 import type { AboutPage, BreadcrumbList, WithContext } from 'schema-dts';
 
 const pageTitle = '利用規約';
-const description = 'ピーチウェブのWebサービスをご利用いただく際のご利用規約をまとめたページです。';
 
-export const metadata: Metadata = {
-  title: pageTitle,
-  description: description,
-  openGraph: {
-    title: pageTitle,
-    description: description,
-    type: 'article',
-  },
-};
+const description = 'ピーチウェブのWebサービスをご利用いただく際のご利用規約をまとめたページです。';
 
 const breadcrumbs = [
   {
@@ -32,35 +23,45 @@ const breadcrumbs = [
   },
 ];
 
-export default async function Terms() {
-  const headingClasses = 'my-5 border-b-2 border-momo-400 pb-2 text-lg font-bold';
-  const listClasses = 'mb-12 list-decimal space-y-4 pl-5';
-  const nestedListClasses = 'mt-2 list-roman space-y-2 pl-5';
-
-  const jsonLdData: WithContext<AboutPage> = {
-    '@context': 'https://schema.org',
-    '@type': 'AboutPage',
-    name: pageTitle,
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: description,
+  openGraph: {
+    title: pageTitle,
     description: description,
-    url: `${siteConfig.url}/terms`,
-    mainEntity: {
-      '@type': 'Organization',
-      '@id': siteConfig.url,
-      name: siteConfig.name,
-    },
-  };
+    type: 'article',
+  },
+};
 
-  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: breadcrumb.title,
-      item: `${siteConfig.url}${breadcrumb.href}`,
-    })),
-  };
+const headingClasses = 'my-5 border-b-2 border-momo-400 pb-2 text-lg font-bold';
+const listClasses = 'mb-12 list-decimal space-y-4 pl-5';
+const nestedListClasses = 'mt-2 list-roman space-y-2 pl-5';
 
+const jsonLdData: WithContext<AboutPage> = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: pageTitle,
+  description: description,
+  url: `${siteConfig.url}/terms`,
+  mainEntity: {
+    '@type': 'Organization',
+    '@id': siteConfig.url,
+    name: siteConfig.name,
+  },
+};
+
+const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: breadcrumb.title,
+    item: `${siteConfig.url}${breadcrumb.href}`,
+  })),
+};
+
+const TermPage = () => {
   return (
     <>
       <JsonLd jsonLdData={jsonLdData} />
@@ -237,4 +238,6 @@ export default async function Terms() {
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default TermPage;

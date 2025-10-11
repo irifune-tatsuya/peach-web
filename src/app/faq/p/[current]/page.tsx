@@ -12,9 +12,10 @@ import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import type { CollectionPage, BreadcrumbList, WithContext } from 'schema-dts';
 
-const pageTitle = 'よくあるご質問';
-const description =
-  'ピーチウェブへのよくあるご質問をまとめております。サービスに関するものから事務的なものまで様々な疑問にお答えします。もし見つからない場合はお問い合わせフォームからご質問ください。';
+export const revalidate = 3600;
+const baseTitle = 'よくあるご質問一覧';
+const baseDescription = `サービスに関するものから事務的なものまで様々な疑問にお答えします。もし見つからない場合はお問い合わせフォームからご質問ください。`;
+const parentSegment = 'faq';
 
 type Props = {
   params: Promise<{
@@ -26,37 +27,35 @@ type Props = {
   }>;
 };
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
+export const generateMetadata = async (props: Props): Promise<Metadata> => {
   const params = await props.params;
   const current = params.current || '1';
-  const title = `${pageTitle} - ${current}ページ目`;
-
+  const pageTitle = `${baseTitle} - ${current}ページ目`;
+  const description = `${baseTitle}（${current}ページ目）です。${baseDescription}`;
   return {
-    title: title,
+    title: pageTitle,
     description: description,
     robots: {
       index: true,
       follow: true,
     },
     alternates: {
-      canonical: `/faq/p/${current}`,
+      canonical: `/${parentSegment}/p/${current}`,
     },
     openGraph: {
-      title: title,
+      title: pageTitle,
       description: description,
       type: 'website',
     },
   };
-}
+};
 
-export const revalidate = 3600;
-
-export default async function Page(props: Props) {
-  const searchParams = await props.searchParams;
+const FaqPCurrentPage = async (props: Props) => {
   const params = await props.params;
-  const category = 'faq';
-  const { tagId } = params;
+  const searchParams = await props.searchParams;
   const current = parseInt(params.current as string, 10);
+  const pageTitle = `${baseTitle} - ${current}ページ目`;
+  const description = `${baseTitle}（${current}ページ目）です。${baseDescription}`;
   const tags = await getTagList({
     filters: FAQFILTER,
   });
@@ -67,16 +66,6 @@ export default async function Page(props: Props) {
     q: searchParams.q,
   });
 
-  const title = `${pageTitle} - ${current}ページ目`;
-
-  const collectionPageJsonLd: WithContext<CollectionPage> = {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: title,
-    description: description,
-    url: `${siteConfig.url}/faq/p/${current}`,
-  };
-
   const breadcrumbs = [
     {
       title: 'ホーム',
@@ -84,16 +73,24 @@ export default async function Page(props: Props) {
       isCurrentPage: false,
     },
     {
-      title: 'よくあるご質問',
-      href: '/faq',
+      title: baseTitle,
+      href: `/${parentSegment}`,
       isCurrentPage: false,
     },
     {
       title: `${current}ページ目`,
-      href: `/faq/p/${current}`,
+      href: `/${parentSegment}/p/${current}`,
       isCurrentPage: true,
     },
   ];
+
+  const collectionPageJsonLd: WithContext<CollectionPage> = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: pageTitle,
+    description: description,
+    url: `${siteConfig.url}/${parentSegment}/p/${current}`,
+  };
 
   const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
     '@context': 'https://schema.org',
@@ -110,18 +107,18 @@ export default async function Page(props: Props) {
     <>
       <JsonLd jsonLdData={collectionPageJsonLd} />
       <JsonLd jsonLdData={breadcrumbJsonLd} />
-      <Title titleEn={'FAQ'} titleJp={'よくあるご質問'} />
+      <Title titleEn={'FAQ'} titleJp={`${baseTitle}（${current}ページ目）`} />
       <div className="mx-auto max-w-6xl p-4 pb-[60px] md:pb-[156px]">
         <nav className="mb-20 flex justify-center md:justify-start">
           <Suspense fallback={<div className="animate-pulse">読み込み中...</div>}>
-            <SearchField category={category} />
+            <SearchField category={parentSegment} />
           </Suspense>
         </nav>
-        <TagList tags={tags.contents} category={category} />
-        <ArticleList articles={data.contents} category={category} />
+        <TagList tags={tags.contents} category={parentSegment} />
+        <ArticleList articles={data.contents} category={parentSegment} />
         <Pagination
           totalCount={data.totalCount}
-          basePath={`/${category}`}
+          basePath={`/${parentSegment}`}
           current={current}
           q={searchParams.q}
         />
@@ -129,4 +126,6 @@ export default async function Page(props: Props) {
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default FaqPCurrentPage;

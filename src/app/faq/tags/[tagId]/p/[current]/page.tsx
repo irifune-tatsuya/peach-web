@@ -11,6 +11,11 @@ import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import type { CollectionPage, BreadcrumbList, WithContext } from 'schema-dts';
 
+export const revalidate = 3600;
+const baseTitle = 'タグの絞り込み結果';
+const baseDescription = `もし回答が見つからない場合はお問い合わせフォームから気軽にご質問ください。`;
+const parentSegment = 'faq';
+
 type Props = {
   params: Promise<{
     tagId: string;
@@ -21,15 +26,15 @@ type Props = {
   }>;
 };
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
+export const generateMetadata = async (props: Props): Promise<Metadata> => {
   const params = await props.params;
-  const tagId = params.tagId;
   const current = params.current || '1';
+  const tagId = params.tagId;
   const tag = await getTag(tagId);
-  const tagName = tag.name;
-
-  const pageTitle = `「${tagName}」に関するよくあるご質問 - ${current}ページ目`;
-  const description = `「${tagName}」に関連するよくあるご質問の一覧（${current}ページ目）です。ピーチウェブのサービスについて、より深くご理解いただけます。`;
+  const pageTitle = tag.name ? `「${tag.name}」${baseTitle} - ${current}ページ目` : baseTitle;
+  const description = tag.name
+    ? `「${tag.name}」に関連する${baseTitle}（${current}ページ目）です。${baseDescription}`
+    : `${baseTitle}（${current}ページ目）です。${baseDescription}`;
 
   return {
     title: pageTitle,
@@ -39,7 +44,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       follow: true,
     },
     alternates: {
-      canonical: `/faq/tags/${tagId}/p/${current}`,
+      canonical: `/${parentSegment}/tags/${tagId}/p/${current}`,
     },
     openGraph: {
       title: pageTitle,
@@ -47,33 +52,23 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       type: 'website',
     },
   };
-}
+};
 
-export const revalidate = 3600;
-
-export default async function Page(props: Props) {
-  const searchParams = await props.searchParams;
+const FaqTagsPCurrentPage = async (props: Props) => {
   const params = await props.params;
-  const category = 'faq';
-  const { tagId } = params;
+  const searchParams = await props.searchParams;
   const current = parseInt(params.current as string, 10);
+  const tagId = params.tagId;
+  const tag = await getTag(tagId);
   const data = await getList({
     limit: LIMIT30,
     offset: LIMIT30 * (current - 1),
     filters: `tags[contains]${tagId}`,
   });
-  const tag = await getTag(tagId);
-
-  const pageTitle = `「${tag.name}」に関するよくあるご質問 - ${current}ページ目`;
-  const description = `「${tag.name}」に関連するよくあるご質問の一覧（${current}ページ目）です。ピーチウェブのサービスについて、より深くご理解いただけます。`;
-
-  const collectionPageJsonLd: WithContext<CollectionPage> = {
-    '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: pageTitle,
-    description: description,
-    url: `${siteConfig.url}/faq/tags/${tagId}/p/${current}`,
-  };
+  const pageTitle = tag.name ? `「${tag.name}」${baseTitle} - ${current}ページ目` : baseTitle;
+  const description = tag.name
+    ? `「${tag.name}」に関連する${baseTitle}（${current}ページ目）です。${baseDescription}`
+    : `${baseTitle}（${current}ページ目）です。${baseDescription}`;
 
   const breadcrumbs = [
     {
@@ -83,12 +78,12 @@ export default async function Page(props: Props) {
     },
     {
       title: 'よくあるご質問',
-      href: '/faq',
+      href: `${parentSegment}`,
       isCurrentPage: false,
     },
     {
-      title: `${tag.name}タグの記事一覧`,
-      href: `/faq/tags/${tag.id}`,
+      title: tag.name ? `${tag.name}${baseTitle}` : baseTitle,
+      href: `/${parentSegment}/tags/${tag.id}`,
       isCurrentPage: false,
     },
     {
@@ -97,6 +92,14 @@ export default async function Page(props: Props) {
       isCurrentPage: true,
     },
   ];
+
+  const collectionPageJsonLd: WithContext<CollectionPage> = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: pageTitle,
+    description: description,
+    url: `${siteConfig.url}/${parentSegment}/tags/${tagId}/p/${current}`,
+  };
 
   const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
     '@context': 'https://schema.org',
@@ -114,19 +117,19 @@ export default async function Page(props: Props) {
       <JsonLd jsonLdData={collectionPageJsonLd} />
       <JsonLd jsonLdData={breadcrumbJsonLd} />
       <Title
-        titleEn={`FAQ -${tag.id.charAt(0).toUpperCase() + tag.id.slice(1)}-`}
-        titleJp={`${tag.name}タグの記事一覧`}
+        titleEn={`Tag filter results`}
+        titleJp={tag.name ? `「${tag.name}」${baseTitle}（${current}ページ目）` : baseTitle}
       />
       <div className="mx-auto max-w-6xl p-4 pb-[60px] md:pb-[156px]">
         <nav className="mb-20 flex justify-center md:justify-start">
           <Suspense fallback={<div className="animate-pulse">読み込み中...</div>}>
-            <SearchField category={category} />
+            <SearchField category={parentSegment} />
           </Suspense>
         </nav>
-        <ArticleList articles={data.contents} category={category} />
+        <ArticleList articles={data.contents} category={parentSegment} />
         <Pagination
           totalCount={data.totalCount}
-          basePath={`/${category}/tags/${tag.name}`}
+          basePath={`/${parentSegment}/tags/${tag.name}`}
           current={current}
           q={searchParams.q}
         />
@@ -134,4 +137,6 @@ export default async function Page(props: Props) {
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default FaqTagsPCurrentPage;

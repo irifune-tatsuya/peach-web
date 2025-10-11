@@ -12,23 +12,9 @@ import { siteConfig } from '@/config/site';
 import type { CreativeWork, ImageObject, BreadcrumbList, WithContext } from 'schema-dts';
 
 const pageTitle = 'ランディングページデザイン提案01';
+
 const description =
   '若々しい起業家のためのランディングページデザインで、多くの写真を使用して視覚的に訴求できるように心がけました。こちらは起業家の挨拶セクションとなります。';
-
-export const metadata: Metadata = {
-  title: pageTitle,
-  description: description,
-  openGraph: {
-    title: pageTitle,
-    description: description,
-    type: 'article',
-  },
-};
-
-const braketHeadingClasses =
-  "relative inline-block before:content-['['] after:content-[']'] before:absolute before:-left-4 after:absolute after:-right-4";
-const blueMarkerClasses =
-  'bg-gradient-to-t from-blue-200 to-blue-200 bg-no-repeat bg-bottom [background-size:100%_50%]';
 
 const breadcrumbs = [
   {
@@ -47,6 +33,21 @@ const breadcrumbs = [
     isCurrentPage: true,
   },
 ];
+
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: description,
+  openGraph: {
+    title: pageTitle,
+    description: description,
+    type: 'article',
+  },
+};
+
+const braketHeadingClasses =
+  "relative inline-block before:content-['['] after:content-[']'] before:absolute before:-left-4 after:absolute after:-right-4";
+const blueMarkerClasses =
+  'bg-gradient-to-t from-blue-200 to-blue-200 bg-no-repeat bg-bottom [background-size:100%_50%]';
 
 const pageName = 'lp01';
 
@@ -114,36 +115,36 @@ const footerLinks = [
   },
 ];
 
-export default async function Lp01() {
-  const creativeWorkJsonLd: WithContext<CreativeWork> = {
-    '@context': 'https://schema.org',
-    '@type': 'CreativeWork',
-    name: pageTitle,
-    description: description,
-    url: `${siteConfig.url}/achievements/design/lp01`,
-    author: {
-      '@type': 'Organization',
-      '@id': siteConfig.url,
-      name: siteConfig.name,
-    },
-    image: swiperImages.map((img) => ({
-      '@type': 'ImageObject',
-      contentUrl: img.pcSrc,
-      name: img.alt,
-    })) as ImageObject[],
-  };
+const creativeWorkJsonLd: WithContext<CreativeWork> = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: pageTitle,
+  description: description,
+  url: `${siteConfig.url}/achievements/design/lp01`,
+  author: {
+    '@type': 'Organization',
+    '@id': siteConfig.url,
+    name: siteConfig.name,
+  },
+  image: swiperImages.map((img) => ({
+    '@type': 'ImageObject',
+    contentUrl: img.pcSrc,
+    name: img.alt,
+  })) as ImageObject[],
+};
 
-  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: breadcrumb.title,
-      item: `${siteConfig.url}${breadcrumb.href}`,
-    })),
-  };
+const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: breadcrumb.title,
+    item: `${siteConfig.url}${breadcrumb.href}`,
+  })),
+};
 
+const Lp01Page = () => {
   return (
     <>
       <JsonLd jsonLdData={creativeWorkJsonLd} />
@@ -290,4 +291,6 @@ export default async function Lp01() {
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default Lp01Page;

@@ -11,20 +11,25 @@ import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import type { CollectionPage, BreadcrumbList, WithContext } from 'schema-dts';
 
+export const revalidate = 3600;
+const baseTitle = 'タグの絞り込み結果';
+const baseDescription = `もし回答が見つからない場合はお問い合わせフォームから気軽にご質問ください。`;
+const parentSegment = 'faq';
+
 type Props = {
   params: Promise<{
     tagId: string;
   }>;
 };
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
+export const generateMetadata = async (props: Props): Promise<Metadata> => {
   const params = await props.params;
   const tagId = params.tagId;
   const tag = await getTag(tagId);
-  const tagName = tag.name;
-
-  const pageTitle = `「${tagName}」に関するよくあるご質問`;
-  const description = `「${tagName}」に関連するよくあるご質問の一覧です。ピーチウェブのサービスについて、より深くご理解いただけます。`;
+  const pageTitle = tag.name ? `「${tag.name}」${baseTitle}` : baseTitle;
+  const description = tag.name
+    ? `「${tag.name}」に関連する${baseTitle}です。${baseDescription}`
+    : `${baseTitle}です。${baseDescription}`;
 
   return {
     title: pageTitle,
@@ -34,7 +39,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       follow: true,
     },
     alternates: {
-      canonical: `/faq/tags/${tagId}`,
+      canonical: `/${parentSegment}/tags/${tagId}`,
     },
     openGraph: {
       title: pageTitle,
@@ -42,20 +47,20 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
       type: 'website',
     },
   };
-}
+};
 
-export const revalidate = 3600;
-
-export default async function Tags(props: Props) {
+const FaqTagsPage = async (props: Props) => {
   const params = await props.params;
-  const category = 'faq';
-
-  const { tagId } = params;
+  const tagId = params.tagId;
+  const tag = await getTag(tagId);
   const data = await getList({
     limit: LIMIT30,
     filters: `tags[contains]${tagId}`,
   });
-  const tag = await getTag(tagId);
+  const pageTitle = tag.name ? `「${tag.name}」${baseTitle}` : baseTitle;
+  const description = tag.name
+    ? `「${tag.name}」に関連する${baseTitle}です。${baseDescription}`
+    : `${baseTitle}です。${baseDescription}`;
 
   const breadcrumbs = [
     {
@@ -65,25 +70,22 @@ export default async function Tags(props: Props) {
     },
     {
       title: 'よくあるご質問',
-      href: `/${category}`,
+      href: `/${parentSegment}`,
       isCurrentPage: false,
     },
     {
-      title: `${tag.name}タグの記事一覧`,
-      href: `/${category}/tags/${tagId}`,
+      title: tag.name ? `${tag.name}${baseTitle}` : baseTitle,
+      href: `/${parentSegment}/tags/${tagId}`,
       isCurrentPage: true,
     },
   ];
-
-  const pageTitle = `「${tag.name}」に関するよくあるご質問`;
-  const description = `「${tag.name}」に関連するよくあるご質問の一覧です。ピーチウェブのサービスについて、より深くご理解いただけます。`;
 
   const collectionPageJsonLd: WithContext<CollectionPage> = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: pageTitle,
     description: description,
-    url: `${siteConfig.url}/faq/tags/${tagId}`,
+    url: `${siteConfig.url}/${parentSegment}/tags/${tagId}`,
   };
 
   const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
@@ -101,20 +103,19 @@ export default async function Tags(props: Props) {
     <>
       <JsonLd jsonLdData={collectionPageJsonLd} />
       <JsonLd jsonLdData={breadcrumbJsonLd} />
-      <Title
-        titleEn={`FAQ -${tag.id.charAt(0).toUpperCase() + tag.id.slice(1)}-`}
-        titleJp={`${tag.name}タグの記事一覧`}
-      />
+      <Title titleEn={`Tag filter results`} titleJp={`「${tag.name}」${baseTitle}`} />
       <div className="mx-auto max-w-6xl p-4 pb-[60px] md:pb-[156px]">
         <nav className="mb-20 flex justify-center md:justify-start">
           <Suspense fallback={<div className="animate-pulse">読み込み中...</div>}>
-            <SearchField category={category} />
+            <SearchField category={parentSegment} />
           </Suspense>
         </nav>
-        <ArticleList articles={data.contents} category={category} />
-        <Pagination totalCount={data.totalCount} basePath={`/${category}/tags/${tagId}`} />
+        <ArticleList articles={data.contents} category={parentSegment} />
+        <Pagination totalCount={data.totalCount} basePath={`/${parentSegment}/tags/${tagId}`} />
       </div>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default FaqTagsPage;

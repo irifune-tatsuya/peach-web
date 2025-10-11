@@ -21,18 +21,9 @@ import { siteConfig } from '@/config/site';
 import type { AboutPage, BreadcrumbList, WithContext } from 'schema-dts';
 
 const pageTitle = '選ばれる理由';
+
 const description =
   '弊社の強み、他社と比較して選ばれる理由についてお話します。ホームページ制作は高い！どんなページが良いか一緒に考えてほしいという方は弊社の強みに共感していただけると思います！';
-
-export const metadata: Metadata = {
-  title: pageTitle,
-  description: description,
-  openGraph: {
-    title: pageTitle,
-    description: description,
-    type: 'article',
-  },
-};
 
 const breadcrumbs = [
   {
@@ -46,6 +37,16 @@ const breadcrumbs = [
     isCurrentPage: true,
   },
 ];
+
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: description,
+  openGraph: {
+    title: pageTitle,
+    description: description,
+    type: 'article',
+  },
+};
 
 const togetherData = [
   {
@@ -121,30 +122,31 @@ const ReasonCard = ({ item }: { item: { title: string; content: string; image: s
   </Card>
 );
 
-export default async function Reason() {
-  const aboutPageJsonLd: WithContext<AboutPage> = {
-    '@context': 'https://schema.org',
-    '@type': 'AboutPage',
-    name: pageTitle,
-    description: description,
-    url: `${siteConfig.url}/reason`,
-    mainEntity: {
-      '@type': 'Organization',
-      '@id': siteConfig.url,
-      name: siteConfig.name,
-    },
-  };
+const aboutPageJsonLd: WithContext<AboutPage> = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: pageTitle,
+  description: description,
+  url: `${siteConfig.url}/reason`,
+  mainEntity: {
+    '@type': 'Organization',
+    '@id': siteConfig.url,
+    name: siteConfig.name,
+  },
+};
 
-  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: breadcrumb.title,
-      item: `${siteConfig.url}${breadcrumb.href}`,
-    })),
-  };
+const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: breadcrumb.title,
+    item: `${siteConfig.url}${breadcrumb.href}`,
+  })),
+};
+
+const ReasonPage = () => {
   return (
     <>
       <JsonLd jsonLdData={aboutPageJsonLd} />
@@ -426,4 +428,6 @@ export default async function Reason() {
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default ReasonPage;

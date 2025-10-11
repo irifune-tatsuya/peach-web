@@ -22,18 +22,9 @@ import { siteConfig } from '@/config/site';
 import type { Service, Offer, BreadcrumbList, WithContext } from 'schema-dts';
 
 const pageTitle = '料金体系';
+
 const description =
   'ピーチウェブが提供するWEBブランディングの料金体系をご案内いたします。分かりやすく安心感のあるプライスでご納得いただけるかと思います。';
-
-export const metadata: Metadata = {
-  title: pageTitle,
-  description: description,
-  openGraph: {
-    title: pageTitle,
-    description: description,
-    type: 'article',
-  },
-};
 
 const breadcrumbs = [
   {
@@ -47,6 +38,16 @@ const breadcrumbs = [
     isCurrentPage: true,
   },
 ];
+
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: description,
+  openGraph: {
+    title: pageTitle,
+    description: description,
+    type: 'article',
+  },
+};
 
 const basicPriceData = [
   {
@@ -134,38 +135,39 @@ const singleOptionData = {
   ],
 };
 
-export default async function Pricing() {
-  const serviceJsonLd: WithContext<Service> = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: 'WEBブランディングサービス',
-    description: description,
-    url: `${siteConfig.url}/pricing`,
-    provider: {
-      '@type': 'Organization',
-      '@id': siteConfig.url,
-      name: siteConfig.name,
-    },
-    serviceType: 'WEBブランディング',
-    offers: basicPriceData.map((plan) => ({
-      '@type': 'Offer',
-      name: plan.title,
-      price: parseInt(plan.price.replace(/[^0-9]/g, '')),
-      priceCurrency: 'JPY',
-      description: [...plan.homepage, ...plan.contents].join('、'),
-    })) as Offer[],
-  };
+const serviceJsonLd: WithContext<Service> = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'WEBブランディングサービス',
+  description: description,
+  url: `${siteConfig.url}/pricing`,
+  provider: {
+    '@type': 'Organization',
+    '@id': siteConfig.url,
+    name: siteConfig.name,
+  },
+  serviceType: 'WEBブランディング',
+  offers: basicPriceData.map((plan) => ({
+    '@type': 'Offer',
+    name: plan.title,
+    price: parseInt(plan.price.replace(/[^0-9]/g, '')),
+    priceCurrency: 'JPY',
+    description: [...plan.homepage, ...plan.contents].join('、'),
+  })) as Offer[],
+};
 
-  const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: breadcrumbs.map((breadcrumb, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: breadcrumb.title,
-      item: `${siteConfig.url}${breadcrumb.href}`,
-    })),
-  };
+const breadcrumbJsonLd: WithContext<BreadcrumbList> = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((breadcrumb, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: breadcrumb.title,
+    item: `${siteConfig.url}${breadcrumb.href}`,
+  })),
+};
+
+const PricingPage = () => {
   return (
     <>
       <JsonLd jsonLdData={serviceJsonLd} />
@@ -297,4 +299,6 @@ export default async function Pricing() {
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default PricingPage;

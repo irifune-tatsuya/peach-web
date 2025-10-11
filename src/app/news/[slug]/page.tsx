@@ -10,23 +10,21 @@ import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import type { Article as ArticleSchema, BreadcrumbList, WithContext } from 'schema-dts';
 
+export const revalidate = 0;
+const parentSegment = 'news';
+
 type Props = {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ draftKey?: string }>;
 };
 
-export const revalidate = 0;
-
-export async function generateMetadata({
-  params: paramsPromise,
-  searchParams: searchParamsPromise,
-}: Props): Promise<Metadata> {
-  const params = await paramsPromise;
-  const searchParams = await searchParamsPromise;
+export const generateMetadata = async (props: Props): Promise<Metadata> => {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   const data = await getDetail(params.slug, { draftKey: searchParams.draftKey });
   const defaultImageUrl = `${IMAGEBASEURL}/ogp.jpg`;
   const imageUrl = data?.thumbnail?.url || defaultImageUrl;
-  const url = `/news/${data.id}`;
+  const url = `/${parentSegment}/${data.id}`;
 
   return {
     title: data.title,
@@ -61,14 +59,11 @@ export async function generateMetadata({
       ],
     },
   };
-}
+};
 
-export default async function Page({
-  params: paramsPromise,
-  searchParams: searchParamsPromise,
-}: Props) {
-  const params = await paramsPromise;
-  const searchParams = await searchParamsPromise;
+const NewsSlugPage = async (props: Props) => {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   const { isEnabled } = await draftMode();
   const data = await getDetail(params.slug, { draftKey: searchParams.draftKey });
 
@@ -79,13 +74,13 @@ export default async function Page({
       isCurrentPage: false,
     },
     {
-      title: 'ニュース',
-      href: '/news',
+      title: 'お知らせ',
+      href: `${parentSegment}`,
       isCurrentPage: false,
     },
     {
       title: data.title,
-      href: `/news/${data.id}`,
+      href: `/${parentSegment}/${data.id}`,
       isCurrentPage: true,
     },
   ];
@@ -114,7 +109,7 @@ export default async function Page({
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `${siteConfig.url}/news/${data.id}`,
+      '@id': `${siteConfig.url}/${parentSegment}/${data.id}`,
     },
   };
 
@@ -138,4 +133,6 @@ export default async function Page({
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );
-}
+};
+
+export default NewsSlugPage;

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react'; // 👈 useStateをインポート
+import { useState } from 'react';
 import { ImDisplay } from 'react-icons/im';
 import { IoBookOutline } from 'react-icons/io5';
 import { GoMail } from 'react-icons/go';
