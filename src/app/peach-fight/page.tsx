@@ -48,7 +48,7 @@ export const metadata: Metadata = {
 
 const swiperImages = [
   {
-    h: 'h-[calc(100vh-128px)] md:h-[calc(100vh-108px)]',
+    h: 'h-[calc(100vh-200px)]',
     src: `${IMAGEBASEURL}/${segmentName}/peach-fight-bg.webp`,
     alt: baseTitle,
     borderRadius: 60,
@@ -107,7 +107,7 @@ const PeachFightPage = () => {
         <Title titleEn={'Peach-Fight'} titleJp={baseTitle} />
       </div>
       <section id="key-visual" className="relative h-screen overflow-hidden">
-        <div className="absolute top-2/4 left-1/2 z-20 w-[85%] max-w-xl -translate-x-1/2 -translate-y-1/2 sm:top-[40%]">
+        <div className="absolute top-1/3 left-1/2 z-20 w-[85%] max-w-xl -translate-x-1/2 -translate-y-1/3  sm:top-[40%]">
           <div className="w-full animate-[var(--animate-zoom-in)]">
             <Image
               src={`${IMAGEBASEURL}/${segmentName}/peach-fight-logo.webp`}
@@ -121,7 +121,7 @@ const PeachFightPage = () => {
         </div>
         <Link
           href={'/contact'}
-          className="absolute bottom-[-20px] left-1/2 z-20 h-[145px] w-[145px] -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full border-2 border-black bg-white md:bottom-[30px]"
+          className="absolute bottom-[40px] md:bottom-[60px] left-1/2 z-20 h-[145px] w-[145px] -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full border-2 border-black bg-white"
         >
           <span className="absolute top-0 right-0 bottom-0 left-0 m-auto block h-[124px] w-[124px] animate-[var(--animate-spin-clockwise)]">
             <Image
