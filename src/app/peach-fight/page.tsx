@@ -48,10 +48,10 @@ export const metadata: Metadata = {
 
 const swiperImages = [
   {
+    h: 'h-[calc(100vh-128px)] md:h-[calc(100vh-108px)]',
     src: `${IMAGEBASEURL}/${segmentName}/peach-fight-bg.webp`,
     alt: baseTitle,
     borderRadius: 60,
-    h: 'h-[80vh]',
   },
 ];
 
@@ -140,7 +140,7 @@ const PeachFightPage = () => {
             />
           </span>
         </Link>
-        <div className="mx-4 my-8 md:mx-10 md:my-0">
+        <div className="m-4 md:my-0">
           <TopSwiper images={swiperImages} />
         </div>
       </section>
