@@ -16,13 +16,13 @@ export const GridArticleList: FC<Props> = ({ articles, category }) => {
     return <p>記事がありません。</p>;
   }
   return (
-    <ul className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+    <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
       {articles.map((article) => (
         <li
           key={article.id}
           className="transition-opacity duration-300 ease-in-out hover:opacity-60"
         >
-          <LandscapeCard article={article} category={category} maxW={400} />
+          <LandscapeCard article={article} category={category} />
         </li>
       ))}
     </ul>

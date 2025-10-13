@@ -12,6 +12,7 @@ type SlideImage = {
   src: string;
   alt: string;
   borderRadius?: number;
+  objectPosition?: string;
 };
 
 type Props = {
@@ -19,7 +20,7 @@ type Props = {
 };
 
 export const TopSwiper: FC<Props> = ({ images }) => {
-  const imageHeightClass = 'h-[calc(100vh-55px)] md:h-[calc(100vh-76px)]';
+  const imageHeightClass = 'h-[calc(100vh-96px)] md:h-[calc(100vh-76px)]';
 
   return (
     <Swiper
@@ -38,7 +39,7 @@ export const TopSwiper: FC<Props> = ({ images }) => {
     >
       {images.map((image, i) => (
         <SwiperSlide key={i}>
-          <div className={`relative w-screen ${image.h ?? imageHeightClass}`}>
+          <div className={`relative ${image.h ?? imageHeightClass}`}>
             <Image
               src={image.src}
               alt={image.alt}
@@ -46,6 +47,7 @@ export const TopSwiper: FC<Props> = ({ images }) => {
               className="object-cover"
               style={{
                 borderRadius: `${image.borderRadius ?? 0}px`,
+                objectPosition: image.objectPosition ?? 'center',
               }}
               priority={i === 0}
               sizes="100vw"

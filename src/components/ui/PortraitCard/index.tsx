@@ -8,25 +8,23 @@ import { IMAGEBASEURL } from '@/constants';
 type Props = {
   article: Article;
   category: string;
-  maxW: number;
 };
 
-export const PortraitCard: FC<Props> = ({ article, category, maxW }) => {
+export const PortraitCard: FC<Props> = ({ article, category }) => {
   const imageUrl = article.subthumbnail?.url || `${IMAGEBASEURL}/portrait-no-image.webp`;
   const altText = article.subthumbnail ? article.title : 'No Image';
 
   return (
-    <div
-      className="min-w-[250px] w-auto overflow-hidden rounded-lg bg-white shadow-md"
-      style={{ maxWidth: `${maxW}px` }}
-    >
-      <Link href={`/${category}/${article.id}`} className="hover:no-underline">
-        <div className="relative w-full aspect-[2/3]">
-          <Image src={imageUrl} alt={altText} fill className="object-cover" />
+    <div className="w-[230px] md:w-[280px] lg:w-[208px] overflow-hidden">
+      <Link href={`/${category}/${article.id}`} className="block hover:no-underline">
+        <div className="relative w-full aspect-[9/16]">
+          <Image src={imageUrl} alt={altText} fill className="object-cover rounded-lg" />
         </div>
-        <div className="flex flex-col p-2">
-          <h3 className="my-3 text-base line-clamp-2">{article.title}</h3>
-          <PublishedDate date={article.publishedAt || article.createdAt} />
+        <div className="pt-3">
+          <div className="flex-grow">
+            <h3 className="mb-1 text-base font-bold line-clamp-2">{article.title}</h3>
+            <PublishedDate date={article.publishedAt || article.createdAt} />
+          </div>
         </div>
       </Link>
     </div>

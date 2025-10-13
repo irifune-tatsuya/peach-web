@@ -115,7 +115,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body suppressHydrationWarning={true}>
         <Header />
-        <main className="mx-auto mt-0 md:mt-20 pb-[96px] md:pb-0">{children}</main>
+        <main className="mx-auto mt-0 md:mt-[76px] pb-[96px] md:pb-0">{children}</main>
         <ScrollToTopButton />
         <NavBar />
         <Footer />

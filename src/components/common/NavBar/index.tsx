@@ -16,7 +16,7 @@ export const NavBar: React.FC = () => {
 
   return (
     <>
-      <nav className="flex gap-4 w-full h-24 items-start justify-center bg-momo-300 fixed bottom-0 z-10 md:hidden pt-5">
+      <nav className="flex gap-4 w-full h-24 items-start justify-center bg-momo-300 fixed bottom-0 z-50 md:hidden pt-5">
         <Link href="/article" className="flex w-14 flex-col items-center hover:no-underline">
           <IoBookOutline size={'2rem'} className="text-momo-100" />
           <span className="mt-[0.2em] text-[10px]">新着記事</span>
