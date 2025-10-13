@@ -12,7 +12,7 @@ export const ViewMoreButton: FC<Props> = ({ href, size }) => {
 
   return (
     <div className="flex justify-center md:block">
-      <Link href={href} className="group flex items-center no-underline">
+      <Link href={href} className="group flex justify-center items-center no-underline">
         <span
           className={`
             font-bold text-sm underline underline-offset-3

@@ -154,3 +154,8 @@ body {
   color: var(--color-foreground);
   background: var(--color-background);
 }
+
+.text-stroke {
+  -webkit-text-stroke: 2px var(--color-foreground);
+  text-stroke: 2px var(--color-foreground);
+}
