@@ -83,7 +83,7 @@ export const Article: FC<Props> = ({ data, isShowToc = true, isFaqLayout = false
       )}
 
       <div
-        className="prose prose-lg mb-20 px-4 prose-h2:inline-block prose-h2:no-underline prose-h2:border-b-4 prose-h2:border-[var(--color-momo-100)] prose-h2:pb-1"
+        className="prose prose-lg mb-20 px-4 prose-h2:inline-block prose-h2:border-b-2 prose-h2:border-[var(--color-momo-100)] prose-h2:pb-1 prose-h2:no-underline prose-h2:text-2xl"
         dangerouslySetInnerHTML={{
           __html: `${formatRichText(data.content)}`,
         }}

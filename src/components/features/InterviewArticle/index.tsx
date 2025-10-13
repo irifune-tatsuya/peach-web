@@ -36,31 +36,31 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
       sns: data.instagramid,
       href: `https://www.instagram.com/${data.instagramid}?ref=badge`,
       bg: 'bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500',
-      icon: <FaInstagram size={32} color="white" />,
+      icon: <FaInstagram size={40} color="white" />,
     },
     {
       sns: data.facebookurl,
       href: data.facebookurl,
       bg: 'bg-[#1877f2]',
-      icon: <FaFacebookF size={26} color="white" />,
+      icon: <FaFacebookF size={30} color="white" />,
     },
     {
       sns: data.xid,
       href: `https://twitter.com/${data.xid}`,
       bg: 'bg-black',
-      icon: <FaXTwitter size={24} color="white" />,
+      icon: <FaXTwitter size={28} color="white" />,
     },
     {
       sns: data.lineurl,
       href: data.lineurl,
       bg: 'bg-white',
-      icon: <FaLine size={45} color="#06c755" />,
+      icon: <FaLine size={50} color="#06c755" />,
     },
     {
       sns: data.url,
       href: data.url,
       bg: 'bg-[var(--color-momo-100)]',
-      icon: <IoMdHome size={30} color="white" />,
+      icon: <IoMdHome size={40} color="white" />,
     },
   ];
 
@@ -85,8 +85,7 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
             className="h-auto w-full"
           />
         )}
-
-        <div className="mt-8 border-t border-black px-4 pt-8 pb-5 md:pt-20 md:pb-5">
+        <div className="px-4 pt-8 pb-5 md:pt-20 md:pb-5">
           <h1 className="text-left text-2xl font-bold leading-normal md:text-4xl">{data.title}</h1>
           <div className="mt-5 flex flex-col items-stretch justify-end gap-3 md:flex-row md:items-center">
             {data.instagramid && (
@@ -94,10 +93,14 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
                 href={`https://www.instagram.com/${data.instagramid}?ref=badge`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-12 items-center justify-center rounded-lg bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 px-6 font-bold text-white transition-opacity hover:opacity-70"
+                className="flex items-center justify-center rounded-lg bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 p-2 font-bold text-white transition-opacity hover:opacity-70"
               >
-                <FaInstagram size={32} color="white" />
-                <span className="ml-1">{`${data.interviewed}さんをフォロー`}</span>
+                <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center">
+                  <FaInstagram size={30} color="white" />
+                </div>
+                <div className="ml-1 text-center">
+                  <span className="block text-sm leading-tight">{data.interviewed}さん</span>
+                </div>
               </Link>
             )}
             <div className="flex gap-3">
@@ -107,7 +110,7 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
                 rel="nofollow noopener"
                 className="flex h-12 flex-1 items-center justify-center rounded-lg bg-[#1877f2] px-3 font-bold text-white transition-opacity hover:opacity-70 md:flex-none"
               >
-                <FaFacebookF size={26} color="white" />
+                <FaFacebookF size={20} color="white" />
                 <span className="ml-1">記事をシェア</span>
               </Link>
               <Link
@@ -116,7 +119,7 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
                 rel="nofollow noopener"
                 className="flex h-12 flex-1 items-center justify-center rounded-lg bg-black px-3 font-bold text-white transition-opacity hover:opacity-70 md:flex-none"
               >
-                <FaXTwitter size={24} color="white" />
+                <FaXTwitter size={22} color="white" />
                 <span className="ml-1">記事をシェア</span>
               </Link>
             </div>
@@ -128,15 +131,16 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
         {devidedContents.map((content, i) => (
           <React.Fragment key={i}>
             <div
-              className="prose prose-lg mb-8 max-w-none px-4 prose-h2:inline-block prose-h2:border-b-2 prose-h2:border-[var(--color-momo-100)] prose-h2:pb-1 prose-h2:no-underline"
+              className="prose prose-lg mb-8 max-w-none px-4 prose-h2:inline-block prose-h2:border-b-2 prose-h2:border-[var(--color-momo-100)] prose-h2:pb-1 prose-h2:no-underline prose-h2:text-2xl"
               dangerouslySetInnerHTML={{ __html: formatRichText(content) }}
             />
             {i < devidedContents.length - 1 &&
               (data.instagramid || data.facebookurl || data.xid || data.lineurl || data.url) && (
                 <div className="px-4 pt-8 pb-32">
-                  <div className="mx-auto max-w-2xl rounded-2xl bg-momo-600 p-6 text-center shadow-lg md:p-8">
-                    <p className="text-xl font-bold text-momo-100 md:text-2xl">
-                      {`${data.interviewed}さんをフォロー`}
+                  <div className="mx-auto max-w-2xl rounded-2xl bg-momo-300 p-6 text-center shadow-lg md:p-8">
+                    <p className="font-bold text-momo-100 md:text-2xl">
+                      <span className="block">{data.interviewed}さん</span>
+                      <span className="block">アカウントのフォロー</span>
                     </p>
                     <div className="mt-6 flex justify-center">
                       <div className="inline-grid grid-cols-3 gap-4 md:flex md:flex-row">
@@ -147,12 +151,12 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
                                 href={link.href || ''}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className={`flex h-14 w-14 items-center justify-center rounded-full transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg ${link.bg}`}
+                                className={`flex h-14 w-14 items-center justify-center rounded-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg ${link.bg}`}
                               >
                                 {link.icon}
                               </Link>
                             ) : (
-                              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-200">
+                              <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-gray-200">
                                 {interviewedSNSLinks[j].icon}
                               </div>
                             )}
