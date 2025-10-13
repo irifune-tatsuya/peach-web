@@ -14,7 +14,7 @@ export const LandscapeCard: FC<Props> = ({ article, category }) => {
   const imageUrl = article.thumbnail?.url || `${IMAGEBASEURL}/no-image.webp`;
   const altText = article.thumbnail ? article.title : 'No Image';
   return (
-    <div className="w-[300px] md:w-[370px] lg:w-[416px] overflow-hidden">
+    <div className="max-w-[400px] overflow-hidden">
       <Link href={`/${category}/${article.id}`} className="block hover:no-underline">
         <div className="relative aspect-video w-full">
           <Image src={imageUrl} alt={altText} fill className="object-cover rounded-lg" />
