@@ -22,7 +22,7 @@ export const GridArticleList: FC<Props> = ({ articles, category }) => {
           key={article.id}
           className="transition-opacity duration-300 ease-in-out hover:opacity-60"
         >
-          <LandscapeCard article={article} category={category} maxW={400} />
+          <LandscapeCard article={article} category={category} />
         </li>
       ))}
     </ul>
