@@ -561,7 +561,7 @@ const ServicePage = () => {
           <Accordion type="single" collapsible className="mx-auto mt-10 w-full max-w-4xl">
             {faq.map((item, i) => (
               <AccordionItem value={`item-${i}`} key={i}>
-                <AccordionTrigger className="bg-momo-600 px-4 text-left font-bold leading-loose text-white text-base hover:no-underline md:text-lg">
+                <AccordionTrigger className="bg-momo-600 px-4 text-left font-bold leading-loose text-base hover:no-underline md:text-lg">
                   {item.q}
                 </AccordionTrigger>
                 <AccordionContent className="p-4 leading-loose text-base md:text-lg">
