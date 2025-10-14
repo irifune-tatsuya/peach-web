@@ -1,5 +1,5 @@
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
-import Title from '@/components/ui/Title';
+import { Title } from '@/components/ui/Title';
 import { IMAGEBASEURL } from '@/constants';
 import { ACHIEVEMENTS } from '@/constants/achievements';
 import { Metadata } from 'next';
@@ -7,11 +7,12 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { FaExternalLinkAlt } from 'react-icons/fa';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import type { CreativeWork, BreadcrumbList, WithContext } from 'schema-dts';
+import { SquareArrowOutUpRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export const revalidate = 3600;
 const parentSegment = 'achievements';
@@ -124,22 +125,38 @@ const AchievementSlugPage = async (props: Props) => {
       <section className="relative overflow-hidden bg-gradient-to-b from-[#fcdee9] to-white pt-[88px] pb-[90px] md:pt-32 md:pb-44">
         <div className="mx-auto max-w-4xl p-4">
           <div className="flex justify-center">
-            <a
-              href={achievement.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${buttonBaseClasses} mb-8 w-full max-w-sm bg-momo-100 text-white`}
-            >
-              <span>サイトを見る</span>
-              <FaExternalLinkAlt />
-            </a>
+            <Button asChild variant="default" className="mb-8">
+              <a href={achievement.href} target="_blank" rel="noopener noreferrer">
+                <span className="relative z-10 flex items-center">
+                  サイトを見る
+                  <SquareArrowOutUpRight className="ml-2 h-4 w-4" />
+                </span>
+              </a>
+            </Button>
           </div>
           <Tabs defaultValue="sp" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="sp">スマホ版</TabsTrigger>
-              <TabsTrigger value="pc">パソコン版</TabsTrigger>
-              <TabsTrigger value="details">サイト解説</TabsTrigger>
-            </TabsList>
+            <div className="flex justify-center">
+              <TabsList className="h-auto justify-center rounded-full bg-white p-1">
+                <TabsTrigger
+                  value="sp"
+                  className="rounded-full px-6 py-3 data-[state=active]:bg-momo-100 data-[state=active]:text-white data-[state=active]:shadow-md"
+                >
+                  スマホ版
+                </TabsTrigger>
+                <TabsTrigger
+                  value="pc"
+                  className="rounded-full px-6 py-3 data-[state=active]:bg-momo-100 data-[state=active]:text-white data-[state=active]:shadow-md"
+                >
+                  パソコン版
+                </TabsTrigger>
+                <TabsTrigger
+                  value="details"
+                  className="rounded-full px-6 py-3 data-[state=active]:bg-momo-100 data-[state=active]:text-white data-[state=active]:shadow-md"
+                >
+                  サイト解説
+                </TabsTrigger>
+              </TabsList>
+            </div>
             <TabsContent value="sp" className="mt-6">
               <div className="flex justify-center">
                 <Image
@@ -201,22 +218,20 @@ const AchievementSlugPage = async (props: Props) => {
               </div>
             </TabsContent>
           </Tabs>
-          <div className="mt-8 flex flex-col items-center justify-center gap-2">
-            <a
-              href={achievement.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${buttonBaseClasses} w-full max-w-sm bg-momo-100 text-white`}
-            >
-              <span>サイトを見る</span>
-              <FaExternalLinkAlt />
-            </a>
-            <Link
-              href="/achievements"
-              className={`${buttonBaseClasses} w-full max-w-sm bg-momo-200 text-black`}
-            >
-              実績一覧に戻る
-            </Link>
+          <div className="mt-8 flex items-center justify-center gap-2">
+            <Button asChild variant="default">
+              <a href={achievement.href} target="_blank" rel="noopener noreferrer">
+                <span className="relative z-10 flex items-center">
+                  サイトを見る
+                  <SquareArrowOutUpRight className="ml-1 !h-5 !w-5" />
+                </span>
+              </a>
+            </Button>
+            <Button asChild variant="secondary">
+              <Link href="/achievements">
+                <span className="relative z-10 flex items-center">実績一覧に戻る</span>
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

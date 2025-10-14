@@ -1,5 +1,5 @@
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
-import Title from '@/components/ui/Title';
+import { Title } from '@/components/ui/Title';
 import React from 'react';
 import { Metadata } from 'next';
 import { JsonLd } from '@/components/common/JsonLd';

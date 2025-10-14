@@ -4,9 +4,8 @@ import { getDetail } from '@/lib/microcms';
 import { Article } from '@/components/features/Article';
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { IMAGEBASEURL } from '@/constants';
-import { IoBookOutline } from 'react-icons/io5';
-import { IoMdHome } from 'react-icons/io';
-import ButtonArea from '@/components/common/ButtonArea';
+import { House, Newspaper } from 'lucide-react';
+import { ButtonArea } from '@/components/common/ButtonArea';
 import { draftMode } from 'next/headers';
 import { PreviewAlert } from '@/components/common/PreviewAlert';
 import { JsonLd } from '@/components/common/JsonLd';
@@ -64,24 +63,20 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
   };
 };
 
-const contactButtons = [
+const linkButtons = [
   {
-    bgClassName: 'bg-[var(--color-momo-100)]',
-    textClassName: 'text-white',
     href: '/',
-    isExternal: false,
-    title: 'TOPページへ',
-    icon: <IoMdHome />,
+    children: 'TOPページへ',
+    icon: <House className="mr-1 !h-5 !w-5" />,
+    variant: 'default',
   },
   {
-    bgClassName: 'bg-[var(--color-momo-300)]',
-    textClassName: 'text-black',
     href: '/article',
-    isExternal: false,
-    title: '新着記事一覧へ',
-    icon: <IoBookOutline />,
+    children: '新着記事一覧へ',
+    icon: <Newspaper className="mr-1 !h-5 !w-5" />,
+    variant: 'secondary',
   },
-];
+] as const;
 
 const ArticleSlugPage = async (props: Props) => {
   const params = await props.params;
@@ -152,7 +147,7 @@ const ArticleSlugPage = async (props: Props) => {
       <JsonLd jsonLdData={breadcrumbJsonLd} />
       {isEnabled && <PreviewAlert />}
       <Article data={data} />
-      <ButtonArea buttons={contactButtons} className="bg-white" />
+      <ButtonArea buttons={linkButtons} />
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );

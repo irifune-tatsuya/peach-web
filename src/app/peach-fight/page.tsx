@@ -2,20 +2,20 @@ import { getList } from '@/lib/microcms';
 import { LIMIT12, PEACHFILTER, IMAGEBASEURL, CONTACT } from '@/constants';
 import { Pagination } from '@/components/ui/Pagination';
 import { GridArticleList } from '@/components/common/GridArticleList';
-import Title from '@/components/ui/Title';
+import { Title } from '@/components/ui/Title';
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { SearchField } from '@/components/ui/SearchField';
 import { TopSwiper } from '@/components/common/TopSwiper';
 import React, { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { IoMail } from 'react-icons/io5';
 import { FaLine } from 'react-icons/fa';
-import ButtonArea from '@/components/common/ButtonArea';
+import { ButtonArea } from '@/components/common/ButtonArea';
 import { Metadata } from 'next';
 import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import type { CollectionPage, BreadcrumbList, WithContext } from 'schema-dts';
+import { Mail } from 'lucide-react';
 
 export const revalidate = 3600;
 const baseTitle = '岡山のチャレンジ応援マガジン「ピーチファイ」';
@@ -55,24 +55,20 @@ const swiperImages = [
   },
 ];
 
-const contactButtons = [
+const linkButtons = [
   {
-    bgClassName: 'bg-[var(--color-momo-100)]',
-    textClassName: 'text-white',
     href: '/contact',
-    isExternal: false,
-    title: 'フォームから取材応募',
-    icon: <IoMail />,
+    children: 'フォームから取材応募',
+    icon: <Mail className="mr-1 !h-5 !w-5" />,
+    variant: 'default',
   },
   {
-    bgClassName: 'bg-[#06c755]',
-    textClassName: 'text-white',
     href: CONTACT.line,
-    isExternal: true,
-    title: 'LINEから取材応募',
-    icon: <FaLine />,
+    children: 'LINEからお問い合わせ',
+    icon: <FaLine className="mr-1 !h-5 !w-5" />,
+    variant: 'line',
   },
-];
+] as const;
 
 const data = await getList({
   limit: LIMIT12,
@@ -188,7 +184,7 @@ const PeachFightPage = () => {
           </div>
         </div>
       </section>
-      <ButtonArea buttons={contactButtons} className="bg-white" />
+      <ButtonArea buttons={linkButtons} />
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );

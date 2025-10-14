@@ -14,7 +14,7 @@ type stopMailMagazineInputs = {
   email: string;
 };
 
-export async function createContactData(data: ContactFormValues) {
+export const createContactData = async (data: ContactFormValues) => {
   const portalId = process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID;
   const formGuid = process.env.NEXT_PUBLIC_HUBSPOT_FORM_ID;
   const config = {
@@ -44,9 +44,9 @@ export async function createContactData(data: ContactFormValues) {
   } catch (error) {
     return 'error';
   }
-}
+};
 
-export async function createStartMailMagazineData(data: startMailMagazineInputs) {
+export const createStartMailMagazineData = async (data: startMailMagazineInputs) => {
   const portalId = process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID;
   const formGuid = process.env.NEXT_PUBLIC_HUBSPOT_START_MAIL_MAGAZINE_FORM_ID;
   const config = {
@@ -74,9 +74,9 @@ export async function createStartMailMagazineData(data: startMailMagazineInputs)
   } catch (error) {
     return 'error';
   }
-}
+};
 
-export async function createStopMailMagazineData(data: stopMailMagazineInputs) {
+export const createStopMailMagazineData = async (data: stopMailMagazineInputs) => {
   const portalId = process.env.NEXT_PUBLIC_HUBSPOT_PORTAL_ID;
   const formGuid = process.env.NEXT_PUBLIC_HUBSPOT_STOP_MAIL_MAGAZINE_FORM_ID;
   const config = {
@@ -99,4 +99,4 @@ export async function createStopMailMagazineData(data: stopMailMagazineInputs) {
   } catch (error) {
     return 'error';
   }
-}
+};

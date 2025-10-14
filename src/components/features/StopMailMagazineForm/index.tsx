@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 import { createStopMailMagazineData } from '@/app/_action/contact';
 import { stopMailMagazineSchema, type StopMailMagazineValues } from '@/lib/schema';
 import { Button } from '@/components/ui/button';
@@ -20,8 +19,9 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import { ChevronRight } from 'lucide-react';
 
-export const StopMailMagazineForm: React.FC = () => {
+export const StopMailMagazineForm: FC = () => {
   const [isStopChecked, setIsStopChecked] = useState(false);
   const [stopstatus, setStopStatus] = useState<string | null>(null);
 
@@ -123,13 +123,9 @@ export const StopMailMagazineForm: React.FC = () => {
         </div>
 
         <div className="mt-8 flex justify-center">
-          <Button
-            type="submit"
-            disabled={!isStopChecked || isSubmitting}
-            className="h-14 w-[295px] rounded-full bg-momo-100 text-lg font-bold tracking-widest text-white hover:bg-momo-100/90"
-          >
+          <Button type="submit" size="lg" disabled={!isStopChecked || isSubmitting}>
             {isSubmitting ? '処理中...' : '配信停止する'}
-            <MdOutlineKeyboardArrowRight className="ml-1 h-8 w-8" />
+            <ChevronRight className="!h-8 !w-8" />
           </Button>
         </div>
       </form>

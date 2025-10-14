@@ -1,15 +1,16 @@
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
-import Title from '@/components/ui/Title';
+import { Title } from '@/components/ui/Title';
 import { IMAGEBASEURL } from '@/constants';
 import { ACHIEVEMENTS } from '@/constants/achievements';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { FaCheckCircle, FaExternalLinkAlt } from 'react-icons/fa';
 import { Metadata } from 'next';
 import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import type { CollectionPage, ItemList, BreadcrumbList, WithContext } from 'schema-dts';
+import { CircleCheck, SquareArrowOutUpRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const pageTitle = '実績&デザイン集';
 
@@ -99,7 +100,7 @@ const AchievementsPage = () => {
       <section className={sectionClasses}>
         <div className="mx-auto max-w-6xl p-4">
           <h2 className="flex items-center text-xl font-bold md:text-2xl">
-            <FaCheckCircle className="mr-2 text-momo-100" />
+            <CircleCheck className="mr-2 text-momo-100" />
             <span>制作実績</span>
           </h2>
           <div className="mx-auto max-w-4xl py-8 font-medium leading-loose text-base md:text-lg">
@@ -121,21 +122,19 @@ const AchievementsPage = () => {
                     </div>
                   </Link>
                   <div className="flex flex-col gap-2 py-5">
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`${buttonBaseClasses} bg-momo-100`}
-                    >
-                      <span>サイトを見る</span>
-                      <FaExternalLinkAlt />
-                    </a>
-                    <Link
-                      href={`/achievements/${item.slug}`}
-                      className={`${buttonBaseClasses} bg-momo-200 !text-black`}
-                    >
-                      <span>詳細を見る</span>
-                    </Link>
+                    <Button asChild variant="default">
+                      <Link href={item.href} target="_blank" rel="noopener noreferrer">
+                        <span className="relative z-10 flex items-center">
+                          サイトを見る
+                          <SquareArrowOutUpRight className="ml-1 !h-5 !w-5" />
+                        </span>
+                      </Link>
+                    </Button>
+                    <Button asChild variant="secondary">
+                      <Link href={`/achievements/${item.slug}`}>
+                        <span className="relative z-10 flex items-center">詳細を見る</span>
+                      </Link>
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -146,7 +145,7 @@ const AchievementsPage = () => {
       <section className={sectionClasses}>
         <div className="mx-auto max-w-6xl p-4">
           <h2 className="flex items-center text-xl font-bold md:text-2xl">
-            <FaCheckCircle className="mr-2 text-momo-100" />
+            <CircleCheck className="mr-2 text-momo-100" />
             <span>デザイン提案</span>
           </h2>
           <div className="mx-auto max-w-4xl py-8 font-medium leading-loose text-base md:text-lg">

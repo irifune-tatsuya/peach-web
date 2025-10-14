@@ -1,8 +1,8 @@
-import React from 'react';
+import { FC } from 'react';
 import { IMAGEBASEURL } from '@/constants';
 import Image from 'next/image';
 
-const Loading: React.FC = () => {
+export const LoadingScreen: FC = () => {
   return (
     <div className="flex h-screen items-start justify-center bg-white pt-[30vh]">
       <div className="text-center animate-pulse">
@@ -17,5 +17,3 @@ const Loading: React.FC = () => {
     </div>
   );
 };
-
-export default Loading;

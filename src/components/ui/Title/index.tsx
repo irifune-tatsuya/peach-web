@@ -1,11 +1,10 @@
-import React from 'react';
+import { FC } from 'react';
 
 type Props = {
   titleEn: string;
   titleJp: string;
 };
-
-export default function Title({ titleEn, titleJp }: Props) {
+export const Title: FC<Props> = ({ titleEn, titleJp }) => {
   return (
     <div className="pt-9 pb-10 text-momo-100 md:pt-[118px] md:pb-[72px]">
       <div className="mx-auto max-w-6xl p-4">
@@ -16,4 +15,4 @@ export default function Title({ titleEn, titleJp }: Props) {
       </div>
     </div>
   );
-}
+};

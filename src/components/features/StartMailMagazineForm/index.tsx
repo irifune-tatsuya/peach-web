@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import { ChevronRight } from 'lucide-react';
 import { createStartMailMagazineData } from '@/app/_action/contact';
 import { IMAGEBASEURL } from '@/constants';
 import { startMailMagazineSchema, type StartMailMagazineValues } from '@/lib/schema';
@@ -23,7 +23,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 
-export const StartMailMagazineForm: React.FC = () => {
+export const StartMailMagazineForm: FC = () => {
   const [isStartChecked, setIsStartChecked] = useState(false);
   const [startstatus, setStartStatus] = useState<string | null>(null);
 
@@ -193,13 +193,9 @@ export const StartMailMagazineForm: React.FC = () => {
         </div>
 
         <div className="flex justify-center pt-4">
-          <Button
-            type="submit"
-            className="h-14 w-72 rounded-full bg-momo-100 text-lg font-bold tracking-widest text-white hover:bg-momo-100/90"
-            disabled={!isStartChecked || isSubmitting}
-          >
+          <Button type="submit" size="lg" disabled={!isStartChecked || isSubmitting}>
             {isSubmitting ? '送信中...' : '登録する'}
-            <MdOutlineKeyboardArrowRight size="2rem" />
+            <ChevronRight className="!h-8 !w-8" />
           </Button>
         </div>
       </form>

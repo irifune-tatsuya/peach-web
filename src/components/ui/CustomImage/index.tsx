@@ -1,5 +1,6 @@
 'use client';
 
+import { FC } from 'react';
 import { cn } from '@/lib/utils';
 import NextImage, { type ImageProps as NextImageProps } from 'next/image';
 
@@ -7,7 +8,7 @@ type CustomImageProps = Omit<NextImageProps, 'width' | 'height' | 'style' | 'fil
   wrapperClassName?: string;
 };
 
-export const CustomImage: React.FC<CustomImageProps> = ({ wrapperClassName, ...imageProps }) => {
+export const CustomImage: FC<CustomImageProps> = ({ wrapperClassName, ...imageProps }) => {
   return (
     <div className={cn('relative', wrapperClassName)}>
       <NextImage {...imageProps} fill sizes={imageProps.sizes || '100vw'} />

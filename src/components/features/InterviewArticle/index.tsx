@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FaInstagram, FaFacebookF, FaLine } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
-import { IoMdHome } from 'react-icons/io';
+import { House } from 'lucide-react';
 import { formatRichText } from '@/lib/richtext';
 import { renderToc } from '@/lib/render-toc';
 import { type Article } from '@/lib/microcms';
@@ -15,6 +15,7 @@ import { IMAGEBASEURL } from '@/constants';
 import { PublishedDate } from '@/components//ui/PublishedDate';
 import { TableOfContents } from '@/components/common/TableOfContents';
 import { StartMailMagazineForm } from '@/components/features/StartMailMagazineForm';
+import { Button } from '@/components/ui/button';
 
 type Props = {
   data: Article;
@@ -35,34 +36,34 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
     {
       sns: data.instagramid,
       href: `https://www.instagram.com/${data.instagramid}?ref=badge`,
-      bg: 'bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500',
-      icon: <FaInstagram size={32} color="white" />,
+      variant: 'instagram',
+      icon: <FaInstagram className="!h-10 !w-10" />,
     },
     {
       sns: data.facebookurl,
       href: data.facebookurl,
-      bg: 'bg-[#1877f2]',
-      icon: <FaFacebookF size={26} color="white" />,
+      variant: 'facebook',
+      icon: <FaFacebookF className="!h-8 !w-8" />,
     },
     {
       sns: data.xid,
       href: `https://twitter.com/${data.xid}`,
-      bg: 'bg-black',
-      icon: <FaXTwitter size={24} color="white" />,
+      variant: 'x',
+      icon: <FaXTwitter className="!h-8 !w-8" />,
     },
     {
       sns: data.lineurl,
       href: data.lineurl,
-      bg: 'bg-white',
-      icon: <FaLine size={45} color="#06c755" />,
+      variant: 'line',
+      icon: <FaLine className="!h-10 !w-10" />,
     },
     {
       sns: data.url,
       href: data.url,
-      bg: 'bg-[var(--color-momo-100)]',
-      icon: <IoMdHome size={30} color="white" />,
+      variant: 'default',
+      icon: <House className="!h-8 !w-8" />,
     },
-  ];
+  ] as const;
 
   return (
     <article>
@@ -85,40 +86,48 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
             className="h-auto w-full"
           />
         )}
-
-        <div className="mt-8 border-t border-black px-4 pt-8 pb-5 md:pt-20 md:pb-5">
+        <div className="px-4 pt-8 pb-5 md:pt-20 md:pb-5">
           <h1 className="text-left text-2xl font-bold leading-normal md:text-4xl">{data.title}</h1>
-          <div className="mt-5 flex flex-col items-stretch justify-end gap-3 md:flex-row md:items-center">
+          <div className="mt-5 flex flex-col items-stretch justify-end gap-3 lg:flex-row md:items-center">
             {data.instagramid && (
-              <Link
-                href={`https://www.instagram.com/${data.instagramid}?ref=badge`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex h-12 items-center justify-center rounded-lg bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 px-6 font-bold text-white transition-opacity hover:opacity-70"
-              >
-                <FaInstagram size={32} color="white" />
-                <span className="ml-1">{`${data.interviewed}さんをフォロー`}</span>
-              </Link>
+              <Button asChild variant="instagram">
+                <Link
+                  href={`https://www.instagram.com/${data.instagramid}?ref=badge`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="relative z-10 flex items-center">
+                    <FaInstagram className="!mr-2 !h-6 !w-6" />
+                    {data.interviewed}さんをフォロー
+                  </span>
+                </Link>
+              </Button>
             )}
             <div className="flex gap-3">
-              <Link
-                href={`https://www.facebook.com/share.php?u=${fullPath}`}
-                target="_blank"
-                rel="nofollow noopener"
-                className="flex h-12 flex-1 items-center justify-center rounded-lg bg-[#1877f2] px-3 font-bold text-white transition-opacity hover:opacity-70 md:flex-none"
-              >
-                <FaFacebookF size={26} color="white" />
-                <span className="ml-1">記事をシェア</span>
-              </Link>
-              <Link
-                href={`https://x.com/share?url=${fullPath}&text=${data.title}&via=irifune333&related=${data.xid}`}
-                target="_blank"
-                rel="nofollow noopener"
-                className="flex h-12 flex-1 items-center justify-center rounded-lg bg-black px-3 font-bold text-white transition-opacity hover:opacity-70 md:flex-none"
-              >
-                <FaXTwitter size={24} color="white" />
-                <span className="ml-1">記事をシェア</span>
-              </Link>
+              <Button asChild variant="facebook" className="flex-1 md:flex-none">
+                <Link
+                  href={`https://www.facebook.com/share.php?u=${fullPath}`}
+                  target="_blank"
+                  rel="nofollow noopener"
+                >
+                  <span className="relative z-10 flex items-center">
+                    <FaFacebookF className="!mr-2 !h-5 !w-5" />
+                    記事をシェア
+                  </span>
+                </Link>
+              </Button>
+              <Button asChild variant="x" className="flex-1 md:flex-none">
+                <Link
+                  href={`https://x.com/share?url=${fullPath}&text=${data.title}&via=irifune333&related=${data.xid}`}
+                  target="_blank"
+                  rel="nofollow noopener"
+                >
+                  <span className="relative z-10 flex items-center">
+                    <FaXTwitter className="!mr-2 !h-5 !w-5" />
+                    記事をシェア
+                  </span>
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
@@ -128,33 +137,41 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
         {devidedContents.map((content, i) => (
           <React.Fragment key={i}>
             <div
-              className="prose prose-lg mb-8 max-w-none px-4 prose-h2:inline-block prose-h2:border-b-2 prose-h2:border-[var(--color-momo-100)] prose-h2:pb-1 prose-h2:no-underline"
+              className="prose prose-lg mb-8 max-w-none px-4 prose-h2:inline-block prose-h2:border-b-2 prose-h2:border-[var(--color-momo-100)] prose-h2:pb-1 prose-h2:no-underline prose-h2:text-2xl"
               dangerouslySetInnerHTML={{ __html: formatRichText(content) }}
             />
             {i < devidedContents.length - 1 &&
               (data.instagramid || data.facebookurl || data.xid || data.lineurl || data.url) && (
                 <div className="px-4 pt-8 pb-32">
-                  <div className="mx-auto max-w-2xl rounded-2xl bg-momo-600 p-6 text-center shadow-lg md:p-8">
-                    <p className="text-xl font-bold text-momo-100 md:text-2xl">
-                      {`${data.interviewed}さんをフォロー`}
+                  <div className="mx-auto max-w-2xl rounded-2xl bg-momo-300 p-6 text-center shadow-lg md:p-8">
+                    <p>
+                      <span className="block font-bold md:text-2xl">{data.interviewed}さん</span>
+                      <span className="block text-gray-500">アカウントフォローはこちら</span>
                     </p>
                     <div className="mt-6 flex justify-center">
                       <div className="inline-grid grid-cols-3 gap-4 md:flex md:flex-row">
                         {interviewedSNSLinks.map((link, j) => (
                           <div key={j}>
                             {link.sns ? (
-                              <Link
-                                href={link.href || ''}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={`flex h-14 w-14 items-center justify-center rounded-full transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg ${link.bg}`}
+                              <Button
+                                asChild
+                                variant={link.variant}
+                                size="icon"
+                                className="h-14 w-14 rounded-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg"
+                              >
+                                <a href={link.href || ''} target="_blank" rel="noopener noreferrer">
+                                  {link.icon}
+                                </a>
+                              </Button>
+                            ) : (
+                              <Button
+                                variant="outline"
+                                size="icon"
+                                className="h-14 w-14 rounded-lg"
+                                disabled
                               >
                                 {link.icon}
-                              </Link>
-                            ) : (
-                              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gray-200">
-                                {interviewedSNSLinks[j].icon}
-                              </div>
+                              </Button>
                             )}
                           </div>
                         ))}

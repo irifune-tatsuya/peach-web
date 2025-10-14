@@ -1,5 +1,6 @@
+import { FC } from 'react';
 import Link from 'next/link';
-import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import { ChevronRight } from 'lucide-react';
 
 type BreadcrumbItem = {
   title: string;
@@ -11,7 +12,7 @@ type Props = {
   breadcrumbs: BreadcrumbItem[];
 };
 
-export const Breadcrumbs = ({ breadcrumbs }: Props) => {
+export const Breadcrumbs: FC<Props> = ({ breadcrumbs }) => {
   return (
     <nav aria-label="breadcrumb" className="bg-momo-300 px-4 py-4 text-sm">
       <ol className="mx-auto flex max-w-6xl flex-wrap">
@@ -29,9 +30,7 @@ export const Breadcrumbs = ({ breadcrumbs }: Props) => {
                 {item.title}
               </Link>
             )}
-            {i < breadcrumbs.length - 1 && (
-              <MdOutlineKeyboardArrowRight className="mx-2 h-5 w-5 shrink-0" />
-            )}
+            {i < breadcrumbs.length - 1 && <ChevronRight className="mx-2 h-5 w-5 shrink-0" />}
           </li>
         ))}
       </ol>

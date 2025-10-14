@@ -1,4 +1,4 @@
-import Title from '@/components/ui/Title';
+import { Title } from '@/components/ui/Title';
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { ContactForm } from '@/components/features/ContactForm';
 import React from 'react';

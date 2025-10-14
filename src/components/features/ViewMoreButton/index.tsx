@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Link from 'next/link';
-import { FiArrowRight } from 'react-icons/fi';
+import { ChevronRight } from 'lucide-react';
 
 type Props = {
   href: string;
@@ -34,10 +34,10 @@ export const ViewMoreButton: FC<Props> = ({ href, size }) => {
           `}
         >
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <FiArrowRight
+            <ChevronRight
               className={`
                 text-white
-                ${isSmall ? 'h-4 w-4' : 'h-5 w-5'}
+                ${isSmall ? '!h-4 !w-4' : '!h-5 !w-5'}
               `}
             />
           </div>

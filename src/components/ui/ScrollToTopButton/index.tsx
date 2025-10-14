@@ -1,20 +1,46 @@
 'use client';
 
-import { MdKeyboardArrowUp } from 'react-icons/md';
+import { FC } from 'react';
+import { useEffect, useState } from 'react';
+import { ChevronUp } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
-export const ScrollToTopButton = () => {
+export const ScrollToTopButton: FC = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const toggleVisibility = () => {
+    if (window.scrollY > 300) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener('scroll', toggleVisibility);
+
+    return () => {
+      window.removeEventListener('scroll', toggleVisibility);
+    };
+  }, []);
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <button
+    <Button
       type="button"
       onClick={scrollToTop}
-      className="fixed bottom-28 right-3 z-50 block h-[50px] w-[50px] rounded-full bg-white p-2 text-momo-100 shadow-lg transition-transform hover:scale-105 active:scale-95 md:hidden"
       aria-label="ページトップに戻る"
+      variant="momo"
+      size="icon"
+      className={cn(
+        'fixed bottom-[110px] right-2 z-50 h-12 w-12 shadow-lg md:hidden transition-transform duration-300 ease-in-out',
+        isVisible ? 'translate-y-0' : 'translate-y-20',
+      )}
     >
-      <MdKeyboardArrowUp className="h-full w-full" />
-    </button>
+      <ChevronUp className="!h-6 !w-6" />
+    </Button>
   );
 };

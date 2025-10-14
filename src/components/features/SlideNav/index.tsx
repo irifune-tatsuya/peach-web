@@ -1,7 +1,8 @@
 'use client';
 
+import { FC } from 'react';
 import { useEffect, useState } from 'react';
-import { MdKeyboardArrowRight } from 'react-icons/md';
+import { ChevronRight } from 'lucide-react';
 import { Link as ScrollLink } from 'react-scroll';
 import { cn } from '@/lib/utils';
 
@@ -39,7 +40,7 @@ interface SlideNavProps {
   onLinkClick?: () => void;
 }
 
-export const SlideNav: React.FC<SlideNavProps> = ({ data, activeId, setActiveId, onLinkClick }) => {
+export const SlideNav: FC<SlideNavProps> = ({ data, activeId, setActiveId, onLinkClick }) => {
   const offsetValue = useScrollOffset();
 
   return (
@@ -69,8 +70,8 @@ export const SlideNav: React.FC<SlideNavProps> = ({ data, activeId, setActiveId,
                 )}
               >
                 <div className="flex items-center">
-                  <MdKeyboardArrowRight
-                    className={cn('h-5 w-5', isActive ? 'text-momo-100' : 'text-gray-400')}
+                  <ChevronRight
+                    className={cn('!h-5 !w-5', isActive ? 'text-momo-100' : 'text-gray-400')}
                   />
                   <span className="flex-1">{item.title}</span>
                 </div>

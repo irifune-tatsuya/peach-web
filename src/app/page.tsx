@@ -11,7 +11,6 @@ import {
 } from '@/constants';
 import { FaInstagram, FaLine } from 'react-icons/fa';
 import { FaSquareXTwitter } from 'react-icons/fa6';
-import { ContactButton } from '@/components/ui/ContactButton';
 import { getList } from '@/lib/microcms';
 import { LatestArticleList } from '@/components/features/LatestArticleList';
 import { ViewMoreButton } from '@/components/features/ViewMoreButton';
@@ -19,6 +18,8 @@ import { SectionHeading } from '@/components/features/SectionHeading';
 import { ArticleList } from '@/components/common/ArticleList';
 import { MainArticleCard } from '@/components/features/MainArticleCard';
 import { ArticleSubList } from '@/components/features/ArticleSubList';
+import { Button } from '@/components/ui/button';
+import { Mail } from 'lucide-react';
 
 export const revalidate = 3600;
 
@@ -102,7 +103,12 @@ const HomePage = () => {
           <Link href={CONTACT.line} target="_blank">
             <FaLine className="h-10 w-10" />
           </Link>
-          <ContactButton />
+          <Button asChild>
+            <Link href="/contact">
+              <Mail className="!h-5 !w-5" />
+              お問い合わせ
+            </Link>
+          </Button>
         </div>
       </section>
       <section className="pt-14 pb-10 md:py-18">

@@ -3,8 +3,7 @@
 import { FC } from 'react';
 import Link from 'next/link';
 import { MENU } from '@/constants';
-import { IoMail, IoCloseOutline } from 'react-icons/io5';
-import { FaArrowRight } from 'react-icons/fa';
+import { Mail, X, ArrowRight } from 'lucide-react';
 import {
   Sheet,
   SheetContent,
@@ -15,8 +14,9 @@ import {
   SheetDescription,
 } from '@/components/ui/sheet';
 import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
 
-function useMediaQuery(query: string): boolean {
+const useMediaQuery = (query: string): boolean => {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ function useMediaQuery(query: string): boolean {
   }, [matches, query]);
 
   return matches;
-}
+};
 
 type Props = {
   isOpen: boolean;
@@ -45,7 +45,7 @@ export const NavDrawer: FC<Props> = ({ isOpen, onCloseAction }) => {
 
   return (
     <Sheet open={isOpen} onOpenChange={onCloseAction}>
-      <SheetContent side={side} className="bg-white">
+      <SheetContent side={side} className="bg-white flex flex-col h-full">
         <SheetHeader className="flex flex-row justify-end">
           <SheetTitle className="sr-only">ナビゲーションメニュー</SheetTitle>
           <SheetDescription className="sr-only">
@@ -53,11 +53,11 @@ export const NavDrawer: FC<Props> = ({ isOpen, onCloseAction }) => {
           </SheetDescription>
           <SheetClose asChild>
             <button className="hidden h-12 w-12 rounded-full bg-momo-300 p-2 md:block">
-              <IoCloseOutline className="h-full w-full" />
+              <X className="h-full w-full" />
             </button>
           </SheetClose>
         </SheetHeader>
-        <div className="pt-10">
+        <div className="py-10 flex-1 overflow-y-auto">
           <nav className="flex justify-center md:justify-end">
             <ul className="w-full list-none">
               {MENU.map((item, i) => (
@@ -68,7 +68,7 @@ export const NavDrawer: FC<Props> = ({ isOpen, onCloseAction }) => {
                     onClick={onCloseAction}
                   >
                     {item.title}
-                    <FaArrowRight className="text-momo-100" />
+                    <ArrowRight className="text-momo-100" />
                   </Link>
                 </li>
               ))}
@@ -77,15 +77,15 @@ export const NavDrawer: FC<Props> = ({ isOpen, onCloseAction }) => {
         </div>
         <SheetFooter className="md:hidden">
           <div className="flex w-full items-center justify-between px-2">
-            <Link href="/contact" className="block text-center" onClick={onCloseAction}>
-              <div className="flex h-full max-w-[200px] items-center justify-center rounded-[30px] bg-momo-100 px-['2em'] py-['1em'] text-sm font-bold text-white">
-                <IoMail size={'1.5em'} />
-                <span className="ml-4">お問い合わせ</span>
-              </div>
-            </Link>
+            <Button asChild>
+              <Link href="/contact">
+                <Mail className="!h-5 !w-5" />
+                お問い合わせ
+              </Link>
+            </Button>
             <SheetClose asChild>
               <button className="block h-12 w-12 rounded-full bg-momo-300 p-2 md:hidden">
-                <IoCloseOutline className="h-full w-full" />
+                <X className="h-full w-full" />
               </button>
             </SheetClose>
           </div>

@@ -1,14 +1,14 @@
-import React from 'react';
+import { FC } from 'react';
 import { MENU, CONTACT, IMAGEBASEURL } from '@/constants';
 import { FaInstagram } from 'react-icons/fa';
 import { FaSquareXTwitter } from 'react-icons/fa6';
 import { FaLine } from 'react-icons/fa';
-import { NextPage } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ContactButton } from '@/components/ui/ContactButton';
+import { Button } from '@/components/ui/button';
+import { Mail } from 'lucide-react';
 
-export const Footer: React.FC = () => {
+export const Footer: FC = () => {
   return (
     <footer className="hidden flex-col items-center px-4 pb-12 pt-12 md:flex">
       <div className="flex w-full justify-center">
@@ -48,7 +48,12 @@ export const Footer: React.FC = () => {
           </ul>
         </nav>
         <div className="flex flex-col">
-          <ContactButton />
+          <Button asChild>
+            <Link href="/contact">
+              <Mail className="!h-5 !w-5" />
+              お問い合わせ
+            </Link>
+          </Button>
           <address className="my-5 not-italic text-sm">
             〒704-8176
             <br />

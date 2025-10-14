@@ -27,7 +27,7 @@ export const TableOfContents: FC<Props> = ({ toc }) => {
   }
 
   return (
-    <nav className="my-9 rounded-lg bg-momo-300 p-2 shadow-lg">
+    <nav className="my-9 mx-4 p-2 rounded-lg bg-momo-300 shadow-lg">
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="item-1" className="border-b-0">
           <AccordionTrigger className="px-4 font-bold hover:no-underline">

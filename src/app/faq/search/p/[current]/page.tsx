@@ -1,7 +1,7 @@
 import { getList } from '@/lib/microcms';
 import { FAQFILTER, LIMIT12 } from '@/constants';
 import { Pagination } from '@/components/ui/Pagination';
-import Title from '@/components/ui/Title';
+import { Title } from '@/components/ui/Title';
 import { SearchField } from '@/components/ui/SearchField';
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import React, { Suspense } from 'react';

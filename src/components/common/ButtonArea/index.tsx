@@ -1,22 +1,23 @@
-import React from 'react';
-import SimpleButton from '@/components/ui/SimpleButton';
+import { FC } from 'react';
+import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { type VariantProps } from 'class-variance-authority';
 
-type Button = {
-  bgClassName?: string;
-  textClassName?: string;
+type ButtonType = {
   href: string;
-  isExternal: boolean;
-  title: string;
-  icon: React.ReactNode;
+  children: React.ReactNode;
+  icon?: React.ReactNode;
+  variant?: VariantProps<typeof buttonVariants>['variant'];
+  size?: VariantProps<typeof buttonVariants>['size'];
 };
 
 type Props = {
-  buttons: Array<Button>;
+  buttons: ReadonlyArray<ButtonType>;
   className?: string;
 };
 
-export default function ButtonArea({ buttons, className }: Props) {
+export const ButtonArea: FC<Props> = ({ buttons, className }) => {
   return (
     <div
       className={cn(
@@ -24,18 +25,29 @@ export default function ButtonArea({ buttons, className }: Props) {
         className,
       )}
     >
-      {buttons.map((button, i) => (
-        <SimpleButton
-          key={i}
-          bgClassName={button.bgClassName}
-          textClassName={button.textClassName}
-          href={button.href}
-          isExternal={button.isExternal}
-          title={button.title}
-          icon={button.icon}
-          className="w-full max-w-xs md:w-auto"
-        />
-      ))}
+      {buttons.map((button, i) => {
+        const isExternal = button.href.startsWith('http');
+        return (
+          <Button
+            key={i}
+            asChild
+            variant={button.variant || 'default'}
+            size={button.size || 'default'}
+            className="w-full max-w-xs md:w-auto"
+          >
+            <Link
+              href={button.href}
+              target={isExternal ? '_blank' : undefined}
+              rel={isExternal ? 'noopener noreferrer' : undefined}
+            >
+              <span className="relative z-10 flex items-center">
+                {button.icon}
+                {button.children}
+              </span>
+            </Link>
+          </Button>
+        );
+      })}
     </div>
   );
-}
+};

@@ -1,13 +1,12 @@
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
-import Title from '@/components/ui/Title';
-import { FaCheckCircle } from 'react-icons/fa';
+import { Title } from '@/components/ui/Title';
+import { CircleCheck, Monitor } from 'lucide-react';
 import { SideScrollIcon } from '@/components/ui/SideScrollIcon';
-import { ImDisplay } from 'react-icons/im';
 import { IMAGEBASEURL } from '@/constants';
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Table,
   TableBody,
@@ -20,6 +19,7 @@ import { Metadata } from 'next';
 import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import type { Service, Offer, BreadcrumbList, WithContext } from 'schema-dts';
+import { Button } from '@/components/ui/button';
 
 const pageTitle = '料金体系';
 
@@ -177,7 +177,7 @@ const PricingPage = () => {
         <div className="mx-auto max-w-6xl p-4">
           <div>
             <h2 className="flex items-center text-lg font-bold md:text-xl">
-              <FaCheckCircle className="text-momo-100" />
+              <CircleCheck className="text-momo-100" />
               <span className="ml-2">基本料金</span>
             </h2>
           </div>
@@ -225,17 +225,16 @@ const PricingPage = () => {
                 </Card>
               ))}
             </div>
-            <p className="text-center text-sm">※ 料金は全て税別です。</p>
-            <div className="py-10">
-              <Link
-                href="/service"
-                className="mx-auto block w-[250px] text-center hover:no-underline"
-              >
-                <div className="flex h-full items-center justify-center rounded-full bg-momo-100 px-[2em] py-[1em] font-bold text-white">
-                  <ImDisplay size={'1.5em'} />
-                  <p className="ml-2">サービス内容を見る</p>
-                </div>
-              </Link>
+            <p className="mt-4 text-center text-sm">※ 料金は全て税別です。</p>
+            <div className="py-10 text-center">
+              <Button asChild variant="default" className="mx-auto w-[250px]">
+                <Link href="/service">
+                  <span className="relative z-10 flex items-center">
+                    <Monitor className="!h-5 !w-5" />
+                    サービス内容を見る
+                  </span>
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
@@ -244,7 +243,7 @@ const PricingPage = () => {
         <div className="mx-auto max-w-6xl p-4">
           <div>
             <h2 className="flex items-center text-lg font-bold md:text-xl">
-              <FaCheckCircle className="text-momo-100" />
+              <CircleCheck className="text-momo-100" />
               <span className="ml-2">オプション料金</span>
             </h2>
           </div>

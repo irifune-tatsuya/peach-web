@@ -1,6 +1,6 @@
 import styles from './not-found.module.css';
 
-export default function NotFound() {
+const NotFound = () => {
   return (
     <div className={styles.container}>
       <dl>
@@ -9,4 +9,6 @@ export default function NotFound() {
       </dl>
     </div>
   );
-}
+};
+
+export default NotFound;

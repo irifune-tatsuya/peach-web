@@ -1,13 +1,12 @@
 'use client';
 
-import { NextPage } from 'next';
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import Link from 'next/link';
 import Image from 'next/image';
-import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import { ChevronRight } from 'lucide-react';
 import { createContactData } from '@/app/_action/contact';
 import { IMAGEBASEURL } from '@/constants';
 import { Button } from '@/components/ui/button';
@@ -17,7 +16,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { contactFormSchema } from '@/lib/schema';
 
-export const ContactForm: React.FC = () => {
+export const ContactForm: FC = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
 
@@ -245,13 +244,9 @@ export const ContactForm: React.FC = () => {
         </div>
 
         <div className="mt-[60px] flex justify-center">
-          <Button
-            type="submit"
-            disabled={!isChecked || isSubmitting}
-            className="h-[80px] w-full max-w-[350px] rounded-full bg-momo-100 text-lg font-bold tracking-widest text-white hover:bg-momo-100/90"
-          >
+          <Button type="submit" disabled={!isChecked || isSubmitting} size="lg">
             {isSubmitting ? '送信中...' : '送信する'}
-            <MdOutlineKeyboardArrowRight className="ml-1 h-8 w-8" />
+            <ChevronRight className="!ml-1 !h-8 !w-8" />
           </Button>
         </div>
       </form>

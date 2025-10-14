@@ -1,7 +1,6 @@
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { SideScrollIcon } from '@/components/ui/SideScrollIcon';
-import { SiteLinkButton } from '@/components/ui/SiteLinkButton';
-import Title from '@/components/ui/Title';
+import { Title } from '@/components/ui/Title';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Table,
@@ -13,12 +12,14 @@ import {
 } from '@/components/ui/table';
 import { IMAGEBASEURL } from '@/constants';
 import Image from 'next/image';
-import { FaCheckCircle } from 'react-icons/fa';
-import { ImCoinYen, ImDisplay } from 'react-icons/im';
 import { Metadata } from 'next';
 import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import type { AboutPage, BreadcrumbList, WithContext } from 'schema-dts';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { Monitor, CircleCheck } from 'lucide-react';
+import { BadgeJapaneseYen } from 'lucide-react';
 
 const pageTitle = '選ばれる理由';
 
@@ -90,19 +91,6 @@ const designData = [
   },
 ];
 
-const buttonData = {
-  service: {
-    href: '/service',
-    icon: <ImDisplay size="1.5em" />,
-    text: 'サービス内容を見る',
-  },
-  pricing: {
-    href: '/pricing',
-    icon: <ImCoinYen size="1.5em" />,
-    text: '価格とプランを見る',
-  },
-};
-
 const ReasonCard = ({ item }: { item: { title: string; content: string; image: string } }) => (
   <Card className="min-w-[280px] w-auto max-w-[350px] snap-start flex-shrink-0">
     <CardHeader>
@@ -155,7 +143,7 @@ const ReasonPage = () => {
       <section className="relative overflow-hidden bg-[linear-gradient(-225deg,_#eeeeee_0%,_#ffffff_56%,_#eeeeee_100%)] pt-[88px] pb-[90px] md:pt-32 md:pb-44">
         <div className="mx-auto max-w-6xl p-4">
           <h2 className="flex items-center text-xl font-bold md:text-2xl">
-            <FaCheckCircle className="text-momo-100" />
+            <CircleCheck className="text-momo-100" />
             <span className="ml-2">一緒に作るWEBブランディング</span>
           </h2>
           <div className="mx-auto max-w-4xl py-8 font-medium leading-loose text-base md:text-lg">
@@ -175,15 +163,20 @@ const ReasonPage = () => {
               ))}
             </div>
           </div>
-          <div className="mt-10 py-10">
-            <SiteLinkButton {...buttonData.service} />
+          <div className="mt-10 py-10 flex justify-center">
+            <Button asChild>
+              <Link href="/service">
+                <Monitor className="!h-5 !w-5" />
+                サービス内容を見る
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
       <section className="relative overflow-hidden bg-white pt-[88px] pb-[90px] md:pt-32 md:pb-44">
         <div className="mx-auto max-w-6xl p-4">
           <h2 className="flex items-center text-xl font-bold md:text-2xl">
-            <FaCheckCircle className="text-momo-100" />
+            <CircleCheck className="text-momo-100" />
             <span className="ml-2">他社様とのサービス比較</span>
           </h2>
           <div className="mx-auto max-w-4xl py-8 font-medium leading-loose text-base md:text-lg">
@@ -225,56 +218,52 @@ const ReasonPage = () => {
                 </TableHeader>
                 <TableBody>
                   <TableRow>
-                    <TableCell className="bg-momo-200 font-bold">HP制作費用</TableCell>
-                    <TableCell className="bg-momo-600 text-center text-white">基本無料</TableCell>
+                    <TableCell className="bg-momo-100 font-bold text-white">HP制作費用</TableCell>
+                    <TableCell className="bg-momo-200 text-center">基本無料</TableCell>
                     <TableCell className="text-center">5~30万円程度</TableCell>
-                    <TableCell className="bg-momo-600 text-center text-white">基本無料</TableCell>
+                    <TableCell className="bg-momo-200 text-center">基本無料</TableCell>
                     <TableCell className="text-center">30万円以上</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className="bg-momo-200 font-bold">月額費用</TableCell>
+                    <TableCell className="bg-momo-100 font-bold text-white">月額費用</TableCell>
                     <TableCell className="text-center">60,000円</TableCell>
-                    <TableCell className="bg-momo-600 text-center text-white">なし</TableCell>
+                    <TableCell className="bg-momo-200 text-center">なし</TableCell>
                     <TableCell className="text-center">10,000円以上</TableCell>
-                    <TableCell className="bg-momo-600 text-center text-white">なし</TableCell>
+                    <TableCell className="bg-momo-200 text-center">なし</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className="bg-momo-200 font-bold">価格表示</TableCell>
-                    <TableCell className="bg-momo-600 text-center text-white">HPにて記載</TableCell>
-                    <TableCell className="bg-momo-600 text-center text-white">
-                      商品ページに記載
+                    <TableCell className="bg-momo-100 font-bold text-white">価格表示</TableCell>
+                    <TableCell className="bg-momo-200 text-center">HPにて記載</TableCell>
+                    <TableCell className="bg-momo-200 text-center">商品ページに記載</TableCell>
+                    <TableCell className="text-center">なし</TableCell>
+                    <TableCell className="text-center">なし</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="bg-momo-100 font-bold text-white">
+                      デザイン自由度
                     </TableCell>
-                    <TableCell className="text-center">なし</TableCell>
-                    <TableCell className="text-center">なし</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="bg-momo-200 font-bold">デザイン自由度</TableCell>
-                    <TableCell className="bg-momo-600 text-center text-white">高い</TableCell>
+                    <TableCell className="bg-momo-200 text-center">高い</TableCell>
                     <TableCell className="text-center">制作者による</TableCell>
                     <TableCell className="text-center">低い</TableCell>
                     <TableCell className="text-center">高い</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className="bg-momo-200 font-bold">ページ更新</TableCell>
-                    <TableCell className="bg-momo-600 text-center text-white">
-                      基本毎月4回
-                    </TableCell>
+                    <TableCell className="bg-momo-100 font-bold text-white">ページ更新</TableCell>
+                    <TableCell className="bg-momo-200 text-center">基本毎月4回</TableCell>
                     <TableCell className="text-center">なし</TableCell>
                     <TableCell className="text-center">追加料金が発生</TableCell>
                     <TableCell className="text-center">追加料金が発生</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className="bg-momo-200 font-bold">SEO対策</TableCell>
-                    <TableCell className="bg-momo-600 text-center text-white">基本含む</TableCell>
+                    <TableCell className="bg-momo-100 font-bold text-white">SEO対策</TableCell>
+                    <TableCell className="bg-momo-200 text-center">基本含む</TableCell>
                     <TableCell className="text-center">なし</TableCell>
                     <TableCell className="text-center">追加料金が発生</TableCell>
                     <TableCell className="text-center">追加料金が発生</TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className="bg-momo-200 font-bold">客先訪問</TableCell>
-                    <TableCell className="bg-momo-600 text-center text-white">
-                      毎月1回以上
-                    </TableCell>
+                    <TableCell className="bg-momo-100 font-bold text-white">客先訪問</TableCell>
+                    <TableCell className="bg-momo-200 text-center">毎月1回以上</TableCell>
                     <TableCell className="text-center">なし</TableCell>
                     <TableCell className="text-center">なし</TableCell>
                     <TableCell className="text-center">追加料金が発生</TableCell>
@@ -282,8 +271,13 @@ const ReasonPage = () => {
                 </TableBody>
               </Table>
             </div>
-            <div className="mt-10 py-10">
-              <SiteLinkButton {...buttonData.pricing} />
+            <div className="mt-10 py-10 flex justify-center">
+              <Button asChild>
+                <Link href="/pricing">
+                  <BadgeJapaneseYen className="!h-5 !w-5" />
+                  価格とプランを見る
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
@@ -291,7 +285,7 @@ const ReasonPage = () => {
       <section className="relative overflow-hidden bg-[linear-gradient(-225deg,_#eeeeee_0%,_#ffffff_56%,_#eeeeee_100%)] pt-[88px] pb-[90px] md:pt-32 md:pb-44">
         <div className="mx-auto max-w-6xl p-4">
           <h2 className="flex items-center text-xl font-bold md:text-2xl">
-            <FaCheckCircle className="text-momo-100" />
+            <CircleCheck className="text-momo-100" />
             <span className="ml-2">フルカスタマイズデザイン</span>
           </h2>
           <div className="mt-11 md:mt-16">
@@ -318,7 +312,7 @@ const ReasonPage = () => {
       <section className="relative overflow-hidden bg-white pt-[88px] pb-[90px] md:pt-32 md:pb-44">
         <div className="mx-auto max-w-6xl p-4">
           <h2 className="flex items-center text-xl font-bold md:text-2xl">
-            <FaCheckCircle className="text-momo-100" />
+            <CircleCheck className="text-momo-100" />
             <span className="ml-2">WEB集客との違い</span>
           </h2>
           <div className="mt-11 md:mt-16">
@@ -343,7 +337,9 @@ const ReasonPage = () => {
                 </TableHeader>
                 <TableBody>
                   <TableRow>
-                    <TableCell className="bg-momo-200 text-center font-bold">目的</TableCell>
+                    <TableCell className="bg-momo-100 text-center font-bold text-white">
+                      目的
+                    </TableCell>
                     <TableCell>
                       企業やサービスの認知度とイメージを向上させ、顧客との信頼関係を構築することを⽬指す。
                     </TableCell>
@@ -352,7 +348,9 @@ const ReasonPage = () => {
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className="bg-momo-200 text-center font-bold">手法</TableCell>
+                    <TableCell className="bg-momo-100 text-center font-bold text-white">
+                      手法
+                    </TableCell>
                     <TableCell>
                       <ul className="list-disc space-y-1 pl-5">
                         <li>ビジュアルデザインの統⼀</li>
@@ -371,7 +369,9 @@ const ReasonPage = () => {
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className="bg-momo-200 text-center font-bold">目標</TableCell>
+                    <TableCell className="bg-momo-100 text-center font-bold text-white">
+                      目標
+                    </TableCell>
                     <TableCell>
                       <ul className="list-disc space-y-1 pl-5">
                         <li>ブランド認知度の向上</li>
@@ -389,7 +389,9 @@ const ReasonPage = () => {
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className="bg-momo-200 text-center font-bold">KPI</TableCell>
+                    <TableCell className="bg-momo-100 text-center font-bold text-white">
+                      KPI
+                    </TableCell>
                     <TableCell>
                       <ul className="list-disc space-y-1 pl-5">
                         <li>商品や企業名での検索数</li>
@@ -408,7 +410,9 @@ const ReasonPage = () => {
                     </TableCell>
                   </TableRow>
                   <TableRow>
-                    <TableCell className="bg-momo-200 text-center font-bold">効果</TableCell>
+                    <TableCell className="bg-momo-100 text-center font-bold text-white">
+                      効果
+                    </TableCell>
                     <TableCell>
                       ⻑期的に影響を与えるもので、⼀度築かれたブランド価値は⻑期間維持されやすい。
                     </TableCell>
@@ -419,8 +423,13 @@ const ReasonPage = () => {
                 </TableBody>
               </Table>
             </div>
-            <div className="mt-10 py-10">
-              <SiteLinkButton {...buttonData.service} />
+            <div className="mt-10 py-10 flex justify-center">
+              <Button asChild>
+                <Link href="/service">
+                  <Monitor className="!h-5 !w-5" />
+                  サービス内容を見る
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
