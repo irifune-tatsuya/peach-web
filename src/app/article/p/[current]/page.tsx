@@ -12,7 +12,7 @@ import { siteConfig } from '@/config/site';
 import type { CollectionPage, BreadcrumbList, WithContext } from 'schema-dts';
 
 export const revalidate = 3600;
-const baseTitle = '新着記事一覧';
+const baseTitle = 'ピーチブログ一覧';
 const baseDescription = `マーケティングや経営、ホームページに関するお得情報などのお客様の役に立つ記事やピーチウェブからのご提案などを日々更新しております。`;
 const parentSegment = 'article';
 

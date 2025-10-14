@@ -64,7 +64,7 @@ const ArticleSearchPage = async (props: Props) => {
       isCurrentPage: false,
     },
     {
-      title: '新着記事一覧',
+      title: 'ピーチブログ一覧',
       href: `/${parentSegment}`,
       isCurrentPage: false,
     },

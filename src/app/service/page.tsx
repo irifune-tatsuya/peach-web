@@ -20,7 +20,7 @@ import { BadgeJapaneseYen, CircleCheck, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 
-const pageTitle = 'サービス内容';
+const pageTitle = 'サービス紹介';
 
 const description =
   'ピーチウェブのWEBブランディングのサービスについてご紹介します。ホームページを作るだけでなく記事を更新してお客様との信頼関係を醸成できるサービスを目指しております。';
@@ -32,7 +32,7 @@ const breadcrumbs = [
     isCurrentPage: false,
   },
   {
-    title: 'サービス内容',
+    title: pageTitle,
     href: '/service',
     isCurrentPage: true,
   },
