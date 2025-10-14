@@ -23,11 +23,7 @@ import { Mail } from 'lucide-react';
 
 export const revalidate = 3600;
 
-const swiperImages = [
-  { src: `${IMAGEBASEURL}/top/top-slider1.webp`, alt: 'キービジュアル1' },
-  { src: `${IMAGEBASEURL}/top/top-slider2.webp`, alt: 'キービジュアル2' },
-  { src: `${IMAGEBASEURL}/top/top-slider3.webp`, alt: 'キービジュアル3' },
-];
+const swiperImages = [{ src: `${IMAGEBASEURL}/top/top-slider1.webp`, alt: 'キービジュアル1' }];
 
 const businessLinks = [
   { href: '/reason', title: '選ばれる理由', titleEn: 'Reason' },
