@@ -12,7 +12,7 @@ import { siteConfig } from '@/config/site';
 import type { CollectionPage, BreadcrumbList, WithContext } from 'schema-dts';
 
 export const revalidate = 3600;
-const baseTitle = 'ピーチファイ記事一覧';
+const baseTitle = 'ピーチファイ一覧';
 const baseDescription = '岡山のチャレンジするフレッシュな起業家のストーリをぜひお楽しみください！';
 const parentSegment = 'peach-fight';
 

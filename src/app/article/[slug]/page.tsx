@@ -4,7 +4,7 @@ import { getDetail } from '@/lib/microcms';
 import { Article } from '@/components/features/Article';
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { IMAGEBASEURL } from '@/constants';
-import { House, Newspaper } from 'lucide-react';
+import { House, BookOpen } from 'lucide-react';
 import { ButtonArea } from '@/components/common/ButtonArea';
 import { draftMode } from 'next/headers';
 import { PreviewAlert } from '@/components/common/PreviewAlert';
@@ -72,8 +72,8 @@ const linkButtons = [
   },
   {
     href: '/article',
-    children: '新着記事一覧へ',
-    icon: <Newspaper className="mr-1 !h-5 !w-5" />,
+    children: 'ピーチブログ一覧へ',
+    icon: <BookOpen className="mr-1 !h-5 !w-5" />,
     variant: 'secondary',
   },
 ] as const;
@@ -91,7 +91,7 @@ const ArticleSlugPage = async (props: Props) => {
       isCurrentPage: false,
     },
     {
-      title: '新着記事一覧',
+      title: 'ピーチブログ一覧',
       href: `/${parentSegment}`,
       isCurrentPage: false,
     },

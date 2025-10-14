@@ -13,56 +13,74 @@ export const IMAGEBASEURL = 'https://www.assets.peach-web.co.jp';
 // ヘッダーやフッターに表示するメニュー
 export const MENU = [
   {
+    title: 'ピーチファイ',
+    href: '/peach-fight',
+    type: 'highlight',
+  },
+  {
+    title: 'ピーチブログ',
+    href: '/article',
+    type: 'highlight',
+  },
+  {
     title: 'ホーム',
     href: '/',
+    type: 'main',
   },
   {
     title: 'ピーチな想い',
     href: '/thought',
+    type: 'main',
   },
   {
     title: '選ばれる理由',
     href: '/reason',
+    type: 'main',
   },
   {
-    title: 'サービス内容',
+    title: 'サービス紹介',
     href: '/service',
+    type: 'main',
   },
   {
     title: '料金体系',
     href: '/pricing',
-  },
-  {
-    title: '実績&デザイン集',
-    href: '/achievements',
-  },
-  {
-    title: 'ピーチファイ',
-    href: '/peach-fight',
-  },
-  {
-    title: '新着記事',
-    href: '/article',
+    type: 'main',
   },
   {
     title: 'ニュースレターのご案内',
     href: '/newsletter',
+    type: 'main',
+  },
+  {
+    title: '実績&デザイン集',
+    href: '/achievements',
+    type: 'main',
+  },
+  {
+    title: 'お知らせ',
+    href: '/news',
+    type: 'main',
   },
   {
     title: 'よくあるご質問',
     href: '/faq',
+    type: 'main',
   },
   {
     title: 'プライバシーポリシー',
     href: '/privacy',
+    type: 'footer',
   },
   {
     title: '利用規約',
     href: '/terms',
+    type: 'footer',
   },
   {
     title: '特定商取引法に基づく表記',
     href: '/tokushoho',
+    type: 'footer',
   },
 ];
 

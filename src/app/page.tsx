@@ -92,25 +92,6 @@ const HomePage = () => {
         </div>
         <TopSwiper images={swiperImages} />
       </section>
-      <section>
-        <div className="flex items-center justify-center gap-3 bg-momo-300 p-2 md:hidden">
-          <Link href={CONTACT.instagram} target="_blank">
-            <FaInstagram className="h-10 w-10" />
-          </Link>
-          <Link href={CONTACT.X} target="_blank">
-            <FaSquareXTwitter className="h-10 w-10" />
-          </Link>
-          <Link href={CONTACT.line} target="_blank">
-            <FaLine className="h-10 w-10" />
-          </Link>
-          <Button asChild>
-            <Link href="/contact">
-              <Mail className="!h-5 !w-5" />
-              お問い合わせ
-            </Link>
-          </Button>
-        </div>
-      </section>
       <section className="pt-14 pb-10 md:py-18">
         <div className="mx-auto w-full md:max-w-[735px] lg:max-w-[900px] xl:max-w-6xl px-4">
           <SectionHeading titleEn="Business" titleJp="事業内容" />
@@ -164,7 +145,7 @@ const HomePage = () => {
       <section className="py-10 md:py-18">
         <div className="mx-auto w-full md:max-w-[735px] lg:max-w-[900px] xl:max-w-6xl px-4">
           <div className="flex items-center justify-between md:mb-12">
-            <SectionHeading titleEn="Article" titleJp="新着記事" />
+            <SectionHeading titleEn="Articles" titleJp="ピーチブログ" />
             <ViewMoreButton href={'/article'} size={'small'} />
           </div>
           <LatestArticleList articles={articleData.contents} category={'article'} />
