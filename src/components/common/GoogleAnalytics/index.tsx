@@ -4,9 +4,9 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import Script from 'next/script';
 import { useEffect } from 'react';
 import { IS_GATAG, GA_TAG_ID, pageview } from '@/lib/gtag';
-import React from 'react';
+import { FC } from 'react';
 
-const GoogleAnalytics = () => {
+export const GoogleAnalytics: FC = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -37,5 +37,3 @@ const GoogleAnalytics = () => {
     </>
   );
 };
-
-export default GoogleAnalytics;

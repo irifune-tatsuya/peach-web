@@ -4,7 +4,7 @@ import { NavBar } from '@/components/common/NavBar';
 import { ScrollToTopButton } from '@/components/ui/ScrollToTopButton';
 import { Header } from '@/components/common/Header';
 import { Footer } from '@/components/common/Footer';
-import GoogleAnalytics from '@/components/common/GoogleAnalytics/';
+import { GoogleAnalytics } from '@/components/common/GoogleAnalytics/';
 import { IMAGEBASEURL } from '@/constants';
 import { Suspense } from 'react';
 import { JsonLd } from '@/components/common/JsonLd';
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
   const organizationJsonLd: Organization = {
     '@type': 'Organization',
     name: siteConfig.name,
@@ -122,4 +122,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

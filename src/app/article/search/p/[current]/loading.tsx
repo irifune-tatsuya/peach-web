@@ -1,5 +1,7 @@
-import LoadingScreen from '@/components/common/LoadingScreen';
+import { LoadingScreen } from 'src/components/common/LoadingScreen/';
 
-export default function Loading() {
+const Loading = () => {
   return <LoadingScreen />;
-}
+};
+
+export default Loading;

@@ -1,11 +1,13 @@
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
-import Title from '@/components/ui/Title';
+import { Title } from '@/components/ui/Title';
 import React from 'react';
-import { ContactButton } from '@/components/ui/ContactButton';
 import { Metadata } from 'next';
 import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import type { AboutPage, BreadcrumbList, WithContext } from 'schema-dts';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { Mail } from 'lucide-react';
 
 const pageTitle = '特定商取引法に基づく表記';
 
@@ -92,7 +94,12 @@ const TokushohoPage = () => {
           <br />
           <br />
           <div className="flex justify-center">
-            <ContactButton />
+            <Button asChild>
+              <Link href="/contact">
+                <Mail className="!h-5 !w-5" />
+                お問い合わせ
+              </Link>
+            </Button>
           </div>
         </div>
         <h2 className={headingClasses}>5.メールアドレス</h2>

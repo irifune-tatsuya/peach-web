@@ -5,15 +5,14 @@ import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { IMAGEBASEURL } from '@/constants';
 import { InterviewArticle } from '@/components/features/InterviewArticle';
 import { CONTACT } from '@/constants';
-import { IoMail } from 'react-icons/io5';
 import { FaLine } from 'react-icons/fa';
-import { IoMdHome } from 'react-icons/io';
-import ButtonArea from '@/components/common/ButtonArea';
+import { ButtonArea } from '@/components/common/ButtonArea';
 import { draftMode } from 'next/headers';
 import { PreviewAlert } from '@/components/common/PreviewAlert';
 import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import type { Article as ArticleSchema, BreadcrumbList, WithContext } from 'schema-dts';
+import { House, Mail } from 'lucide-react';
 
 export const revalidate = 0;
 const parentSegment = 'peach-fight';
@@ -66,32 +65,26 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
   };
 };
 
-const contactButtons = [
+const linkButtons = [
   {
-    bgClassName: 'bg-[var(--color-momo-100)]',
-    textClassName: 'text-white',
     href: '/contact',
-    isExternal: false,
-    title: 'フォームから取材応募',
-    icon: <IoMail />,
+    children: 'フォームから取材応募',
+    icon: <Mail className="mr-1 !h-5 !w-5" />,
+    variant: 'default',
   },
   {
-    bgClassName: 'bg-[#06c755]',
-    textClassName: 'text-white',
     href: CONTACT.line,
-    isExternal: true,
-    title: 'LINEから取材応募',
-    icon: <FaLine />,
+    children: 'LINEからお問い合わせ',
+    icon: <FaLine className="mr-1 !h-5 !w-5" />,
+    variant: 'line',
   },
   {
-    bgClassName: 'bg-[var(--color-momo-300)]',
-    textClassName: 'text-black',
     href: `/${parentSegment}`,
-    isExternal: false,
-    title: 'ピーチファイTOPへ',
-    icon: <IoMdHome />,
+    children: 'ピーチファイTOPへ',
+    icon: <House className="mr-1 !h-5 !w-5" />,
+    variant: 'secondary',
   },
-];
+] as const;
 
 const PeachFightSlugPage = async (props: Props) => {
   const params = await props.params;
@@ -162,7 +155,7 @@ const PeachFightSlugPage = async (props: Props) => {
       <JsonLd jsonLdData={breadcrumbJsonLd} />
       {isEnabled && <PreviewAlert />}
       <InterviewArticle data={data} />
-      <ButtonArea buttons={contactButtons} className="bg-white" />
+      <ButtonArea buttons={linkButtons} />
       <Breadcrumbs breadcrumbs={breadcrumbs} />
     </>
   );

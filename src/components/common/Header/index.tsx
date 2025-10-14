@@ -1,18 +1,18 @@
 'use client';
 
-import React from 'react';
+import { FC, useState } from 'react';
 import { CONTACT, IMAGEBASEURL } from '@/constants';
 import { FaInstagram } from 'react-icons/fa';
 import { FaSquareXTwitter } from 'react-icons/fa6';
 import { FaLine } from 'react-icons/fa';
 import { MenuButton } from '@/components/ui/MenuButton';
 import { NavDrawer } from '@/components/common/NavDrawer';
-import { ContactButton } from '@/components//ui/ContactButton';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Mail } from 'lucide-react';
 
-export const Header: React.FC = () => {
+export const Header: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -42,7 +42,12 @@ export const Header: React.FC = () => {
             <FaLine size={'2em'} />
           </Link>
           <nav className="ml-auto flex h-full items-center">
-            <ContactButton />
+            <Button asChild>
+              <Link href="/contact">
+                <Mail className="!h-5 !w-5" />
+                お問い合わせ
+              </Link>
+            </Button>
           </nav>
           <MenuButton onToggle={() => setIsOpen(!isOpen)} />
         </div>

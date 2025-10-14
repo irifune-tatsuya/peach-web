@@ -1,7 +1,7 @@
 import { ARTICLEFILTER, FAQFILTER, NEWSFILTER, PEACHFILTER } from '@/constants';
 import { getList, getTagList } from '@/lib/microcms';
 
-export default async function sitemap() {
+export const sitemap = async () => {
   const baseURL = new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000');
 
   const articleData = await getList({
@@ -73,4 +73,6 @@ export default async function sitemap() {
   }));
 
   return [...routes, ...articles, ...faqs, ...faqTags, ...news, ...peachFight];
-}
+};
+
+export default sitemap;

@@ -155,11 +155,38 @@ body {
   background: var(--color-background);
 }
 
+/* TOPページで使用するSectionHeadingコンポーネント用 */
 .text-stroke {
   -webkit-text-stroke: 2px var(--color-foreground);
   text-stroke: 2px var(--color-foreground);
 }
 
+/* buttonコンポーネントのアニメーション用 */
+.btn-slide-hover {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-slide-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-in-out;
+  z-index: -1;
+}
+
+.btn-slide-hover:hover::before {
+  transform: scaleX(1);
+}
+
+/* microCMSのカスタムCSS用 */
 .marker {
   background: linear-gradient(transparent 0%, #febdd6 0%);
   border-radius: 6px;

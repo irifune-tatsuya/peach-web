@@ -1,7 +1,7 @@
 import { getList, getTagList } from '@/lib/microcms';
 import { FAQFILTER, LIMIT30 } from '@/constants';
 import { Pagination } from '@/components/ui/Pagination';
-import Title from '@/components/ui/Title';
+import { Title } from '@/components/ui/Title';
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { SearchField } from '@/components/ui/SearchField';
 import { ArticleList } from '@/components/common/ArticleList';

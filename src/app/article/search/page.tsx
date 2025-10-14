@@ -1,7 +1,7 @@
 import { getList } from '@/lib/microcms';
 import { Pagination } from '@/components/ui/Pagination';
 import { GridArticleList } from '@/components/common/GridArticleList';
-import Title from '@/components/ui/Title';
+import { Title } from '@/components/ui/Title';
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { SearchField } from '@/components/ui/SearchField';
 import { ARTICLEFILTER } from '@/constants';

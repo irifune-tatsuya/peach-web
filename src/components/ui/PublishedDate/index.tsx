@@ -1,7 +1,5 @@
 import { FC } from 'react';
-import { IMAGEBASEURL } from '@/constants';
 import { formatDate } from '@/lib/date';
-import Image from 'next/image';
 import { Clock } from 'lucide-react';
 
 type Props = {

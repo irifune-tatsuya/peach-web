@@ -1,5 +1,6 @@
 import { FC } from 'react';
-import { MdMenu } from 'react-icons/md';
+import { Menu } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 type Props = {
   onToggle: () => void;
@@ -7,11 +8,9 @@ type Props = {
 
 export const MenuButton: FC<Props> = ({ onToggle }) => {
   return (
-    <button onClick={onToggle} className="w-14">
-      <div className="flex flex-col items-center">
-        <MdMenu size={32} />
-        <span className="text-[10px]">メニュー</span>
-      </div>
-    </button>
+    <Button onClick={onToggle} variant="ghost" className="h-auto w-14 flex-col gap-0 p-1">
+      <Menu className="!h-7 !w-7" />
+      <span className="text-[10px]">メニュー</span>
+    </Button>
   );
 };

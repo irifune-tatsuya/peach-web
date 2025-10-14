@@ -2,14 +2,14 @@
 
 import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { MdMenu, MdClose } from 'react-icons/md';
-import { FaCalendarAlt } from 'react-icons/fa';
+import { Calendar } from 'lucide-react';
 import { CustomImage } from '@/components/ui/CustomImage';
 import { IMAGEBASEURL } from '@/constants';
 import { SlideNav } from '@/components/features/SlideNav';
-import { ContactButton } from '@/components/ui/ContactButton';
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import Link from 'next/link';
+import { Menu, X } from 'lucide-react';
 
 interface Slide {
   id: string;
@@ -48,7 +48,7 @@ const AnimatedSlide = ({ slide }: { slide: Slide }) => {
   );
 };
 
-export default function SlideViewer({ slides }: SlideViewerProps) {
+const SlideViewer = ({ slides }: SlideViewerProps) => {
   const tocData = slides
     .filter((slide) => slide.tocTitle)
     .map((slide) => ({
@@ -72,9 +72,9 @@ export default function SlideViewer({ slides }: SlideViewerProps) {
           <CollapsibleTrigger asChild>
             <Button variant="ghost" className="w-full text-momo-100">
               {isMobileMenuOpen ? (
-                <MdClose className="mr-2 h-4 w-4" />
+                <X className="mr-2 h-4 w-4" />
               ) : (
-                <MdMenu className="mr-2 h-4 w-4" />
+                <Menu className="mr-2 h-4 w-4" />
               )}
               目次を見る
             </Button>
@@ -107,14 +107,16 @@ export default function SlideViewer({ slides }: SlideViewerProps) {
           </div>
         </div>
         <div className="mx-auto max-w-[310px] pt-10 text-center md:pt-16">
-          <ContactButton
-            text="オンラインミーティングの予約"
-            href="https://calendar.app.google/PZsqsKjFUZ6a3StDA"
-            IconComponent={FaCalendarAlt}
-            iconSize="1.2rem"
-          />
+          <Button asChild>
+            <Link href="https://calendar.app.google/PZsqsKjFUZ6a3StDA" target="_blank">
+              <Calendar className="!h-5 !w-5" />
+              オンラインミーティングの予約
+            </Link>
+          </Button>
         </div>
       </div>
     </>
   );
-}
+};
+
+export default SlideViewer;

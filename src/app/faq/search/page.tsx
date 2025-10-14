@@ -1,6 +1,6 @@
 import { getList } from '@/lib/microcms';
 import { Pagination } from '@/components/ui/Pagination';
-import Title from '@/components/ui/Title';
+import { Title } from '@/components/ui/Title';
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { SearchField } from '@/components/ui/SearchField';
 import { FAQFILTER } from '@/constants';

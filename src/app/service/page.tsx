@@ -1,7 +1,6 @@
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
-import ButtonArea from '@/components/common/ButtonArea';
+import { ButtonArea } from '@/components/common/ButtonArea';
 import { SideScrollIcon } from '@/components/ui/SideScrollIcon';
-import { SiteLinkButton } from '@/components/ui/SiteLinkButton';
 import {
   Accordion,
   AccordionContent,
@@ -12,13 +11,14 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CONTACT, IMAGEBASEURL } from '@/constants';
 import Image from 'next/image';
-import { FaCheckCircle, FaLine } from 'react-icons/fa';
-import { ImCoinYen } from 'react-icons/im';
-import { IoMail } from 'react-icons/io5';
+import { FaLine } from 'react-icons/fa';
 import { Metadata } from 'next';
 import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
-import type { Service, FAQPage, Question, Answer, BreadcrumbList, WithContext } from 'schema-dts';
+import type { Service, FAQPage, Question, BreadcrumbList, WithContext } from 'schema-dts';
+import { BadgeJapaneseYen, CircleCheck, Mail } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 const pageTitle = 'サービス内容';
 
@@ -48,24 +48,20 @@ export const metadata: Metadata = {
   },
 };
 
-const ContactButtons = [
+const linkButtons = [
   {
-    bgClassName: 'bg-momo-100 hover:bg-momo-100/90',
-    textClassName: 'text-white',
     href: '/contact',
-    isExternal: false,
-    title: 'フォームからお問い合わせ',
-    icon: <IoMail />,
+    children: 'フォームからお問い合わせ',
+    icon: <Mail className="mr-1 !h-5 !w-5" />,
+    variant: 'default',
   },
   {
-    bgClassName: 'bg-[#06c755] hover:bg-[#06c755]/90',
-    textClassName: 'text-white',
     href: CONTACT.line,
-    isExternal: true,
-    title: 'LINEからお問い合わせ',
-    icon: <FaLine />,
+    children: 'LINEからお問い合わせ',
+    icon: <FaLine className="mr-1 !h-5 !w-5" />,
+    variant: 'line',
   },
-];
+] as const;
 
 const services = [
   {
@@ -380,34 +376,38 @@ const ServicePage = () => {
             </div>
             <div className="mx-auto mt-5 max-w-sm space-y-2 text-base font-bold text-momo-100 md:max-w-md md:text-lg">
               <div className="flex flex-col gap-2 md:flex-row md:gap-4">
-                <p className="flex-1 rounded-full bg-white px-5 py-2 text-center">
+                <p className="flex-1 rounded-full bg-white px-5 py-2 text-center whitespace-nowrap">
                   ホームページ無料作成
                 </p>
-                <p className="flex-1 rounded-full bg-white px-5 py-2 text-center">月額5万円から</p>
+                <p className="flex-1 rounded-full bg-white px-5 py-2 text-center whitespace-nowrap">
+                  月額5万円から
+                </p>
               </div>
               <div className="flex flex-col gap-2 md:flex-row md:gap-4">
-                <p className="flex-1 rounded-full bg-white px-5 py-2 text-center">SEO対策付き</p>
-                <p className="flex-1 rounded-full bg-white px-5 py-2 text-center">
+                <p className="flex-1 rounded-full bg-white px-5 py-2 text-center whitespace-nowrap">
+                  SEO対策付き
+                </p>
+                <p className="flex-1 rounded-full bg-white px-5 py-2 text-center whitespace-nowrap">
                   オリジナルデザイン
                 </p>
               </div>
               <div className="flex flex-col gap-2 md:flex-row md:gap-4">
-                <p className="flex-1 rounded-full bg-white px-5 py-2 text-center">
+                <p className="flex-1 rounded-full bg-white px-5 py-2 text-center whitespace-nowrap">
                   記事更新毎月4回
                 </p>
-                <p className="flex-1 rounded-full bg-white px-5 py-2 text-center">
+                <p className="flex-1 rounded-full bg-white px-5 py-2 text-center whitespace-nowrap">
                   追加デザイン制作
                 </p>
               </div>
             </div>
           </div>
         </div>
-        <ButtonArea buttons={ContactButtons} />
+        <ButtonArea buttons={linkButtons} />
       </section>
       <section className="bg-white pt-20 md:pt-40">
         <div className="mx-auto max-w-6xl p-4">
           <h2 className="flex items-center text-xl font-bold md:text-2xl">
-            <FaCheckCircle className="text-momo-100" />
+            <CircleCheck className="text-momo-100" />
             <span className="ml-2">WEBブランディングとは？</span>
           </h2>
           <div className="mx-auto max-w-4xl pt-8 font-medium leading-loose text-base md:text-lg">
@@ -445,13 +445,13 @@ const ServicePage = () => {
                 </div>
               </div>
             ))}
-            <div className="py-10">
-              <SiteLinkButton
-                href="/pricing"
-                icon={<ImCoinYen size="1.5em" />}
-                text="価格とプランを見る"
-                className="py-10"
-              />
+            <div className="py-20 flex justify-center">
+              <Button asChild>
+                <Link href="/contact">
+                  <BadgeJapaneseYen className="!h-5 !w-5" />
+                  価格とプランを見る
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
@@ -459,7 +459,7 @@ const ServicePage = () => {
       <section className="bg-[linear-gradient(-225deg,_#eeeeee_0%,_#ffffff_56%,_#eeeeee_100%)] pt-20 md:pt-32">
         <div className="mx-auto max-w-6xl p-4">
           <h2 className="flex items-center text-xl font-bold md:text-2xl">
-            <FaCheckCircle className="text-momo-100" />
+            <CircleCheck className="text-momo-100" />
             <span className="ml-2">ブランディングストーリー</span>
           </h2>
           <div className="mx-auto max-w-4xl pt-8 font-medium leading-loose text-base md:text-lg">
@@ -500,7 +500,7 @@ const ServicePage = () => {
               </p>
             </div>
             <div className="mt-8 text-center font-bold text-white md:mt-0">
-              <div className="mx-auto max-w-xs rounded-lg bg-white p-4 text-lg text-momo-100 md:max-w-md md:text-xl">
+              <div className="mx-auto max-w-xs rounded-lg bg-white p-4 text-momo-100 md:max-w-md">
                 <p>
                   シナリオ通りに記事更新を
                   <br className="lg:hidden" />
@@ -532,7 +532,7 @@ const ServicePage = () => {
       <section className="pt-20 md:pt-32">
         <div className="mx-auto max-w-6xl p-4">
           <h2 className="flex items-center text-xl font-bold md:text-2xl">
-            <FaCheckCircle className="text-momo-100" />
+            <CircleCheck className="text-momo-100" />
             <span className="ml-2">サービスの流れ</span>
           </h2>
         </div>
@@ -550,12 +550,12 @@ const ServicePage = () => {
             ))}
           </div>
         </div>
-        <ButtonArea buttons={ContactButtons} />
+        <ButtonArea buttons={linkButtons} />
       </section>
       <section className="px-4 pt-20 pb-24 md:pt-32 md:pb-40">
         <div className="mx-auto max-w-6xl">
           <h2 className="flex items-center text-xl font-bold md:text-2xl">
-            <FaCheckCircle className="text-momo-100" />
+            <CircleCheck className="text-momo-100" />
             <span className="ml-2">よくあるご質問</span>
           </h2>
           <Accordion type="single" collapsible className="mx-auto mt-10 w-full max-w-4xl">
