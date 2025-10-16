@@ -66,8 +66,8 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
   ] as const;
 
   return (
-    <article>
-      <div className="mx-auto min-h-[calc(100vh-200px)] max-w-4xl pb-4 md:pb-40">
+    <article className="mx-auto min-h-[calc(100vh-200px)] pb-[60px] md:max-w-[620px] md:pb-[156px]">
+      <div>
         {data.thumbnail ? (
           <Image
             src={data.thumbnail.url}
@@ -88,7 +88,7 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
         )}
         <div className="px-4 pt-8 pb-5 md:pt-20 md:pb-5">
           <h1 className="text-left text-2xl font-bold leading-normal md:text-4xl">{data.title}</h1>
-          <div className="mt-5 flex flex-col items-stretch justify-end gap-3 lg:flex-row md:items-center">
+          <div className="mt-5 flex flex-col items-end justify-end gap-3">
             {data.instagramid && (
               <Button asChild variant="instagram">
                 <Link
@@ -103,7 +103,7 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
                 </Link>
               </Button>
             )}
-            <div className="flex gap-3">
+            <div className="flex justify-end gap-3">
               <Button asChild variant="facebook" className="flex-1 md:flex-none">
                 <Link
                   href={`https://www.facebook.com/share.php?u=${fullPath}`}
@@ -137,7 +137,7 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
         {devidedContents.map((content, i) => (
           <React.Fragment key={i}>
             <div
-              className="prose prose-lg mb-8 max-w-none px-4 prose-h2:inline-block prose-h2:border-b-2 prose-h2:border-[var(--color-momo-100)] prose-h2:pb-1 prose-h2:no-underline prose-h2:text-2xl"
+              className="prose prose-base leading-9 mb-8 max-w-4xl px-4 prose-h2:inline-block prose-h2:border-b-2 prose-h2:border-[var(--color-momo-100)] prose-h2:pb-1 prose-h2:no-underline prose-h2:text-2xl prose-img:w-full prose-img:mx-auto prose-img:max-w-[400px]"
               dangerouslySetInnerHTML={{ __html: formatRichText(content) }}
             />
             {i < devidedContents.length - 1 &&
