@@ -45,7 +45,9 @@ export const TableOfContents: FC<Props> = ({ toc }) => {
                     smooth={true}
                     duration={200}
                     offset={-76}
-                    className={`toc-${item.name} block cursor-pointer px-4 py-2 text-sm transition-all hover:pl-6`}
+                    className={`block cursor-pointer px-4 py-2 transition-all hover:pl-6 ${
+                      item.name === 'h2' ? 'font-semibold text-base' : ''
+                    } ${item.name === 'h3' ? 'pl-8 text-sm' : ''}`}
                   >
                     {item.text}
                   </Link>
