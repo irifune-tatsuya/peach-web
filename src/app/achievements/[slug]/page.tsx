@@ -125,7 +125,7 @@ const AchievementSlugPage = async (props: Props) => {
       <section className="relative overflow-hidden bg-gradient-to-b from-[#fcdee9] to-white pt-[88px] pb-[90px] md:pt-32 md:pb-44">
         <div className="mx-auto max-w-4xl p-4">
           <div className="flex justify-center">
-            <Button asChild variant="default" className="mb-8">
+            <Button asChild variant="default" className="mb-8 btn-slide-hover">
               <a href={achievement.href} target="_blank" rel="noopener noreferrer">
                 <span className="relative z-10 flex items-center">
                   サイトを見る
@@ -219,7 +219,7 @@ const AchievementSlugPage = async (props: Props) => {
             </TabsContent>
           </Tabs>
           <div className="mt-8 flex items-center justify-center gap-2">
-            <Button asChild variant="default">
+            <Button asChild variant="default" className="btn-slide-hover">
               <a href={achievement.href} target="_blank" rel="noopener noreferrer">
                 <span className="relative z-10 flex items-center">
                   サイトを見る
@@ -227,7 +227,7 @@ const AchievementSlugPage = async (props: Props) => {
                 </span>
               </a>
             </Button>
-            <Button asChild variant="secondary">
+            <Button asChild variant="secondary" className="btn-slide-hover">
               <Link href="/achievements">
                 <span className="relative z-10 flex items-center">実績一覧に戻る</span>
               </Link>

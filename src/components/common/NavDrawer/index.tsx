@@ -68,7 +68,10 @@ export const NavDrawer: FC<Props> = ({ isOpen, onCloseAction }) => {
             <ul className="mb-8 space-y-2">
               {highlightMenus.map((item, i) => (
                 <li key={i}>
-                  <Button asChild className="h-20 w-full justify-between rounded-lg text-left p-4">
+                  <Button
+                    asChild
+                    className="h-20 w-full justify-between rounded-lg text-left p-4 btn-slide-hover"
+                  >
                     <Link href={item.href} className="w-full" onClick={onCloseAction}>
                       {item.title === 'ピーチファイ' ? (
                         <div>
@@ -105,7 +108,7 @@ export const NavDrawer: FC<Props> = ({ isOpen, onCloseAction }) => {
                 href={CONTACT.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-momo-100 hover:text-momo-200"
+                className="text-momo-500"
               >
                 <FaInstagram className="!h-10 !w-10" />
                 <span className="sr-only">Instagram</span>
@@ -114,7 +117,7 @@ export const NavDrawer: FC<Props> = ({ isOpen, onCloseAction }) => {
                 href={CONTACT.X}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-momo-100 hover:text-momo-200"
+                className="text-momo-500"
               >
                 <FaSquareXTwitter className="!h-10 !w-10" />
                 <span className="sr-only">X (旧Twitter)</span>
@@ -123,7 +126,7 @@ export const NavDrawer: FC<Props> = ({ isOpen, onCloseAction }) => {
                 href={CONTACT.line}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-momo-100 hover:text-momo-200"
+                className="text-momo-500"
               >
                 <FaLine className="!h-10 !w-10" />
                 <span className="sr-only">LINE</span>
@@ -144,16 +147,16 @@ export const NavDrawer: FC<Props> = ({ isOpen, onCloseAction }) => {
             </div>
           </nav>
         </div>
-        <SheetFooter className="fixed bottom-0 left-0 z-10 w-full bg-white/80 py-8 px-6 backdrop-blur-sm md:hidden">
+        <SheetFooter className="fixed bottom-0 left-0 z-10 w-full bg-white/80 py-4 px-6 backdrop-blur-sm md:hidden">
           <div className="flex w-full items-center justify-between gap-4">
-            <Button asChild className="flex-1">
-              <Link href="/contact" onClick={onCloseAction}>
-                <Mail className="mr-2 !h-5 !w-5" />
+            <Button asChild variant="default" className="flex-1 !h-16">
+              <Link href="/contact" onClick={onCloseAction} className="!text-lg">
+                <Mail className="mr-2 !h-6 !w-6" />
                 お問い合わせ
               </Link>
             </Button>
             <SheetClose asChild>
-              <Button variant="gray" className="h-12 w-12 flex-shrink-0 p-2">
+              <Button variant="gray" className="h-16 w-16 flex-shrink-0 p-2">
                 <X className="!h-6 !w-6" />
                 <span className="sr-only">メニューを閉じる</span>
               </Button>

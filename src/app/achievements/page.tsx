@@ -122,7 +122,7 @@ const AchievementsPage = () => {
                     </div>
                   </Link>
                   <div className="flex flex-col gap-2 py-5">
-                    <Button asChild variant="default">
+                    <Button asChild variant="default" className="btn-slide-hover">
                       <Link href={item.href} target="_blank" rel="noopener noreferrer">
                         <span className="relative z-10 flex items-center">
                           サイトを見る
@@ -130,7 +130,7 @@ const AchievementsPage = () => {
                         </span>
                       </Link>
                     </Button>
-                    <Button asChild variant="secondary">
+                    <Button asChild variant="secondary" className="btn-slide-hover">
                       <Link href={`/achievements/${item.slug}`}>
                         <span className="relative z-10 flex items-center">詳細を見る</span>
                       </Link>

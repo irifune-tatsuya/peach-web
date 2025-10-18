@@ -33,7 +33,7 @@ export const ButtonArea: FC<Props> = ({ buttons, className }) => {
             asChild
             variant={button.variant || 'default'}
             size={button.size || 'default'}
-            className="w-full max-w-xs md:w-auto"
+            className="w-full max-w-xs md:w-auto btn-slide-hover"
           >
             <Link
               href={button.href}

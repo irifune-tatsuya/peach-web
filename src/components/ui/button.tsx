@@ -9,15 +9,15 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          'bg-momo-100 text-white border-2 border-momo-100 hover:text-momo-100 btn-slide-hover',
+          'bg-momo-100 text-white border-2 border-momo-100 hover:text-momo-100',
         momo: 'bg-momo-100 text-white border-2 border-momo-100 hover:text-momo-100',
-        secondary: 'bg-momo-200 border-2 border-momo-200 hover:text-momo-200 btn-slide-hover',
-        line: 'bg-[#06c755] text-white border-2 border-[#06c755] hover:text-[#06c755] btn-slide-hover',
+        secondary: 'bg-momo-200 border-2 border-momo-200 hover:text-momo-200',
+        line: 'bg-[#06c755] text-white border-2 border-[#06c755] hover:text-[#06c755]',
         facebook:
-          'bg-[#1877f2] text-white border-2 border-[#1877f2] hover:text-[#1877f2] btn-slide-hover',
+          'bg-[#1877f2] text-white border-2 border-[#1877f2] hover:text-[#1877f2]',
         x: 'bg-black text-white border-2 border-black hover:text-black btn-slide-hover',
         instagram:
-          'bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white border-2 border-pink-500 hover:text-pink-500 btn-slide-hover',
+          'bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white border-2 border-pink-500 hover:text-pink-500',
         destructive:
           'bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
         outline:

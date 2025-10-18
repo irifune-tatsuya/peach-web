@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Article } from '@/lib/microcms';
+import { Article } from '@/types/microcms';
 import React from 'react';
 import { LandscapeCard } from '@/components/ui/LandscapeCard';
 

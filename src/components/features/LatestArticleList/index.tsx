@@ -3,7 +3,7 @@
 import { FC } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Navigation } from 'swiper/modules';
-import { Article } from '@/lib/microcms';
+import { Article } from '@/types/microcms';
 import { LandscapeCard } from '@/components/ui/LandscapeCard';
 import { PortraitCard } from '@/components/ui/PortraitCard';
 import { ChevronLeft, ChevronRight } from 'lucide-react';

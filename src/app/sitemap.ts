@@ -1,11 +1,13 @@
 import { ARTICLEFILTER, FAQFILTER, NEWSFILTER, PEACHFILTER } from '@/constants';
-import { getList, getTagList } from '@/lib/microcms';
+import { getList } from '@/lib/microcms';
+import type { Tag } from '@/types/microcms';
 
 export const sitemap = async () => {
-  const baseURL = new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000');
+  const baseURL = (process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000').replace(/\/$/, '');
 
   const articleData = await getList({
     filters: ARTICLEFILTER,
+    limit: 9999,
   });
 
   const articles = articleData.contents.map((article) => ({
@@ -15,6 +17,7 @@ export const sitemap = async () => {
 
   const faqData = await getList({
     filters: FAQFILTER,
+    limit: 9999,
   });
 
   const faqs = faqData.contents.map((faq) => ({
@@ -22,17 +25,20 @@ export const sitemap = async () => {
     lastModified: faq.publishedAt,
   }));
 
-  const faqCategoryData = await getTagList({
-    filters: 'category[equals]faq',
+  const uniqueTagsMap = new Map<string, Tag>();
+  faqData.contents.forEach((article) => {
+    (article.tags || []).forEach((tag) => {
+      uniqueTagsMap.set(tag.id, tag);
+    });
   });
-
-  const faqTags = faqCategoryData.contents.map((faq) => ({
-    url: `${baseURL}/faq/tags/${faq.id}`,
-    lastModified: faq.publishedAt,
+  const faqTags = Array.from(uniqueTagsMap.values()).map((tag) => ({
+    url: `${baseURL}/faq/tags/${tag.id}`,
+    lastModified: tag.updatedAt,
   }));
 
   const newsData = await getList({
     filters: NEWSFILTER,
+    limit: 9999,
   });
 
   const news = newsData.contents.map((news) => ({
@@ -42,6 +48,7 @@ export const sitemap = async () => {
 
   const peachFightData = await getList({
     filters: PEACHFILTER,
+    limit: 9999,
   });
 
   const peachFight = peachFightData.contents.map((article) => ({
@@ -51,22 +58,26 @@ export const sitemap = async () => {
 
   const routes = [
     '/',
+    '/achievements',
+    '/achievements/design/lp01',
     '/article',
     '/article/search',
     '/contact',
     '/faq',
     '/faq/search',
-    '/faq/search',
+    '/faq/tags',
     '/news',
     '/newsletter',
     '/peach-fight',
     '/peach-fight/search',
+    '/pekechi',
     '/pricing',
     '/privacy',
     '/reason',
     '/service',
     '/terms',
     '/thought',
+    '/tokushoho',
   ].map((route) => ({
     url: `${baseURL}${route}`,
     lastModified: new Date().toISOString(),

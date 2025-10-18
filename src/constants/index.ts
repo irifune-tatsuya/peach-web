@@ -1,12 +1,11 @@
-// 1ページの表示件数
 export const LIMIT05 = 5;
 export const LIMIT12 = 12;
 export const LIMIT30 = 30;
-export const ARTICLEFILTER = 'category[equals]article';
-export const PEACHFILTER = 'category[equals]peach-fight';
-export const NEWSFILTER = 'category[equals]news';
-export const FAQFILTER = 'category[equals]faq';
-export const CATEGORYFILTER = 'category[equals]faq';
+export const LIMIT100 = 100;
+export const ARTICLEFILTER = 'category[contains]article';
+export const PEACHFILTER = 'category[contains]peach-fight';
+export const NEWSFILTER = 'category[contains]news';
+export const FAQFILTER = 'category[contains]faq';
 
 export const IMAGEBASEURL = 'https://www.assets.peach-web.co.jp';
 
@@ -84,7 +83,6 @@ export const MENU = [
   },
 ];
 
-// 連絡先
 export const CONTACT = {
   instagram: 'https://www.instagram.com/irifune3333',
   X: 'https://x.com/irifune333',

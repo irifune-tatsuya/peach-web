@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Article } from '@/lib/microcms';
+import { Article } from '@/types/microcms';
 import Link from 'next/link';
 import Image from 'next/image';
 import { IMAGEBASEURL } from '@/constants';
@@ -15,8 +15,9 @@ export const ArticleSubList: FC<Props> = ({ articles, fontClassName }) => {
   return (
     <ul className="grid grid-cols-2 gap-2 md:gap-4 lg:gap-2">
       {articles.map((article) => {
-        const imageUrl = article.subthumbnail?.url || `${IMAGEBASEURL}/no-image.webp`;
-        const altText = article.subthumbnail ? article.title : 'No Image';
+        const imageUrl =
+          article.peach_fight_details?.subthumbnail?.url || `${IMAGEBASEURL}/no-image.webp`;
+        const altText = article.peach_fight_details?.subthumbnail ? article.title : 'No Image';
         return (
           <li key={article.id}>
             <Link

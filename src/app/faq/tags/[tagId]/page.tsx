@@ -1,5 +1,5 @@
 import { getList, getTag } from '@/lib/microcms';
-import { LIMIT30 } from '@/constants';
+import { LIMIT30, FAQFILTER } from '@/constants';
 import { Pagination } from '@/components/ui/Pagination';
 import { ArticleList } from '@/components/common/ArticleList';
 import { Title } from '@/components/ui/Title';
@@ -55,7 +55,7 @@ const FaqTagsPage = async (props: Props) => {
   const tag = await getTag(tagId);
   const data = await getList({
     limit: LIMIT30,
-    filters: `tags[contains]${tagId}`,
+    filters: `tags[contains]${tagId}[and]${FAQFILTER}`,
   });
   const pageTitle = tag.name ? `「${tag.name}」${baseTitle}` : baseTitle;
   const description = tag.name

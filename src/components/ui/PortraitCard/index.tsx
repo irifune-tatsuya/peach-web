@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Article } from '@/lib/microcms';
+import { Article } from '@/types/microcms';
 import { PublishedDate } from '@/components/ui/PublishedDate';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,8 +11,8 @@ type Props = {
 };
 
 export const PortraitCard: FC<Props> = ({ article, category }) => {
-  const imageUrl = article.subthumbnail?.url || `${IMAGEBASEURL}/portrait-no-image.webp`;
-  const altText = article.subthumbnail ? article.title : 'No Image';
+  const imageUrl = article.peach_fight_details?.subthumbnail?.url || `${IMAGEBASEURL}/portrait-no-image.webp`;
+  const altText = article.peach_fight_details?.subthumbnail ? article.title : 'No Image';
 
   return (
     <div className="w-[230px] md:w-[280px] lg:w-[208px] overflow-hidden">

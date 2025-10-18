@@ -94,7 +94,7 @@ const TokushohoPage = () => {
           <br />
           <br />
           <div className="flex justify-center">
-            <Button asChild>
+            <Button asChild variant="default" className="btn-slide-hover">
               <Link href="/contact">
                 <Mail className="!h-5 !w-5" />
                 お問い合わせ
