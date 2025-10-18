@@ -12,6 +12,9 @@ import { IMAGEBASEURL } from '@/constants';
 import { PublishedDate } from '@/components/ui/PublishedDate';
 import { TableOfContents } from '@/components/common/TableOfContents';
 import { StartMailMagazineForm } from '@/components/features/StartMailMagazineForm';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { FaFacebookF } from 'react-icons/fa';
 
 type Props = {
   data: ArticleType;
@@ -67,15 +70,25 @@ export const Article: FC<Props> = ({ data, isShowToc = true, isFaqLayout = false
                 <PublishedDate date={data.publishedAt || data.createdAt} simple={true} />
               </div>
             </div>
-            <div className="flex gap-2">
-              <a
-                href={`https://x.com/share?url=${fullPath}&text=${data.title}&via=irifune333&related=irifune333&hashtags=ピーチウェブ`}
-                target="_blank"
-                rel="nofollow noopener"
-                className="flex h-[37px] w-[37px] items-center justify-center rounded-[7px] bg-black transition-opacity hover:opacity-70"
-              >
-                <FaXTwitter size={24} color="white" />
-              </a>
+            <div className="flex justify-end gap-3">
+              <Button asChild variant="facebook" size="icon">
+                <Link
+                  href={`https://www.facebook.com/share.php?u=${fullPath}`}
+                  target="_blank"
+                  rel="nofollow noopener"
+                >
+                  <FaFacebookF className="!h-5 !w-5" />
+                </Link>
+              </Button>
+              <Button asChild variant="x" size="icon">
+                <Link
+                  href={`https://x.com/share?url=${fullPath}&text=${data.title}&via=irifune333&related=${data.xid}`}
+                  target="_blank"
+                  rel="nofollow noopener"
+                >
+                  <FaXTwitter className="!h-5 !w-5" />
+                </Link>
+              </Button>
             </div>
           </div>
           {isShowToc && <TableOfContents toc={toc} />}

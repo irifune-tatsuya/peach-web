@@ -123,7 +123,13 @@ export const StopMailMagazineForm: FC = () => {
         </div>
 
         <div className="mt-8 flex justify-center">
-          <Button type="submit" size="lg" disabled={!isStopChecked || isSubmitting}>
+          <Button
+            type="submit"
+            size="lg"
+            disabled={!isStopChecked || isSubmitting}
+            variant="default"
+            className="btn-slide-hover"
+          >
             {isSubmitting ? '処理中...' : '配信停止する'}
             <ChevronRight className="!h-8 !w-8" />
           </Button>

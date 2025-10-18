@@ -33,7 +33,7 @@ export const Header: FC = () => {
         </Link>
         <div className="flex items-center gap-5">
           <nav className="ml-auto flex h-full items-center">
-            <Button asChild>
+            <Button asChild variant="default" className="btn-slide-hover">
               <Link href="/contact" className="!text-lg !lg:text-xl">
                 <Mail className="!h-6 !w-6" />
                 お問い合わせ

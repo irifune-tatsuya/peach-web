@@ -90,7 +90,7 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
           <h1 className="text-left text-2xl font-bold leading-normal md:text-4xl">{data.title}</h1>
           <div className="mt-5 flex flex-col items-end justify-end gap-3">
             {data.instagramid && (
-              <Button asChild variant="instagram">
+              <Button asChild variant="instagram" className="btn-slide-hover">
                 <Link
                   href={`https://www.instagram.com/${data.instagramid}?ref=badge`}
                   target="_blank"
@@ -104,7 +104,7 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
               </Button>
             )}
             <div className="flex justify-end gap-3">
-              <Button asChild variant="facebook" className="flex-1 md:flex-none">
+              <Button asChild variant="facebook" className="flex-1 md:flex-none btn-slide-hover">
                 <Link
                   href={`https://www.facebook.com/share.php?u=${fullPath}`}
                   target="_blank"
@@ -112,11 +112,11 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
                 >
                   <span className="relative z-10 flex items-center">
                     <FaFacebookF className="!mr-2 !h-5 !w-5" />
-                    記事をシェア
+                    シェア
                   </span>
                 </Link>
               </Button>
-              <Button asChild variant="x" className="flex-1 md:flex-none">
+              <Button asChild variant="x" className="flex-1 md:flex-none btn-slide-hover">
                 <Link
                   href={`https://x.com/share?url=${fullPath}&text=${data.title}&via=irifune333&related=${data.xid}`}
                   target="_blank"
@@ -124,7 +124,7 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
                 >
                   <span className="relative z-10 flex items-center">
                     <FaXTwitter className="!mr-2 !h-5 !w-5" />
-                    記事をシェア
+                    シェア
                   </span>
                 </Link>
               </Button>
@@ -157,7 +157,7 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
                                 asChild
                                 variant={link.variant}
                                 size="icon"
-                                className="h-14 w-14 rounded-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg"
+                                className="h-14 w-14 rounded-lg transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg btn-slide-hover"
                               >
                                 <a href={link.href || ''} target="_blank" rel="noopener noreferrer">
                                   {link.icon}

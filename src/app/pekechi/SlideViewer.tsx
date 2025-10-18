@@ -70,7 +70,7 @@ const SlideViewer = ({ slides }: SlideViewerProps) => {
       <div className="sticky top-0 z-10 mt-0 bg-white shadow-sm md:hidden">
         <Collapsible open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
           <CollapsibleTrigger asChild>
-            <Button variant="ghost" className="w-full text-momo-100">
+            <Button variant="ghost" className="w-full text-momo-100 btn-slide-hover">
               {isMobileMenuOpen ? (
                 <X className="mr-2 h-4 w-4" />
               ) : (
@@ -107,7 +107,7 @@ const SlideViewer = ({ slides }: SlideViewerProps) => {
           </div>
         </div>
         <div className="mx-auto max-w-[310px] pt-10 text-center md:pt-16">
-          <Button asChild>
+          <Button asChild variant="default" className="btn-slide-hover">
             <Link href="https://calendar.app.google/PZsqsKjFUZ6a3StDA" target="_blank">
               <Calendar className="!h-5 !w-5" />
               オンラインミーティングの予約

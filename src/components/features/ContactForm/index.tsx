@@ -244,7 +244,13 @@ export const ContactForm: FC = () => {
         </div>
 
         <div className="mt-[60px] flex justify-center">
-          <Button type="submit" disabled={!isChecked || isSubmitting} size="lg">
+          <Button
+            type="submit"
+            disabled={!isChecked || isSubmitting}
+            variant="default"
+            size="lg"
+            className="btn-slide-hover"
+          >
             {isSubmitting ? '送信中...' : '送信する'}
             <ChevronRight className="!ml-1 !h-8 !w-8" />
           </Button>

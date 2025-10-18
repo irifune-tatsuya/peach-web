@@ -11,40 +11,45 @@ import { cn } from '@/lib/utils';
 export const NavBar: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const iconButtonStyle = cn('rounded-full w-9 h-9', 'bg-white/50 hover:bg-white/80 text-momo-900');
+  const iconButtonStyle = cn('w-12 h-12 bg-white');
 
   return (
     <>
-      <nav className="fixed bottom-8 left-0 right-0 z-50 flex w-full justify-end gap-5 items-center px-6 md:hidden">
+      <nav className="fixed bottom-4 left-0 right-0 z-50 flex w-full justify-between items-center px-6 md:hidden">
         <div
           className={cn(
-            'flex items-center gap-1 p-1.5',
+            'flex items-center gap-2 p-2',
             'rounded-full',
             'bg-neutral-200/80 backdrop-blur-lg shadow-lg',
           )}
         >
           <Button asChild variant="ghost" size="icon" className={iconButtonStyle}>
             <Link href="/">
-              <House className="!h-4 !w-4" />
+              <House className="!h-6 !w-6" />
               <span className="sr-only">ホーム</span>
             </Link>
           </Button>
           <Button asChild variant="ghost" size="icon" className={iconButtonStyle}>
             <Link href="/article">
-              <Rss className="!h-4 !w-4" />
+              <Rss className="!h-6 !w-6" />
               <span className="sr-only">ピーチブログ</span>
             </Link>
           </Button>
           <Button asChild variant="ghost" size="icon" className={iconButtonStyle}>
             <Link href="/peach-fight">
-              <BookOpen className="!h-4 !w-4" />
+              <BookOpen className="!h-6 !w-6" />
               <span className="sr-only">岡山のチャレンジ応援マガジンピーチファイ</span>
             </Link>
           </Button>
-          <Button asChild variant="ghost" className={cn(iconButtonStyle, 'w-auto px-3')}>
-            <Link href="/contact" className="flex items-center !gap-1 text-sm">
-              <Mail className="!h-4 !w-4" />
-              <span>お問い合わせ</span>
+          <Button
+            asChild
+            variant="default"
+            size="icon"
+            className={`${iconButtonStyle} bg-momo-100`}
+          >
+            <Link href="/contact">
+              <Mail className="!h-6 !w-6" />
+              <span className="sr-only">お問い合わせ</span>
             </Link>
           </Button>
         </div>

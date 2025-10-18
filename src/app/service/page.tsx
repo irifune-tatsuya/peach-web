@@ -446,7 +446,7 @@ const ServicePage = () => {
               </div>
             ))}
             <div className="py-20 flex justify-center">
-              <Button asChild>
+              <Button asChild variant="default" className="btn-slide-hover">
                 <Link href="/contact">
                   <BadgeJapaneseYen className="!h-5 !w-5" />
                   価格とプランを見る

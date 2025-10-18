@@ -193,7 +193,13 @@ export const StartMailMagazineForm: FC = () => {
         </div>
 
         <div className="flex justify-center pt-4">
-          <Button type="submit" size="lg" disabled={!isStartChecked || isSubmitting}>
+          <Button
+            type="submit"
+            size="lg"
+            disabled={!isStartChecked || isSubmitting}
+            variant="default"
+            className="btn-slide-hover"
+          >
             {isSubmitting ? '送信中...' : '登録する'}
             <ChevronRight className="!h-8 !w-8" />
           </Button>

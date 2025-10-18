@@ -164,7 +164,7 @@ const ReasonPage = () => {
             </div>
           </div>
           <div className="mt-10 py-10 flex justify-center">
-            <Button asChild>
+            <Button asChild variant="default" className="btn-slide-hover">
               <Link href="/service">
                 <Monitor className="!h-5 !w-5" />
                 サービス内容を見る
@@ -272,7 +272,7 @@ const ReasonPage = () => {
               </Table>
             </div>
             <div className="mt-10 py-10 flex justify-center">
-              <Button asChild>
+              <Button asChild variant="default" className="btn-slide-hover">
                 <Link href="/pricing">
                   <BadgeJapaneseYen className="!h-5 !w-5" />
                   価格とプランを見る
@@ -424,7 +424,7 @@ const ReasonPage = () => {
               </Table>
             </div>
             <div className="mt-10 py-10 flex justify-center">
-              <Button asChild>
+              <Button asChild variant="default" className="btn-slide-hover">
                 <Link href="/service">
                   <Monitor className="!h-5 !w-5" />
                   サービス内容を見る
