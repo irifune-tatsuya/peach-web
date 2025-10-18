@@ -1,4 +1,4 @@
-import { ARTICLEFILTER, FAQFILTER, NEWSFILTER, PEACHFILTER } from '@/constants';
+import { ARTICLEFILTER, FAQFILTER, LIMIT100, NEWSFILTER, PEACHFILTER } from '@/constants';
 import { getList } from '@/lib/microcms';
 import type { Tag } from '@/types/microcms';
 
@@ -7,7 +7,7 @@ export const sitemap = async () => {
 
   const articleData = await getList({
     filters: ARTICLEFILTER,
-    limit: 9999,
+    limit: LIMIT100,
   });
 
   const articles = articleData.contents.map((article) => ({
@@ -17,7 +17,7 @@ export const sitemap = async () => {
 
   const faqData = await getList({
     filters: FAQFILTER,
-    limit: 9999,
+    limit: LIMIT100,
   });
 
   const faqs = faqData.contents.map((faq) => ({
@@ -38,7 +38,7 @@ export const sitemap = async () => {
 
   const newsData = await getList({
     filters: NEWSFILTER,
-    limit: 9999,
+    limit: LIMIT100,
   });
 
   const news = newsData.contents.map((news) => ({
@@ -48,7 +48,7 @@ export const sitemap = async () => {
 
   const peachFightData = await getList({
     filters: PEACHFILTER,
-    limit: 9999,
+    limit: LIMIT100,
   });
 
   const peachFight = peachFightData.contents.map((article) => ({
