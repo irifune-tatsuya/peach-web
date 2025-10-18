@@ -52,7 +52,7 @@ export const sitemap = async () => {
   });
 
   const peachFight = peachFightData.contents.map((article) => ({
-    url: `${baseURL}/news/${article.id}`,
+    url: `${baseURL}/peach-fight/${article.id}`,
     lastModified: article.publishedAt,
   }));
 
