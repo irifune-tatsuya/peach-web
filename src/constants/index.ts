@@ -1,6 +1,7 @@
 export const LIMIT05 = 5;
 export const LIMIT12 = 12;
 export const LIMIT30 = 30;
+export const LIMIT100 = 100;
 export const ARTICLEFILTER = 'category[contains]article';
 export const PEACHFILTER = 'category[contains]peach-fight';
 export const NEWSFILTER = 'category[contains]news';

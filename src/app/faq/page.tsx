@@ -1,5 +1,5 @@
-import { getList, getTagList } from '@/lib/microcms';
-import { FAQFILTER, LIMIT30 } from '@/constants';
+import { getList } from '@/lib/microcms';
+import { FAQFILTER, LIMIT100 } from '@/constants';
 import { Pagination } from '@/components/ui/Pagination';
 import { Title } from '@/components/ui/Title';
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
@@ -11,6 +11,7 @@ import { Metadata } from 'next';
 import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import type { CollectionPage, BreadcrumbList, WithContext } from 'schema-dts';
+import type { Tag } from '@/types/microcms';
 
 export const revalidate = 3600;
 const baseTitle = 'よくあるご質問一覧';
@@ -41,12 +42,18 @@ export const metadata: Metadata = {
   },
 };
 
-const tags = await getTagList();
-
 const data = await getList({
-  limit: LIMIT30,
+  limit: LIMIT100,
   filters: FAQFILTER,
 });
+
+const uniqueTagsMap = new Map<string, Tag>();
+data.contents.forEach((article) => {
+  (article.tags || []).forEach((tag) => {
+    uniqueTagsMap.set(tag.id, tag);
+  });
+});
+const faqTags = Array.from(uniqueTagsMap.values());
 
 const collectionPageJsonLd: WithContext<CollectionPage> = {
   '@context': 'https://schema.org',
@@ -79,7 +86,7 @@ const FaqPage = () => {
             <SearchField category={segmentName} />
           </Suspense>
         </nav>
-        <TagList tags={tags.contents} category={segmentName} />
+        <TagList tags={faqTags} category={segmentName} />
         <ArticleList articles={data.contents} category={segmentName} />
         <Pagination totalCount={data.totalCount} basePath={`/${segmentName}`} />
       </div>
