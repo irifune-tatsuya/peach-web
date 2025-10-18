@@ -20,7 +20,7 @@ type Props = {
 };
 
 export const TopSwiper: FC<Props> = ({ images }) => {
-  const imageHeightClass = 'h-[calc(100vh-96px)] md:h-[calc(100vh-76px)]';
+  const imageHeightClass = 'h-screen md:h-[calc(100vh-76px)]';
 
   return (
     <Swiper

@@ -1,16 +1,23 @@
 import { FC } from 'react';
 import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 type Props = {
   onToggle: () => void;
+  className?: string;
 };
 
-export const MenuButton: FC<Props> = ({ onToggle }) => {
+export const MenuButton: FC<Props> = ({ onToggle, className }) => {
   return (
-    <Button onClick={onToggle} variant="ghost" className="h-auto w-16 flex-col gap-0 p-1">
-      <Menu className="!h-7 !w-7" />
-      <span className="mt-[0.2em] text-[10px] font-bold">メニュー</span>
+    <Button
+      onClick={onToggle}
+      variant="gray"
+      size="icon"
+      className={cn('rounded-full h-12 w-12 cursor-pointer', className)}
+    >
+      <Menu className="!h-6 !w-6" />
+      <span className="sr-only">メニューを開く</span>
     </Button>
   );
 };

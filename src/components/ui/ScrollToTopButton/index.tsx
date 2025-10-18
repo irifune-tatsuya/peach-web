@@ -36,8 +36,7 @@ export const ScrollToTopButton: FC = () => {
       variant="momo"
       size="icon"
       className={cn(
-        'fixed bottom-[110px] right-2 z-50 h-12 w-12 shadow-lg md:hidden transition-transform duration-300 ease-in-out',
-        isVisible ? 'translate-y-0' : 'translate-y-20',
+        'fixed bottom-24 md:bottom-10 lg:bottom-24 right-6 md:right-5 lg:right-10 xl:right-32 z-50 h-12 w-12 shadow-lg',
       )}
     >
       <ChevronUp className="!h-6 !w-6" />
