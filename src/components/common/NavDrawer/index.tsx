@@ -57,10 +57,10 @@ export const NavDrawer: FC<Props> = ({ isOpen, onCloseAction }) => {
         </SheetDescription>
         <div className="hidden md:flex items-center justify-end py-3 px-7">
           <SheetClose asChild>
-            <button className="h-12 w-12 rounded-full bg-momo-100 p-2 text-white">
-              <X className="h-full w-full" />
+            <Button variant="gray" className="h-12 w-12 p-2">
+              <X className="!h-6 !w-6" />
               <span className="sr-only">Close</span>
-            </button>
+            </Button>
           </SheetClose>
         </div>
         <div className="flex-1 overflow-y-auto px-6 pb-20 pt-10 md:pt-5">
@@ -153,10 +153,10 @@ export const NavDrawer: FC<Props> = ({ isOpen, onCloseAction }) => {
               </Link>
             </Button>
             <SheetClose asChild>
-              <button className="h-12 w-12 flex-shrink-0 rounded-full bg-momo-100 p-2 text-white">
-                <X className="h-full w-full" />
-                <span className="sr-only">Close</span>
-              </button>
+              <Button variant="gray" className="h-12 w-12 flex-shrink-0 p-2">
+                <X className="!h-6 !w-6" />
+                <span className="sr-only">メニューを閉じる</span>
+              </Button>
             </SheetClose>
           </div>
         </SheetFooter>

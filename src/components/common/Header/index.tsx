@@ -32,19 +32,10 @@ export const Header: FC = () => {
           />
         </Link>
         <div className="flex items-center gap-5">
-          <Link href={CONTACT.instagram} target="_blank">
-            <FaInstagram size={'2em'} />
-          </Link>
-          <Link href={CONTACT.X} target="_blank">
-            <FaSquareXTwitter size={'2em'} />
-          </Link>
-          <Link href={CONTACT.line} target="_blank">
-            <FaLine size={'2em'} />
-          </Link>
           <nav className="ml-auto flex h-full items-center">
             <Button asChild>
-              <Link href="/contact">
-                <Mail className="!h-5 !w-5" />
+              <Link href="/contact" className="!text-lg !lg:text-xl">
+                <Mail className="!h-6 !w-6" />
                 お問い合わせ
               </Link>
             </Button>

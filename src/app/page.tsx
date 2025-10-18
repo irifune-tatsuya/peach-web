@@ -68,7 +68,7 @@ const HomePage = () => {
     <>
       <section
         id="key-visual"
-        className="relative w-screen overflow-hidden h-[calc(100vh-96px)] md:h-[calc(100vh-76px)]"
+        className="relative w-screen overflow-hidden h-screen md:h-[calc(100vh-76px)]"
       >
         <h1 className="sr-only">合同会社ピーチウェブ公式サイト</h1>
         <div className="absolute left-1/2 top-1/2 z-20 w-[80%] max-w-lg -translate-x-1/2 -translate-y-1/2 animate-[var(--animate-fade-in)]">
