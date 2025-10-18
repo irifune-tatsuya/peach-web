@@ -56,9 +56,7 @@ const FaqPCurrentPage = async (props: Props) => {
   const current = parseInt(params.current as string, 10);
   const pageTitle = `${baseTitle} - ${current}ページ目`;
   const description = `${baseTitle}（${current}ページ目）です。${baseDescription}`;
-  const tags = await getTagList({
-    filters: FAQFILTER,
-  });
+  const tags = await getTagList();
   const data = await getList({
     limit: LIMIT30,
     filters: FAQFILTER,

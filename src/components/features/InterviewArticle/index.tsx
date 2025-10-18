@@ -10,7 +10,7 @@ import { FaXTwitter } from 'react-icons/fa6';
 import { House } from 'lucide-react';
 import { formatRichText } from '@/lib/richtext';
 import { renderToc } from '@/lib/render-toc';
-import { type Article } from '@/lib/microcms';
+import { Article } from '@/types/microcms';
 import { IMAGEBASEURL } from '@/constants';
 import { PublishedDate } from '@/components//ui/PublishedDate';
 import { TableOfContents } from '@/components/common/TableOfContents';
@@ -34,32 +34,32 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
 
   const interviewedSNSLinks = [
     {
-      sns: data.instagramid,
-      href: `https://www.instagram.com/${data.instagramid}?ref=badge`,
+      sns: data.peach_fight_details?.instagramid,
+      href: `https://www.instagram.com/${data.peach_fight_details?.instagramid}?ref=badge`,
       variant: 'instagram',
       icon: <FaInstagram className="!h-10 !w-10" />,
     },
     {
-      sns: data.facebookurl,
-      href: data.facebookurl,
+      sns: data.peach_fight_details?.facebookurl,
+      href: data.peach_fight_details?.facebookurl,
       variant: 'facebook',
       icon: <FaFacebookF className="!h-8 !w-8" />,
     },
     {
-      sns: data.xid,
-      href: `https://twitter.com/${data.xid}`,
+      sns: data.peach_fight_details?.xid,
+      href: `https://twitter.com/${data.peach_fight_details?.xid}`,
       variant: 'x',
       icon: <FaXTwitter className="!h-8 !w-8" />,
     },
     {
-      sns: data.lineurl,
-      href: data.lineurl,
+      sns: data.peach_fight_details?.lineurl,
+      href: data.peach_fight_details?.lineurl,
       variant: 'line',
       icon: <FaLine className="!h-10 !w-10" />,
     },
     {
-      sns: data.url,
-      href: data.url,
+      sns: data.peach_fight_details?.url,
+      href: data.peach_fight_details?.url,
       variant: 'default',
       icon: <House className="!h-8 !w-8" />,
     },
@@ -89,16 +89,16 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
         <div className="px-4 pt-8 pb-5 md:pt-20 md:pb-5">
           <h1 className="text-left text-2xl font-bold leading-normal md:text-4xl">{data.title}</h1>
           <div className="mt-5 flex flex-col items-end justify-end gap-3">
-            {data.instagramid && (
+            {data.peach_fight_details?.instagramid && (
               <Button asChild variant="instagram" className="btn-slide-hover">
                 <Link
-                  href={`https://www.instagram.com/${data.instagramid}?ref=badge`}
+                  href={`https://www.instagram.com/${data.peach_fight_details?.instagramid}?ref=badge`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <span className="relative z-10 flex items-center">
                     <FaInstagram className="!mr-2 !h-6 !w-6" />
-                    {data.interviewed}さんをフォロー
+                    {data.peach_fight_details?.interviewed}さんをフォロー
                   </span>
                 </Link>
               </Button>
@@ -118,7 +118,7 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
               </Button>
               <Button asChild variant="x" className="flex-1 md:flex-none btn-slide-hover">
                 <Link
-                  href={`https://x.com/share?url=${fullPath}&text=${data.title}&via=irifune333&related=${data.xid}`}
+                  href={`https://x.com/share?url=${fullPath}&text=${data.title}&via=irifune333&related=${data.peach_fight_details?.xid}`}
                   target="_blank"
                   rel="nofollow noopener"
                 >
@@ -141,11 +141,17 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
               dangerouslySetInnerHTML={{ __html: formatRichText(content) }}
             />
             {i < devidedContents.length - 1 &&
-              (data.instagramid || data.facebookurl || data.xid || data.lineurl || data.url) && (
+              (data.peach_fight_details?.instagramid ||
+                data.peach_fight_details?.facebookurl ||
+                data.peach_fight_details?.xid ||
+                data.peach_fight_details?.lineurl ||
+                data.peach_fight_details?.url) && (
                 <div className="px-4 pt-8 pb-32">
                   <div className="mx-auto max-w-2xl rounded-2xl bg-momo-300 p-6 text-center shadow-lg md:p-8">
                     <p>
-                      <span className="block font-bold md:text-2xl">{data.interviewed}さん</span>
+                      <span className="block font-bold md:text-2xl">
+                        {data.peach_fight_details?.interviewed}さん
+                      </span>
                       <span className="block text-gray-500">アカウントフォローはこちら</span>
                     </p>
                     <div className="mt-6 flex justify-center">

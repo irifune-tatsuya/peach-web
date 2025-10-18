@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Tag } from '@/lib/microcms';
+import { Tag } from '@/types/microcms';
 import { TagListItem } from '@/components/ui/TagListItem';
 
 type Props = {

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import Link from 'next/link';
-import { Tag } from '@/lib/microcms';
+import { Tag } from '@/types/microcms';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 

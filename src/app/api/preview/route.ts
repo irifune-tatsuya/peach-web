@@ -21,7 +21,7 @@ export const GET = async (req: NextRequest) => {
     });
   }
 
-  const categoryId = data.category?.id;
+  const categoryId = data.category;
 
   let path = '/';
   switch (categoryId) {

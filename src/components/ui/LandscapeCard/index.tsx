@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Article } from '@/lib/microcms';
+import { Article } from '@/types/microcms';
 import { PublishedDate } from '@/components/ui/PublishedDate';
 import Image from 'next/image';
 import Link from 'next/link';

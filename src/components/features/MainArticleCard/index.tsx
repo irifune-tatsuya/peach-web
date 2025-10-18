@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Article } from '@/lib/microcms';
+import { Article } from '@/types/microcms';
 import Image from 'next/image';
 import Link from 'next/link';
 import { IMAGEBASEURL } from '@/constants';
@@ -11,8 +11,13 @@ type Props = {
 };
 
 export const MainArticleCard: FC<Props> = ({ article, fontClassName }) => {
-  const imageUrl = article.subthumbnail?.url || `${IMAGEBASEURL}/portrait-no-image.webp`;
-  const altText = article.subthumbnail ? article.title : 'No Image';
+  if (!article) {
+    return <p>記事がありません</p>;
+  }
+
+  const imageUrl =
+    article.peach_fight_details?.subthumbnail?.url || `${IMAGEBASEURL}/portrait-no-image.webp`;
+  const altText = article.peach_fight_details?.subthumbnail ? article.title : 'No Image';
 
   return (
     <Link

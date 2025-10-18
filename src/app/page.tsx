@@ -1,16 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { TopSwiper } from '@/components/common/TopSwiper';
-import {
-  LIMIT05,
-  ARTICLEFILTER,
-  CONTACT,
-  NEWSFILTER,
-  IMAGEBASEURL,
-  PEACHFILTER,
-} from '@/constants';
-import { FaInstagram, FaLine } from 'react-icons/fa';
-import { FaSquareXTwitter } from 'react-icons/fa6';
+import { LIMIT05, ARTICLEFILTER, NEWSFILTER, IMAGEBASEURL, PEACHFILTER } from '@/constants';
 import { getList } from '@/lib/microcms';
 import { LatestArticleList } from '@/components/features/LatestArticleList';
 import { ViewMoreButton } from '@/components/features/ViewMoreButton';
@@ -18,8 +9,6 @@ import { SectionHeading } from '@/components/features/SectionHeading';
 import { ArticleList } from '@/components/common/ArticleList';
 import { MainArticleCard } from '@/components/features/MainArticleCard';
 import { ArticleSubList } from '@/components/features/ArticleSubList';
-import { Button } from '@/components/ui/button';
-import { Mail } from 'lucide-react';
 
 export const revalidate = 3600;
 

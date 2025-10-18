@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import { FaXTwitter } from 'react-icons/fa6';
 import { formatRichText } from '@/lib/richtext';
 import { renderToc } from '@/lib/render-toc';
-import { type Article as ArticleType } from '@/lib/microcms';
+import { type Article as ArticleType } from '@/types/microcms';
 import { IMAGEBASEURL } from '@/constants';
 import { PublishedDate } from '@/components/ui/PublishedDate';
 import { TableOfContents } from '@/components/common/TableOfContents';
@@ -82,7 +82,7 @@ export const Article: FC<Props> = ({ data, isShowToc = true, isFaqLayout = false
               </Button>
               <Button asChild variant="x" size="icon">
                 <Link
-                  href={`https://x.com/share?url=${fullPath}&text=${data.title}&via=irifune333&related=${data.xid}`}
+                  href={`https://x.com/share?url=${fullPath}&text=${data.title}&via=irifune333&related=${data.peach_fight_details?.xid}`}
                   target="_blank"
                   rel="nofollow noopener"
                 >

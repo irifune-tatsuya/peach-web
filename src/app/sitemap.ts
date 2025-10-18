@@ -22,9 +22,7 @@ export const sitemap = async () => {
     lastModified: faq.publishedAt,
   }));
 
-  const faqCategoryData = await getTagList({
-    filters: 'category[equals]faq',
-  });
+  const faqCategoryData = await getTagList();
 
   const faqTags = faqCategoryData.contents.map((faq) => ({
     url: `${baseURL}/faq/tags/${faq.id}`,

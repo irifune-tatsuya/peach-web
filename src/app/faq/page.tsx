@@ -41,9 +41,8 @@ export const metadata: Metadata = {
   },
 };
 
-const tags = await getTagList({
-  filters: FAQFILTER,
-});
+const tags = await getTagList();
+
 const data = await getList({
   limit: LIMIT30,
   filters: FAQFILTER,
