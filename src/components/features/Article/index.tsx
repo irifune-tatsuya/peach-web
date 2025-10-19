@@ -82,7 +82,7 @@ export const Article: FC<Props> = ({ data, isShowToc = true, isFaqLayout = false
               </Button>
               <Button asChild variant="x" size="icon">
                 <Link
-                  href={`https://x.com/share?url=${fullPath}&text=${data.title}&via=irifune333&related=${data.peach_fight_details?.xid}`}
+                  href={`https://x.com/share?url=${fullPath}&text=${data.title}&via=irifune333`}
                   target="_blank"
                   rel="nofollow noopener"
                 >

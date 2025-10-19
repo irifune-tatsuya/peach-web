@@ -87,48 +87,28 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
           />
         )}
         <div className="px-4 pt-8 pb-5 md:pt-20 md:pb-5">
-          <h1 className="text-left text-2xl font-bold leading-normal md:text-4xl">{data.title}</h1>
-          <div className="mt-5 flex flex-col items-end justify-end gap-3">
-            {data.peach_fight_details?.instagramid && (
-              <Button asChild variant="instagram" className="btn-slide-hover">
-                <Link
-                  href={`https://www.instagram.com/${data.peach_fight_details?.instagramid}?ref=badge`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="relative z-10 flex items-center">
-                    <FaInstagram className="!mr-2 !h-6 !w-6" />
-                    {data.peach_fight_details?.interviewed}さんをフォロー
-                  </span>
-                </Link>
-              </Button>
-            )}
-            <div className="flex justify-end gap-3">
-              <Button asChild variant="facebook" className="flex-1 md:flex-none btn-slide-hover">
-                <Link
-                  href={`https://www.facebook.com/share.php?u=${fullPath}`}
-                  target="_blank"
-                  rel="nofollow noopener"
-                >
-                  <span className="relative z-10 flex items-center">
-                    <FaFacebookF className="!mr-2 !h-5 !w-5" />
-                    シェア
-                  </span>
-                </Link>
-              </Button>
-              <Button asChild variant="x" className="flex-1 md:flex-none btn-slide-hover">
-                <Link
-                  href={`https://x.com/share?url=${fullPath}&text=${data.title}&via=irifune333&related=${data.peach_fight_details?.xid}`}
-                  target="_blank"
-                  rel="nofollow noopener"
-                >
-                  <span className="relative z-10 flex items-center">
-                    <FaXTwitter className="!mr-2 !h-5 !w-5" />
-                    シェア
-                  </span>
-                </Link>
-              </Button>
-            </div>
+          <h1 className="mb-5 mt-[30px] text-left text-2xl font-bold leading-normal md:mt-[72px]">
+            {data.title}
+          </h1>
+          <div className="flex justify-end gap-3">
+            <Button asChild variant="facebook" size="icon">
+              <Link
+                href={`https://www.facebook.com/share.php?u=${fullPath}`}
+                target="_blank"
+                rel="nofollow noopener"
+              >
+                <FaFacebookF className="!h-5 !w-5" />
+              </Link>
+            </Button>
+            <Button asChild variant="x" size="icon">
+              <Link
+                href={`https://x.com/share?url=${fullPath}&text=${data.title}&via=irifune333&related=${data.peach_fight_details?.xid}`}
+                target="_blank"
+                rel="nofollow noopener"
+              >
+                <FaXTwitter className="!h-5 !w-5" />
+              </Link>
+            </Button>
           </div>
         </div>
 
