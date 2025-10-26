@@ -38,7 +38,7 @@ export const MENU = [
   },
   {
     title: 'サービス紹介',
-    href: '/service',
+    href: '/services',
     type: 'main',
   },
   {

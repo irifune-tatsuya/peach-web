@@ -16,7 +16,7 @@ const swiperImages = [{ src: `${IMAGEBASEURL}/top/top-slider1.webp`, alt: 'キ�
 
 const businessLinks = [
   { href: '/reason', title: '選ばれる理由', titleEn: 'Reason' },
-  { href: '/service', title: 'サービス内容', titleEn: 'Service' },
+  { href: '/services', title: 'サービス内容', titleEn: 'Service' },
   { href: '/pricing', title: '料金体系', titleEn: 'Pricing' },
   { href: '/achievements', title: '実績&デザイン集', titleEn: 'Achievements' },
 ];

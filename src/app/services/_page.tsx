@@ -19,6 +19,7 @@ import type { Service, FAQPage, Question, BreadcrumbList, WithContext } from 'sc
 import { BadgeJapaneseYen, CircleCheck, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { SectionTitle } from '@/components/ui/SectionTitle';
 
 const pageTitle = 'サービス紹介';
 
@@ -33,7 +34,7 @@ const breadcrumbs = [
   },
   {
     title: pageTitle,
-    href: '/service',
+    href: '/services',
     isCurrentPage: true,
   },
 ];
@@ -263,7 +264,7 @@ const serviceJsonLd: WithContext<Service> = {
   '@type': 'Service',
   name: 'WEBブランディング事業',
   description: description,
-  url: `${siteConfig.url}/service`,
+  url: `${siteConfig.url}/services`,
   provider: {
     '@type': 'Organization',
     '@id': siteConfig.url,
@@ -307,7 +308,7 @@ const ServicePage = () => {
       <JsonLd jsonLdData={breadcrumbJsonLd} />
       <section className="relative h-[300px] w-full md:h-[600px]">
         <Image
-          src={`${IMAGEBASEURL}/service/title.webp`}
+          src={`${IMAGEBASEURL}/services/title.webp`}
           alt="サービス内容トップ画像"
           fill
           className="object-cover"
@@ -330,7 +331,7 @@ const ServicePage = () => {
           <div className="mt-3 items-center justify-center gap-4 md:flex">
             <div className="mx-auto h-[250px] w-[250px] md:mx-0">
               <Image
-                src={`${IMAGEBASEURL}/service/issue.webp`}
+                src={`${IMAGEBASEURL}/services/issue.webp`}
                 alt="こんなお悩みはございませんか？"
                 width={250}
                 height={250}
@@ -352,7 +353,7 @@ const ServicePage = () => {
         </div>
         <div className="mt-8 items-center justify-center gap-4 bg-momo-100 py-8 text-white md:flex">
           <Image
-            src={`${IMAGEBASEURL}/service/solution.webp`}
+            src={`${IMAGEBASEURL}/services/solution.webp`}
             alt="解決策をご提案"
             width={300}
             height={300}
@@ -366,7 +367,7 @@ const ServicePage = () => {
             </p>
             <div className="flex justify-center">
               <Image
-                src={`${IMAGEBASEURL}/service/service-title.webp`}
+                src={`${IMAGEBASEURL}/services/service-title.webp`}
                 alt="ピーチウェブのWEBブランディングサービス"
                 width={500}
                 height={20}
@@ -406,10 +407,7 @@ const ServicePage = () => {
       </section>
       <section className="bg-white pt-20 md:pt-40">
         <div className="mx-auto max-w-6xl p-4">
-          <h2 className="flex items-center text-xl font-bold md:text-2xl">
-            <CircleCheck className="text-momo-100" />
-            <span className="ml-2">WEBブランディングとは？</span>
-          </h2>
+          <SectionTitle>WEBブランディングとは？</SectionTitle>
           <div className="mx-auto max-w-4xl pt-8 font-medium leading-loose text-base md:text-lg">
             <p>
               弊社のWEBブランディングは
@@ -430,7 +428,7 @@ const ServicePage = () => {
                 }`}
               >
                 <Image
-                  src={`${IMAGEBASEURL}/service/service${i + 1}.webp`}
+                  src={`${IMAGEBASEURL}/services/service${i + 1}.webp`}
                   alt={item.title}
                   width={400}
                   height={267}
@@ -458,10 +456,7 @@ const ServicePage = () => {
       </section>
       <section className="bg-[linear-gradient(-225deg,_#eeeeee_0%,_#ffffff_56%,_#eeeeee_100%)] pt-20 md:pt-32">
         <div className="mx-auto max-w-6xl p-4">
-          <h2 className="flex items-center text-xl font-bold md:text-2xl">
-            <CircleCheck className="text-momo-100" />
-            <span className="ml-2">ブランディングストーリー</span>
-          </h2>
+          <SectionTitle>ブランディングストーリー</SectionTitle>
           <div className="mx-auto max-w-4xl pt-8 font-medium leading-loose text-base md:text-lg">
             <p>
               WEB上のブランドはどのように醸成されるのでしょうか？ここではとある経営コンサルティング会社を想定して、弊社のサービスでブランド化する流れをご紹介します。
@@ -477,7 +472,7 @@ const ServicePage = () => {
                 item={step}
                 index={i}
                 type="シナリオ"
-                imageUrl={`${IMAGEBASEURL}/service/scenario${i + 1}.webp`}
+                imageUrl={`${IMAGEBASEURL}/services/scenario${i + 1}.webp`}
               />
             ))}
           </div>
@@ -486,7 +481,7 @@ const ServicePage = () => {
           <div className="items-center justify-center gap-8 md:flex">
             <div className="flex flex-col items-center">
               <Image
-                src={`${IMAGEBASEURL}/service/ceo-circle.webp`}
+                src={`${IMAGEBASEURL}/services/ceo-circle.webp`}
                 alt="ピーチウェブ代表社員 入船達也"
                 width={300}
                 height={300}
@@ -509,7 +504,7 @@ const ServicePage = () => {
               </div>
               <div className="mt-4 flex items-end justify-center">
                 <Image
-                  src={`${IMAGEBASEURL}/service/service-title.webp`}
+                  src={`${IMAGEBASEURL}/services/service-title.webp`}
                   alt="ピーチウェブのWEBブランディングサービス"
                   width={400}
                   height={64}
@@ -531,10 +526,7 @@ const ServicePage = () => {
       </section>
       <section className="pt-20 md:pt-32">
         <div className="mx-auto max-w-6xl p-4">
-          <h2 className="flex items-center text-xl font-bold md:text-2xl">
-            <CircleCheck className="text-momo-100" />
-            <span className="ml-2">サービスの流れ</span>
-          </h2>
+          <SectionTitle>サービスの流れ</SectionTitle>
         </div>
         <div className="mx-auto max-w-6xl px-4">
           <SideScrollIcon />
@@ -545,7 +537,7 @@ const ServicePage = () => {
                 item={step}
                 index={i}
                 type="ステップ"
-                imageUrl={`${IMAGEBASEURL}/service/step${i + 1}.webp`}
+                imageUrl={`${IMAGEBASEURL}/services/step${i + 1}.webp`}
               />
             ))}
           </div>
@@ -554,10 +546,7 @@ const ServicePage = () => {
       </section>
       <section className="px-4 pt-20 pb-24 md:pt-32 md:pb-40">
         <div className="mx-auto max-w-6xl">
-          <h2 className="flex items-center text-xl font-bold md:text-2xl">
-            <CircleCheck className="text-momo-100" />
-            <span className="ml-2">よくあるご質問</span>
-          </h2>
+          <SectionTitle>よくあるご質問</SectionTitle>
           <Accordion type="single" collapsible className="mx-auto mt-10 w-full max-w-4xl">
             {faq.map((item, i) => (
               <AccordionItem value={`item-${i}`} key={i}>

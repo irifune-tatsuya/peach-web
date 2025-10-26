@@ -1,7 +1,6 @@
 import './globals.css';
 import { Metadata } from 'next';
 import { NavBar } from '@/components/common/NavBar';
-import { ScrollToTopButton } from '@/components/ui/ScrollToTopButton';
 import { Header } from '@/components/common/Header';
 import { Footer } from '@/components/common/Footer';
 import { GoogleAnalytics } from '@/components/common/GoogleAnalytics/';
@@ -116,7 +115,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <body suppressHydrationWarning={true}>
         <Header />
         <main className="mx-auto mt-0 md:mt-[76px] pb-[96px] md:pb-0">{children}</main>
-        <ScrollToTopButton />
         <NavBar />
         <Footer />
       </body>

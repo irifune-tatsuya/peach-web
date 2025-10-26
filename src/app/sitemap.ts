@@ -74,7 +74,7 @@ export const sitemap = async () => {
     '/pricing',
     '/privacy',
     '/reason',
-    '/service',
+    '/services',
     '/terms',
     '/thought',
     '/tokushoho',

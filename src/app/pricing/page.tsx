@@ -228,7 +228,7 @@ const PricingPage = () => {
             <p className="mt-4 text-center text-sm">※ 料金は全て税別です。</p>
             <div className="py-10 text-center">
               <Button asChild variant="default" className="mx-auto w-[250px] btn-slide-hover">
-                <Link href="/service">
+                <Link href="/services">
                   <span className="relative z-10 flex items-center">
                     <Monitor className="!h-5 !w-5" />
                     サービス内容を見る

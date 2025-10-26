@@ -20,6 +20,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Monitor, CircleCheck } from 'lucide-react';
 import { BadgeJapaneseYen } from 'lucide-react';
+import { SectionTitle } from '@/components/ui/SectionTitle';
 
 const pageTitle = '選ばれる理由';
 
@@ -142,10 +143,9 @@ const ReasonPage = () => {
       <Title titleEn={'Reasons'} titleJp={'選ばれる理由'} />
       <section className="relative overflow-hidden bg-[linear-gradient(-225deg,_#eeeeee_0%,_#ffffff_56%,_#eeeeee_100%)] pt-[88px] pb-[90px] md:pt-32 md:pb-44">
         <div className="mx-auto max-w-6xl p-4">
-          <h2 className="flex items-center text-xl font-bold md:text-2xl">
-            <CircleCheck className="text-momo-100" />
-            <span className="ml-2">一緒に作るWEBブランディング</span>
-          </h2>
+          <SectionTitle>
+            一緒に作るWEBブランディング
+          </SectionTitle>
           <div className="mx-auto max-w-4xl py-8 font-medium leading-loose text-base md:text-lg">
             <p>
               ピーチウェブのサービスがお客様に選ばれる理由の1つ目は、
@@ -165,7 +165,7 @@ const ReasonPage = () => {
           </div>
           <div className="mt-10 py-10 flex justify-center">
             <Button asChild variant="default" className="btn-slide-hover">
-              <Link href="/service">
+              <Link href="/services">
                 <Monitor className="!h-5 !w-5" />
                 サービス内容を見る
               </Link>
@@ -175,10 +175,9 @@ const ReasonPage = () => {
       </section>
       <section className="relative overflow-hidden bg-white pt-[88px] pb-[90px] md:pt-32 md:pb-44">
         <div className="mx-auto max-w-6xl p-4">
-          <h2 className="flex items-center text-xl font-bold md:text-2xl">
-            <CircleCheck className="text-momo-100" />
-            <span className="ml-2">他社様とのサービス比較</span>
-          </h2>
+          <SectionTitle>
+            他社様とのサービス比較
+          </SectionTitle>
           <div className="mx-auto max-w-4xl py-8 font-medium leading-loose text-base md:text-lg">
             <p>
               お客様に選ばれる理由の2つ目は、他社様より
@@ -284,10 +283,9 @@ const ReasonPage = () => {
       </section>
       <section className="relative overflow-hidden bg-[linear-gradient(-225deg,_#eeeeee_0%,_#ffffff_56%,_#eeeeee_100%)] pt-[88px] pb-[90px] md:pt-32 md:pb-44">
         <div className="mx-auto max-w-6xl p-4">
-          <h2 className="flex items-center text-xl font-bold md:text-2xl">
-            <CircleCheck className="text-momo-100" />
-            <span className="ml-2">フルカスタマイズデザイン</span>
-          </h2>
+          <SectionTitle>
+            フルカスタマイズデザイン
+          </SectionTitle>
           <div className="mt-11 md:mt-16">
             <div className="mx-auto max-w-4xl py-8 font-medium leading-loose text-base md:text-lg">
               <p>
@@ -311,10 +309,9 @@ const ReasonPage = () => {
       </section>
       <section className="relative overflow-hidden bg-white pt-[88px] pb-[90px] md:pt-32 md:pb-44">
         <div className="mx-auto max-w-6xl p-4">
-          <h2 className="flex items-center text-xl font-bold md:text-2xl">
-            <CircleCheck className="text-momo-100" />
-            <span className="ml-2">WEB集客との違い</span>
-          </h2>
+          <SectionTitle>
+            WEB集客との違い
+          </SectionTitle>
           <div className="mt-11 md:mt-16">
             <div className="mx-auto max-w-4xl py-8 font-medium leading-loose text-base md:text-lg">
               <p>
@@ -425,7 +422,7 @@ const ReasonPage = () => {
             </div>
             <div className="mt-10 py-10 flex justify-center">
               <Button asChild variant="default" className="btn-slide-hover">
-                <Link href="/service">
+                <Link href="/services">
                   <Monitor className="!h-5 !w-5" />
                   サービス内容を見る
                 </Link>

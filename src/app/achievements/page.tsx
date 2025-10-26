@@ -11,6 +11,7 @@ import { siteConfig } from '@/config/site';
 import type { CollectionPage, ItemList, BreadcrumbList, WithContext } from 'schema-dts';
 import { CircleCheck, SquareArrowOutUpRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { SectionTitle } from '@/components/ui/SectionTitle';
 
 const pageTitle = '実績&デザイン集';
 
@@ -99,10 +100,7 @@ const AchievementsPage = () => {
       <Title titleEn={'Achievements & Designs'} titleJp={'実績&デザイン集'} />
       <section className={sectionClasses}>
         <div className="mx-auto max-w-6xl p-4">
-          <h2 className="flex items-center text-xl font-bold md:text-2xl">
-            <CircleCheck className="mr-2 text-momo-100" />
-            <span>制作実績</span>
-          </h2>
+          <SectionTitle>制作実績</SectionTitle>
           <div className="mx-auto max-w-4xl py-8 font-medium leading-loose text-base md:text-lg">
             <p>弊社で制作したホームページ、ランディングページの実績をご紹介します。</p>
           </div>
@@ -144,10 +142,7 @@ const AchievementsPage = () => {
       </section>
       <section className={sectionClasses}>
         <div className="mx-auto max-w-6xl p-4">
-          <h2 className="flex items-center text-xl font-bold md:text-2xl">
-            <CircleCheck className="mr-2 text-momo-100" />
-            <span>デザイン提案</span>
-          </h2>
+          <SectionTitle>デザイン提案</SectionTitle>
           <div className="mx-auto max-w-4xl py-8 font-medium leading-loose text-base md:text-lg">
             <p>
               ホームページやランディングページのデザイン提案です。気に入るものはありますでしょうか？

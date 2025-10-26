@@ -6,11 +6,11 @@ type Props = {
 };
 export const Title: FC<Props> = ({ titleEn, titleJp }) => {
   return (
-    <div className="pt-9 pb-10 text-momo-100 md:pt-[118px] md:pb-[72px]">
+    <div className="py-9 md:py-20 bg-gradient-to-r from-momo-600 to-white">
       <div className="mx-auto max-w-6xl p-4">
-        <div className="inline-block pr-1">
-          <p className="text-base font-bold">{titleJp}</p>
-          <h1 className="text-4xl font-bold md:text-5xl">{titleEn}</h1>
+        <div className="">
+          <h1 className="text-lg md:text-2xl font-bold">{titleJp}</h1>
+          <p className="text-3xl md:text-5xl font-bold">{titleEn}</p>
         </div>
       </div>
     </div>
