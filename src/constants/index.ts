@@ -32,18 +32,8 @@ export const MENU = [
     type: 'main',
   },
   {
-    title: '選ばれる理由',
-    href: '/reason',
-    type: 'main',
-  },
-  {
     title: 'サービス紹介',
-    href: '/service',
-    type: 'main',
-  },
-  {
-    title: '料金体系',
-    href: '/pricing',
+    href: '/services',
     type: 'main',
   },
   {

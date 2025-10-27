@@ -81,7 +81,7 @@ const NewsletterContents = [
   {
     title: 'サービスの最新情報',
     text: 'WEBブランディングやホームページ制作などサービスに関する情報をお届けします。',
-    href: '/service',
+    href: '/services',
   },
   {
     title: 'ピーチウェブからのお知らせ',

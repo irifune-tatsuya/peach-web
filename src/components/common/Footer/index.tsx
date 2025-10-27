@@ -31,9 +31,9 @@ export const Footer: FC = () => {
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
-      <div className="flex w-full max-w-5xl xl:max-w-6xl justify-center gap-8">
+      <div className="flex w-full max-w-6xl justify-center gap-8">
         <nav>
-          <ul className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-4 text-sm">
+          <ul className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 lg:gap-4 text-xs">
             {MENU.map((item, i) => (
               <li key={i}>
                 <Link
@@ -47,21 +47,21 @@ export const Footer: FC = () => {
             ))}
           </ul>
         </nav>
-        <div className="flex flex-col">
+        <div className="flex flex-col w-1/4">
           <Button asChild variant="default" className="btn-slide-hover">
             <Link href="/contact">
               <Mail className="!h-5 !w-5" />
               お問い合わせ
             </Link>
           </Button>
-          <address className="my-5 not-italic text-sm">
+          <address className="my-5 not-italic text-xs mx-auto">
             〒704-8176
             <br />
             岡山県岡山市東区中川町405-1
             <br />
             ヴィンテージ・プレイス201
           </address>
-          <div className="flex gap-5">
+          <div className="flex gap-5 justify-center-safe">
             <Link href={CONTACT.instagram} target="_blank">
               <FaInstagram size={'3em'} />
             </Link>

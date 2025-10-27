@@ -15,9 +15,8 @@ export const revalidate = 3600;
 const swiperImages = [{ src: `${IMAGEBASEURL}/top/top-slider1.webp`, alt: 'キービジュアル1' }];
 
 const businessLinks = [
-  { href: '/reason', title: '選ばれる理由', titleEn: 'Reason' },
-  { href: '/service', title: 'サービス内容', titleEn: 'Service' },
-  { href: '/pricing', title: '料金体系', titleEn: 'Pricing' },
+  { href: '/services/hagupe', title: 'ホームページ制作「はぐぺ」', titleEn: 'hagupe' },
+  { href: '/services/pekechi', title: 'X運用代行「ぺけち」', titleEn: 'Pekechi' },
   { href: '/achievements', title: '実績&デザイン集', titleEn: 'Achievements' },
 ];
 
@@ -100,7 +99,6 @@ const HomePage = () => {
                   >
                     <span className="mr-4 text-momo-500 row-span-2">{`0${i + 1}`}</span>
                     <span className="mr-4 lg:text-lg">{item.title}</span>
-                    <span className="text-sm">{item.titleEn}</span>
                   </Link>
                 </li>
               ))}
