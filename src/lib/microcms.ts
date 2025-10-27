@@ -1,7 +1,7 @@
 import { createClient } from 'microcms-js-sdk';
 import type { MicroCMSQueries } from 'microcms-js-sdk';
 import { notFound } from 'next/navigation';
-import type { Article, Tag, Service } from '@/types/microcms';
+import type { Article, Tag } from '@/types/microcms';
 import { FAQFILTER } from '@/constants';
 
 if (!process.env.MICROCMS_SERVICE_DOMAIN) {
@@ -56,33 +56,6 @@ export const getTag = async (contentId: string, queries?: MicroCMSQueries) => {
       endpoint: 'tags',
       contentId,
       queries,
-    })
-    .catch(notFound);
-
-  return detailData;
-};
-
-export const getServicesList = async (queries?: MicroCMSQueries) => {
-  const listData = await client
-    .getList<Service>({
-      endpoint: 'services',
-      queries,
-    })
-    .catch(notFound);
-  return listData;
-};
-
-export const getServiceDetail = async (contentId: string, queries?: MicroCMSQueries) => {
-  const mergedQueries = {
-    ...queries,
-    depth: 1 as const,
-  };
-
-  const detailData = await client
-    .getListDetail<Service>({
-      endpoint: 'services',
-      contentId,
-      queries: mergedQueries,
     })
     .catch(notFound);
 
