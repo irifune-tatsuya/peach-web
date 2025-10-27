@@ -6,7 +6,7 @@ import { JsonLd } from '@/components/common/JsonLd';
 import { siteConfig } from '@/config/site';
 import { draftMode } from 'next/headers';
 import { PreviewAlert } from '@/components/common/PreviewAlert';
-import type { Service, Article as ArticleType } from '@/types/microcms';
+import type { Article as ArticleType } from '@/types/microcms';
 import type {
   Article as ArticleSchema,
   BreadcrumbList,
@@ -22,23 +22,15 @@ import {
   CircleCheck,
   X,
   Check,
-  Users,
-  Target,
   Sparkles,
-  Star,
   ArrowRightLeft,
   ArrowUpDown,
   KeyRound,
   MoveDown,
-  Lightbulb,
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   ThumbsUp,
-  Plus,
-  Minus,
 } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import {
   Accordion,
@@ -47,7 +39,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { MeritsSlider } from '@/components/features/MeritsSlider';
-import { PlansSlider } from '@/components/features/PlansSlider';
+import { PlansSlider } from '@/components/features/services/PlanCard';
 import { CtaButton } from '@/components/ui/CtaButton';
 import Link from 'next/link';
 import { StepsSlider } from '@/components/features/StepsSlider';
@@ -114,228 +106,6 @@ const formatOptionPrice = (type: '月額' | '単発', price: number, isStarting:
   const suffix = isStarting ? '〜' : '';
   return `${type} ${formattedPrice}円 / 税別${suffix}`;
 };
-
-const firstDialogueData = [
-  {
-    speaker: 'client',
-    text: '確かにお客様から注文をいただくのにに手こずっているんですけど、ホームページで解決できるんですか...？',
-    image: `${IMAGEBASEURL}/services/dialogue-client-question.webp`,
-    alt: '悩むお客様',
-  },
-  {
-    speaker: 'staff',
-    text: 'そうですね！ホームページはスモールビジネスの集客の問題点である「リード獲得」と「コンバージョン率」を改善できる可能性がありますよ。',
-    image: `${IMAGEBASEURL}/services/dialogue-salesperson-answer.webp`,
-    alt: 'ピーチウェブ担当者',
-  },
-  {
-    speaker: 'client',
-    text: 'リード...？コンバージョン...？なんだか難しそう...。私たちみたいな小さい会社でも、本当に集客できるようになるんですか？',
-    image: `${IMAGEBASEURL}/services/dialogue-client-question.webp`,
-    alt: '悩むお客様',
-  },
-  {
-    speaker: 'staff',
-    text: 'もちろんです！まずはあなたの問題点がリードなのか、コンバージョンなのか考えてみましょう！',
-    image: `${IMAGEBASEURL}/services/dialogue-salesperson-answer.webp`,
-    alt: 'ピーチウェブ担当者',
-  },
-];
-
-const businessIssuesData = [
-  {
-    title: 'そもそも知られていない！',
-    description:
-      '良い商品やサービスや商品を持っているのに、売り込みが苦手で動けない。だから注文の連絡が一向に来ない...。',
-    imageUrl: `${IMAGEBASEURL}/services/problem-lead.webp`,
-    alt: 'リード獲得の悩み',
-    keyword: 'リード獲得',
-  },
-  {
-    title: '相手に魅力が刺さってない！',
-    description:
-      '色んな人と名刺交換しまくったり、SNSのフォロワーも集まっているのに見込みのお客様からの反応がない...。',
-    imageUrl: `${IMAGEBASEURL}/services/problem-cv.webp`,
-    alt: 'コンバージョン率の悩み',
-    keyword: 'コンバージョン率',
-  },
-  {
-    title: 'どっちも問題かも！',
-    description:
-      '自分の商品やサービスに自信が持てない。人と会わないし、SNSもわかからない。それじゃ売れるわけないか...。',
-    imageUrl: `${IMAGEBASEURL}/services/problem-lead-and-cv.webp`,
-    alt: 'リード獲得とコンバージョン率、両方の悩み',
-    keyword: '集客活動してない',
-  },
-];
-
-const leadInitiatives = [
-  '各ページのSEO対策と継続的なブログ更新',
-  'SNS運用によるページ誘導',
-  'Web広告の運用',
-  'MEO対策（Googleビジネスプロフィール）',
-];
-
-const cvInitiatives = [
-  '伝わるランディングページ制作',
-  'ストレスないお問い合わせフォームへの導線設計',
-  'お客様の声や導入事例の充実',
-  '分かりやすい料金プランの提示',
-];
-
-const proposalDialogueData = [
-  {
-    speaker: 'client',
-    text: '問題解決の方程式や対策はわかったけど、やることが多くて大変そう...。',
-    image: `${IMAGEBASEURL}/services/dialogue-client-question.webp`,
-    alt: '悩むお客様',
-  },
-  {
-    speaker: 'staff',
-    text: 'そうですよね。リード獲得でもコンバージョン率でも、いずれの問題であっても集客の第一歩にはホームページ制作をおすすめします。',
-    image: `${IMAGEBASEURL}/services/dialogue-salesperson-answer.webp`,
-    alt: 'ピーチウェブ担当者',
-  },
-  {
-    speaker: 'client',
-    text: 'どうしてホームページなんですか？SNSとか無料で手軽に始めるほうが良さそうなのに...。',
-    image: `${IMAGEBASEURL}/services/dialogue-client-question.webp`,
-    alt: '悩むお客様',
-  },
-  {
-    speaker: 'staff',
-    text: 'わかります！ところがWeb集客の最初の段階でホームページを作ると、こんなにたくさんのメリットがあるんですよ！',
-    image: `${IMAGEBASEURL}/services/dialogue-salesperson-answer.webp`,
-    alt: 'ピーチウェブ担当者',
-  },
-];
-
-const meritsData = [
-  {
-    title: 'あなたの魅力を棚卸しできる',
-    description:
-      'ホームページ制作は、まず「何を伝えるか」を考えることから始まります。あなたのビジネスの強み、ターゲット、競合調査など「棚卸し」の機会になります。',
-    imageUrl: `${IMAGEBASEURL}/services/hagupe/merit-plan-review.webp`,
-    alt: '魅力を棚卸しする',
-  },
-  {
-    title: 'あなたの魅力が100%伝わる',
-    description:
-      'SNSとは違って、ホームページは「あなたが自由に発信できる場所」です。写真、テキスト、デザインを使ってあなたの魅力を精一杯届けることができます。',
-    imageUrl: `${IMAGEBASEURL}/services/hagupe/merit-web-design.webp`,
-    alt: '魅力を伝えるプレゼンテーション',
-  },
-  {
-    title: '集客成功の方程式が使える',
-    description:
-      'ブログ更新でリード獲得し、サービスページの改善でコンバージョン率のアップを狙います。ホームページはこの両方を同時に改善できる最強のツールです。',
-    imageUrl: `${IMAGEBASEURL}/services/hagupe/merit-sales-improvement.webp`,
-    alt: 'マーケティング分析グラフ',
-  },
-  {
-    title: 'あなたの信頼性が高まる',
-    description:
-      'キチンとしたホームページがあるとあなたの本気度と信頼感が伝わります。名刺交換やSNSフォローの後、お客様が見に来る「あなたの本拠地」となります。',
-    imageUrl: `${IMAGEBASEURL}/services/hagupe/merit-trust.webp`,
-    alt: '信頼の握手',
-  },
-];
-
-const faqDialogueData = [
-  {
-    speaker: 'client',
-    text: '制作プランも見たけど、先に無料のSNSから始めるのじゃだめなのかな？',
-    image: `${IMAGEBASEURL}/services/dialogue-client-question.webp`,
-    alt: '悩むお客様',
-  },
-  {
-    speaker: 'staff',
-    text: 'なるほど。SNSから始める方も多いようですが、集客になれないうちに始めるとデメリットも目立つのでおすすめしていません。',
-    image: `${IMAGEBASEURL}/services/dialogue-salesperson-answer.webp`,
-    alt: 'ピーチウェブ担当者',
-  },
-  {
-    speaker: 'client',
-    text: 'SNSを先にスタートさせるのことのデメリット？集客に慣れてからのほうがいいんですね。',
-    image: `${IMAGEBASEURL}/services/dialogue-client-question.webp`,
-    alt: '悩むお客様',
-  },
-  {
-    speaker: 'staff',
-    text: 'そうですね、せっかくですからSNSから集客を始めるデメリットと上手なWeb集客の方法を見ていきましょう。',
-    image: `${IMAGEBASEURL}/services/dialogue-salesperson-answer.webp`,
-    alt: 'ピーチウェブ担当者',
-  },
-];
-
-const disadvantagesOfSnsData = [
-  {
-    title: '投稿に時間がとられる！',
-    description:
-      '本業も忙しいのに毎日1~3回分の投稿を考えなきゃアカウントが埋もれる...。時間もプレッシャーもかかりすぎ！',
-    imageUrl: `${IMAGEBASEURL}/services/hagupe/disadvantages-of-sns-long-post-time.webp`,
-    alt: '投稿する時間がもったいない問題',
-  },
-  {
-    title: '成果が出るまでが遠い！',
-    description:
-      'SNSはあくまでコミュニケーションツール。見込みのお客様がファンになって購入するまで時間がかかり過ぎる...。',
-    imageUrl: `${IMAGEBASEURL}/services/hagupe/disadvantages-of-sns-long-lead-time.webp`,
-    alt: 'ファンになって購入するまでのリードタイムが長い',
-  },
-  {
-    title: '事業全体を説明しにくい！',
-    description:
-      'あなたに興味を持ってくれるフォロワーさんが現れても、SNS投稿には文字数制限があって全てを説明できない。',
-    imageUrl: `${IMAGEBASEURL}/services/hagupe/disadvantages-of-sns-hard-to-explain.webp`,
-    alt: 'SNSでは事業全体を説明することができない',
-  },
-  {
-    title: '受注の受け付けがしにくい！',
-    description:
-      'SNSのDMでは個別の受注フォームがない...。結局ECサイトやアンケートサイトに誘導しなきゃいけない。',
-    imageUrl: `${IMAGEBASEURL}/services/hagupe/disadvantages-of-sns-difficult-to-accept.webp`,
-    alt: '受注フォームやECサイトを別で用意しなければならない',
-  },
-  {
-    title: '凍結されたらおしまい！',
-    description:
-      'SNSは運営権限でアカウントを勝手に凍結します。これまでの投稿もフォロワーも取り返せなくなると大変...。',
-    imageUrl: `${IMAGEBASEURL}/services/hagupe/disadvantages-of-sns-account-suspension.webp`,
-    alt: 'アカウント凍結リスク問題',
-  },
-];
-
-const webMarketingStepsData = [
-  {
-    title: '「Web上の本拠地」を作ろう',
-    description:
-      'まずはWeb上の本拠地として見込みのお客様にあなたを説明するためのホームページを制作しましょう。プラットフォームの都合に左右されず、アカウント凍結リスクもありません。',
-    imageUrl: `${IMAGEBASEURL}/services/hagupe/web-marketing-step1.webp`,
-    alt: 'Web上の本拠地となるホームページ',
-  },
-  {
-    title: '良質な記事でファンを育てる',
-    description:
-      '焦って毎日投稿する必要はありません。ホームページのブログ機能を活用し、お客様にとって役に立つ情報を発信。じっくり時間をかけて信頼関係とファンを育てていきましょう。',
-    imageUrl: `${IMAGEBASEURL}/services/hagupe/web-marketing-step2.webp`,
-    alt: '良質なコンテンツを作成する',
-  },
-  {
-    title: 'お問い合わせへ自然に誘導',
-    description:
-      'ホームページなら、訪れた見込み客を自然な流れで「お問い合わせ」や「資料請求」へ誘導する設計が可能です。SNSよりも短期間で確実にコンバージョンへ繋げやすくなります。',
-    imageUrl: `${IMAGEBASEURL}/services/hagupe/web-marketing-step3.webp`,
-    alt: 'お問い合わせへ誘導する',
-  },
-  {
-    title: 'SNSは「拡散役」として活用',
-    description:
-      '本拠地ができたら、SNSはホームページへ誘導するための「拡散役」として活用します。万が一アカウントに問題が起きても、大切なWeb資産（ホームページ）は安全ですよ。',
-    imageUrl: `${IMAGEBASEURL}/services/hagupe/web-marketing-step4.webp`,
-    alt: 'SNSを戦略的に活用する',
-  },
-];
 
 const ServiceDetailPage = async (props: Props) => {
   const params = await props.params;
@@ -434,11 +204,11 @@ const ServiceDetailPage = async (props: Props) => {
 
   return (
     <>
-      <JsonLd jsonLdData={breadcrumbJsonLd} />
+      {/* <JsonLd jsonLdData={breadcrumbJsonLd} />
       <JsonLd jsonLdData={serviceJsonLd} />
       {faqJsonLd && <JsonLd jsonLdData={faqJsonLd} />}
-      {isEnabled && <PreviewAlert />}
-      <section className="relative h-screen md:h-[calc(100vh-76px)] overflow-hidden">
+      {isEnabled && <PreviewAlert />} */}
+      {/* <section className="relative h-screen md:h-[calc(100vh-76px)] overflow-hidden">
         <Image
           src={service.main_visual.url}
           alt={`${service.title_jp}の背景画像`}
@@ -482,8 +252,8 @@ const ServiceDetailPage = async (props: Props) => {
             )}
           </div>
         </div>
-      </section>
-      {service.worries && service.worries.length > 0 && (
+      </section> */}
+      {/* {service.worries && service.worries.length > 0 && (
         <section className="py-16 md:py-24">
           <div className="mx-4 max-w-5xl rounded-lg bg-momo-300 py-8 lg:mx-auto">
             <h2 className="text-center font-bold text-lg md:text-2xl">
@@ -520,8 +290,8 @@ const ServiceDetailPage = async (props: Props) => {
             </div>
           </div>
         </section>
-      )}
-      <section className="py-16 md:py-24">
+      )} */}
+      {/* <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-4">
           <SectionTitle>
             その悩み<span className="hidden md:inline-block">、</span>
@@ -554,8 +324,8 @@ const ServiceDetailPage = async (props: Props) => {
             ))}
           </div>
         </div>
-      </section>
-      <section className="py-16 md:py-24">
+      </section> */}
+      {/* <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-4">
           <SectionTitle>
             あなたの本当の悩みはどれ？
@@ -596,8 +366,8 @@ const ServiceDetailPage = async (props: Props) => {
             <MoveDown className="w-16 h-16 mx-auto mt-8 text-momo-100 animate-bounce" />
           </div>
         </div>
-      </section>
-      <section
+      </section> */}
+      {/* <section
         className="relative py-16 md:py-24 overflow-hidden bg-cover bg-center bg-fixed"
         style={{ backgroundImage: `url(${IMAGEBASEURL}/services/parallax-bg.webp)` }}
       >
@@ -656,8 +426,8 @@ const ServiceDetailPage = async (props: Props) => {
             </div>
           </div>
         </div>
-      </section>
-      <section className="py-16 md:py-24">
+      </section> */}
+      {/* <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-4">
           <SectionTitle>
             集客の第一歩は
@@ -690,8 +460,8 @@ const ServiceDetailPage = async (props: Props) => {
             ))}
           </div>
         </div>
-      </section>
-      <section className="py-16 md:py-24">
+      </section> */}
+      {/* <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4">
           <SectionTitle>
             ホームページ制作の
@@ -722,8 +492,8 @@ const ServiceDetailPage = async (props: Props) => {
             <MoveDown className="w-16 h-16 mx-auto mt-8 text-momo-100 animate-bounce" />
           </div>
         </div>
-      </section>
-      <section
+      </section> */}
+      {/* <section
         className="relative py-24 md:py-32 overflow-hidden bg-cover bg-center bg-fixed"
         style={{ backgroundImage: `url(${service.main_visual.url})` }}
       >
@@ -755,8 +525,8 @@ const ServiceDetailPage = async (props: Props) => {
             />
           </div>
         </div>
-      </section>
-      <section className="bg-momo-50 py-16 md:py-24">
+      </section> */}
+      {/* <section className="bg-momo-50 py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-4">
           <div className="relative rounded-xl overflow-hidden shadow-xl">
             <Image
@@ -797,8 +567,8 @@ const ServiceDetailPage = async (props: Props) => {
             </div>
           </div>
         </div>
-      </section>
-      <section className="bg-momo-600 py-16 md:py-24">
+      </section> */}
+      {/* <section className="bg-momo-600 py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-4">
           <SectionTitle>
             「{service.title_jp}」が選ばれる{service.strengths.length}つの強み
@@ -834,8 +604,8 @@ const ServiceDetailPage = async (props: Props) => {
             ))}
           </div>
         </div>
-      </section>
-      <section className="py-16 md:py-24 overflow-hidden">
+      </section> */}
+      {/* <section className="py-16 md:py-24 overflow-hidden">
         <div className="max-w-6xl mx-auto px-4">
           <SectionTitle className="pb-12">料金プラン</SectionTitle>
           {service.plan && service.plan.length > 0 ? (
@@ -844,8 +614,8 @@ const ServiceDetailPage = async (props: Props) => {
             <p className="text-center text-gray-500">料金プランは準備中です。</p>
           )}
         </div>
-      </section>
-      {service.option && service.option.length > 0 && (
+      </section> */}
+      {/* {service.option && service.option.length > 0 && (
         <section className="py-16 md:py-24">
           <div className="max-w-6xl mx-auto px-4">
             <SectionTitle className="text-center mb-12">有料オプション</SectionTitle>
@@ -884,8 +654,8 @@ const ServiceDetailPage = async (props: Props) => {
             </Accordion>
           </div>
         </section>
-      )}
-      <section className="bg-momo-50 py-16 md:py-24">
+      )} */}
+      {/* <section className="bg-momo-50 py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-4">
           <div className="relative rounded-xl overflow-hidden shadow-xl">
             <Image
@@ -926,8 +696,8 @@ const ServiceDetailPage = async (props: Props) => {
             </div>
           </div>
         </div>
-      </section>
-      <section className="py-16 md:py-24">
+      </section> */}
+      {/* <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-4">
           <SectionTitle>
             ホームページ制作が先？
@@ -960,8 +730,8 @@ const ServiceDetailPage = async (props: Props) => {
             ))}
           </div>
         </div>
-      </section>
-      <section className="py-16 md:py-24">
+      </section> */}
+      {/* <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-4">
           <SectionTitle>
             SNSから集客を始める
@@ -980,8 +750,8 @@ const ServiceDetailPage = async (props: Props) => {
             </div>
           </div>
         </div>
-      </section>
-      <section className="py-16 md:py-24">
+      </section> */}
+      {/* <section className="py-16 md:py-24">
         <div className="max-w-6xl mx-auto px-4">
           <SectionTitle className="text-center mb-16">おすすめのWeb集客の進め方</SectionTitle>
           <div className="relative space-y-12 before:absolute before:inset-y-0 before:w-0.5 before:bg-gray-200 before:left-6 md:before:left-1/2 md:before:-translate-x-1/2 max-w-4xl mx-auto">
@@ -1028,8 +798,8 @@ const ServiceDetailPage = async (props: Props) => {
             <MoveDown className="w-16 h-16 mx-auto mt-8 text-momo-100 animate-bounce" />
           </div>
         </div>
-      </section>
-      {service.steps && service.steps.length > 0 && (
+      </section> */}
+      {/* {service.steps && service.steps.length > 0 && (
         <section className="py-16 md:py-24 overflow-hidden">
           <div className="max-w-6xl mx-auto px-4">
             <SectionTitle>ご依頼の流れ</SectionTitle>
@@ -1046,8 +816,8 @@ const ServiceDetailPage = async (props: Props) => {
             </div>
           </div>
         </section>
-      )}
-      <section className="bg-momo-50 py-16 md:py-24">
+      )} */}
+      {/* <section className="bg-momo-50 py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-4">
           <div className="relative rounded-xl overflow-hidden shadow-xl">
             <Image
@@ -1088,7 +858,7 @@ const ServiceDetailPage = async (props: Props) => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {faqs && faqs.length > 0 && (
         <section className="bg-white py-16 md:py-24">
           <div className="max-w-3xl mx-auto px-4">
