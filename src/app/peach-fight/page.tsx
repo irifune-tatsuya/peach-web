@@ -102,7 +102,10 @@ const PeachFightPage = () => {
       <div className="hidden">
         <Title titleEn={'Peach-Fight'} titleJp={baseTitle} />
       </div>
-      <section id="key-visual" className="relative h-screen overflow-hidden">
+      <section
+        id="key-visual"
+        className="relative overflow-hidden h-screen md:h-[calc(100vh-90px)] w-screen"
+      >
         <div className="absolute top-1/3 left-1/2 z-20 w-[85%] max-w-xl -translate-x-1/2 -translate-y-1/3  sm:top-[40%]">
           <div className="w-full animate-[var(--animate-zoom-in)]">
             <Image
@@ -136,8 +139,19 @@ const PeachFightPage = () => {
             />
           </span>
         </Link>
-        <div className="m-4 md:my-0">
-          <TopSwiper images={swiperImages} />
+        <div className="absolute inset-0 z-10">
+          <div className="h-full w-full pt-4 px-4 pb-44 md:pb-48 md:px-8">
+            <div className="relative h-full w-full">
+              <Image
+                src={`${IMAGEBASEURL}/${segmentName}/peach-fight-bg.webp`}
+                alt="ピーチファイトのキービジュアル背景"
+                fill
+                className="object-cover rounded-[60px]"
+                priority
+                sizes="100vw"
+              />
+            </div>
+          </div>
         </div>
       </section>
       <div className="mx-auto max-w-6xl p-4 pt-4 pb-[60px] md:pt-0 md:pb-[156px]">
