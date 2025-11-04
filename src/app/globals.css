@@ -1,5 +1,7 @@
 @import 'tailwindcss';
 @plugin "@tailwindcss/typography";
+@plugin "tailwindcss-animate";
+@config "../../tailwind.config.ts";
 
 @theme {
   --color-momo-100: oklch(73.93% 0.17 3.39);
@@ -229,7 +231,7 @@ body {
 }
 
 /* microCMSのカスタムCSS用 */
-.marker {
+/* .marker {
   background: linear-gradient(transparent 0%, #febdd6 0%);
   border-radius: 6px;
 }
@@ -270,4 +272,4 @@ body {
   background-color: #f3f2ed;
   font-size: medium;
   line-height: 2rem;
-}
+} */

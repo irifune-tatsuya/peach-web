@@ -28,7 +28,7 @@ export const Article: FC<Props> = ({ data, isShowToc = true, isFaqLayout = false
   const fullPath = `${process.env.NEXT_PUBLIC_BASE_URL}${pathName}`;
 
   return (
-    <article className="mx-auto min-h-[calc(100vh-200px)] pb-[60px] md:max-w-[620px] md:pb-[156px]">
+    <article className="mx-auto min-h-[calc(100vh-200px)] pb-[60px] md:max-w-3xl md:pb-[156px]">
       {!isFaqLayout && (
         <>
           {data.thumbnail ? (
@@ -37,7 +37,7 @@ export const Article: FC<Props> = ({ data, isShowToc = true, isFaqLayout = false
               alt={data.title}
               width={data.thumbnail.width}
               height={data.thumbnail.height}
-              className="h-auto w-full max-w-[620px]"
+              className="h-auto w-full max-w-3xl"
               priority
             />
           ) : (
@@ -46,7 +46,7 @@ export const Article: FC<Props> = ({ data, isShowToc = true, isFaqLayout = false
               alt={'No Image'}
               width={620}
               height={349}
-              className="h-auto w-full max-w-[620px]"
+              className="h-auto w-full max-w-3xl"
             />
           )}
         </>
@@ -96,7 +96,7 @@ export const Article: FC<Props> = ({ data, isShowToc = true, isFaqLayout = false
       )}
 
       <div
-        className="prose prose-base leading-9 mb-20 px-4 prose-h2:inline-block prose-h2:border-b-2 prose-h2:border-[var(--color-momo-100)] prose-h2:pb-1 prose-h2:no-underline prose-h2:text-2xl prose-img:w-full prose-img:mx-auto prose-img:max-w-[400px]"
+        className="prose my-12 px-4 max-w-3xl"
         dangerouslySetInnerHTML={{
           __html: `${formatRichText(data.content)}`,
         }}
