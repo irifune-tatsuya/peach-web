@@ -1,15 +1,13 @@
 import { getList } from '@/lib/microcms';
-import { LIMIT12, PEACHFILTER, IMAGEBASEURL, CONTACT } from '@/constants';
+import { LIMIT12, PEACHFILTER, IMAGEBASEURL } from '@/constants';
 import { Pagination } from '@/components/ui/Pagination';
 import { GridArticleList } from '@/components/common/GridArticleList';
 import { Title } from '@/components/ui/Title';
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { SearchField } from '@/components/ui/SearchField';
-import { TopSwiper } from '@/components/common/TopSwiper';
 import React, { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaLine } from 'react-icons/fa';
 import { ButtonArea } from '@/components/common/ButtonArea';
 import { Metadata } from 'next';
 import { JsonLd } from '@/components/common/JsonLd';
@@ -61,12 +59,6 @@ const linkButtons = [
     children: 'フォームから取材応募',
     icon: <Mail className="mr-1 !h-5 !w-5" />,
     variant: 'default',
-  },
-  {
-    href: CONTACT.line,
-    children: 'LINEからお問い合わせ',
-    icon: <FaLine className="mr-1 !h-5 !w-5" />,
-    variant: 'line',
   },
 ] as const;
 
@@ -169,17 +161,17 @@ const PeachFightPage = () => {
         </h2>
         <div className="flex flex-col justify-between md:flex-row">
           <div className="w-full md:w-[450px] lg:w-[600px]">
-            <p className="mt-4 font-bold text-base lg:text-xl">
+            <p className="mt-4 font-bold">
               「ピーチファイ」は、岡山県内（ときどき県外）の
               <span className="text-[var(--color-momo-100)]">
                 起業家や新しいビジネスを展開する会社の従業員様の熱い想いを取材するWEBマガジン
               </span>
               です。
             </p>
-            <p className="mt-4 font-bold text-base lg:text-xl">
+            <p className="mt-4 font-bold">
               異業種交流会では聴くことができない詳しい事業内容や起業家の想い、プライベートな側面など身近な起業家のストーリーを通じて、あなたの心にも火を灯しましょう！取材をされた方と取材を読んだ方がつながり、新しいチャレンジが連鎖することで地元岡山がより盛り上がればと思っております！
             </p>
-            <p className="mt-4 font-bold text-base lg:text-xl">
+            <p className="mt-4 font-bold">
               また、ピーチファイでは
               <span className="text-[var(--color-momo-100)]">
                 取材を受けたい起業家、会社の従業員様も大募集

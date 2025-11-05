@@ -1,12 +1,11 @@
 import { FC } from 'react';
 import { MENU, CONTACT, IMAGEBASEURL } from '@/constants';
-import { FaInstagram } from 'react-icons/fa';
-import { FaSquareXTwitter } from 'react-icons/fa6';
-import { FaLine } from 'react-icons/fa';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Mail } from 'lucide-react';
+import { FaXTwitter } from 'react-icons/fa6';
+import { RiQuillPenLine } from 'react-icons/ri';
 
 export const Footer: FC = () => {
   return (
@@ -61,16 +60,17 @@ export const Footer: FC = () => {
             <br />
             ヴィンテージ・プレイス201
           </address>
-          <div className="flex gap-5 justify-center-safe">
-            <Link href={CONTACT.instagram} target="_blank">
-              <FaInstagram size={'3em'} />
-            </Link>
-            <Link href={CONTACT.X} target="_blank">
-              <FaSquareXTwitter size={'3em'} />
-            </Link>
-            <Link href={CONTACT.line} target="_blank">
-              <FaLine size={'3em'} />
-            </Link>
+          <div className="flex gap-4 justify-center items-center">
+            <Button asChild variant="link" size="icon" className="bg-momo-500">
+              <Link href={CONTACT.X} target="_blank">
+                <FaXTwitter className="!h-5 !w-5 text-white" />
+              </Link>
+            </Button>
+            <Button asChild variant="link" size="icon" className="bg-momo-500">
+              <Link href={CONTACT.note} target="_blank">
+                <RiQuillPenLine className="!h-5 !w-5 text-white" />
+              </Link>
+            </Button>
           </div>
         </div>
       </div>
