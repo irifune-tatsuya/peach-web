@@ -316,10 +316,7 @@ const HagupePage = async () => {
         readMoreText="詳しくは..."
       />
       {hagupeData && <ServiceIntroductionSection data={hagupeData} />}
-      <ContactSection
-        title="まずは気軽にWeb集客のお悩みをご相談ください！"
-        text="専門のスタッフが丁寧にヒアリングし、無料でご提案までいたします。"
-      />
+      <ContactSection title="まずは気軽にWeb集客のお悩みをご相談ください！" />
       {hagupeStrengths && hagupeStrengths.length > 0 && (
         <StrengthsSection titleJp={hagupeData.titleJp} strengths={hagupeStrengths} />
       )}
@@ -337,10 +334,7 @@ const HagupePage = async () => {
       {hagupeOptions && hagupeOptions.length > 0 && (
         <OptionsSection title="有料オプション" options={hagupeOptions} />
       )}
-      <ContactSection
-        title="ご要望に応じたカスタマイズ見積もりも可能です！"
-        text="まずはホームページのご希望と予算感をお伝えください。専門スタッフが最適なプランご提案します。"
-      />
+      <ContactSection title="ご要望に応じたカスタマイズ見積もりも可能です！" />
       {hagupeSnsDialogue && hagupeSnsDialogue.length > 0 && (
         <DialogueSection
           dialogues={hagupeSnsDialogue}
@@ -387,10 +381,7 @@ const HagupePage = async () => {
           </div>
         </section>
       )}
-      <ContactSection
-        title="気軽にお問い合わせください！"
-        text="ホームページ制作をするかどうか悩んでいても大丈夫！無理な営業行為はいたしません。"
-      />
+      <ContactSection title="気軽にお問い合わせください！" />
       {faqs && faqs.length > 0 && <FaqsSection title="よくあるご質問" faqs={faqs} />}
       <Breadcrumbs breadcrumbs={breadcrumbsData} />
     </>

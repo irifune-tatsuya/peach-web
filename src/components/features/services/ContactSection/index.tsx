@@ -5,14 +5,13 @@ import { CtaButton } from '@/components/ui/CtaButton';
 
 type Props = {
   title: string;
-  text: string;
 };
 
 const commonImgPath = `${IMAGEBASEURL}/common`;
 
-export const ContactSection = ({ title, text }: Props) => {
+export const ContactSection = ({ title }: Props) => {
   return (
-    <section className="bg-momo-50 py-16 md:py-24">
+    <section className="py-16 md:py-24">
       <div className="max-w-4xl mx-auto px-4">
         <div className="relative rounded-xl overflow-hidden shadow-xl">
           <Image
@@ -37,7 +36,14 @@ export const ContactSection = ({ title, text }: Props) => {
             </div>
             <div className="text-center md:text-left text-white order-2 md:order-none">
               <h2 className="text-2xl md:text-3xl font-bold leading-tight mb-4">{title}</h2>
-              <p className="text-base md:text-lg text-white/90 mb-6">{text}</p>
+              <div className="bg-white/20 backdrop-blur-sm rounded-lg p-4 mb-4 text-center md:text-left">
+                <p className="text-lg md:text-xl font-bold text-white mb-2">
+                  初回相談料：3,000円 (税込)
+                </p>
+                <p className="text-sm text-white/90">
+                  ※初回ヒアリング、お見積もり・ご提案を含みます。相談料の返金はできかねますので、あらかじめご了承ください。
+                </p>
+              </div>
               <div className="flex justify-center">
                 <Link href="/contact" passHref>
                   <CtaButton size="xl" className="btn-slide-hover">
