@@ -4,8 +4,6 @@ import { getDetail } from '@/lib/microcms';
 import { Breadcrumbs } from '@/components/common/Breadcrumbs';
 import { IMAGEBASEURL } from '@/constants';
 import { InterviewArticle } from '@/components/features/InterviewArticle';
-import { CONTACT } from '@/constants';
-import { FaLine } from 'react-icons/fa';
 import { ButtonArea } from '@/components/common/ButtonArea';
 import { draftMode } from 'next/headers';
 import { PreviewAlert } from '@/components/common/PreviewAlert';
@@ -71,12 +69,6 @@ const linkButtons = [
     children: 'フォームから取材応募',
     icon: <Mail className="mr-1 !h-5 !w-5" />,
     variant: 'default',
-  },
-  {
-    href: CONTACT.line,
-    children: 'LINEからお問い合わせ',
-    icon: <FaLine className="mr-1 !h-5 !w-5" />,
-    variant: 'line',
   },
   {
     href: `/${parentSegment}`,

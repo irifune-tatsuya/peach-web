@@ -4,6 +4,8 @@ import { FC, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { MENU, CONTACT } from '@/constants';
 import { Mail, X, ArrowRight } from 'lucide-react';
+import { FaXTwitter } from 'react-icons/fa6';
+import { RiQuillPenLine } from 'react-icons/ri';
 import { FaInstagram, FaLine } from 'react-icons/fa';
 import { FaSquareXTwitter } from 'react-icons/fa6';
 import {
@@ -103,34 +105,17 @@ export const NavDrawer: FC<Props> = ({ isOpen, onCloseAction }) => {
                 </li>
               ))}
             </ul>
-            <div className="mt-10 flex justify-center gap-6">
-              <a
-                href={CONTACT.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-momo-500"
-              >
-                <FaInstagram className="!h-10 !w-10" />
-                <span className="sr-only">Instagram</span>
-              </a>
-              <a
-                href={CONTACT.X}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-momo-500"
-              >
-                <FaSquareXTwitter className="!h-10 !w-10" />
-                <span className="sr-only">X (旧Twitter)</span>
-              </a>
-              <a
-                href={CONTACT.line}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-momo-500"
-              >
-                <FaLine className="!h-10 !w-10" />
-                <span className="sr-only">LINE</span>
-              </a>
+            <div className="mt-10 flex gap-4 justify-center items-center">
+              <Button asChild variant="link" size="icon" className="bg-momo-500">
+                <Link href={CONTACT.X} target="_blank">
+                  <FaXTwitter className="!h-5 !w-5 text-white" />
+                </Link>
+              </Button>
+              <Button asChild variant="link" size="icon" className="bg-momo-500">
+                <Link href={CONTACT.note} target="_blank">
+                  <RiQuillPenLine className="!h-5 !w-5 text-white" />
+                </Link>
+              </Button>
             </div>
             <Separator className="my-4" />
             <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">

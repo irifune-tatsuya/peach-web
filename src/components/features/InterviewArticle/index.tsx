@@ -66,7 +66,7 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
   ] as const;
 
   return (
-    <article className="mx-auto min-h-[calc(100vh-200px)] pb-[60px] md:max-w-[620px] md:pb-[156px]">
+    <article className="mx-auto min-h-[calc(100vh-200px)] pb-[60px] md:max-w-3xl md:pb-[156px]">
       <div>
         {data.thumbnail ? (
           <Image
@@ -117,7 +117,7 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
         {devidedContents.map((content, i) => (
           <React.Fragment key={i}>
             <div
-              className="prose prose-base leading-9 mb-8 max-w-4xl px-4 prose-h2:inline-block prose-h2:border-b-2 prose-h2:border-[var(--color-momo-100)] prose-h2:pb-1 prose-h2:no-underline prose-h2:text-2xl prose-img:w-full prose-img:mx-auto prose-img:max-w-[400px]"
+              className="prose my-12 max-w-3xl px-4"
               dangerouslySetInnerHTML={{ __html: formatRichText(content) }}
             />
             {i < devidedContents.length - 1 &&
@@ -127,7 +127,7 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
                 data.peach_fight_details?.lineurl ||
                 data.peach_fight_details?.url) && (
                 <div className="px-4 pt-8 pb-32">
-                  <div className="mx-auto max-w-2xl rounded-2xl bg-momo-300 p-6 text-center shadow-lg md:p-8">
+                  <div className="mx-auto max-w-3xl rounded-2xl bg-momo-300 p-6 text-center shadow-lg md:p-8">
                     <p>
                       <span className="block font-bold md:text-2xl">
                         {data.peach_fight_details?.interviewed}さん
@@ -164,7 +164,7 @@ export const InterviewArticle: FC<Props> = ({ data, isShowToc = true }) => {
                       </div>
                     </div>
                   </div>
-                  <p className="mt-2 text-center text-xs text-gray-600 md:text-sm">
+                  <p className="mt-4 text-center text-xs text-gray-600 md:text-sm">
                     ※ 一方的な営業・勧誘目的で連絡を取るのはお控えください。
                   </p>
                 </div>

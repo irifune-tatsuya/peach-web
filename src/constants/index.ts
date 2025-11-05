@@ -32,8 +32,8 @@ export const MENU = [
     type: 'main',
   },
   {
-    title: 'サービス紹介',
-    href: '/services',
+    title: 'ホームページ制作「はぐぺ」',
+    href: '/services/hagupe',
     type: 'main',
   },
   {
@@ -74,7 +74,6 @@ export const MENU = [
 ];
 
 export const CONTACT = {
-  instagram: 'https://www.instagram.com/irifune3333',
   X: 'https://x.com/irifune333',
-  line: 'https://line.me/ti/p/s-f8-4Mo0A',
+  note: 'https://note.com/peachweb',
 };

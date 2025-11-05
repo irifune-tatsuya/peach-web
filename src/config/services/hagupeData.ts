@@ -551,7 +551,7 @@ export const hagupeSteps: InfoCardItem[] = [
     id: 'stp1',
     title: 'お問い合わせ',
     description:
-      '以下のリンクからご連絡をお待ちしてます。ご提案までは無料対応、かつ提案後のしつこい営業もございませんので、気軽にご連絡くださいね。',
+      '以下のリンクからご連絡をお待ちしてます。初回のヒアリングからご提案までは3,000円の相談料を頂戴しておりますが、提案後のしつこい営業もございませんので、気軽にご連絡くださいね。',
     image: {
       url: `${hagupeImgPath}/step1-contact.webp`,
       width: 600,

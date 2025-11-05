@@ -1,10 +1,7 @@
 'use client';
 
 import { FC, useState } from 'react';
-import { CONTACT, IMAGEBASEURL } from '@/constants';
-import { FaInstagram } from 'react-icons/fa';
-import { FaSquareXTwitter } from 'react-icons/fa6';
-import { FaLine } from 'react-icons/fa';
+import { IMAGEBASEURL } from '@/constants';
 import { MenuButton } from '@/components/ui/MenuButton';
 import { NavDrawer } from '@/components/common/NavDrawer';
 import Link from 'next/link';
