@@ -18,6 +18,13 @@ export type PeachFightDetails = {
   interviewed?: string;
 };
 
+export type CtaButton = {
+  fieldId: 'cta_button';
+  linkType?: ('internal' | 'external')[];
+  linkText?: string;
+  linkUrl?: string;
+};
+
 export type Article = {
   category: ArticleCategory;
   title: string;
@@ -26,5 +33,6 @@ export type Article = {
   thumbnail?: MicroCMSImage;
   tags?: Tag[];
   peach_fight_details?: PeachFightDetails;
+  cta_button?: CtaButton[];
 } & MicroCMSContentId &
   MicroCMSDate;
