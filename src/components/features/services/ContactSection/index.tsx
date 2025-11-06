@@ -46,9 +46,7 @@ export const ContactSection = ({ title }: Props) => {
               </div>
               <div className="flex justify-center">
                 <Link href="/contact" passHref>
-                  <CtaButton size="xl" className="btn-slide-hover">
-                    お問い合わせはこちらから
-                  </CtaButton>
+                  <CtaButton size="xl">お問い合わせはこちらから</CtaButton>
                 </Link>
               </div>
             </div>

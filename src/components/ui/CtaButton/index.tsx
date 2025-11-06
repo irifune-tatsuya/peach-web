@@ -9,7 +9,10 @@ const ctaButtonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-momo-100 text-white shadow-lg hover:bg-momo-100/90 active:scale-98',
+        default:
+          'bg-momo-100 text-white border-2 border-momo-100 hover:bg-white hover:text-momo-100',
+        secondary:
+          'bg-momo-300 text-foreground border-2 border-momo-300 hover:border-foreground hover:bg-white',
         gradient:
           'bg-gradient-to-r from-momo-100 to-momo-200 text-white shadow-xl hover:shadow-2xl hover:brightness-105 active:scale-98',
         outline:

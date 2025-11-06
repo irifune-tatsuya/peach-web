@@ -12,6 +12,7 @@ import { IMAGEBASEURL } from '@/constants';
 import { PublishedDate } from '@/components/ui/PublishedDate';
 import { TableOfContents } from '@/components/common/TableOfContents';
 import { StartMailMagazineForm } from '@/components/features/StartMailMagazineForm';
+import { ArticleCtaButtons } from '@/components/features/ArticleCtaButtons';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { FaFacebookF } from 'react-icons/fa';
@@ -94,7 +95,6 @@ export const Article: FC<Props> = ({ data, isShowToc = true, isFaqLayout = false
           {isShowToc && <TableOfContents toc={toc} />}
         </>
       )}
-
       <div
         className="prose my-12 px-4 max-w-3xl"
         dangerouslySetInnerHTML={{
@@ -102,6 +102,9 @@ export const Article: FC<Props> = ({ data, isShowToc = true, isFaqLayout = false
         }}
       />
       <div className="px-4">
+        <ArticleCtaButtons buttons={data.cta_button} />
+      </div>
+      <div className="px-4 mt-12">
         <h2 className="text-2xl font-bold inline-block border-b-4 border-momo-100 pb-1">
           次の記事更新はいつ？
         </h2>
